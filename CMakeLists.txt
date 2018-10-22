@@ -15,6 +15,8 @@ project (grasp-rci-qed)
 enable_language(Fortran)
 enable_testing()
 
+include("cmake/fortran_modules.cmake")
+
 # rci-qed links agains the libraries in ${GRASP}/lib, so the user needs to
 # specify the GRASP enviroment variable that would point to the GRASP root
 # directory when first setting up the build directory.
