@@ -47,6 +47,7 @@ if ! [ -z ${grasp_cmake_build+x} ]; then
 	cat >> ${cmakelistsuser} <<-EOF
 		# Added automatically by the ./configure.sh script of grasp-rci-qed
 		add_subdirectory("${DIR}/src/" "\${CMAKE_CURRENT_BINARY_DIR}/external/grasp-rci-qed")
+		add_subdirectory("${DIR}/test/" "\${CMAKE_CURRENT_BINARY_DIR}/external/grasp-rci-qed/test")
 	EOF
 	cat <<-EOF
 		You can now build rci-qed when building GRASP.

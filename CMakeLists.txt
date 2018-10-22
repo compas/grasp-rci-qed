@@ -13,6 +13,7 @@
 cmake_minimum_required (VERSION 2.6)
 project (grasp-rci-qed)
 enable_language(Fortran)
+enable_testing()
 
 # rci-qed links agains the libraries in ${GRASP}/lib, so the user needs to
 # specify the GRASP enviroment variable that would point to the GRASP root
@@ -161,3 +162,6 @@ message("* MPI_Fortran_LINK_FLAGS:         ${MPI_Fortran_LINK_FLAGS}")
 
 # Include the rci-qed build target
 add_subdirectory("src/")
+
+# Include unit and integration tests
+add_subdirectory("test/")
