@@ -30,8 +30,6 @@ add_executable(rci-qed
     iniestdm_I.f90
     iniestsd.f90
     iniestsd_I.f90
-    keint.f90
-    keint_I.f90
     lodmixmpi.f90
     lodmixmpi_I.f90
     lodres.f90
@@ -59,10 +57,6 @@ add_executable(rci-qed
     strsum_I.f90
     triangrk.f90
     triangrk_I.f90
-    vint.f90
-    vint_I.f90
-    vinti.f90
-    vinti_I.f90
     vpint.f90
     vpint_I.f90
     vpintf.f90
@@ -72,6 +66,6 @@ add_executable(rci-qed
 )
 target_link_libraries_Fortran(rci-qed PUBLIC
     mod 9290 rang90 mpi90 dvd90
-    rci_breit rci_qed
+    rci_breit rci_qed rci_mass_shifts
 )
 install(TARGETS rci-qed DESTINATION bin/)
