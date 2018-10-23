@@ -91,5 +91,5 @@ add_executable(rci-qed
     wghtd5.f90
     wghtd5_I.f90
 )
-target_link_libraries_Fortran(rci-qed PUBLIC mod 9290 rang90 mpi90 dvd90 breit)
+target_link_libraries_Fortran(rci-qed PUBLIC mod 9290 rang90 mpi90 dvd90 rci_breit)
 install(TARGETS rci-qed DESTINATION bin/)

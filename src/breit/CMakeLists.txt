@@ -1,4 +1,4 @@
-add_library(breit STATIC
+add_library(rci_breit STATIC
     bessel.f90 bessel_I.f90
     breid.f90 breid_I.f90
     brint1.f90 brint1_I.f90
@@ -22,6 +22,5 @@ add_library(breit STATIC
     triangbreit2.f90 triangbreit2_I.f90
     zkf.f90 zkf_I.f90
 )
-setup_fortran_modules(breit)
-#target_link_libraries_Fortran(breit PRIVATE mod 9290 rang90 mpi90 dvd90)
-target_link_libraries_Fortran(breit PRIVATE mod 9290 rang90)
+setup_fortran_modules(rci_breit)
+target_link_libraries_Fortran(rci_breit PRIVATE mod 9290 rang90)
