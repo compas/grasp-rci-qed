@@ -1,5 +1,5 @@
 #!/bin/bash
-export SCRIP_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 if [ -z ${GRASP+x} ]; then >&2 echo "ERROR: \$GRASP variable is unset."; exit 1; fi
 if [ -z ${RCIQED+x} ]; then >&2 echo "ERROR: \$RCIQED variable is unset."; exit 1; fi
@@ -18,27 +18,33 @@ if ! [ -f "${RCIQED}" ]; then
 	exit 1
 fi
 
+# Get the configuration -- the first argument, and check that input files exist
+CONF=$1
+if ! [ -f "${SCRIPT_DIR}/${CONF}.isodata" ]; then >&2 echo "${SCRIPT_DIR}/${CONF}.isodata missing"; exit 1; fi
+if ! [ -f "${SCRIPT_DIR}/${CONF}.c" ]; then >&2 echo "${SCRIPT_DIR}/${CONF}.c missing"; exit 1; fi
+
 # The test will run in the integration-rci directory, under build/test.
-if [ -e "integration-rci" ]; then
-	if ! [ -d "integration-rci" ]; then
-		>&2 echo "integration-rci exists at ${PWD}, but not directory. Bailing."
+TEST_DIRECTORY="integration-rci-${CONF}"
+if [ -e "${TEST_DIRECTORY}" ]; then
+	if ! [ -d "${TEST_DIRECTORY}" ]; then
+		>&2 echo "${TEST_DIRECTORY} exists at ${PWD}, but not directory. Bailing."
 		exit 2
 	fi
 
-	>&2 echo "WARNING: removing integration-rci at ${PWD}"
-	rm -Rv integration-rci
+	>&2 echo "WARNING: removing ${TEST_DIRECTORY} at ${PWD}"
+	rm -Rv "${TEST_DIRECTORY}"
 fi
-mkdir "integration-rci" && cd "integration-rci" || {
-	>&2 echo "ERROR: failed to create integration-rci/ at ${PWD}"
+mkdir "${TEST_DIRECTORY}" && cd "${TEST_DIRECTORY}" || {
+	>&2 echo "ERROR: failed to create ${TEST_DIRECTORY}/ at ${PWD}"
 	exit 2
 }
 # The rest of this script has the working directory set to integration-rci/
 >&2 echo "INFO: Working directory $PWD"
->&2 echo "INFO: Test script in $SCRIP_DIR"
+>&2 echo "INFO: Test script in $SCRIPT_DIR"
 
 # Set up the input files for rwnfestimate
-cp ${SCRIP_DIR}/nitrogen.isodata isodata || exit 1
-cp ${SCRIP_DIR}/nitrogen.c rcsf.inp || exit 1
+cp ${SCRIPT_DIR}/${CONF}.isodata isodata || exit 1
+cp ${SCRIPT_DIR}/${CONF}.c rcsf.inp || exit 1
 sed 's/[ \t]*#.*//' <<-EOF > rwfnestimate.input
 	y                  # Default settings?
 	2                  # Wavefunction type? 2 = Thomas-Fermi
@@ -51,12 +57,11 @@ ${RWFNESTIMATE} < rwfnestimate.input || {
 
 
 # Set up input files for RCI
-statename="nitrogen"
-cp rcsf.inp ${statename}.c
-cp rwfn.inp ${statename}.w
+cp rcsf.inp ${CONF}.c
+cp rwfn.inp ${CONF}.w
 sed 's/[ \t]*#.*//' <<-EOF > rci.input
 	y                  # Default settings?
-	${statename}       # Name of state
+	${CONF}            # Name of state
 	y                  # Include Breit?
 	y                  # Modify frequency?
 	1e-6               # Frequency scaling factor
