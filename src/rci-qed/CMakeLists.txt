@@ -7,12 +7,6 @@ add_executable(rci-qed
     engout.f90
     engout_I.f90
     evcout.f90
-    funk.f90
-    funk_I.f90
-    funl.f90
-    funl_I.f90
-    fzalf.f90
-    fzalf_I.f90
     #gdsummpi_I.f90
     genintrk.f90
     genintrk_I.f90
@@ -38,8 +32,6 @@ add_executable(rci-qed
     iniestsd_I.f90
     keint.f90
     keint_I.f90
-    klamaq.f90
-    klamaq_I.f90
     lodmixmpi.f90
     lodmixmpi_I.f90
     lodres.f90
@@ -48,15 +40,8 @@ add_executable(rci-qed
     maneig_I.f90
     matrix.f90
     matrix_I.f90
-    mohr.f90
-    mohr_I.f90
     ncharg.f90
     ncharg_I.f90
-    qed.f90
-    qed_I.f90
-    qed_slfen.f90
-    qed_slfen_I.f90
-    ratden_I.f90
     rci90mpi.f90
     setdbg.f90
     setdbg_I.f90
@@ -74,12 +59,6 @@ add_executable(rci-qed
     strsum_I.f90
     triangrk.f90
     triangrk_I.f90
-    vac2.f90
-    vac2_I.f90
-    vac4.f90
-    vac4_I.f90
-    vacpol.f90
-    vacpol_I.f90
     vint.f90
     vint_I.f90
     vinti.f90
@@ -91,5 +70,8 @@ add_executable(rci-qed
     wghtd5.f90
     wghtd5_I.f90
 )
-target_link_libraries_Fortran(rci-qed PUBLIC mod 9290 rang90 mpi90 dvd90 rci_breit)
+target_link_libraries_Fortran(rci-qed PUBLIC
+    mod 9290 rang90 mpi90 dvd90
+    rci_breit rci_qed
+)
 install(TARGETS rci-qed DESTINATION bin/)
