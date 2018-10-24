@@ -1,4 +1,4 @@
-add_executable(rci-qed
+add_library(rci
     auxblk.f90
     auxblk_I.f90
     dnicmv.f90
@@ -40,7 +40,6 @@ add_executable(rci-qed
     matrix_I.f90
     ncharg.f90
     ncharg_I.f90
-    rci90mpi.f90
     setdbg.f90
     setdbg_I.f90
     setham_gg.f90
@@ -60,8 +59,9 @@ add_executable(rci-qed
     wghtd5.f90
     wghtd5_I.f90
 )
-target_link_libraries_Fortran(rci-qed PUBLIC
+setup_fortran_modules(rci)
+target_link_libraries_Fortran(rci PRIVATE
     mod 9290 rang90 mpi90 dvd90
     rci_breit rci_qed rci_mass_shifts
 )
-install(TARGETS rci-qed DESTINATION bin/)
+install(TARGETS rci DESTINATION bin/)
