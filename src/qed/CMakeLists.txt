@@ -5,6 +5,8 @@ add_library(rci_qed STATIC
     vac2.f90 vac2_I.f90
     vac4.f90 vac4_I.f90
     vacpol.f90 vacpol_I.f90
+    vpint.f90 vpint_I.f90
+    vpintf.f90 vpintf_I.f90
     # Self-energy related routines
     fzalf.f90 fzalf_I.f90
     klamaq.f90 klamaq_I.f90

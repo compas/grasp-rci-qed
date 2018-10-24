@@ -57,10 +57,6 @@ add_executable(rci-qed
     strsum_I.f90
     triangrk.f90
     triangrk_I.f90
-    vpint.f90
-    vpint_I.f90
-    vpintf.f90
-    vpintf_I.f90
     wghtd5.f90
     wghtd5_I.f90
 )
