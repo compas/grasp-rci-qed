@@ -38,14 +38,14 @@ program hydrogenic_vp
     ! They are here to catch any change to the diagonal element values.
     ! The reference values are accurate up to 10^{-8}.
     type(orbital_reference), parameter, dimension(*) :: orbitals = (/ &
-        orbital_reference(1, -1, 2.3019950e-00, 1d-7), & ! 1s
-        orbital_reference(2, -1, 2.9216080e-01, 1d-7), & ! 2s
-        orbital_reference(2,  1, 9.5570078e-04, 1d-7), & ! 2p-
-        orbital_reference(2, -2, 3.7985058e-08, 1d-7), & ! 2p
-        orbital_reference(3,  2, 8.0534987e-12, 1d-7), & ! 3d-
-        orbital_reference(3, -3, 1.6661945e-16, 1d-7), & ! 3d
-        orbital_reference(4,  3, 2.1063549e-20, 1d-7), & ! 4f-
-        orbital_reference(5, -4, 2.5670738e-25, 1d-7)  & ! 5f
+        orbital_reference(1, -1, -3.1701678053e-03, 1d-7), & ! 1s
+        orbital_reference(2, -1, -4.0115725286e-04, 1d-7), & ! 2s
+        orbital_reference(2,  1, -1.8052454393e-06, 1d-7), & ! 2p-
+        orbital_reference(2, -2, -3.4401802024e-07, 1d-7), & ! 2p
+        orbital_reference(3,  2, -1.1242863616e-10, 1d-7), & ! 3d-
+        orbital_reference(3, -3, -3.3481529462e-11, 1d-7), & ! 3d
+        orbital_reference(4,  3, -6.9334598114e-15, 1d-7), & ! 4f-
+        orbital_reference(5, -4, -2.0900530055e-15, 1d-7)  & ! 5f
     /)
     type(orbital_reference) :: orb
 
