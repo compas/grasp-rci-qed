@@ -29,5 +29,5 @@ add_executable(test.hydrogenic_vp
     lib/testing.f90
     lib/lib9290_setup.f90
 )
-target_link_libraries_Fortran(test.hydrogenic_vp PUBLIC mod 9290 grasp rci rci_qed)
+target_link_libraries_Fortran(test.hydrogenic_vp PUBLIC mod 9290 grasp rci_rci rci_qed)
 add_test(hydrogenic_vp test.hydrogenic_vp)

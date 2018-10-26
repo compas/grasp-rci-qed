@@ -1,4 +1,4 @@
-add_library(rci
+add_library(rci_rci
     auxblk.f90
     auxblk_I.f90
     dnicmv.f90
@@ -59,9 +59,8 @@ add_library(rci
     wghtd5.f90
     wghtd5_I.f90
 )
-setup_fortran_modules(rci)
-target_link_libraries_Fortran(rci PRIVATE
+setup_fortran_modules(rci_rci)
+target_link_libraries_Fortran(rci_rci PRIVATE
     mod 9290 rang90 mpi90 dvd90
     rci_breit rci_qed rci_mass_shifts
 )
-install(TARGETS rci DESTINATION bin/)
