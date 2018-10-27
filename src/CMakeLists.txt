@@ -7,6 +7,7 @@ add_subdirectory("breit")
 add_subdirectory("qed")
 add_subdirectory("mass_shifts")
 add_subdirectory("rci")
+add_subdirectory("matrixelements")
 
 # rci-qed is the main program in this module
 add_executable(rci-qed
