@@ -8,6 +8,7 @@
 !!
 program matrixelements
     use grasp_kinds, only: real64
+    use grasp_cimatrixelements
     use g2k_lib92
     use g2k_librci
     use g2k_csls
@@ -38,6 +39,8 @@ program matrixelements
     type(matrixelement) :: hij
 
     real(real64), dimension(:,:), allocatable :: cimatrix
+    real(real64) :: result
+    real(real64), dimension(20) :: tshell
 
     character(*), parameter :: isodata = 'isodata' ! name of the isodata file
 
@@ -94,6 +97,13 @@ program matrixelements
             hij = eval_matrixelement(i, j, hamcache)
             call print_matrixelement(i, j, hij)
             call write_matrixelement(fh, i, j, hij)
+
+            print '(a15," = ",d20.10)', "dirac_potential", dirac_potential(i, j)
+            print '(a15," = ",d20.10)', "coulomb", coulomb(i, j)
+            print '(a15," = ",d20.10)', "breit", breit(i, j)
+            print '(a15," = ",d20.10)', "QED VP", qed_vp(i, j)
+            print '(a15," = ",d20.10)', "NMS", nms(i, j)
+            print '(a15," = ",d20.10)', "SMS", sms(i, j)
 
             cimatrix(i, j) = hij%diracpot + hij%coulomb + hij%breit
             cimatrix(j, i) = cimatrix(i, j)

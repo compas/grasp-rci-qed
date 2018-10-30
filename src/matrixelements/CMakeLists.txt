@@ -1,6 +1,7 @@
 set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Wimplicit-interface -Wimplicit-procedure")
 add_executable(rci.matrixelements
     matrixelements.f90
+    cimatrixelements.f90
     g2k_lib92.f90
     g2k_librci.f90
     g2k_csls.F90
