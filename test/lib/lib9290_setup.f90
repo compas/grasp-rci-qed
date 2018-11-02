@@ -49,8 +49,9 @@ contains
     end subroutine setup_grid
 
     subroutine setup_nucleus
-        use def_C
-        use npar_C
+        use grasp_kinds, only: dp
+        use def_C, only: CVAC, C, PI, TENMAX, EXPMAX, EXPMIN, PRECIS, Z, FMTOAU
+        use npar_C, only: NPARM, PARM
         use nucpot_I
 
         ! C and CVAC are both speeds of light. However, C is usually read in from
@@ -60,10 +61,12 @@ contains
         print *, TENMAX,EXPMAX,EXPMIN,PRECIS
         print *, CVAC, PI
 
-        Z = 18.0D0
+        Z = 74.0_dp
         NPARM = 2
-        PARM(1) = 6.8839456274865651D-005
-        PARM(2) = 9.8905913700962641D-006
+        PARM(1) = 6.3992148288789252_dp * FMTOAU
+        PARM(2) = 0.52338755531043146_dp * FMTOAU
+
+        print *, PARM
 
         call nucpot
     end subroutine setup_nucleus
