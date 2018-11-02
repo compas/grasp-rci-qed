@@ -1,19 +1,9 @@
 program exportvp
-    use ncdist_C, only: ZDIST
-    use grid_C, only: N, R
+    use grasp_rci_utils, only: write_zdist_csv
     implicit none
-
-    integer :: i, fh
-
     call setup
     call setup_vacuum_polarization
-
-    open(newunit=fh, file="vacuum_polarization.csv", action='write')
-    write(fh, '(a5,2(",",a25))') "idx", "radius", "vacuum_polarization"
-    do i = 1, N
-        write(fh, '(i5,2(",",es25.16))') i, R(i), ZDIST(i)
-    enddo
-    close(fh)
+    call write_zdist_csv
 
 contains
 
