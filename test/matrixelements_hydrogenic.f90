@@ -24,7 +24,6 @@ program matrixelements_hydrogenic
     call allocate_hydrogenic_orbitals(orbitals)
     call orbout("hydrogenic.w")
 
-
 contains
 
     function reldiff(a, b)

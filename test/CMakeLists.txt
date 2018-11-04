@@ -1,9 +1,21 @@
-# Make sure the test executables end up on build/test/, not build/bin/
+# Make sure the test libraries and executables do not end up in build/{lib,bin}/
 unset(CMAKE_RUNTIME_OUTPUT_DIRECTORY)
+unset(CMAKE_LIBRARY_OUTPUT_DIRECTORY)
+unset(CMAKE_ARCHIVE_OUTPUT_DIRECTORY)
 
 # Let's catch implicit uses of routines in the test prorams and libraries
 set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Wimplicit-interface -Wimplicit-procedure")
 
+# A library of test helper routines etc.
+add_library(rci-qed.test STATIC
+    lib/testing.f90
+)
+setup_fortran_modules(rci-qed.test)
+target_link_libraries_Fortran(rci-qed.test PUBLIC
+    grasp
+)
+
+# Script-based unit testing
 add_test(NAME test-integration-rci-nitrogen
     COMMAND
     ${CMAKE_CURRENT_SOURCE_DIR}/integration/rci.sh
@@ -26,19 +38,22 @@ add_test(lib92_quad test.lib92_quad)
 # Unit tests for the 1-particle QED operators
 add_executable(test.hydrogenic_vp
     hydrogenic_vp.f90
-    lib/testing.f90
-    lib/lib9290_setup.f90
 )
-target_link_libraries_Fortran(test.hydrogenic_vp PUBLIC mod 9290 grasp rci_rci rci_qed)
+target_link_libraries_Fortran(test.hydrogenic_vp PUBLIC
+    mod 9290 grasp
+    rci_rci rci_qed
+    rci-qed.tools rci-qed.test
+)
 add_test(hydrogenic_vp test.hydrogenic_vp)
 
 # Unit tests for matrix element calculations
 add_executable(test.matrixelements_hydrogenic
     matrixelements_hydrogenic.f90
     lib/testing.f90
-    lib/lib9290_setup.f90
-    lib/lib9290_hydrogenic.f90
-    lib/orbout.f90 lib/orbout_I.f90
 )
-target_link_libraries_Fortran(test.matrixelements_hydrogenic PUBLIC mod 9290 grasp rci_rci rci_qed)
+target_link_libraries_Fortran(test.matrixelements_hydrogenic PUBLIC
+    mod 9290 grasp
+    rci_rci rci_qed
+    rci-qed.tools rci-qed.test
+)
 add_test(matrixelements_hydrogenic test.matrixelements_hydrogenic)
