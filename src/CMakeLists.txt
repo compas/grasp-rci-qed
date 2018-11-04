@@ -18,3 +18,14 @@ target_link_libraries_Fortran(rci-qed PUBLIC
     rci_rci
 )
 install(TARGETS rci-qed DESTINATION bin/)
+
+# rci-qed.matrixelements
+add_executable(rci-qed.matrixelements
+    matrixelements.f90
+)
+target_link_libraries_Fortran(rci-qed.matrixelements PUBLIC
+    mod 9290 rang90
+    grasp rci_rci rci_breit rci_qed rci_mass_shifts
+    rci-qed_matrixelements
+)
+install(TARGETS rci-qed.matrixelements DESTINATION bin/)

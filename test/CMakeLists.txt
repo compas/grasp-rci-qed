@@ -53,7 +53,10 @@ add_executable(test.matrixelements_hydrogenic
 )
 target_link_libraries_Fortran(test.matrixelements_hydrogenic PUBLIC
     mod 9290 grasp
-    rci_rci rci_qed
+    rci_rci rci_qed rci-qed_matrixelements
     rci-qed.tools rci-qed.test
 )
 add_test(matrixelements_hydrogenic test.matrixelements_hydrogenic)
+set_property(TEST matrixelements_hydrogenic PROPERTY ENVIRONMENT
+    "RCIQED_TESTDATA=${CMAKE_CURRENT_SOURCE_DIR}/data"
+)
