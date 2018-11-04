@@ -18,13 +18,3 @@ target_link_libraries_Fortran(rci-qed PUBLIC
     rci_rci
 )
 install(TARGETS rci-qed DESTINATION bin/)
-
-# Utility programs
-add_executable(rci.exportvp
-    exportvp.f90
-)
-target_link_libraries_Fortran(rci.exportvp PUBLIC
-    mod 9290 mpi90
-    rci_rci rci_qed
-)
-install(TARGETS rci.exportvp DESTINATION bin/)

@@ -23,4 +23,12 @@ target_link_libraries_Fortran(rci-qed.exporthydrogenic PUBLIC
     mod 9290 mpi90
     rci-qed.tools
 )
-#install(TARGETS rci-qed.exporthydrogenic DESTINATION bin/)
+
+# exportvp
+add_executable(rci-qed.exportvp
+    exportvp.f90
+)
+target_link_libraries_Fortran(rci-qed.exportvp PUBLIC
+    mod 9290 mpi90
+    rci_rci rci_qed
+)
