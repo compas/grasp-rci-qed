@@ -1,5 +1,5 @@
 program matrixelements_hydrogenic
-    use grasp_kinds, only: real64
+    use grasp_kinds, only: real64, dp
     use grasptest_lib9290_setup
     use grasptest_lib9290_hydrogenic
     use orbout_I
@@ -20,9 +20,7 @@ program matrixelements_hydrogenic
     integer :: n, k, l, tmpk, tmpl
     real(real64) :: vp_value
 
-    call setup_constants
-    call setup_grid
-    call setup_nucleus
+    call setup(74.0_dp)
     call allocate_hydrogenic_orbitals(orbitals)
     call orbout("hydrogenic.w")
 

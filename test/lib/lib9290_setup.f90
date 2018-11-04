@@ -2,22 +2,20 @@
 !! required by the lib9290 routines.
 module grasptest_lib9290_setup
     implicit none
-    ! implicit real*8 (A-H, O-Z)
-    ! include 'parameters.def'
-
-    ! COMMON/DEF0/TENMAX,EXPMAX,EXPMIN,PRECIS &
-    !       /DEF1/EMN,IONCTY,NELEC,Z &
-    !       /DEF2/C &
-    !       /DEF4/ACCY,NSCF,NSIC,NSOLV &
-    !       /DEF9/CVAC,PI &
-    !       /GRID/R(NNN1),RP(NNN1),RPOR(NNN1),RNT,H,HP,N &
-    !       /NPAR/PARM(2),NPARM &
-    !       /ORB2/NCF,NW,PNTRIQ &
-    !       /ORB4/NP(NNNW),NAK(NNNW) &
-    !       /ORB10/NH(NNNW) &
-    !       /TATB/TA(NNN1),TB(NNN1),MTP
 
 contains
+
+    !> Call all the setup routines to set up parts of the lib9290 global state
+    !! for a point nucleus with charge `nuclear_z`.
+    subroutine setup(nuclear_z)
+        use grasp_kinds, only: real64
+
+        real(real64), intent(in) :: nuclear_z
+
+        call setup_constants
+        call setup_grid(nuclear_z)
+        call setup_nucleus(nuclear_z)
+    end subroutine setup
 
     subroutine setup_constants
         use setcon_I
@@ -27,7 +25,8 @@ contains
         call setmc ! machine-dependent parameters
     end subroutine setup_constants
 
-    subroutine setup_grid
+    subroutine setup_grid(nuclear_z)
+        use grasp_kinds, only: real64
         use parameter_def
         use def_C
         use grid_C
@@ -35,24 +34,29 @@ contains
         use setqic_I
         use radgrd_I
 
+        real(real64), intent(in) :: nuclear_z
+
+        ! Taken from getcid.f90
+        RNT = 2.0D-6 / nuclear_z
         H = 5.0D-2
-        RNT = 2.0D-6
         HP = 0.0D0
         N = NNNP
+        ACCY = H**6
+
         MTP = NNNP
 
         call setqic
         call radgrd
-
-        ! Stolen from rci, based on the various examples of setting ACCY there
-        ACCY = H**6
     end subroutine setup_grid
 
-    subroutine setup_nucleus
-        use grasp_kinds, only: dp
-        use def_C, only: CVAC, C, PI, TENMAX, EXPMAX, EXPMIN, PRECIS, Z, FMTOAU
+    !> Sets up the nuclear parameters for a point nucleus with charge `nuclear_z`.
+    subroutine setup_nucleus(nuclear_z)
+        use grasp_kinds, only: real64, dp
+        use def_C, only: CVAC, C, PI, TENMAX, EXPMAX, EXPMIN, PRECIS, Z
         use npar_C, only: NPARM, PARM
         use nucpot_I
+
+        real(real64), intent(in) :: nuclear_z
 
         ! C and CVAC are both speeds of light. However, C is usually read in from
         ! a file, so needs to be set manually.
@@ -61,12 +65,9 @@ contains
         print *, TENMAX,EXPMAX,EXPMIN,PRECIS
         print *, CVAC, PI
 
-        Z = 74.0_dp
-        NPARM = 2
-        PARM(1) = 6.3992148288789252_dp * FMTOAU
-        PARM(2) = 0.52338755531043146_dp * FMTOAU
-
-        print *, PARM
+        ! Set the nucleus up as a point source for a specific Z
+        Z = nuclear_z
+        NPARM = 0
 
         call nucpot
     end subroutine setup_nucleus

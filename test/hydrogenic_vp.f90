@@ -21,7 +21,7 @@ program hydrogenic_vp
     !use g2k_parameters, only: real64, dp, NNN1, NNNP
     !use g2ktest_lib92_common, only: setup_constants, setup_grid, setup_nucleus, kappa_to_string
     !use qed_flambaum_hydrogenic_test_common, only: NW, NP, NAK
-    use grasp_kinds, only: real64
+    use grasp_kinds, only: real64, dp
     use grasptest_lib9290_setup
     use orb_C
     use vpint_I
@@ -38,14 +38,14 @@ program hydrogenic_vp
     ! They are here to catch any change to the diagonal element values.
     ! The reference values are accurate up to 10^{-8}.
     type(orbital_reference), parameter, dimension(*) :: orbitals = (/ &
-        orbital_reference(1, -1, -3.1701678053e-03, 1d-7), & ! 1s
-        orbital_reference(2, -1, -4.0115725286e-04, 1d-7), & ! 2s
-        orbital_reference(2,  1, -1.8052454393e-06, 1d-7), & ! 2p-
-        orbital_reference(2, -2, -3.4401802024e-07, 1d-7), & ! 2p
-        orbital_reference(3,  2, -1.1242863616e-10, 1d-7), & ! 3d-
-        orbital_reference(3, -3, -3.3481529462e-11, 1d-7), & ! 3d
-        orbital_reference(4,  3, -6.9334598114e-15, 1d-7), & ! 4f-
-        orbital_reference(5, -4, -2.0900530055e-15, 1d-7)  & ! 5f
+        orbital_reference(1, -1, -3.1703841900e-03, 1d-7), & ! 1s
+        orbital_reference(2, -1, -4.0118488628e-04, 1d-7), & ! 2s
+        orbital_reference(2,  1, -1.8052645141e-06, 1d-7), & ! 2p-
+        orbital_reference(2, -2, -3.4397524133e-07, 1d-7), & ! 2p
+        orbital_reference(3,  2, -1.1241603499e-10, 1d-7), & ! 3d-
+        orbital_reference(3, -3, -3.3478594312e-11, 1d-7), & ! 3d
+        orbital_reference(4,  3, -6.9328886357e-15, 1d-7), & ! 4f-
+        orbital_reference(5, -4, -2.0898993567e-15, 1d-7)  & ! 5f
     /)
     type(orbital_reference) :: orb
 
@@ -53,9 +53,7 @@ program hydrogenic_vp
     integer :: n, k, l, tmpk, tmpl
     real(real64) :: vp_value
 
-    call setup_constants
-    call setup_grid
-    call setup_nucleus
+    call setup(18.0_dp)
     call allocate_hydrogenic_orbitals
 
     call setup_vacuum_polarization
