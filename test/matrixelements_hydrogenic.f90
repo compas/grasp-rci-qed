@@ -50,7 +50,7 @@ contains
         hij_breit = breit(ic, ir)
 
         print '("H(",i0,",",i0"):")', ic, ir
-        print *, hij_dp, hij_coulomb, hij_breit
+        print '(3(d30.16))', hij_dp, hij_coulomb, hij_breit
         print '(d30.16)', hij_dp + hij_coulomb + hij_breit
     end subroutine calculate_hij
 

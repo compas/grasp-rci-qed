@@ -348,25 +348,53 @@ contains
             elseif(itype == 6) then
                 call BRINT6(LABEL(1,I),LABEL(2,I),LABEL(3,i),LABEL(4,i),LABEL(5,i), result)
             endif
-            ! Note: itype == 0 is also possible.
 
-            if(itype > 0) then
-                breit = breit + result * COEFF(i)
+            ! Note: LABEL(6,i) can also be negative. See breid.f90.
+            !
+            ! In breid.f90, the sign of ITYPE is controlled by ISG, which is
+            ! determined by:
+            !
+            !     ISG = 1
+            !     IF (JA == JB) THEN
+            !        IF (ICORE(IA1)/=0 .AND. ICORE(IB1)/=0) THEN
+            !           IF (JA > 1) RETURN
+            !           ISG = -1
+            !        ENDIF
+            !     ENDIF
+            !
+            ! This means that it can sometimes also be negative. It seems to be
+            ! negative if the value is for a contributions from the filled core
+            ! shells. It would make sense that these contributions are the same
+            ! for all CSFs, and hence can be "shared" for the diagonal elements.
+            !
+            ! This is what appears to be happening with ELSTO -- it stores the
+            ! common part of the diagonal for each block.
+            !
+            ! From the original setham_gg routine:
+            !
+            !    IF (LABEL(6,I) > 0) THEN
+            !       ELEMNT = ELEMNT + CONTR
+            !    ELSE
+            !    !            ...It comes here only when ic=ir=1
+            !    !               clue: rkco<-breid<-talk<-label(6,i)
+            !       NCORE = NCORE + 1
+            !       ELSTO = ELSTO + CONTR
+            !       write(fh_hmat, '(" % setting ELSTO")')
+            !    ENDIF
+            !
+            ! So, to correctly calculate the matrix element, we should also
+            ! add the ones that normally go to ELSTO to the Breit matrix element.
+            !
+            ! TODO/FIXME: But isn't ELSTO global across multiple matrix elements
+            ! in a block?
+            if(LABEL(6,i) > 0) then
+                print *, "ELSTO: no."
+            elseif(LABEL(6,i) < 0) then
+                print *, "ELSTO: yes."
             else
-                ! Comment from the original setham_gg routine:
-                !
-                ! > ...It comes here only when ic=ir=1
-                ! > clue: rkco<-breid<-talk<-label(6,i)
-                !
-                ! And there also was the following code in this else block:
-                !
-                !     NCORE = NCORE + 1
-                !     ELSTO = ELSTO + result * COEFF(i)
-                !
-                ! However, this code does not look relevant. It sets up some stuff
-                ! for genmat two.. but does not seem to be able to affect matrix
-                ! element calculations.
+                print *, "ELSTO: itype == 0"
             endif
+            breit = breit + result * COEFF(i)
         enddo
     end function breit
 
