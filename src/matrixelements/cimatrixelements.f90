@@ -224,10 +224,6 @@ contains
     end
 
     !===========================================================================
-    ! Routines for Dirac + nuclear potential
-    !---------------------------------------------------------------------------
-
-    !===========================================================================
     ! Routines for two-particle Coulomb matrix elements
     !---------------------------------------------------------------------------
 
@@ -270,6 +266,16 @@ contains
         enddo
     end function coulomb
 
+    !> Calls the RKINTC, but makes sure that the input LABEL values do not get
+    !! changed.
+    subroutine rkintc_safe(l1, l2, l3, l4, l5, result)
+        use grasp_kinds, only: real64
+        use rkintc_I
+        integer, value :: l1, l2, l3, l4, l5
+        real(real64), intent(out) :: result
+        call RKINTC(l1, l2, l3, l4, l5, result)
+    end subroutine rkintc_safe
+
     !===========================================================================
     ! Routines for two-particle mass shift (special mass shift; SMS)
     !---------------------------------------------------------------------------
@@ -309,7 +315,65 @@ contains
     ! Routines for two-particle Breit matrix elements
     !---------------------------------------------------------------------------
 
+    !> Returns the matrix element of the Breit operator.
     function breit(ic, ir)
+        use grasp_kinds, only: real64, dp
+
+        integer, intent(in) :: ic, ir
+        real(real64) :: breit
+
+        real(real64) :: breit_core, breit_noncore, elsto
+
+        if(ic == 1 .and. ir == 1) then
+            call breit_split(ic, ir, breit_core, breit_noncore)
+            breit = breit_core + breit_noncore
+        elseif(ic == ir) then
+            call breit_split( 1,  1, elsto, breit_noncore)
+            call breit_split(ic, ir, breit_core, breit_noncore)
+            if(breit_core /= 0.0_dp) then
+                ! NOTE: comparing floats here with equality, but `breit_split`
+                ! should set it to _exactly_ 0.0_dp and it should not be modified
+                ! at all, unless the value is significant, so this should work
+                ! as expected.
+                print '("┌ WARNING: Unexpected non-zero value for breit_core")'
+                print '("│ ir, ic = ",i0,", ", i0)', ir, ic
+                print '("└ @ grasp_cimatrixelements % breit W101")'
+            endif
+            breit = elsto + breit_noncore
+        else ! ic /= ir
+            call breit_split(ic, ir, breit_core, breit_noncore)
+            if(breit_core /= 0.0_dp) then
+                ! NOTE: comparing floats here with equality, but `breit_split`
+                ! should set it to _exactly_ 0.0_dp and it should not be modified
+                ! at all, unless the value is significant, so this should work
+                ! as expected.
+                print '("┌ WARNING: Unexpected non-zero value for breit_core")'
+                print '("│ ir, ic = ",i0,", ", i0)', ir, ic
+                print '("└ @ grasp_cimatrixelements % breit W101")'
+            endif
+            breit = breit_noncore
+        endif
+    end function breit
+
+    !> Calculates the Breit matrix element, but calculates the core part only
+    !! sometimes.
+    !!
+    !! The `breit_core` argument is set to non-zero only if `ic == ir == 1`.
+    !!
+    !! This behaviour was reverse-engineered from `setham_gg.f90`. It appears
+    !! that the contribution to the diagnoal elements from the core electrons
+    !! is only calculated `ic == ir == 1`. For those contributions, `LABEL(6,i)`
+    !! is set to a negative value and in `setham_gg` they are accumulated into
+    !! `ELSTO`, not to `ELEMNT`.
+    !!
+    !! The assumption is that this contribution is the same for all the diagonal
+    !! elements and therefore does not have to be calculated again, probably to
+    !! optimize the calculation of the Breit matrix elements.
+    !!
+    !! This behaviour is completely undocumented, however, and the API does not
+    !! give any hints. It just appears that `RKCI_GG` / `BREID` populate the
+    !! `LABEL` arrays differently for some `ic`/`ir` values.
+    subroutine breit_split(ic, ir, breit_core, breit_noncore)
         use grasp_kinds, only: real64, dp
         use buffer_C, only: NVCOEF, COEFF, LABEL
         use breid_I
@@ -322,13 +386,14 @@ contains
         use brint6_I
 
         integer, intent(in) :: ic, ir
-        real(real64) :: breit
+        real(real64), intent(out) :: breit_core, breit_noncore
 
         integer :: itype, i
         real(real64) :: result
 
         ! The Breit interaction part of the matrix element
-        breit = 0.0_dp
+        breit_core = 0.0_dp
+        breit_noncore = 0.0_dp
         NVCOEF = 0 ! needs to be reset?
         CALL RKCO_GG(ic, ir, BREID, 1, 2)
         do i = 1, NVCOEF
@@ -384,32 +449,28 @@ contains
             !
             ! So, to correctly calculate the matrix element, we should also
             ! add the ones that normally go to ELSTO to the Breit matrix element.
-            !
-            ! TODO/FIXME: But isn't ELSTO global across multiple matrix elements
-            ! in a block?
             if(LABEL(6,i) > 0) then
-                print *, "ELSTO: no."
+                breit_noncore = breit_noncore + result * COEFF(i)
             elseif(LABEL(6,i) < 0) then
-                print *, "ELSTO: yes."
+                if(ir /= 1 .or. ir /= 1) then
+                    ! The assumption is that `ELSTO` is only set when ic == ir == 1.
+                    ! To make sure we catch the error if that assumption turns out
+                    ! to be false, we will just crash the program here.
+                    print '("┌ ERROR: Unexpected negative LABEL(6,i)")'
+                    print '("│ ir, ic = ",i0,", ", i0)', ir, ic
+                    print '("└ @ grasp_cimatrixelements % breit_split E201")'
+                    error stop
+                endif
+                breit_core = breit_core + result * COEFF(i)
             else
-                print *, "ELSTO: itype == 0"
+                ! Similar to above -- the assumption here is that `LABEL(6,:)`
+                ! will never be zero.
+                print '("┌ ERROR: Unexpected zero LABEL(6,i)")'
+                print '("│ ir, ic = ",i0,", ", i0)', ir, ic
+                print '("└ @ grasp_cimatrixelements % breit_split E202")'
+                error stop
             endif
-            breit = breit + result * COEFF(i)
         enddo
-    end function breit
-
-    !===========================================================================
-    ! Helper routines
-    !---------------------------------------------------------------------------
-
-    !> Calls the RKINTC, but makes sure that the input LABEL values do not get
-    !! changed.
-    subroutine rkintc_safe(l1, l2, l3, l4, l5, result)
-        use grasp_kinds, only: real64
-        use rkintc_I
-        integer, value :: l1, l2, l3, l4, l5
-        real(real64), intent(out) :: result
-        call RKINTC(l1, l2, l3, l4, l5, result)
-    end subroutine rkintc_safe
+    end subroutine breit_split
 
 end module grasp_cimatrixelements

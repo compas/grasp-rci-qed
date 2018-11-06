@@ -18,9 +18,10 @@ program matrixelements_hydrogenic
     character(:), allocatable :: testdata
 
     if(.not.getenv_allocating("RCIQED_TESTDATA", testdata)) then
+        print '("ERROR: Unable to get RCIQED_TESTDATA environment variable")'
         error stop
     endif
-    print '("RCI_TESTDATA=",a)', testdata
+    print '("RCIQED_TESTDATA=",a)', testdata
 
     call setup(74.0_dp)
     call allocate_hydrogenic_orbitals(orbitals)
@@ -29,30 +30,59 @@ program matrixelements_hydrogenic
     call lib92_init_rkco_gg
     call rcicommon_init
 
-    call calculate_hij(1, 1)
-    call calculate_hij(1, 2)
-    call calculate_hij(2, 2)
-    call calculate_hij(3, 3)
-    call calculate_hij(4, 4)
-    call calculate_hij(4, 5)
-    call calculate_hij(5, 5)
+    ! The following reference values were calculated using the non-MPI rci90
+    ! program by adding in debug statements into setham_gg.f90. The values were
+    ! taken from the EMT vector, with ELSTO added to all the diagonal values.
+    !
+    ! The physical system was a point-like Z=74 nucleus. The orbitals were
+    ! generated using the exporthydrogenic tool and read from a file.
+    !
+    ! Note: the values here are calculated with orbitals that are re-generated
+    ! with DCBSRW. Due to what are probably inaccuracies arising from
+    ! interpolating the orbitals, the reference values do not exactly match the
+    ! calculated values. However, it seems that they nicely fall into the 1e-10
+    ! tolerance.
+    !
+    ! Also, any changes and errors in the routines populating hydrogenic orbitals
+    ! may cause test failures here.
+    print *
+    print *, "Many-body DCB matrix elements for hydrogenic orbitals"
+    print '(6(" "), 4a20)', &
+        'H(ic,ir)', 'Reference', 'Diff (relative)', 'Tolerance'
+    call verify_dcb(1, 1, -0.978959699717e4_dp)
+    call verify_dcb(2, 2, -0.989063049881e4_dp) !
+    call verify_dcb(3, 3, -0.984231419490e4_dp) !
+    call verify_dcb(4, 4, -0.984161965244e4_dp) !
+    call verify_dcb(5, 5, -0.989314767535e4_dp) !
+    call verify_dcb(1, 2,  0.194514557433e1_dp)
+    call verify_dcb(2, 1,  0.194514557433e1_dp)
+    call verify_dcb(5, 4, -0.800396534942e0_dp) !
+    call verify_dcb(4, 5, -0.800396534942e0_dp) !
+
+    if(.not.tests_passed) then
+        print *, "qed_flambaum_hydrogenic_test: Tests failed."
+        stop 1
+    end if
 
 contains
 
-    subroutine calculate_hij(ic, ir)
+    subroutine verify_dcb(ic, ir, reference)
         use grasp_cimatrixelements
+        use grasp_kinds, only: real64, dp
 
         integer, intent(in) :: ir, ic
-        real(real64) :: hij_dp, hij_coulomb, hij_breit
+        real(real64), intent(in) :: reference
 
-        hij_dp = dirac_potential(ic, ir)
-        hij_coulomb = coulomb(ic, ir)
-        hij_breit = breit(ic, ir)
+        real(real64), parameter :: tol = 1e-10_dp
 
-        print '("H(",i0,",",i0"):")', ic, ir
-        print '(3(d30.16))', hij_dp, hij_coulomb, hij_breit
-        print '(d30.16)', hij_dp + hij_coulomb + hij_breit
-    end subroutine calculate_hij
+        real(real64) :: hij = 0.0_dp
+
+        hij = dirac_potential(ic, ir)
+        hij = hij + coulomb(ic, ir)
+        hij = hij + breit(ic, ir)
+        print '(i3,i3,4es20.10)', ic, ir, hij, reference, reldiff(hij, reference), tol
+        call check_tolerance("DCB", hij, reference, tol)
+    end subroutine verify_dcb
 
     function reldiff(a, b)
         use grasp_kinds, only: real64
