@@ -53,7 +53,7 @@ program hydrogenic_vp
     integer :: n, k, l, tmpk, tmpl
     real(real64) :: vp_value
 
-    call setup(18.0_dp)
+    call setup(18.0_dp, 39.9623831225_dp) ! Ar-40
     call allocate_hydrogenic_orbitals
 
     call setup_vacuum_polarization

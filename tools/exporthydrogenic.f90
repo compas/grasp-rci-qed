@@ -21,7 +21,7 @@ program exporthydrogenic
     integer :: n, k, l, tmpk, tmpl
     real(real64) :: vp_value
 
-    call setup(74.0_dp)
+    call setup(74.0_dp, 183.91033628717801_dp)
     call allocate_hydrogenic_orbitals(orbitals)
     call orbout("hydrogenic.w")
 

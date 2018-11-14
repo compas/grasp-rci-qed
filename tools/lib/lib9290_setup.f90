@@ -6,15 +6,18 @@ module grasptest_lib9290_setup
 contains
 
     !> Call all the setup routines to set up parts of the lib9290 global state
-    !! for a point nucleus with charge `nuclear_z`.
-    subroutine setup(nuclear_z)
+    !! for a point nucleus with charge `nuclear_z` and mass `nuclear_mass` (amu).
+    !! Nuclear mass is used for mass shifts -- the charge distribution is still
+    !! assumed to be a point.
+    subroutine setup(nuclear_z, nuclear_mass)
         use grasp_kinds, only: real64
 
-        real(real64), intent(in) :: nuclear_z
+        real(real64), intent(in) :: nuclear_z, nuclear_mass
 
         call setup_constants
         call setup_grid(nuclear_z)
         call setup_nucleus(nuclear_z)
+        call setup_nucleus_mass(nuclear_mass)
     end subroutine setup
 
     subroutine setup_constants
@@ -71,6 +74,17 @@ contains
 
         call nucpot
     end subroutine setup_nucleus
+
+    !> Sets up the nuclear mass, important for nuclear mass shifts. Argument
+    !! assumed to be given in atomic mass units.
+    subroutine setup_nucleus_mass(nuclear_mass)
+        use grasp_kinds, only: real64
+        use def_C, only: EMN, AUMAMU
+
+        real(real64), intent(in) :: nuclear_mass
+
+        EMN = nuclear_mass / AUMAMU
+    end subroutine setup_nucleus_mass
 
     function kappa_to_string(kappa)
         integer, intent(in) :: kappa

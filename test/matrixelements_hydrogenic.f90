@@ -1,6 +1,7 @@
 program matrixelements_hydrogenic
     use grasp_kinds, only: real64, dp
     use g2k_lib92, only: lib92_init_csls, lib92_init_rkco_gg, rcicommon_init
+    use g2k_librci
     use grasptest_lib9290_setup
     use grasptest_lib9290_hydrogenic
     implicit none
@@ -23,12 +24,13 @@ program matrixelements_hydrogenic
     endif
     print '("RCIQED_TESTDATA=",a)', testdata
 
-    call setup(74.0_dp)
+    call setup(74.0_dp, 183.91033628717801_dp) ! W-184
     call allocate_hydrogenic_orbitals(orbitals)
 
     call lib92_init_csls(testdata//"/oxygen.c")
     call lib92_init_rkco_gg
-    call rcicommon_init
+    call rci_common_init ! TODO: There are two rci_common_init routines at the
+                         ! moment. This one is more complete though.
 
     ! The following reference values were calculated using the non-MPI rci90
     ! program by adding in debug statements into setham_gg.f90. The values were
@@ -50,14 +52,29 @@ program matrixelements_hydrogenic
     print '(6(" "), 4a20)', &
         'H(ic,ir)', 'Reference', 'Diff (relative)', 'Tolerance'
     call verify_dcb(1, 1, -0.978959699717e4_dp)
-    call verify_dcb(2, 2, -0.989063049881e4_dp) !
-    call verify_dcb(3, 3, -0.984231419490e4_dp) !
-    call verify_dcb(4, 4, -0.984161965244e4_dp) !
-    call verify_dcb(5, 5, -0.989314767535e4_dp) !
+    call verify_dcb(2, 2, -0.989063049881e4_dp)
+    call verify_dcb(3, 3, -0.984231419490e4_dp)
+    call verify_dcb(4, 4, -0.984161965244e4_dp)
+    call verify_dcb(5, 5, -0.989314767535e4_dp)
     call verify_dcb(1, 2,  0.194514557433e1_dp)
     call verify_dcb(2, 1,  0.194514557433e1_dp)
-    call verify_dcb(5, 4, -0.800396534942e0_dp) !
-    call verify_dcb(4, 5, -0.800396534942e0_dp) !
+    call verify_dcb(5, 4, -0.800396534942e0_dp)
+    call verify_dcb(4, 5, -0.800396534942e0_dp)
+
+    print *
+    print *, "Many-body DCB + VP + NMS + SMS matrix elements for hydrogenic orbitals"
+    print '(6(" "), 4a20)', &
+        'H(ic,ir)', 'Reference', 'Diff (relative)', 'Tolerance'
+    call verify_dcbmsvp(1, 1, -0.979221541410e4_dp)
+    call verify_dcbmsvp(2, 2, -0.989328179926e4_dp)!
+    call verify_dcbmsvp(3, 3, -0.984494905359e4_dp)!
+    call verify_dcbmsvp(4, 4, -0.984425451113e4_dp)!
+    call verify_dcbmsvp(5, 5, -0.989579897580e4_dp)!
+    ! Note: the VP/NMS/SMS contributions to off-diagonal elements are zero.
+    call verify_dcbmsvp(1, 2,  0.194514557433e1_dp)
+    call verify_dcbmsvp(2, 1,  0.194514557433e1_dp)
+    call verify_dcbmsvp(5, 4, -0.800396534942e0_dp)
+    call verify_dcbmsvp(4, 5, -0.800396534942e0_dp)
 
     if(.not.tests_passed) then
         print *, "qed_flambaum_hydrogenic_test: Tests failed."
@@ -80,9 +97,32 @@ contains
         hij = dirac_potential(ic, ir)
         hij = hij + coulomb(ic, ir)
         hij = hij + breit(ic, ir)
+
         print '(i3,i3,4es20.10)', ic, ir, hij, reference, reldiff(hij, reference), tol
         call check_tolerance("DCB", hij, reference, tol)
     end subroutine verify_dcb
+
+    subroutine verify_dcbmsvp(ic, ir, reference)
+        use grasp_cimatrixelements
+        use grasp_kinds, only: real64, dp
+
+        integer, intent(in) :: ir, ic
+        real(real64), intent(in) :: reference
+
+        real(real64), parameter :: tol = 1e-10_dp
+
+        real(real64) :: hij = 0.0_dp
+
+        hij = dirac_potential(ic, ir)
+        hij = hij + coulomb(ic, ir)
+        hij = hij + breit(ic, ir)
+        hij = hij + qed_vp(ic, ir)
+        hij = hij + nms(ic, ir)
+        hij = hij + sms(ic, ir)
+
+        print '(i3,i3,4es20.10)', ic, ir, hij, reference, reldiff(hij, reference), tol
+        call check_tolerance("DCB", hij, reference, tol)
+    end subroutine verify_dcbmsvp
 
     function reldiff(a, b)
         use grasp_kinds, only: real64
