@@ -1,3 +1,4 @@
+set(BUILD_BINDIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 # Make sure the test libraries and executables do not end up in build/{lib,bin}/
 unset(CMAKE_RUNTIME_OUTPUT_DIRECTORY)
 unset(CMAKE_LIBRARY_OUTPUT_DIRECTORY)
@@ -23,7 +24,7 @@ add_test(NAME test-integration-rci-nitrogen
 )
 set_property(TEST test-integration-rci-nitrogen PROPERTY ENVIRONMENT
     "GRASP=${GRASP}"
-    "RCIQED=$<TARGET_FILE:rci-qed>"
+    "GRASP_BUILD_BINDIR=${BUILD_BINDIR}"
 )
 
 # Check lib92 routines -- this currently acts as a simple integration test,
@@ -58,7 +59,9 @@ target_link_libraries_Fortran(test.matrixelements_hydrogenic PUBLIC
 )
 add_test(matrixelements_hydrogenic_generate ../tools/rci-qed.exporthydrogenic)
 add_test(matrixelements_hydrogenic test.matrixelements_hydrogenic)
-set_property(TEST matrixelements_hydrogenic
-    PROPERTY ENVIRONMENT "RCIQED_TESTDATA=${CMAKE_CURRENT_SOURCE_DIR}/data"
-    PROPERTY DEPENDS matrixelements_hydrogenic_generate
+set_property(TEST matrixelements_hydrogenic PROPERTY ENVIRONMENT
+    "RCIQED_TESTDATA=${CMAKE_CURRENT_SOURCE_DIR}/data"
+)
+set_property(TEST matrixelements_hydrogenic PROPERTY DEPENDS
+    matrixelements_hydrogenic_generate
 )
