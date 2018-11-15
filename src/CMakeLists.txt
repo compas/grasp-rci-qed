@@ -1,8 +1,4 @@
-add_library(grasp STATIC
-    libgrasp/kinds.f90
-)
-setup_fortran_modules(grasp)
-
+add_subdirectory("libgrasp")
 add_subdirectory("breit")
 add_subdirectory("qed")
 add_subdirectory("mass_shifts")

@@ -50,6 +50,7 @@ contains
     !!
     subroutine lib92_init_cw(isofile, cfile, wfile)
         use g2k_csls, only: count_blocks
+        use grasp_lib9290_init
         !use g2k_lib92_common
         use memory_man
         use alcbuf_I
@@ -130,29 +131,11 @@ contains
 
         ! What follows is from GETCID (RCI92 -> SETRES -> GETCID)
         call SETISO(isofile)
-        RNT = 2.0D-06/Z
-        H = 5.D-2
-        N = NNNP
-        HP = 0.D0
-        C = CVAC
-        ACCY = H**6
-        CALL SETQIC
-        CALL RADGRD
+        call lib9290_init_grid(Z)
         CALL NUCPOT
         call SETRWFA(wfile)
 
-        ! Set up the table of logarithms. From rci3mpi.f
-        !
-        ! This sets up the FACTS common block, which is used by the CORD routine
-        ! that gets passed to RKCO_GG.
-        call FACTT
-
-        ! RKCO_GG uses the BUFFER common block in it's dependencies, but only
-        ! re-allocates via ALCBUF. ALCBUF is actually decently documented in a
-        ! sense -- it makes it relatively clear that you need to call ALCBUF(1)
-        ! at some point. In rci_mpi it is done in SETHAM, before the main loop.
-        ! So we'll do the allocation here.
-        call ALCBUF(1)
+        call lib9290_init_rkco_gg
     end
 
     subroutine lib92_init_csls(cfile)
@@ -223,24 +206,6 @@ contains
         ! CALL ALLOC (UCF, nw,'UCF', 'MATRIX')
         CALL LODCSH2(21, ncore, -119)
     end subroutine lib92_init_csls
-
-    subroutine lib92_init_rkco_gg
-        use alcbuf_I
-        use factt_I
-
-        ! Set up the table of logarithms. From rci3mpi.f
-        !
-        ! This sets up the FACTS common block, which is used by the CORD routine
-        ! that gets passed to RKCO_GG.
-        call FACTT
-
-        ! RKCO_GG uses the BUFFER common block in it's dependencies, but only
-        ! re-allocates via ALCBUF. ALCBUF is actually decently documented in a
-        ! sense -- it makes it relatively clear that you need to call ALCBUF(1)
-        ! at some point. In rci_mpi it is done in SETHAM, before the main loop.
-        ! So we'll do the allocation here.
-        call ALCBUF(1)
-    end
 
     !> Initializes the common blocks necessary for calling rcicommon routines.
     subroutine rcicommon_init

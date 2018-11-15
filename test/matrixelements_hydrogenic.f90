@@ -1,6 +1,7 @@
 program matrixelements_hydrogenic
     use grasp_kinds, only: real64, dp
-    use g2k_lib92, only: lib92_init_csls, lib92_init_rkco_gg, rcicommon_init
+    use grasp_lib9290_init
+    use g2k_lib92, only: lib92_init_csls, rcicommon_init
     use g2k_librci
     use grasptest_lib9290_setup
     use grasptest_lib9290_hydrogenic
@@ -28,7 +29,7 @@ program matrixelements_hydrogenic
     call allocate_hydrogenic_orbitals(orbitals)
 
     call lib92_init_csls(testdata//"/oxygen.c")
-    call lib92_init_rkco_gg
+    call lib9290_init_rkco_gg
     call rci_common_init ! TODO: There are two rci_common_init routines at the
                          ! moment. This one is more complete though.
 
