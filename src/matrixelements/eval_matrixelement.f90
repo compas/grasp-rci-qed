@@ -36,6 +36,8 @@
 
 !> Calculates the matrix element V(i, j)
 function eval_matrixelement(ic, ir, hamcache)
+    use, intrinsic :: ieee_arithmetic
+
     use grasp_kinds, only: real64, dp
     !use g2k_parameters
     use g2k_librci, only: hamiltonian_cache, matrixelement
@@ -81,6 +83,10 @@ function eval_matrixelement(ic, ir, hamcache)
     integer m_local
     real(real64) :: result, result1, result2
 
+    eval_matrixelement%se(1) = ieee_value(eval_matrixelement%se(1), ieee_quiet_nan)
+    eval_matrixelement%se(2) = ieee_value(eval_matrixelement%se(2), ieee_quiet_nan)
+    eval_matrixelement%se(3) = ieee_value(eval_matrixelement%se(3), ieee_quiet_nan)
+    eval_matrixelement%se(4) = ieee_value(eval_matrixelement%se(4), ieee_quiet_nan)
 
     incor = 1 ! set to this in setham_gg.f
     ATWINV = 1.0_dp/EMN ! this is calculated in setham_gg.f
