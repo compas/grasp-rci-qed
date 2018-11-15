@@ -4,8 +4,9 @@ unset(CMAKE_RUNTIME_OUTPUT_DIRECTORY)
 unset(CMAKE_LIBRARY_OUTPUT_DIRECTORY)
 unset(CMAKE_ARCHIVE_OUTPUT_DIRECTORY)
 
-# Let's catch implicit uses of routines in the test prorams and libraries
-set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Wimplicit-interface -Wimplicit-procedure")
+# Let's catch implicit uses of routines in the test binaries and libraries, and
+# abort the compilation if any warning is encountered.
+set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Werror=implicit-procedure -Werror=implicit-interface")
 
 # A library of test helper routines etc.
 add_library(rci-qed.test STATIC
