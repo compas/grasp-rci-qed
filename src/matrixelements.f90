@@ -12,6 +12,7 @@ program matrixelements
     use g2k_lib92
     use g2k_librci
     use g2k_csls
+    use prnt_C, only: NVEC
     implicit none
 
     interface
@@ -21,10 +22,11 @@ program matrixelements
             type(hamiltonian_cache), intent(in) :: hamcache
             type(matrixelement) :: eval_matrixelement
         end function eval_matrixelement
-        subroutine eval_asfs(cimatrix)
-            !use g2k_parameters
-            use grasp_kinds, only: real64
-            real(real64), dimension(:,:), intent(in) :: cimatrix
+        subroutine eval_asfs(hamiltonian, k, hk)
+            use g2k_librci
+            type(matrixelement), dimension(:,:), intent(in) :: hamiltonian
+            integer, intent(in) :: k
+            type(matrixelement), intent(out) :: hk
         end subroutine eval_asfs
     end interface
 
@@ -32,13 +34,13 @@ program matrixelements
     integer :: state_len
     character(:), allocatable :: file_csls, file_wfns, file_mixing
 
-    integer :: status, i, j
+    integer :: status, k, i, j
     integer :: fh
 
     type(hamiltonian_cache) :: hamcache
     type(matrixelement) :: hij
 
-    real(real64), dimension(:,:), allocatable :: cimatrix
+    type(matrixelement), dimension(:,:), allocatable :: hamiltonian
     real(real64) :: result
     real(real64), dimension(20) :: tshell
 
@@ -77,15 +79,9 @@ program matrixelements
     call rci_common_init
 
     ! Allocate the dense CI matrix
-    allocate(cimatrix(ncsfs_global(), ncsfs_global()))
+    allocate(hamiltonian(ncsfs_global(), ncsfs_global()))
 
-    ! Populate the Hamiltonian cache
-    print '(a)', ">>> RUNNING: allocate_sematrices"
-    call allocate_sematrices(hamcache)
-
-    ! Diagonal matrix elements
-    !call run_matrixelement(1, 1)
-
+    print '(a)', ">>> RUNNING: calculating matrixelements"
     open(newunit=fh, file="matrix.csv", action='write')
     write(fh, '(a6,",",a6)', advance='no') "row", "column"
     write(fh, '(4(",",a30))', advance='no') "diracpot", "coulomb", "breit", "vp"
@@ -94,26 +90,33 @@ program matrixelements
     write(fh, '()')
     do i = 1, ncsfs_global()
         do j = 1, i
-            hij = eval_matrixelement(i, j, hamcache)
-            call print_matrixelement(i, j, hij)
-            call write_matrixelement(fh, i, j, hij)
-
-            print '(a15," = ",d20.10)', "dirac_potential", dirac_potential(i, j)
-            print '(a15," = ",d20.10)', "coulomb", coulomb(i, j)
-            print '(a15," = ",d20.10)', "breit", breit(i, j)
-            print '(a15," = ",d20.10)', "QED VP", qed_vp(i, j)
-            print '(a15," = ",d20.10)', "NMS", nms(i, j)
-            print '(a15," = ",d20.10)', "SMS", sms(i, j)
-
-            cimatrix(i, j) = hij%diracpot + hij%coulomb + hij%breit
-            cimatrix(j, i) = cimatrix(i, j)
+            hamiltonian(i,j)%diracpot = dirac_potential(i, j)
+            hamiltonian(i,j)%coulomb = coulomb(i, j)
+            hamiltonian(i,j)%breit = breit(i, j)
+            hamiltonian(i,j)%vp = qed_vp(i, j)
+            hamiltonian(i,j)%nms = nms(i, j)
+            hamiltonian(i,j)%sms = sms(i, j)
+            call print_matrixelement(i, j, hamiltonian(i,j))
+            if (i /= j) then
+                hamiltonian(j,i) = hamiltonian(i,j)
+            endif
         enddo
     enddo
     close(fh)
 
     ! ...
     print '(a)', ">>> RUNNING: eval_asfs"
-    call eval_asfs(cimatrix)
+    do k = 1, NVEC
+        call eval_asfs(hamiltonian, k, hij)
+        print '(a1,a10,a24)',    " ", "Type", "<H_i> (Ha)"
+        print '(a1,a10,e24.15)', " ", "DC", hij%diracpot + hij%coulomb
+        print '(a1,a10,e24.15)', " ", "Breit", hij%breit
+        print '(a1,a10,e24.15)', ">", "DC+B", hij%diracpot + hij%coulomb + hij%breit
+        print '(a1,a10,e24.15)', " ", "QED VP", hij%vp
+        print '(a1,a10,e24.15)', " ", "NMS+SMS", hij%nms + hij%sms
+        print '(a1,a10,e24.15)', ">", "Full", hij%diracpot + hij%coulomb + hij%breit &
+            + hij%vp + hij%nms + hij%sms
+    enddo
 
 contains
 
@@ -128,16 +131,16 @@ contains
         print '(80("="))'
         print '(">>> RUNNING: matrixelement(",i0,", ",i0,")")', k, l
         print '(80("-"))'
-        print '("> Dirac + potential      = ",d20.10)', hij%diracpot
-        print '("> Coulomb                = ",d20.10)', hij%coulomb
-        print '("> Breit                  = ",d20.10)', hij%breit
-        print '("> Vacuum polarization    = ",d20.10)', hij%vp
-        print '("> Self-energy (Mohr)     = ",d20.10)', hij%se(1)
-        print '("> Self-energy (Shabaev)  = ",d20.10)', hij%se(2)
-        print '("> Self-energy (Flambaum) = ",d20.10)', hij%se(3)
-        print '("> Self-energy (Pyykkö)   = ",d20.10)', hij%se(4)
-        print '("> Normal mass shift      = ",d20.10)', hij%nms
-        print '("> Special mass shift     = ",d20.10)', hij%sms
+        print '("> Dirac + potential      = ",d24.15)', hij%diracpot
+        print '("> Coulomb                = ",d24.15)', hij%coulomb
+        print '("> Breit                  = ",d24.15)', hij%breit
+        print '("> Vacuum polarization    = ",d24.15)', hij%vp
+        print '("> Self-energy (Mohr)     = ",d24.15)', hij%se(1)
+        print '("> Self-energy (Shabaev)  = ",d24.15)', hij%se(2)
+        print '("> Self-energy (Flambaum) = ",d24.15)', hij%se(3)
+        print '("> Self-energy (Pyykkö)   = ",d24.15)', hij%se(4)
+        print '("> Normal mass shift      = ",d24.15)', hij%nms
+        print '("> Special mass shift     = ",d24.15)', hij%sms
 
         total_dcb = hij%diracpot + hij%coulomb + hij%breit
         print '("H(",i0,", ",i0,"; DCB) = ",d20.10)', k, l, total_dcb

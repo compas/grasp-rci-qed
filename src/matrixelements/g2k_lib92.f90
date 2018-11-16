@@ -131,6 +131,7 @@ contains
 
         ! What follows is from GETCID (RCI92 -> SETRES -> GETCID)
         call SETISO(isofile)
+        C = CVAC
         call lib9290_init_grid(Z)
         CALL NUCPOT
         call SETRWFA(wfile)
