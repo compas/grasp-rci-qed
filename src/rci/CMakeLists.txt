@@ -3,7 +3,6 @@ add_library(rci_rci
     dnicmv.f90 dnicmv_I.f90
     dspevx_I.f90 # this interface appears to be for a LAPACK function
     engout.f90 engout_I.f90
-    evcout.f90
     #gdsummpi_I.f90
     genintrk.f90 genintrk_I.f90
     genintrkwrap.f90 genintrkwrap_I.f90
