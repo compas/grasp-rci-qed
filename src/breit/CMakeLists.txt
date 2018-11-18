@@ -15,7 +15,6 @@ add_library(rci_breit STATIC
     genintbreit2.f90 genintbreit2_I.f90
     genintbreit2wrap.f90 genintbreit2wrap_I.f90
     rkint.f90 rkint_I.f90
-    rkintc.f90 rkintc_I.f90
     skint.f90 skint_I.f90
     talk.f90 talk_I.f90
     triangbreit1.f90 triangbreit1_I.f90

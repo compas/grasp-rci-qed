@@ -40,6 +40,7 @@ add_library(rci_rci
     matrix_I.f90
     ncharg.f90
     ncharg_I.f90
+    rkintc.f90 rkintc_I.f90
     setdbg.f90
     setdbg_I.f90
     setham_gg.f90
