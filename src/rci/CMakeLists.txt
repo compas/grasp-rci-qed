@@ -19,7 +19,6 @@ add_library(rci_rci
     lodres.f90 lodres_I.f90
     maneig.f90 maneig_I.f90
     matrix.f90 matrix_I.f90
-    ncharg.f90 ncharg_I.f90
     rkintc.f90 rkintc_I.f90
     setdbg.f90 setdbg_I.f90
     setham_gg.f90 setham_gg_I.f90
