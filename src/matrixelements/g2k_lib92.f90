@@ -49,8 +49,8 @@ contains
     !! @param wfile Orbital wavefunction file (usually `*.w`).
     !!
     subroutine lib92_init_cw(isofile, cfile, wfile)
-        use g2k_csls, only: count_blocks
         use grasp_lib9290_init
+        use grasp_lib9290_csls, only: count_blocks
         !use g2k_lib92_common
         use memory_man
         use alcbuf_I
@@ -140,8 +140,7 @@ contains
     end
 
     subroutine lib92_init_csls(cfile)
-        use g2k_csls, only: count_blocks
-        !use g2k_lib92_common
+        use grasp_lib9290_csls, only: count_blocks
         use memory_man
         use alcbuf_I
         use setcsll_I

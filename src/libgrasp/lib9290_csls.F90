@@ -1,23 +1,5 @@
-!> Private module containing GRASP `lib92` common block definitions used by the
-!! routines in `g2k_csls`.
-!!
-!! A separate module is used so that it would be possible to use `implicit none`
-!! in the main function body.
-!!
-!! The module __should not__ be used outside of the `g2k_csls.f90` file.
-!!
-! module g2k_csls_common
-!     IMPLICIT REAL*8 (A-H, O-Z)
-!     include 'parameters.def'
-!     COMMON/ORB2/NCF,NW,PNTRIQ &
-!           /DEF2/C &
-!           /DEF4/ACCY,NSCF,NSIC,NSOLV &
-!           /DEF9/CVAC,PI &
-!           /GRID/R(NNN1),RP(NNN1),RPOR(NNN1),RNT,H,HP,N
-! end module g2k_csls_common
-
 !> Routines used for interacting with the configuration state list (CSL) files.
-module g2k_csls
+module grasp_lib9290_csls
     use orb_C
     use def_C
     use grid_C
@@ -107,4 +89,4 @@ contains
         ncsfs_global = NCF
     end function ncsfs_global
 
-end module g2k_csls
+end module grasp_lib9290_csls

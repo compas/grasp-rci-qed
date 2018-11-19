@@ -8,13 +8,13 @@
 !!
 program matrixelements
     use grasp_kinds, only: real64
+    use grasp_lib9290_csls, only: ncsfs_global
     use grasp_rciqed_breit, only: init_breit
     use grasp_rciqed_mass_shifts, only: init_mass_shifts
     use grasp_rciqed_qed, only: init_vacuum_polarization
     use grasp_cimatrixelements
     use g2k_lib92
     use g2k_librci
-    use g2k_csls
     use prnt_C, only: NVEC
     implicit none
 
