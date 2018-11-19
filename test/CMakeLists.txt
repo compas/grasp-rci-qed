@@ -55,7 +55,8 @@ add_executable(test.matrixelements_hydrogenic
 )
 target_link_libraries_Fortran(test.matrixelements_hydrogenic PUBLIC
     mod 9290 grasp
-    rci_rci rci_qed rci-qed_matrixelements
+    rci-qed_matrixelements
+    rci_rci rci_breit rci_qed rci_mass_shifts
     rci-qed.tools rci-qed.test
 )
 add_test(matrixelements_hydrogenic_generate ../tools/rci-qed.exporthydrogenic)

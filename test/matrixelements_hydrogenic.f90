@@ -1,7 +1,10 @@
 program matrixelements_hydrogenic
     use grasp_kinds, only: real64, dp
     use grasp_lib9290_init
-    use g2k_lib92, only: lib92_init_csls, rcicommon_init
+    use grasp_rciqed_breit, only: init_breit
+    use grasp_rciqed_mass_shifts, only: init_mass_shifts
+    use grasp_rciqed_qed, only: init_vacuum_polarization
+    use g2k_lib92, only: lib92_init_csls
     use g2k_librci
     use grasptest_lib9290_setup
     use grasptest_lib9290_hydrogenic
@@ -15,7 +18,7 @@ program matrixelements_hydrogenic
     /)
 
     logical :: tests_passed = .true.
-    integer :: n, k, l, tmpk, tmpl
+    integer :: n, k, l, tmpk, tmpl, j2max
     real(real64) :: vp_value
     character(:), allocatable :: testdata
 
@@ -25,13 +28,19 @@ program matrixelements_hydrogenic
     endif
     print '("RCIQED_TESTDATA=",a)', testdata
 
-    call setup(74.0_dp, 183.91033628717801_dp) ! W-184
+    ! Setup for W-184
+    call setup(74.0_dp, 183.91033628717801_dp)
+
     call allocate_hydrogenic_orbitals(orbitals)
 
     call lib92_init_csls(testdata//"/oxygen.c")
+
+    ! RCI-specific initialization
     call lib9290_init_rkco_gg
-    call rci_common_init ! TODO: There are two rci_common_init routines at the
-                         ! moment. This one is more complete though.
+    call init_rkintc(j2max)
+    call init_breit(j2max)
+    call init_vacuum_polarization
+    call init_mass_shifts
 
     ! The following reference values were calculated using the non-MPI rci90
     ! program by adding in debug statements into setham_gg.f90. The values were

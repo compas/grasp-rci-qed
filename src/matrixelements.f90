@@ -8,6 +8,9 @@
 !!
 program matrixelements
     use grasp_kinds, only: real64
+    use grasp_rciqed_breit, only: init_breit
+    use grasp_rciqed_mass_shifts, only: init_mass_shifts
+    use grasp_rciqed_qed, only: init_vacuum_polarization
     use grasp_cimatrixelements
     use g2k_lib92
     use g2k_librci
@@ -34,7 +37,7 @@ program matrixelements
     integer :: state_len
     character(:), allocatable :: file_csls, file_wfns, file_mixing
 
-    integer :: status, k, i, j
+    integer :: status, k, i, j, j2max
     integer :: fh
 
     type(hamiltonian_cache) :: hamcache
@@ -75,8 +78,11 @@ program matrixelements
     call lib92_init_cw(isodata, file_csls, file_wfns)
     print '(a)', ">>> CALLING: lib92_init_mixing"
     call lib92_init_mixing(file_mixing)
-    print '(a)', ">>> CALLING: rcicommon_init"
-    call rci_common_init
+    print '(a)', ">>> INITIALIZING rci commons"
+    call init_rkintc(j2max)
+    call init_breit(j2max)
+    call init_vacuum_polarization
+    call init_mass_shifts
 
     ! Allocate the dense CI matrix
     allocate(hamiltonian(ncsfs_global(), ncsfs_global()))

@@ -59,28 +59,19 @@ contains
         enddo
     end subroutine allocate_sematrices
 
-    !> Initializes the common blocks necessary for calling rcicommon routines.
-    subroutine rci_common_init
+    !> Initializes the global state for the RK integrals, i.e. DC matrix elements.
+    subroutine init_rkintc(j2max)
         !use g2k_parameters, only: real64
-        !use g2k_librci_common
-        use orb_C
-        use bcore_C
-        use wfac_C
-        use decide_C
+        use coeils_C, only: NCOEI, FRSTCO
         use genintrk_I
-        use genintbreit1_I
-        use genintbreit2_I
-        use auxblk_I
-        use ichop_I
 
         ! These are the MPI parameters that need to be passed to different
         ! routines. We use the single core values.
         integer, parameter :: myid = 0, nprocs = 1
 
-        real(real64) :: atwinv
-        integer :: N, j2max
+        integer, intent(inout) :: j2max
 
-        integer :: i, j
+        integer :: N
 
         ! AUXBLK needs the j2max variable to be set. This is apparently set by
         ! GENINTRKwrap (based on rci3mpi.f). But GENINTRKwrap apparently only
@@ -97,34 +88,10 @@ contains
         print '("N = ",i0)', N
         print '("j2max = ",i0)', j2max
 
-        ! We'll enable all parts of the Hamiltonian. E.g. AUXBLK relies on these
-        ! flags to determine if certain things get initialized.
-        LTRANS = .TRUE.
-        LVP = .TRUE.
-        LSE = .TRUE.
-        LNMS = .TRUE.
-        LSMS = .TRUE.
+        ! From AUXBLK
+        FRSTCO = .TRUE.
+        NCOEI = 0
 
-        ! Breit related initialization.
-        ! WFACT is the Breit scale factor. We set it to the default 1e-6
-        WFACT = 1d-6
-        ! From rci3mpi_LINUX.f
-        call genintbreit1(myid, nprocs, N, j2max)
-        call genintbreit2(myid, nprocs, N, j2max)
-
-        ! No idea what atwinv means...
-        call AUXBLK(j2max, atwinv)
-        print '("atwinv = ",d10.5)', atwinv
-
-        ! BREID uses COMMON/BCORE/ICORE. This initialization was in setham_gg.f
-        outer: do i = 1, NW
-            ICORE(i) = 0
-            do j = 1, NCF
-                ! ICHOP is a lib92 routine
-                if(ICHOP(i,j) <= 0) cycle outer
-            enddo
-            ICORE(i) = 1
-        enddo outer
-    end subroutine rci_common_init
+    end subroutine init_rkintc
 
 end module g2k_librci
