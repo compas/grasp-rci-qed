@@ -8,6 +8,8 @@
 !!
 program matrixelements
     use grasp_kinds, only: real64
+    use grasp_lib9290, only: init_isocw_full
+    use grasp_lib9290_files, only: load_mixing
     use grasp_lib9290_csls, only: ncsfs_global
     use grasp_rciqed_breit, only: init_breit
     use grasp_rciqed_mass_shifts, only: init_mass_shifts
@@ -75,9 +77,9 @@ program matrixelements
 
     ! Load the isotope information, CSL, radial orbitals and the CI mixing coefficents.
     print '(a)', ">>> CALLING: lib92_init_cw"
-    call lib92_init_cw(isodata, file_csls, file_wfns)
+    call init_isocw_full(isodata, file_csls, file_wfns)
     print '(a)', ">>> CALLING: lib92_init_mixing"
-    call lib92_init_mixing(file_mixing)
+    call load_mixing(file_mixing)
     print '(a)', ">>> INITIALIZING rci commons"
     call init_rkintc(j2max)
     call init_breit(j2max)

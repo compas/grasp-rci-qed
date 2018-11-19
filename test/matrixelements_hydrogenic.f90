@@ -1,10 +1,10 @@
 program matrixelements_hydrogenic
     use grasp_kinds, only: real64, dp
     use grasp_lib9290_init
+    use grasp_lib9290_files, only: load_csl
     use grasp_rciqed_breit, only: init_breit
     use grasp_rciqed_mass_shifts, only: init_mass_shifts
     use grasp_rciqed_qed, only: init_vacuum_polarization
-    use g2k_lib92, only: lib92_init_csls
     use g2k_librci
     use grasptest_lib9290_setup
     use grasptest_lib9290_hydrogenic
@@ -33,10 +33,10 @@ program matrixelements_hydrogenic
 
     call allocate_hydrogenic_orbitals(orbitals)
 
-    call lib92_init_csls(testdata//"/oxygen.c")
+    call load_csl(testdata//"/oxygen.c")
+    call lib9290_init_rkco_gg
 
     ! RCI-specific initialization
-    call lib9290_init_rkco_gg
     call init_rkintc(j2max)
     call init_breit(j2max)
     call init_vacuum_polarization
