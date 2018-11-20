@@ -30,8 +30,6 @@ contains
         ! non-mpi RCI rci92.f: we're the head node (myid = 0) of just 1 process
         ! (nprocs = 1).
         CALL genintrk(myid, nprocs, N, j2max)
-        print '("N = ",i0)', N
-        print '("j2max = ",i0)', j2max
 
         ! From AUXBLK
         FRSTCO = .TRUE.

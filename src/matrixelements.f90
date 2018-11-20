@@ -20,9 +20,7 @@ program matrixelements
     implicit none
 
     type matrixelement
-        real(real64) :: diracpot, coulomb, breit, &
-            vp, se(4), &
-            nms, sms
+        real(real64) :: diracpot, coulomb, breit, vp, nms, sms
     end type matrixelement
 
     character(256) :: state
@@ -77,13 +75,7 @@ program matrixelements
     ! Allocate the dense CI matrix
     allocate(hamiltonian(ncsfs_global(), ncsfs_global()))
 
-    print '(a)', ">>> RUNNING: calculating matrixelements"
-    open(newunit=fh, file="matrix.csv", action='write')
-    write(fh, '(a6,",",a6)', advance='no') "row", "column"
-    write(fh, '(4(",",a30))', advance='no') "diracpot", "coulomb", "breit", "vp"
-    write(fh, '(4(",",a30))', advance='no') "se_mohr", "se_shabaev", "se_flambaum", "se_pyykkoe"
-    write(fh, '(2(",",a30))', advance='no') "nms", "sms"
-    write(fh, '()')
+    print '(a)', ">>> Calculating matrixelements"
     do i = 1, ncsfs_global()
         do j = 1, i
             hamiltonian(i,j)%diracpot = dirac_potential(i, j)
@@ -92,7 +84,7 @@ program matrixelements
             hamiltonian(i,j)%vp = qed_vp(i, j)
             hamiltonian(i,j)%nms = nms(i, j)
             hamiltonian(i,j)%sms = sms(i, j)
-            call print_matrixelement(i, j, hamiltonian(i,j))
+            !call print_matrixelement(i, j, hamiltonian(i,j))
             if (i /= j) then
                 hamiltonian(j,i) = hamiltonian(i,j)
             endif
@@ -100,19 +92,45 @@ program matrixelements
     enddo
     close(fh)
 
-    ! ...
-    print '(a)', ">>> RUNNING: eval_asfs"
+    ! Evaluate the ASF expectation values and write them to a CSV file.
+    print *
+    print '(a)', ">>> Evaluating ASF expectation values:"
+
+    open(newunit=fh, file=trim(state)//".asfenergies.csv", action='write')
+    write(fh, '(a9)', advance='no') "asf_index"
+    write(fh, '(3(",",a24))', advance='no') "diracpot", "coulomb", "breit"
+    write(fh, '(1(",",a24))', advance='no') "vp"
+    write(fh, '(2(",",a24))', advance='no') "nms", "sms"
+    write(fh, '(2(",",a24))', advance='no') "sum_dcb"
+    write(fh, '()')
+
     do k = 1, NVEC
         call eval_asfs(hamiltonian, k, hij)
+
+        ! Write to the CSV file
+        write(fh, '(i9)', advance='no') k
+        write(fh, '(3(",",e24.15))', advance='no') hij%diracpot, hij%coulomb, hij%breit
+        write(fh, '(1(",",e24.15))', advance='no') hij%vp
+        write(fh, '(2(",",e24.15))', advance='no') hij%nms, hij%sms
+        write(fh, '(2(",",e24.15))', advance='no') &
+            hij%diracpot + hij%coulomb + hij%breit ! sum_dcb
+        write(fh, '()') ! write the newline
+
+        ! Also print them out
+        print '(80("="))'
+        print '(">>> ASF #",i0)', k
+        print '(80("-"))'
         print '(a1,a10,a24)',    " ", "Type", "<H_i> (Ha)"
         print '(a1,a10,e24.15)', " ", "DC", hij%diracpot + hij%coulomb
         print '(a1,a10,e24.15)', " ", "Breit", hij%breit
         print '(a1,a10,e24.15)', ">", "DC+B", hij%diracpot + hij%coulomb + hij%breit
         print '(a1,a10,e24.15)', " ", "QED VP", hij%vp
         print '(a1,a10,e24.15)', " ", "NMS+SMS", hij%nms + hij%sms
-        print '(a1,a10,e24.15)', ">", "Full", hij%diracpot + hij%coulomb + hij%breit &
-            + hij%vp + hij%nms + hij%sms
+        print '(a1,a10,e24.15)', ">", "Full", &
+            hij%diracpot + hij%coulomb + hij%breit + hij%vp + hij%nms + hij%sms
     enddo
+
+    close(fh)
 
 contains
 
@@ -129,10 +147,7 @@ contains
         print '("> Coulomb                = ",d24.15)', hij%coulomb
         print '("> Breit                  = ",d24.15)', hij%breit
         print '("> Vacuum polarization    = ",d24.15)', hij%vp
-        print '("> Self-energy (Mohr)     = ",d24.15)', hij%se(1)
-        print '("> Self-energy (Shabaev)  = ",d24.15)', hij%se(2)
-        print '("> Self-energy (Flambaum) = ",d24.15)', hij%se(3)
-        print '("> Self-energy (Pyykkö)   = ",d24.15)', hij%se(4)
+
         print '("> Normal mass shift      = ",d24.15)', hij%nms
         print '("> Special mass shift     = ",d24.15)', hij%sms
 
@@ -147,7 +162,6 @@ contains
         write(fh, '(i6,",",i6)', advance='no') k, l
         write(fh, '(3(",",e30.20))', advance='no') hij%diracpot, hij%coulomb, hij%breit
         write(fh, '(1(",",e30.20))', advance='no') hij%vp
-        write(fh, '(4(",",e30.20))', advance='no') hij%se(1), hij%se(2), hij%se(3), hij%se(4)
         write(fh, '(2(",",e30.20))', advance='no') hij%nms, hij%sms
         write(fh, '()') ! write the newline
     end subroutine write_matrixelement
@@ -182,16 +196,6 @@ contains
 
         integer :: i, j
         real(real64) :: cicj
-
-        print *, "NCF", NCF, "NW", NW
-        !print *, NCFBL(1), NCFBL(2), NCFBL(3), NCFBL(4)
-        print *, "NVEC", NVEC
-        print *, "EAV", EAV
-        print '(a10,2e24.15)', "EVAL(k)", EVAL(k), EVAL(k) + EAV
-        do i = 1, NCF
-            print *, EVEC(i + (k - 1) * NCF)
-        enddo
-        print *, "EVEC", EVEC(1), EVEC(2), EVEC(3)
 
         hk%diracpot = 0.0_dp
         hk%coulomb = 0.0_dp
