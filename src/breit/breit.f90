@@ -4,6 +4,8 @@ module grasp_rciqed_breit
 contains
 
     !> Initialize Breit-related global state.
+    !!
+    !! @param j2max This is the value determined by genintrk(), e.g. in init_rkintc()
     subroutine init_breit(j2max)
         use parameter_def, only: NNNW
         use bcore_C, only: ICORE
