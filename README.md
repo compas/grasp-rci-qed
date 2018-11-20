@@ -1,6 +1,9 @@
-# `rci-qed` for GRASP
+# `rci-qed` program for GRASP
 
--- **aka. an updated RCI program with new QED for GRASP**
+[![Doxygen Documentation](https://img.shields.io/badge/documentation-master-blue.svg)](http://mortenpi.eu/grasp-rci-qed/)
+[![Build Status](https://travis-ci.com/mortenpi/grasp-rci-qed.svg?token=J2TJDmxGV6c9f8C3LXps&branch=master)](https://travis-ci.com/mortenpi/grasp-rci-qed)
+
+**An updated RCI program with new QED for GRASP.**
 
 This is a forked version of `rci90_mpi` from the 2018 version of GRASP that
 includes an updated treatment of QED effects.

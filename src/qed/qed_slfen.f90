@@ -19,6 +19,7 @@
 !-----------------------------------------------
       USE vast_kind_param, ONLY: DOUBLE
       USE parameter_def,   ONLY: NNNW, NNNP
+      USE decide_C, only: LSE
       USE def_C
       USE eigv_C
       USE npar_C
@@ -26,7 +27,6 @@
       USE prnt_C
       USE wave_C
       USE qedcut_C
-      USE mpi_C
 !-----------------------------------------------
 !   I n t e r f a c e   B l o c k s
 !-----------------------------------------------
@@ -40,26 +40,18 @@
 !-----------------------------------------------
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
-      INTEGER :: MAXITER, J, NPJ, KAPPA, MFJ, I, NPJMAX
+      INTEGER :: J, NPJ, KAPPA, MFJ, I, NPJMAX
 !      REAL(DOUBLE), DIMENSION(1) :: UCF
       REAL(DOUBLE), DIMENSION(NNNP) :: PTEMP, QTEMP
       REAL(DOUBLE) :: ZEFF, RATIO, VALU
       CHARACTER :: NPCHAR, NAKCHAR*2
 !-----------------------------------------------
 !
-! Pre-set tolerable number for iteration in finding effective
-! nuclear charge.
-!
-      MAXITER = 20
-!
-      IF (myid .EQ. 0) THEN
-         IF (NQEDCUT.EQ.1) THEN
-            NPJMAX = NQEDMAX
-         ELSE
-            NPJMAX = 8
-         END IF
+      IF (LSE) THEN
+         NPJMAX = NQEDMAX
+      ELSE
+         NPJMAX = 8
       END IF
-      CALL MPI_Bcast (NPJMAX,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
 !
 !
       DO J = 1, NW

@@ -20,4 +20,4 @@ add_library(rci_qed STATIC
     ratden_I.f90
 )
 setup_fortran_modules(rci_qed)
-target_link_libraries_Fortran(rci_qed PRIVATE mod 9290 mpi90)
+target_link_libraries_Fortran(rci_qed PRIVATE mod 9290)

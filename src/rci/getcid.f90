@@ -199,13 +199,10 @@
          WRITE (istde,*) 'Estimate self-energy?'
          LSE = GETYN ()
          IF (LSE.EQV..TRUE.) THEN
-             NQEDCUT = 1
             WRITE (istde,*)                                           &
         'Largest n quantum number for including self-energy for orbital'
             WRITE (istde,*) 'n should be less or equal 8'
             READ *, NQEDMAX
-         ELSE
-            NQEDCUT = 0
          END IF
 
          IF (LTRANS) THEN
@@ -246,6 +243,7 @@
       CALL MPI_Bcast (LNMS, 1, MPI_LOGICAL, 0, MPI_COMM_WORLD, ierr)
       CALL MPI_Bcast (LSMS, 1, MPI_LOGICAL, 0, MPI_COMM_WORLD, ierr)
       CALL MPI_Bcast (LSE,  1, MPI_LOGICAL, 0, MPI_COMM_WORLD, ierr)
+      CALL MPI_Bcast (NQEDMAX, 1, MPI_INTEGER, 0, MPI_COMM_WORLD, ierr)
 !
 ! Parameters controlling the radial grid
 !
