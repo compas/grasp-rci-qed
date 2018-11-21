@@ -473,4 +473,45 @@ contains
         enddo
     end subroutine breit_split
 
+    !===========================================================================
+    ! Routines for calculating self-energy contributions for _diagonal_ elements
+    ! based on hydrogenic SE values tabulated by Mohr et.al.
+    !---------------------------------------------------------------------------
+
+    function qed_se_mohr(ic)
+        use grasp_kinds, only: real64, dp
+        use parameter_def, only: NNNW
+        use qed_slfen_I
+        implicit none
+
+        integer, intent(in) :: ic
+        real(real64) :: qed_se_mohr
+
+        real(real64) :: slfint(NNNW)
+
+        ! Based on matrix.f90
+        call QED_SLFEN(slfint)
+        qed_se_mohr = qed_se_mohr_cached(ic, slfint)
+    end function qed_se_mohr
+
+    function qed_se_mohr_cached(ic, slfint)
+        use grasp_kinds, only: real64, dp
+        use parameter_def, only: NNNW
+        use orb_C
+        use iq_I
+        implicit none
+
+        integer, intent(in) :: ic
+        real(real64), intent(in) :: slfint(NNNW)
+        real(real64) :: qed_se_mohr_cached
+
+        integer :: i
+
+        ! Based on matrix.f90
+        qed_se_mohr_cached = 0.0D00
+        do i = 1, NW
+            qed_se_mohr_cached = qed_se_mohr_cached + IQ(I,IC) * slfint(I)
+        end do
+    end function qed_se_mohr_cached
+
 end module grasp_cimatrixelements

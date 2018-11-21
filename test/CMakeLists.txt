@@ -48,6 +48,17 @@ target_link_libraries_Fortran(test.hydrogenic_vp PUBLIC
 )
 add_test(hydrogenic_vp test.hydrogenic_vp)
 
+add_executable(test.hydrogenic_se
+    hydrogenic_se.f90
+)
+target_link_libraries_Fortran(test.hydrogenic_se PUBLIC
+    mod 9290 grasp
+    rci_rci rci_qed
+    rci-qed.tools rci-qed.test
+)
+add_test(hydrogenic_se test.hydrogenic_se)
+
+
 # Unit tests for matrix element calculations
 add_executable(test.matrixelements_hydrogenic
     matrixelements_hydrogenic.f90

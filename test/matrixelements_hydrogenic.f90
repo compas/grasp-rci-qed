@@ -86,8 +86,19 @@ program matrixelements_hydrogenic
     call verify_dcbmsvp(5, 4, -0.800396534942e0_dp)
     call verify_dcbmsvp(4, 5, -0.800396534942e0_dp)
 
+    ! Mohr self-energy. Only diagonal elements can be estimated.
+    print *
+    print *, "Many-body SE (Mohr) contributions for hydrogenic orbitals"
+    print '(6(" "), 4a20)', &
+        'H(ic,ic)', 'Reference', 'Diff (relative)', 'Tolerance'
+    call verify_se_mohr(1, 0.137580738458381e2_dp)
+    call verify_se_mohr(2, 0.136535966904384e2_dp)
+    call verify_se_mohr(3, 0.137058352681383e2_dp)
+    call verify_se_mohr(4, 0.137058352681383e2_dp)
+    call verify_se_mohr(5, 0.136535966904384e2_dp)
+
     if(.not.tests_passed) then
-        print *, "qed_flambaum_hydrogenic_test: Tests failed."
+        print *, "matrixelements_hydrogenic: Tests failed."
         stop 1
     end if
 
@@ -133,6 +144,22 @@ contains
         print '(i3,i3,4es20.10)', ic, ir, hij, reference, reldiff(hij, reference), tol
         call check_tolerance("DCB", hij, reference, tol)
     end subroutine verify_dcbmsvp
+
+    subroutine verify_se_mohr(ic, reference)
+        use grasp_cimatrixelements
+        use grasp_kinds, only: real64, dp
+
+        integer, intent(in) :: ic
+        real(real64), intent(in) :: reference
+
+        real(real64), parameter :: tol = 1e-10_dp
+
+        real(real64) :: hij = 0.0_dp
+
+        hij = qed_se_mohr(ic)
+        print '(2i3,4es20.10)', ic, ic, hij, reference, reldiff(hij, reference), tol
+        call check_tolerance("SEM", hij, reference, tol)
+    end subroutine verify_se_mohr
 
     function reldiff(a, b)
         use grasp_kinds, only: real64
