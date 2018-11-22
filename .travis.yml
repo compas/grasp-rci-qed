@@ -8,6 +8,8 @@ jobs:
           sources:
             - ubuntu-toolchain-r-test
           packages:
+            # Need a newer compiler due to an apparent bug in gfortran-4.8
+            # which breaks the getenv_allocating function
             - g++-4.9 gfortran-4.9
             - libblas-dev liblapack-dev
             - openmpi-bin openmpi-common libopenmpi-dev
@@ -19,6 +21,7 @@ jobs:
           FC=gfortran-4.9
       script:
         # Clone the latest GRASP
+        - env
         - git clone https://github.com/mortenpi/grasp.git ../grasp
         - source ../grasp/envset.sh
         - ./configure.sh --grasp-cmake
