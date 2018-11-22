@@ -81,7 +81,8 @@ else
 	    cd ${build_directory}/
 	    make
 
-	Note that you probably want to also enable parallel builds by pass -j to make:
+	Note that you probably want to also enable parallel builds by passing -j to
+	the make command:
 
 	    make -jN
 
