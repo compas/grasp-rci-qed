@@ -19,6 +19,8 @@ contains
     !> Loads a configuration state list (CSL) files (typically either `rcsf.inp`
     !! or `*.c`).
     !!
+    !! @param cfile Path to the CSL file.
+    !!
     !! TODO: Document prerequisites (what needs to be loaded before this can be
     !! called?).
     subroutine load_csl(cfile)
@@ -88,6 +90,8 @@ contains
     end subroutine load_csl
 
     !> Loads the nuclear data and initializes the grid and the nuclear model.
+    !!
+    !! @param isofile Path to the `isodata` file.
     subroutine load_isodata(isofile)
         use grasp_lib9290_init, only: lib9290_init_grid
         use def_C, only: CVAC, C, Z
@@ -103,7 +107,10 @@ contains
         CALL NUCPOT
     end subroutine load_isodata
 
-    !> Loads the radial orbitals.
+    !> Loads the radial orbitals from a wavefunction file (typically `*.w` or
+    !! `rwfn.out`).
+    !!
+    !! @param wfile Path to the orbital file.
     subroutine load_orbitals(wfile)
         use setrwfa_I
 
@@ -114,6 +121,8 @@ contains
     end subroutine load_orbitals
 
     !> Loads a mixing files (typically `*.m` or `*.cm`).
+    !!
+    !! @param sumfile Path to the mixing file.
     subroutine load_mixing(sumfile)
         use getmixblock_I
         character(*), intent(in) :: sumfile

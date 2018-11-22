@@ -21,6 +21,8 @@ contains
 
     !> Initializes the radial grid, suitable for the given nuclear charge
     !! `nuclear_z`.
+    !!
+    !! @param nuclear_z Charge of the nucleus.
     subroutine lib9290_init_grid(nuclear_z)
         use grasp_kinds, only: real64
         ! Global state:
@@ -48,6 +50,8 @@ contains
     end subroutine lib9290_init_grid
 
     !> Sets up the nuclear parameters for a point nucleus with charge `nuclear_z`.
+    !!
+    !! @param nuclear_z Charge of the nucleus.
     subroutine lib9290_init_nucleus(nuclear_z)
         use grasp_kinds, only: real64, dp
         use def_C, only: CVAC, C, PI, TENMAX, EXPMAX, EXPMIN, PRECIS, Z
@@ -70,8 +74,9 @@ contains
         call NUCPOT
     end subroutine lib9290_init_nucleus
 
-    !> Sets up the nuclear mass, important for nuclear mass shifts. Argument
-    !! assumed to be given in atomic mass units.
+    !> Sets up the nuclear mass, important for nuclear mass shifts.
+    !!
+    !! @param nuclear_mass Mass of the nucleus in atomic mass units.
     subroutine lib9290_init_nucleus_mass(nuclear_mass)
         use grasp_kinds, only: real64
         use def_C, only: EMN, AUMAMU

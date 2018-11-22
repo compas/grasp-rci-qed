@@ -31,8 +31,6 @@ add_library(rci_rci
     strsum.f90 strsum_I.f90
     triangrk.f90 triangrk_I.f90
     wghtd5.f90 wghtd5_I.f90
-    # Added routines
-    rci_utils.f90
 )
 setup_fortran_modules(rci_rci)
 target_link_libraries_Fortran(rci_rci PRIVATE

@@ -1,3 +1,4 @@
+# Warn if implicit interfaces are boung used.
 set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Wimplicit-interface -Wimplicit-procedure")
 
 add_library(rci-qed_matrixelements STATIC

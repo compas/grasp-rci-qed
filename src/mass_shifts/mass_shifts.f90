@@ -1,3 +1,4 @@
+!> Routines related to the calculation of the normal and specific mass shifts.
 module grasp_rciqed_mass_shifts
     implicit none
 

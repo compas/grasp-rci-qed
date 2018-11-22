@@ -1,3 +1,4 @@
+!> Routines related to calculating the matrix elements of the Breit operator.
 module grasp_rciqed_breit
     implicit none
 

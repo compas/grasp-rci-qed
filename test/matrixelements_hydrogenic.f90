@@ -17,7 +17,9 @@ program matrixelements_hydrogenic
         orbital_definition(2, -2)  & ! 2p
     /)
 
-    logical :: tests_passed = .true.
+    real(real64), parameter :: rtol = 1e-10_dp
+
+    logical :: success = .true.
     integer :: n, k, l, tmpk, tmpl, j2max
     real(real64) :: vp_value
     character(:), allocatable :: testdata
@@ -97,7 +99,7 @@ program matrixelements_hydrogenic
     call verify_se_mohr(4, 0.137058352681383e2_dp)
     call verify_se_mohr(5, 0.136535966904384e2_dp)
 
-    if(.not.tests_passed) then
+    if(.not.success) then
         print *, "matrixelements_hydrogenic: Tests failed."
         stop 1
     end if
@@ -107,11 +109,10 @@ contains
     subroutine verify_dcb(ic, ir, reference)
         use grasp_cimatrixelements
         use grasp_kinds, only: real64, dp
+        use grasptest_testing, only: reldiff, test_isequal
 
         integer, intent(in) :: ir, ic
         real(real64), intent(in) :: reference
-
-        real(real64), parameter :: tol = 1e-10_dp
 
         real(real64) :: hij = 0.0_dp
 
@@ -119,18 +120,17 @@ contains
         hij = hij + coulomb(ic, ir)
         hij = hij + breit(ic, ir)
 
-        print '(i3,i3,4es20.10)', ic, ir, hij, reference, reldiff(hij, reference), tol
-        call check_tolerance("DCB", hij, reference, tol)
+        print '(i3,i3,4es20.10)', ic, ir, hij, reference, reldiff(hij, reference), rtol
+        call test_isequal(success, "DCB", hij, reference, rtol)
     end subroutine verify_dcb
 
     subroutine verify_dcbmsvp(ic, ir, reference)
         use grasp_cimatrixelements
         use grasp_kinds, only: real64, dp
+        use grasptest_testing, only: reldiff, test_isequal
 
         integer, intent(in) :: ir, ic
         real(real64), intent(in) :: reference
-
-        real(real64), parameter :: tol = 1e-10_dp
 
         real(real64) :: hij = 0.0_dp
 
@@ -141,47 +141,24 @@ contains
         hij = hij + nms(ic, ir)
         hij = hij + sms(ic, ir)
 
-        print '(i3,i3,4es20.10)', ic, ir, hij, reference, reldiff(hij, reference), tol
-        call check_tolerance("DCB", hij, reference, tol)
+        print '(i3,i3,4es20.10)', ic, ir, hij, reference, reldiff(hij, reference), rtol
+        call test_isequal(success, "DCB", hij, reference, rtol)
     end subroutine verify_dcbmsvp
 
     subroutine verify_se_mohr(ic, reference)
         use grasp_cimatrixelements
         use grasp_kinds, only: real64, dp
+        use grasptest_testing, only: reldiff, test_isequal
 
         integer, intent(in) :: ic
         real(real64), intent(in) :: reference
 
-        real(real64), parameter :: tol = 1e-10_dp
-
         real(real64) :: hij = 0.0_dp
 
         hij = qed_se_mohr(ic)
-        print '(2i3,4es20.10)', ic, ic, hij, reference, reldiff(hij, reference), tol
-        call check_tolerance("SEM", hij, reference, tol)
+        print '(2i3,4es20.10)', ic, ic, hij, reference, reldiff(hij, reference), rtol
+        call test_isequal(success, "SEM", hij, reference, rtol)
     end subroutine verify_se_mohr
-
-    function reldiff(a, b)
-        use grasp_kinds, only: real64
-        real(real64), intent(in) :: a, b
-        real(real64) :: reldiff
-        reldiff = abs(a-b) / max(abs(a), abs(b))
-    end function reldiff
-
-    subroutine check_tolerance(which, a, b, relative_tolerance)
-        use grasptest_testing, only: within_tolerance
-
-        character(*), intent(in) :: which
-        real(real64), intent(in) :: a, b, relative_tolerance
-        real(real64) :: relative_difference
-
-        if (.not.within_tolerance(a, b, relative_tolerance)) then
-            relative_difference = abs(a-b) / max(abs(a), abs(b))
-            print '("  Test failed: ",a," not within tolerance. Rel.diff: ",es12.5,", tol: ",es12.5)', &
-                which, relative_difference, relative_tolerance
-            tests_passed = .false.
-        endif
-    end subroutine check_tolerance
 
     !> Fetches an environment variable.
     !!

@@ -1,8 +1,5 @@
 !> Routines used for interacting with the configuration state list (CSL) files.
 module grasp_lib9290_csls
-    use orb_C
-    use def_C
-    use grid_C
     implicit none
 
 contains
@@ -84,7 +81,7 @@ contains
     !!
     !! @return The number of CSFs loaded in global scope.
     function ncsfs_global()
-        !use g2k_csls_common, only: NCF
+        use orb_C, only: NCF
         integer :: ncsfs_global
         ncsfs_global = NCF
     end function ncsfs_global

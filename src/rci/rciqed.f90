@@ -1,4 +1,4 @@
-!> General types and routines for RCI
+!> Types and routines for RCI.
 module grasp_rciqed
     implicit none
 
@@ -6,7 +6,6 @@ contains
 
     !> Initializes the global state for the RK integrals, i.e. DC matrix elements.
     subroutine init_rkintc(j2max)
-        !use g2k_parameters, only: real64
         use coeils_C, only: NCOEI, FRSTCO
         use genintrk_I
 

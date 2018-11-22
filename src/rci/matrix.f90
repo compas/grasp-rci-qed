@@ -63,7 +63,6 @@
       USE wghtd5_I
       USE qed_I
       USE mpi_C
-      use grasp_rci_utils, only: write_zdist_csv
       IMPLICIT NONE
 !-----------------------------------------------
 !   D u m m y   A r g u m e n t s
@@ -83,7 +82,6 @@
 !-----------------------------------------------
 !     ...Common to all blocks - place here to save CPU time
       CALL auxblk (j2max, atwinv)
-      call write_zdist_csv
 
 !***************************************************************
 !      Loop over blocks

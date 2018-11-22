@@ -1,4 +1,4 @@
-!> Routines for evaluating the many-particle matrix elements of the Hamiltionian.
+!> Routines for evaluating the many-particle matrix elements of the Hamiltonian.
 !!
 !! Every routine normally has two methods: one that just takes the column and
 !! row index of the CSF as an input, and another one which also accepts some
@@ -25,6 +25,12 @@ module grasp_cimatrixelements
     interface dirac_potential
         module procedure dirac_potential, dirac_potential_cached
     end interface dirac_potential
+
+    !> Calculate an estimate of the self-energy of a diagonal matrix element
+    !! based on the Mohr hydrogenic values.
+    interface qed_se_mohr
+        module procedure qed_se_mohr, qed_se_mohr_cached
+    end interface qed_se_mohr
 
     !> Matrix elements smaller than `cutoff` are set to zero.
     !!
@@ -478,6 +484,12 @@ contains
     ! based on hydrogenic SE values tabulated by Mohr et.al.
     !---------------------------------------------------------------------------
 
+    !> This version initializes the `slfint` array, which contains the per-orbital
+    !! self-energy contributions.
+    !!
+    !! @param ic The index of the CSF.
+    !! @returns The self-energy expectation value
+    !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{SE}}|\Psi_{\textrm{ic}}\rangle\f$.
     function qed_se_mohr(ic)
         use grasp_kinds, only: real64, dp
         use parameter_def, only: NNNW
@@ -494,6 +506,14 @@ contains
         qed_se_mohr = qed_se_mohr_cached(ic, slfint)
     end function qed_se_mohr
 
+    !> Calculates the QED contribution to a CI diagonal element using the orbital
+    !! self-energy values in the `slfint` array.
+    !!
+    !! @param ic The index of the CSF.
+    !! @param slfint A `NW`-element array containing the per-orbital self-energy
+    !!   values.
+    !! @returns The self-energy expectation value
+    !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{SE}}|\Psi_{\textrm{ic}}\rangle\f$.
     function qed_se_mohr_cached(ic, slfint)
         use grasp_kinds, only: real64, dp
         use parameter_def, only: NNNW

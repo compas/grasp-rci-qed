@@ -1,5 +1,5 @@
 add_library(rci_qed STATIC
-    qed.f90
+    rciqed_qed.f90
     # Legacy code
     ## Vacuum polarization related routines
     funk.f90 funk_I.f90
@@ -15,7 +15,7 @@ add_library(rci_qed STATIC
     klamaq.f90 klamaq_I.f90
     mohr.f90 mohr_I.f90
     ## routine implementation was renamed to claim the 'qed' module name
-    qed_legacy.f90 qed_I.f90
+    qed.f90 qed_I.f90
     qed_slfen.f90 qed_slfen_I.f90
     ratden_I.f90
 )

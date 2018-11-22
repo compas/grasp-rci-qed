@@ -1,8 +1,6 @@
 program hydrogenic_se
-    !use g2k_parameters, only: real64, dp, NNN1, NNNP
-    !use g2ktest_lib92_common, only: setup_constants, setup_grid, setup_nucleus, kappa_to_string
-    !use qed_flambaum_hydrogenic_test_common, only: NW, NP, NAK
     use grasp_kinds, only: real64, dp
+    use grasptest_testing, only: test_isequal, reldiff
     use grasptest_lib9290_setup
     use parameter_def, only: NNNW
     use orb_C
@@ -31,7 +29,7 @@ program hydrogenic_se
     /)
     type(orbital_reference) :: orb
 
-    logical :: tests_passed = .true.
+    logical :: success = .true.
     integer :: n, k, l, tmpk, tmpl
     real(real64) :: vp_value
 
@@ -54,22 +52,15 @@ program hydrogenic_se
         print '(i2,":",i2,a2,2es25.15,es16.5,es14.5)', &
             k, NP(k), kappa_to_string(NAK(k)), &
             slfint(k), orb%value, reldiff(slfint(k), orb%value), orb%rtol
-        call check_tolerance("SE", slfint(k), orb%value, orb%rtol)
+        call test_isequal(success, "SE", slfint(k), orb%value, orb%rtol)
     end do
 
-    if(.not.tests_passed) then
+    if(.not.success) then
         print *, "hydrogenic_se: Tests failed."
         stop 1
     end if
 
 contains
-
-    function reldiff(a, b)
-        use grasp_kinds, only: real64
-        real(real64), intent(in) :: a, b
-        real(real64) :: reldiff
-        reldiff = abs(a-b) / max(abs(a), abs(b))
-    end function reldiff
 
     subroutine allocate_hydrogenic_orbitals
         use parameter_def
@@ -114,20 +105,5 @@ contains
         LSE = .true.
         NQEDMAX = 8
     end subroutine setup_mohr_se
-
-    subroutine check_tolerance(which, a, b, relative_tolerance)
-        use grasptest_testing, only: within_tolerance
-
-        character(*), intent(in) :: which
-        real(real64), intent(in) :: a, b, relative_tolerance
-        real(real64) :: relative_difference
-
-        if (.not.within_tolerance(a, b, relative_tolerance)) then
-            relative_difference = abs(a-b) / max(abs(a), abs(b))
-            print '("  Test failed: ",a," not within tolerance. Rel.diff: ",es12.5,", tol: ",es12.5)', &
-                which, relative_difference, relative_tolerance
-            tests_passed = .false.
-        endif
-    end subroutine check_tolerance
 
 end program hydrogenic_se
