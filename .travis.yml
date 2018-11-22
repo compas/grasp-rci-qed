@@ -1,27 +1,22 @@
 language: c
 
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.9
-      - gfortran-4.9
-
-env:
-  - |
-    CTEST_OUTPUT_ON_FAILURE=True
-    CC=gcc-4.9
-    CXX=g++-4.9
-    FC=gfortran-4.9
-
 jobs:
   include:
     - stage: compile
-      before_install:
-        - sudo apt-get install -y
-            libblas-dev liblapack-dev
-            openmpi-bin openmpi-common libopenmpi-dev
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.9 gfortran-4.9
+            - libblas-dev liblapack-dev
+            - openmpi-bin openmpi-common libopenmpi-dev
+      env:
+        - |
+          CTEST_OUTPUT_ON_FAILURE=True
+          CC=gcc-4.9
+          CXX=g++-4.9
+          FC=gfortran-4.9
       script:
         # Clone the latest GRASP
         - git clone https://github.com/mortenpi/grasp.git ../grasp
