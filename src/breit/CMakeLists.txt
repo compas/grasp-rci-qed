@@ -1,4 +1,6 @@
 add_library(rci_breit STATIC
+    breit.f90
+    # Legacy code
     bessel.f90 bessel_I.f90
     breid.f90 breid_I.f90
     brint1.f90 brint1_I.f90

@@ -1,15 +1,23 @@
 language: c
 
-env:
-    CTEST_OUTPUT_ON_FAILURE=True
-
 jobs:
   include:
     - stage: compile
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            # Need a newer compiler due to an apparent bug in gfortran 4.8 & 4.9
+            # which breaks the getenv_allocating function
+            - g++-5 gfortran-5
+            - libblas-dev liblapack-dev
+            - openmpi-bin openmpi-common libopenmpi-dev
       before_install:
-        - sudo apt-get install -y
-            libblas-dev liblapack-dev gfortran
-            openmpi-bin openmpi-common libopenmpi-dev
+        - export CTEST_OUTPUT_ON_FAILURE=True
+        - export CC=gcc-5
+        - export CXX=g++-5
+        - export FC=gfortran-5
       script:
         # Clone the latest GRASP
         - git clone https://github.com/mortenpi/grasp.git ../grasp
@@ -21,9 +29,11 @@ jobs:
         - make test
 
     - stage: documentation
-      before_install:
-        - sudo add-apt-repository -y ppa:mikepurvis/docs # newer Doxygen
-        - sudo apt-get update
-        - sudo apt-get install -y doxygen graphviz
+      addons:
+        apt:
+          sources:
+            - mikepurvis/docs # Newer Doxygen
+          packages:
+            - doxygen graphviz
       script:
         - .ci/travis-deploy.sh

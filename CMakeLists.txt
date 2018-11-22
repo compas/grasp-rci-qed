@@ -164,6 +164,5 @@ message("* MPI_Fortran_LINK_FLAGS:         ${MPI_Fortran_LINK_FLAGS}")
 
 # Include the rci-qed build target
 add_subdirectory("src/")
-
-# Include unit and integration tests
+add_subdirectory("tools/")
 add_subdirectory("test/")

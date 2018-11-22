@@ -1,19 +1,8 @@
 program exportvp
-    use ncdist_C, only: ZDIST
-    use grid_C, only: N, R
     implicit none
-
-    integer :: i, fh
-
     call setup
     call setup_vacuum_polarization
-
-    open(newunit=fh, file="vacuum_polarization.csv", action='write')
-    write(fh, '(a5,2(",",a25))') "idx", "radius", "vacuum_polarization"
-    do i = 1, N
-        write(fh, '(i5,2(",",es25.16))') i, R(i), ZDIST(i)
-    enddo
-    close(fh)
+    call write_zdist_csv
 
 contains
 
@@ -84,5 +73,20 @@ contains
         FRSTVP = .TRUE.
         NVPI = 0
     end subroutine setup_vacuum_polarization
+
+    subroutine write_zdist_csv
+        use ncdist_C, only: ZDIST
+        use grid_C, only: N, R, RP
+        implicit none
+
+        integer :: i, fh
+
+        open(newunit=fh, file="zdist.csv", action='write')
+        write(fh, '(a5,3(",",a25))') "idx", "r", "rp", "zdist"
+        do i = 1, N
+            write(fh, '(i5,3(",",es25.16))') i, R(i), RP(i), ZDIST(i)
+        enddo
+        close(fh)
+    end subroutine write_zdist_csv
 
 end program exportvp

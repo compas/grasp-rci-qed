@@ -1,4 +1,6 @@
 add_library(rci_rci
+    rciqed.f90
+    # Legacy code
     auxblk.f90 auxblk_I.f90
     dnicmv.f90 dnicmv_I.f90
     dspevx_I.f90 # this interface appears to be for a LAPACK function
