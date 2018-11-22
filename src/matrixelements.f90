@@ -7,7 +7,7 @@
 !! Depends on files: `isodata`, `<state>.c`, `<state>.w` and `<state>.cm`
 !!
 program matrixelements
-    use grasp_kinds, only: real64
+    use grasp_kinds, only: real64, dp
     use grasp_lib9290, only: init_isocw_full
     use grasp_lib9290_files, only: load_mixing
     use grasp_lib9290_csls, only: ncsfs_global
@@ -20,7 +20,7 @@ program matrixelements
     implicit none
 
     type matrixelement
-        real(real64) :: diracpot, coulomb, breit, vp, nms, sms
+        real(real64) :: diracpot, coulomb, breit, vp, nms, sms, se_mohr
     end type matrixelement
 
     character(256) :: state
@@ -84,8 +84,10 @@ program matrixelements
             hamiltonian(i,j)%vp = qed_vp(i, j)
             hamiltonian(i,j)%nms = nms(i, j)
             hamiltonian(i,j)%sms = sms(i, j)
-            !call print_matrixelement(i, j, hamiltonian(i,j))
-            if (i /= j) then
+            if (i == j) then
+                hamiltonian(i,j)%se_mohr = qed_se_mohr(i)
+            else
+                hamiltonian(i,j)%se_mohr = 0.0_dp
                 hamiltonian(j,i) = hamiltonian(i,j)
             endif
         enddo
@@ -126,8 +128,9 @@ program matrixelements
         print '(a1,a10,e24.15)', ">", "DC+B", hij%diracpot + hij%coulomb + hij%breit
         print '(a1,a10,e24.15)', " ", "QED VP", hij%vp
         print '(a1,a10,e24.15)', " ", "NMS+SMS", hij%nms + hij%sms
+        print '(a1,a10,e24.15)', " ", "SE(Mohr)", hij%se_mohr
         print '(a1,a10,e24.15)', ">", "Full", &
-            hij%diracpot + hij%coulomb + hij%breit + hij%vp + hij%nms + hij%sms
+            hij%diracpot + hij%coulomb + hij%breit + hij%vp + hij%nms + hij%sms + hij%se_mohr
     enddo
 
     close(fh)
@@ -147,9 +150,9 @@ contains
         print '("> Coulomb                = ",d24.15)', hij%coulomb
         print '("> Breit                  = ",d24.15)', hij%breit
         print '("> Vacuum polarization    = ",d24.15)', hij%vp
-
         print '("> Normal mass shift      = ",d24.15)', hij%nms
         print '("> Special mass shift     = ",d24.15)', hij%sms
+        print '("> Self-energy (Mohr)     = ",d24.15)', hij%se_mohr
 
         total_dcb = hij%diracpot + hij%coulomb + hij%breit
         print '("H(",i0,", ",i0,"; DCB) = ",d20.10)', k, l, total_dcb
@@ -163,6 +166,7 @@ contains
         write(fh, '(3(",",e30.20))', advance='no') hij%diracpot, hij%coulomb, hij%breit
         write(fh, '(1(",",e30.20))', advance='no') hij%vp
         write(fh, '(2(",",e30.20))', advance='no') hij%nms, hij%sms
+        write(fh, '(1(",",e30.20))', advance='no') hij%se_mohr
         write(fh, '()') ! write the newline
     end subroutine write_matrixelement
 
@@ -203,6 +207,7 @@ contains
         hk%vp = 0.0_dp
         hk%nms = 0.0_dp
         hk%sms = 0.0_dp
+        hk%se_mohr = 0.0_dp
         do i = 1, NCF
             do j = 1, NCF
                 cicj = asf_coefficient(k, i) * asf_coefficient(k, j)
@@ -212,6 +217,7 @@ contains
                 hk%vp  = hk%vp  + hamiltonian(i, j)%vp * cicj
                 hk%nms = hk%nms + hamiltonian(i, j)%nms * cicj
                 hk%sms = hk%sms + hamiltonian(i, j)%sms * cicj
+                hk%se_mohr = hk%se_mohr + hamiltonian(i, j)%se_mohr * cicj
             enddo
         enddo
     end subroutine eval_asfs
