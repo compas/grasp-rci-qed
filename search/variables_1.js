@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['orbital_5fkappa',['orbital_kappa',['../structorbital__reference.html#a685135beaa0ec0877b85e9c9f8dd0456',1,'orbital_reference']]],
-  ['orbital_5fn',['orbital_n',['../structorbital__reference.html#a80f35c9e8ecea53fef312003d9c65273',1,'orbital_reference']]]
+  ['coulomb',['coulomb',['../structmatrixelement.html#a95d05e3b3680fc3a0f91eaabb6b1be78',1,'matrixelement']]],
+  ['cutoff',['cutoff',['../classgrasp__cimatrixelements.html#ac8107dc4a8caf39fd3cc1886bf112eb8',1,'grasp_cimatrixelements']]]
 ];

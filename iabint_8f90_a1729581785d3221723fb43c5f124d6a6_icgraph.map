@@ -1,4 +1,6 @@
 <map id="iabint" name="iabint">
-<area shape="rect" id="node2" href="$setham__gg_8f90.html#a167f4b5b022ccc0a3e4d03148d8d392a" title="setham" alt="" coords="107,5,173,32"/>
-<area shape="rect" id="node3" href="$genmat_8f90.html#a32eb33778b36295326eaf91bc5e269f8" title="genmat" alt="" coords="222,5,287,32"/>
+<area shape="rect" id="node2" href="$classgrasp__cimatrixelements.html#aa81e9616a0e357f486549309d300f009" title="Calls the IABINT routine, but ensures that the input k and l arguments do not get swapped..." alt="" coords="107,5,267,46"/>
+<area shape="rect" id="node4" href="$setham__gg_8f90.html#a167f4b5b022ccc0a3e4d03148d8d392a" title="setham" alt="" coords="154,71,219,97"/>
+<area shape="rect" id="node3" href="$classgrasp__cimatrixelements.html#a70e20d4fd774ab9c577c8b082a6424b6" title="Calls the IABINT routine to evaluate the matrix element. The output from ONESCALAR can be passed as a..." alt="" coords="315,5,477,46"/>
+<area shape="rect" id="node5" href="$genmat_8f90.html#a32eb33778b36295326eaf91bc5e269f8" title="genmat" alt="" coords="363,71,429,97"/>
 </map>

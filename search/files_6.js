@@ -18,5 +18,7 @@ var searchData=
   ['genmat2_5fi_2ef90',['genmat2_I.f90',['../genmat2__I_8f90.html',1,'']]],
   ['genmat_5fi_2ef90',['genmat_I.f90',['../genmat__I_8f90.html',1,'']]],
   ['getcid_2ef90',['getcid.f90',['../getcid_8f90.html',1,'']]],
-  ['getcid_5fi_2ef90',['getcid_I.f90',['../getcid__I_8f90.html',1,'']]]
+  ['getcid_5fi_2ef90',['getcid_I.f90',['../getcid__I_8f90.html',1,'']]],
+  ['getmixblock_2ef90',['getmixblock.f90',['../getmixblock_8f90.html',1,'']]],
+  ['getmixblock_5fi_2ef90',['getmixblock_I.f90',['../getmixblock__I_8f90.html',1,'']]]
 ];

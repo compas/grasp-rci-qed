@@ -4,6 +4,7 @@ var searchData=
   ['bessel_5fi_2ef90',['bessel_I.f90',['../bessel__I_8f90.html',1,'']]],
   ['breid_2ef90',['breid.f90',['../breid_8f90.html',1,'']]],
   ['breid_5fi_2ef90',['breid_I.f90',['../breid__I_8f90.html',1,'']]],
+  ['breit_2ef90',['breit.f90',['../breit_8f90.html',1,'']]],
   ['brint1_2ef90',['brint1.f90',['../brint1_8f90.html',1,'']]],
   ['brint1_5fi_2ef90',['brint1_I.f90',['../brint1__I_8f90.html',1,'']]],
   ['brint2_2ef90',['brint2.f90',['../brint2_8f90.html',1,'']]],

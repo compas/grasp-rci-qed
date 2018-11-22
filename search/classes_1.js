@@ -1,13 +1,23 @@
 var searchData=
 [
   ['bessel',['bessel',['../interfacebessel__i_1_1bessel.html',1,'bessel_i']]],
+  ['bessel_5fi',['bessel_i',['../classbessel__i.html',1,'']]],
   ['breid',['breid',['../interfacebreid__i_1_1breid.html',1,'breid_i']]],
+  ['breid_5fi',['breid_i',['../classbreid__i.html',1,'']]],
   ['brint1',['BRINT1',['../interfacebrint1__i_1_1BRINT1.html',1,'brint1_i']]],
+  ['brint1_5fi',['brint1_i',['../classbrint1__i.html',1,'']]],
   ['brint2',['BRINT2',['../interfacebrint2__i_1_1BRINT2.html',1,'brint2_i']]],
+  ['brint2_5fi',['brint2_i',['../classbrint2__i.html',1,'']]],
   ['brint3',['BRINT3',['../interfacebrint3__i_1_1BRINT3.html',1,'brint3_i']]],
+  ['brint3_5fi',['brint3_i',['../classbrint3__i.html',1,'']]],
   ['brint4',['BRINT4',['../interfacebrint4__i_1_1BRINT4.html',1,'brint4_i']]],
+  ['brint4_5fi',['brint4_i',['../classbrint4__i.html',1,'']]],
   ['brint5',['BRINT5',['../interfacebrint5__i_1_1BRINT5.html',1,'brint5_i']]],
+  ['brint5_5fi',['brint5_i',['../classbrint5__i.html',1,'']]],
   ['brint6',['BRINT6',['../interfacebrint6__i_1_1BRINT6.html',1,'brint6_i']]],
+  ['brint6_5fi',['brint6_i',['../classbrint6__i.html',1,'']]],
   ['brintf',['brintf',['../interfacebrintf__i_1_1brintf.html',1,'brintf_i']]],
-  ['brra',['brra',['../interfacebrra__i_1_1brra.html',1,'brra_i']]]
+  ['brintf_5fi',['brintf_i',['../classbrintf__i.html',1,'']]],
+  ['brra',['brra',['../interfacebrra__i_1_1brra.html',1,'brra_i']]],
+  ['brra_5fi',['brra_i',['../classbrra__i.html',1,'']]]
 ];

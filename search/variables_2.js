@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['vp',['vp',['../structorbital__reference.html#a0934cc77198243d3cf734d6f64f29355',1,'orbital_reference']]],
-  ['vp_5ftol',['vp_tol',['../structorbital__reference.html#a455d73d5f50b802584d0abe3a1be2d81',1,'orbital_reference']]]
+  ['diracpot',['diracpot',['../structmatrixelement.html#a876ee288c8902996e8fed9d01947f861',1,'matrixelement']]],
+  ['dp',['dp',['../classgrasp__kinds.html#a93023cb6b38a0587fbe4b9b96e953e74',1,'grasp_kinds']]]
 ];
