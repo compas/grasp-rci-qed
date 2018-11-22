@@ -14,8 +14,7 @@ jobs:
             - libblas-dev liblapack-dev
             - openmpi-bin openmpi-common libopenmpi-dev
       env:
-        - |
-          CTEST_OUTPUT_ON_FAILURE=True
+        - CTEST_OUTPUT_ON_FAILURE=True
           CC=gcc-4.9
           CXX=g++-4.9
           FC=gfortran-4.9
