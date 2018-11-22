@@ -196,6 +196,12 @@ contains
     !! TODO: For this to be a proper library function, it should be implemented
     !! as an interface with additional methods to handle pointers and fixed-length
     !! strings.
+    !!
+    !! NOTE: It appears that this implementation does not work with GFortran 4.8
+    !! and 4.9, probably due to a compiler bug (`value` in the caller context
+    !! does not get set properly, even though it looks fine in
+    !! `getenv_allocating`). It works with GFortran 5.5.0, but it is unknown if
+    !! which 5.x version fixed the issue.
     function getenv_allocating(variable_name, value)
         logical :: getenv_allocating
         character(*), intent(in) :: variable_name
