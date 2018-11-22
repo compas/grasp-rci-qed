@@ -9,10 +9,11 @@ addons:
       - gfortran-4.9
 
 env:
-  - CTEST_OUTPUT_ON_FAILURE=True
-  - CC=gcc-4.9
-  - CXX=g++-4.9
-  - FC=gfortran-4.9
+  - |
+    CTEST_OUTPUT_ON_FAILURE=True
+    CC=gcc-4.9
+    CXX=g++-4.9
+    FC=gfortran-4.9
 
 jobs:
   include:
