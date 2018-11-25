@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['gdsummpi_5fi_2ef90',['gdsummpi_I.f90',['../gdsummpi__I_8f90.html',1,'']]],
   ['genintbreit1',['genintbreit1',['../interfacegenintbreit1__i_1_1genintbreit1.html',1,'genintbreit1_i']]],
   ['genintbreit1',['genintbreit1',['../interfacegenintbreit1__i_1_1genintbreit1.html#a757fb7784dc1c8cd289f3d8092dfbf3b',1,'genintbreit1_i::genintbreit1::genintbreit1()'],['../genintbreit1_8f90.html#a1fb726256a30b106e6cdafafc7b5e902',1,'genintbreit1():&#160;genintbreit1.f90']]],
   ['genintbreit1_2ef90',['genintbreit1.f90',['../genintbreit1_8f90.html',1,'']]],
@@ -22,7 +21,7 @@ var searchData=
   ['genintbreit2wrap_5fi',['genintbreit2wrap_i',['../classgenintbreit2wrap__i.html',1,'']]],
   ['genintbreit2wrap_5fi_2ef90',['genintbreit2wrap_I.f90',['../genintbreit2wrap__I_8f90.html',1,'']]],
   ['genintrk',['genintrk',['../interfacegenintrk__i_1_1genintrk.html',1,'genintrk_i']]],
-  ['genintrk',['genintrk',['../interfacegenintrk__i_1_1genintrk.html#a6f64fadda4ff6ca77a95962afd6eec54',1,'genintrk_i::genintrk::genintrk(myid, nprocs, N, j2max)'],['../interfacegenintrk__i_1_1genintrk.html#a6f64fadda4ff6ca77a95962afd6eec54',1,'genintrk_i::genintrk::genintrk(myid, nprocs, N, j2max)'],['../genintrk_8f90.html#a2136625d3afe1df2841ed30630ca4ace',1,'genintrk():&#160;genintrk.f90']]],
+  ['genintrk',['genintrk',['../interfacegenintrk__i_1_1genintrk.html#a6f64fadda4ff6ca77a95962afd6eec54',1,'genintrk_i::genintrk::genintrk()'],['../genintrk_8f90.html#a2136625d3afe1df2841ed30630ca4ace',1,'genintrk():&#160;genintrk.f90']]],
   ['genintrk_2ef90',['genintrk.f90',['../genintrk_8f90.html',1,'']]],
   ['genintrk_5fi',['genintrk_i',['../classgenintrk__i.html',1,'']]],
   ['genintrk_5fi_2ef90',['genintrk_I.f90',['../genintrk__I_8f90.html',1,'']]],
