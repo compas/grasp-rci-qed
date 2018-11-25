@@ -17,10 +17,10 @@ target_link_libraries_Fortran(rci-qed.test PUBLIC
     grasp
 )
 
-# Script-based unit testing
+# Script-based tests
 add_test(NAME test-integration-rci-nitrogen
     COMMAND
-    ${CMAKE_CURRENT_SOURCE_DIR}/integration/rci.sh
+    ${CMAKE_CURRENT_SOURCE_DIR}/grasp-integration/rci.sh
     "nitrogen"
 )
 set_property(TEST test-integration-rci-nitrogen PROPERTY ENVIRONMENT
