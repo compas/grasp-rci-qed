@@ -1,33 +1,9 @@
 #!/bin/bash
 export SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "${SCRIPT_DIR}/../lib/testing.sh" || { echo "ERROR: Unable to load lib/testing.sh"; exit 1; }
 
 if [ -z ${GRASP+x} ]; then >&2 echo "ERROR: \$GRASP variable is unset."; exit 1; fi
 if [ -z ${GRASP_BUILD_BINDIR+x} ]; then >&2 echo "ERROR: \$GRASP_BUILD_BINDIR variable is unset."; exit 1; fi
-
-function find-grasp-binary {
-	if [ "$#" -ne 1 ]; then
-		>&2 echo "ERROR[find-grasp-binary]: unable to determine \$exe, bad arguments ($# '$@')"
-		exit 1
-	fi
-	exe=$1
-	guesses=(
-		"${GRASP_BUILD_BINDIR}/${exe}"
-		"${GRASP}/bin/${exe}"
-	)
-	for path in ${guesses[*]}; do
-		if [ -f "$path" ]; then
-			echo "$path"
-			return
-		fi
-	done
-
-	>&2 echo "ERROR[find-grasp-binary]: unable to find ${exe}"
-	>&2 echo "  searched at:"
-	for path in ${guesses[*]}; do
-		>&2 echo "    ${path}"
-	done
-	exit 1
-}
 
 # We'll need to call the rwnfestimate binary from GRASP
 RWFNESTIMATE=`find-grasp-binary rwfnestimate` || exit

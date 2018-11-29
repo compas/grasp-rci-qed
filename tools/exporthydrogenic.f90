@@ -8,13 +8,32 @@ program exporthydrogenic
 
     type(orbital_definition), parameter, dimension(*) :: orbitals = (/ &
         orbital_definition(1, -1), & ! 1s
+
         orbital_definition(2, -1), & ! 2s
         orbital_definition(2,  1), & ! 2p-
         orbital_definition(2, -2), & ! 2p
+
+        orbital_definition(3, -1), & ! 3s
+        orbital_definition(3,  1), & ! 3p-
+        orbital_definition(3, -2), & ! 3p
         orbital_definition(3,  2), & ! 3d-
         orbital_definition(3, -3), & ! 3d
+
+        orbital_definition(4, -1), & ! 4s
+        orbital_definition(4,  1), & ! 4p-
+        orbital_definition(4, -2), & ! 4p
+        orbital_definition(4,  2), & ! 4d-
+        orbital_definition(4, -3), & ! 4d
         orbital_definition(4,  3), & ! 4f-
-        orbital_definition(5, -4)  & ! 5f
+        orbital_definition(4, -4), & ! 4f
+
+        orbital_definition(5, -1), & ! 5s
+        orbital_definition(5,  1), & ! 5p-
+        orbital_definition(5, -2), & ! 5p
+        orbital_definition(5,  2), & ! 5d-
+        orbital_definition(5, -3), & ! 5d
+
+        orbital_definition(6, -1)  & ! 6s
     /)
 
     logical :: tests_passed = .true.

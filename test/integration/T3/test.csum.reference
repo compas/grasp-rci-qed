@@ -1,0 +1,329 @@
+
+ There are 15 electrons in the cloud
+  in 32 relativistic CSFs
+  based on 8 relativistic subshells.
+
+The atomic number is  74.0000000000;
+ the mass of the nucleus is  3.351740345104D+05 electron masses;
+  Fermi nucleus:
+  c = 1.209276344455D-04 Bohr radii,
+  a = 9.890591370096D-06 Bohr radii;
+  there are 170 tabulation points in the nucleus.
+
+Speed of light =  1.370359991390D+02 atomic units.
+
+ To H (Dirac Coulomb) is added
+  H (Transverse) --- factor multiplying the photon frequency:  1.00000000D-06;
+  H (Vacuum Polarisation);
+  H (Normal Mass Shift);
+  H (Specific Mass Shift);
+  the total will be diagonalised.
+ Diagonal contributions from H (Self Energy) will be estimated
+  from a screened hydrogenic approximation.
+
+Radial grid: R(I) = RNT*(exp((I-1)*H)-1), I = 1, ..., N;
+
+ RNT  =  2.702702702703D-08 Bohr radii;
+ H    =  5.000000000000D-02 Bohr radii;
+ N    =  590;
+ R(1) =  0.000000000000D+00 Bohr radii;
+ R(2) =  1.385705307460D-09 Bohr radii;
+ R(N) =  1.666367427958D+05 Bohr radii.
+
+ Subshell radial wavefunction summary:
+
+Subshell      e             p0     gamma     P(2)       Q(2)    MTP
+
+  1s   0.0000000000D+00  0.000D+00  1.00  2.221D-05 -6.513D-06  328
+  2s   0.0000000000D+00  0.000D+00  1.00  8.973D-06 -2.631D-06  343
+  2p-  0.0000000000D+00  0.000D+00  1.00  6.733D-07  2.296D-06  343
+  2p   0.0000000000D+00  0.000D+00  2.00  6.752D-14 -9.288D-15  344
+  3s   0.0000000000D+00  0.000D+00  1.00  4.914D-06 -1.441D-06  354
+  3p-  0.0000000000D+00  0.000D+00  1.00  4.002D-07  1.365D-06  353
+  3p   0.0000000000D+00  0.000D+00  2.00  4.168D-14 -5.734D-15  354
+  4s   0.0000000000D+00  0.000D+00  1.00  3.178D-06 -9.317D-07  361
+
+          32  levels will be computed
+
+  Self Energy Corrections: 
+
+
+ Self-energy corrections estimated --- these will influence the data
+  in the RCI92 MIXing coefficients File.
+           0  (total            9 ) rows read from .res
+CUTOFF set to  1.0000000000D-12
+Dirac-Coulomb one-e radial integrals:       9
+One-e angular integrals that exceed CUTOFF:       70
+Coulomb two-e radial integrals:        0
+Two-e angular integrals that exceed CUTOFF:         575
+Transverse two-e radial integrals: 
+       0       0       6      16     128      44
+MCBP coefficients that exceed CUTOFF:             1376
+Core coefficients that exceed CUTOFF:       38
+Vacuum polarisation integrals:        9
+Kinetic energy integrals:        9
+Vinti integrals:       32
+Elements that exceed CUTOFF in the lower triangle of the H matrix:          36
+
+Average energy = -1.210936374472D+04 Hartrees.
+ LAPACK routine DSPEVX selected for eigenvalue problem.
+
+Eigenenergies:
+
+Level  J Parity       Hartrees              Kaysers                eV
+
+  1   1/2 -       -1.2229402125D+04     -2.6840435233D+09     -3.3277898200D+05
+  2   1/2 -       -1.2179933797D+04     -2.6731864802D+09     -3.3143288022D+05
+  3   1/2 -       -1.2122296775D+04     -2.6605366161D+09     -3.2986449698D+05
+  4   1/2 -       -1.2110373198D+04     -2.6579196933D+09     -3.2954003991D+05
+  5   1/2 -       -1.2109652205D+04     -2.6577614537D+09     -3.2952042069D+05
+  6   1/2 -       -1.2108915470D+04     -2.6575997591D+09     -3.2950037311D+05
+  7   1/2 -       -1.2096519468D+04     -2.6548791511D+09     -3.2916306071D+05
+  8   1/2 -       -1.2038204695D+04     -2.6420805377D+09     -3.2757623491D+05
+  9   1/2 -       -1.1988975970D+04     -2.6312760815D+09     -3.2623665308D+05
+
+Energy of each level relative to immediately lower level:
+
+Level  J Parity       Hartrees              Kaysers                eV
+
+  2   1/2 -        4.9468328510D+01      1.0857043164D+07      1.3461017828D+03
+  3   1/2 -        5.7637021616D+01      1.2649864072D+07      1.5683832441D+03
+  4   1/2 -        1.1923577520D+01      2.6169227809D+06      3.2445707062D+02
+  5   1/2 -        7.2099299140D-01      1.5823967101D+05      1.9619218605D+01
+  6   1/2 -        7.3673468633D-01      1.6169457370D+05      2.0047571943D+01
+  7   1/2 -        1.2396002168D+01      2.7206080063D+06      3.3731240008D+02
+  8   1/2 -        5.8314773197D+01      1.2798613351D+07      1.5868258040D+03
+  9   1/2 -        4.9228724654D+01      1.0804456196D+07      1.3395818297D+03
+
+Energy of each level relative to lowest level:
+
+Level  J Parity       Hartrees              Kaysers                eV
+
+  2   1/2 -        4.9468328510D+01      1.0857043164D+07      1.3461017828D+03
+  3   1/2 -        1.0710535013D+02      2.3506907237D+07      2.9144850269D+03
+  4   1/2 -        1.1902892765D+02      2.6123830018D+07      3.2389420975D+03
+  5   1/2 -        1.1974992064D+02      2.6282069689D+07      3.2585613161D+03
+  6   1/2 -        1.2048665532D+02      2.6443764262D+07      3.2786088880D+03
+  7   1/2 -        1.3288265749D+02      2.9164372269D+07      3.6159212881D+03
+  8   1/2 -        1.9119743069D+02      4.1962985619D+07      5.2027470921D+03
+  9   1/2 -        2.4042615534D+02      5.2767441816D+07      6.5423289219D+03
+
+Weights of major contributors to ASF:
+
+Level J Parity      CSF contributions
+
+  1   1/2 -      0.96940    0.20890    0.12202    0.03055    0.02814
+                       1          5          4          8          9
+  2   1/2 -      0.99949   -0.02728   -0.01444   -0.00844   -0.00149
+                       8          1          5          4          9
+  3   1/2 -      0.99549   -0.07872   -0.04405   -0.02314    0.01320
+                       7          6          5          3          4
+  4   1/2 -      0.92449   -0.36897    0.07148   -0.03789    0.03485
+                       4          5          6          1          9
+  5   1/2 -      0.98574   -0.10240    0.07746    0.07322   -0.06965
+                       6          4          7          3          5
+  6   1/2 -      0.87665    0.32526   -0.23689    0.23289    0.10836
+                       5          4          1          9          6
+  7   1/2 -      0.99591   -0.07259    0.04728    0.01977    0.01177
+                       3          6          5          7          9
+  8   1/2 -      0.99948    0.02762   -0.01437   -0.00819    0.00163
+                       2          9          5          4          1
+  9   1/2 -      0.97059   -0.20559   -0.11730    0.03099   -0.03079
+                       9          5          4          1          2
+
+  Self Energy Corrections: 
+
+
+ Self-energy corrections estimated --- these will influence the data
+  in the RCI92 MIXing coefficients File.
+           0  (total           16 ) rows read from .res
+CUTOFF set to  1.0000000000D-12
+Dirac-Coulomb one-e radial integrals:       9
+One-e angular integrals that exceed CUTOFF:      129
+Coulomb two-e radial integrals:        0
+Two-e angular integrals that exceed CUTOFF:        1117
+Transverse two-e radial integrals: 
+       0       0       7      16     128      44
+MCBP coefficients that exceed CUTOFF:             2978
+Core coefficients that exceed CUTOFF:       38
+Vacuum polarisation integrals:        9
+Kinetic energy integrals:        9
+Vinti integrals:       32
+Elements that exceed CUTOFF in the lower triangle of the H matrix:         102
+
+Average energy = -1.210980317871D+04 Hartrees.
+ LAPACK routine DSPEVX selected for eigenvalue problem.
+
+Eigenenergies:
+
+Level  J Parity       Hartrees              Kaysers                eV
+
+  1   3/2 -       -1.2242631505D+04     -2.6869470365D+09     -3.3313897176D+05
+  2   3/2 -       -1.2230565967D+04     -2.6842989571D+09     -3.3281065176D+05
+  3   3/2 -       -1.2217234576D+04     -2.6813730549D+09     -3.3244788612D+05
+  4   3/2 -       -1.2192556132D+04     -2.6759567626D+09     -3.3177635146D+05
+  5   3/2 -       -1.2123245189D+04     -2.6607447690D+09     -3.2989030464D+05
+  6   3/2 -       -1.2122014146D+04     -2.6604745862D+09     -3.2985680625D+05
+  7   3/2 -       -1.2111380226D+04     -2.6581407105D+09     -3.2956744255D+05
+  8   3/2 -       -1.2109761149D+04     -2.6577853642D+09     -3.2952338522D+05
+  9   3/2 -       -1.2109553391D+04     -2.6577397665D+09     -3.2951773183D+05
+ 10   3/2 -       -1.2109458864D+04     -2.6577190202D+09     -3.2951515961D+05
+ 11   3/2 -       -1.2097521406D+04     -2.6550990510D+09     -3.2919032484D+05
+ 12   3/2 -       -1.2096315440D+04     -2.6548343721D+09     -3.2915750883D+05
+ 13   3/2 -       -1.2025324162D+04     -2.6392535875D+09     -3.2722573776D+05
+ 14   3/2 -       -1.2002399538D+04     -2.6342222141D+09     -3.2660192696D+05
+ 15   3/2 -       -1.1990227087D+04     -2.6315506699D+09     -3.2627069770D+05
+ 16   3/2 -       -1.1976662081D+04     -2.6285734952D+09     -3.2590157509D+05
+
+Energy of each level relative to immediately lower level:
+
+Level  J Parity       Hartrees              Kaysers                eV
+
+  2   3/2 -        1.2065537575D+01      2.6480794116D+06      3.2832000047D+02
+  3   3/2 -        1.3331391296D+01      2.9259021902D+06      3.6276563470D+02
+  4   3/2 -        2.4678443783D+01      5.4162923520D+06      6.7153466010D+02
+  5   3/2 -        6.9310942906D+01      1.5211993644D+07      1.8860468227D+03
+  6   3/2 -        1.2310431865D+00      2.7018274955D+05      3.3498391351D+01
+  7   3/2 -        1.0633919906D+01      2.3338756515D+06      2.8936369946D+02
+  8   3/2 -        1.6190771102D+00      3.5534635191D+05      4.4057332237D+01
+  9   3/2 -        2.0775818506D-01      4.5597651081D+04      5.6533881722D+00
+ 10   3/2 -        9.4527330291D-02      2.0746350970D+04      2.5722196738D+00
+ 11   3/2 -        1.1937457828D+01      2.6199691562D+06      3.2483477302D+02
+ 12   3/2 -        1.2059657959D+00      2.6467889850D+05      3.2816000797D+01
+ 13   3/2 -        7.0991278258D+01      1.5580784626D+07      1.9317710766D+03
+ 14   3/2 -        2.2924624133D+01      5.0313734308D+06      6.2381079659D+02
+ 15   3/2 -        1.2172450884D+01      2.6715441707D+06      3.3122925980D+02
+ 16   3/2 -        1.3565005944D+01      2.9771746791D+06      3.6912261308D+02
+
+Energy of each level relative to lowest level:
+
+Level  J Parity       Hartrees              Kaysers                eV
+
+  2   3/2 -        1.2065537575D+01      2.6480794116D+06      3.2832000047D+02
+  3   3/2 -        2.5396928871D+01      5.5739816018D+06      6.9108563517D+02
+  4   3/2 -        5.0075372653D+01      1.0990273954D+07      1.3626202953D+03
+  5   3/2 -        1.1938631556D+02      2.6202267598D+07      3.2486671180D+03
+  6   3/2 -        1.2061735875D+02      2.6472450348D+07      3.2821655093D+03
+  7   3/2 -        1.3125127865D+02      2.8806325999D+07      3.5715292088D+03
+  8   3/2 -        1.3287035576D+02      2.9161672351D+07      3.6155865410D+03
+  9   3/2 -        1.3307811395D+02      2.9207270002D+07      3.6212399292D+03
+ 10   3/2 -        1.3317264128D+02      2.9228016353D+07      3.6238121489D+03
+ 11   3/2 -        1.4511009911D+02      3.1847985509D+07      3.9486469219D+03
+ 12   3/2 -        1.4631606490D+02      3.2112664408D+07      3.9814629227D+03
+ 13   3/2 -        2.1730734316D+02      4.7693449034D+07      5.9132339993D+03
+ 14   3/2 -        2.4023196729D+02      5.2724822465D+07      6.5370447959D+03
+ 15   3/2 -        2.5240441818D+02      5.5396366636D+07      6.8682740557D+03
+ 16   3/2 -        2.6596942412D+02      5.8373541315D+07      7.2373966687D+03
+
+Weights of major contributors to ASF:
+
+Level J Parity      CSF contributions
+
+  1   3/2 -      0.96877    0.19348    0.14653    0.02877    0.02831
+                       3         12         11          2         16
+  2   3/2 -      0.96904    0.14859    0.14540   -0.12404   -0.02928
+                       2         10          9          8          3
+  3   3/2 -      0.96867    0.19197    0.14561    0.04208    0.02791
+                       1          6          5         13         14
+  4   3/2 -      0.99885   -0.03902   -0.01944   -0.01246   -0.00951
+                      13          1          3          6         12
+  5   3/2 -      0.90703   -0.37380   -0.12822    0.12141    0.06452
+                      12         11          3         16         10
+  6   3/2 -      0.90035    0.31496   -0.20551    0.20371   -0.04986
+                      11         12          3         16          7
+  7   3/2 -      0.83619   -0.44547    0.24473    0.14249   -0.13313
+                       8         10          9          2         15
+  8   3/2 -      0.92989   -0.33045   -0.09062    0.07065   -0.07025
+                       7          9         10          2         15
+  9   3/2 -      0.87472    0.33458   -0.25083    0.15463   -0.15378
+                       9          7          8         15          2
+ 10   3/2 -      0.85550    0.45520    0.13428    0.12873    0.09695
+                      10          8          9          7         15
+ 11   3/2 -      0.91209   -0.35882   -0.13053    0.12399    0.06762
+                       6          5          1         14         10
+ 12   3/2 -      0.90704    0.30172   -0.20184    0.20121    0.04818
+                       5          6          1         14          7
+ 13   3/2 -      0.99876    0.04125    0.01931   -0.01253   -0.00993
+                       4         16         14         12         11
+ 14   3/2 -      0.96926   -0.18590   -0.14731   -0.04338    0.03114
+                      16         12         11          4          3
+ 15   3/2 -      0.97028   -0.14784   -0.14469    0.11541    0.03097
+                      15          9         10          8          2
+ 16   3/2 -      0.97044   -0.18504   -0.14641    0.03078    0.02427
+                      14          6          5          1         15
+
+  Self Energy Corrections: 
+
+
+ Self-energy corrections estimated --- these will influence the data
+  in the RCI92 MIXing coefficients File.
+           0  (total            7 ) rows read from .res
+CUTOFF set to  1.0000000000D-12
+Dirac-Coulomb one-e radial integrals:       9
+One-e angular integrals that exceed CUTOFF:       59
+Coulomb two-e radial integrals:        0
+Two-e angular integrals that exceed CUTOFF:         511
+Transverse two-e radial integrals: 
+       0       0       7      16     128      44
+MCBP coefficients that exceed CUTOFF:             1272
+Core coefficients that exceed CUTOFF:       38
+Vacuum polarisation integrals:        9
+Kinetic energy integrals:        9
+Vinti integrals:       32
+Elements that exceed CUTOFF in the lower triangle of the H matrix:          28
+
+Average energy = -1.211058187898D+04 Hartrees.
+ LAPACK routine DSPEVX selected for eigenvalue problem.
+
+Eigenenergies:
+
+Level  J Parity       Hartrees              Kaysers                eV
+
+  1   5/2 -       -1.2230056249D+04     -2.6841870869D+09     -3.3279678161D+05
+  2   5/2 -       -1.2124032347D+04     -2.6609175302D+09     -3.2991172430D+05
+  3   5/2 -       -1.2112232154D+04     -2.6583276872D+09     -3.2959062470D+05
+  4   5/2 -       -1.2110555824D+04     -2.6579597751D+09     -3.2954500941D+05
+  5   5/2 -       -1.2109263534D+04     -2.6576761502D+09     -3.2950984441D+05
+  6   5/2 -       -1.2098208772D+04     -2.6552499105D+09     -3.2920902903D+05
+  7   5/2 -       -1.1989724273D+04     -2.6314403149D+09     -3.2625701543D+05
+
+Energy of each level relative to immediately lower level:
+
+Level  J Parity       Hartrees              Kaysers                eV
+
+  2   5/2 -        1.0602390159D+02      2.3269556718D+07      2.8850573133D+03
+  3   5/2 -        1.1800192835D+01      2.5898429726D+06      3.2109960232D+02
+  4   5/2 -        1.6763308836D+00      3.6791210273D+05      4.5615286767D+01
+  5   5/2 -        1.2922899612D+00      2.8362486286D+05      3.5165000982D+01
+  6   5/2 -        1.1054761387D+01      2.4262396802D+06      3.0081537943D+02
+  7   5/2 -        1.0848449971D+02      2.3809595582D+07      2.9520135985D+03
+
+Energy of each level relative to lowest level:
+
+Level  J Parity       Hartrees              Kaysers                eV
+
+  2   5/2 -        1.0602390159D+02      2.3269556718D+07      2.8850573133D+03
+  3   5/2 -        1.1782409442D+02      2.5859399690D+07      3.2061569156D+03
+  4   5/2 -        1.1950042531D+02      2.6227311793D+07      3.2517722024D+03
+  5   5/2 -        1.2079271527D+02      2.6510936656D+07      3.2869372033D+03
+  6   5/2 -        1.3184747666D+02      2.8937176336D+07      3.5877525828D+03
+  7   5/2 -        2.4033197636D+02      5.2746771919D+07      6.5397661813D+03
+
+Weights of major contributors to ASF:
+
+Level J Parity      CSF contributions
+
+  1   5/2 -      0.96981    0.18645    0.12085    0.09645    0.02814
+                       1          5          3          4          7
+  2   5/2 -      0.99446    0.09533   -0.03380   -0.02628   -0.00942
+                       6          4          3          2          5
+  3   5/2 -      0.80806   -0.56064   -0.14725    0.08134    0.06258
+                       3          4          5          6          2
+  4   5/2 -      0.91391   -0.34654   -0.13422    0.12735   -0.08602
+                       5          4          1          7          3
+  5   5/2 -      0.72656    0.55644    0.27552   -0.20037    0.19956
+                       4          3          5          1          7
+  6   5/2 -      0.99493    0.09738    0.01638   -0.01311   -0.00942
+                       2          4          6          3          5
+  7   5/2 -      0.97102   -0.17953   -0.11874   -0.09916    0.03100
+                       7          5          3          4          1

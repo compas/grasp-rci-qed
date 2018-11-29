@@ -78,3 +78,6 @@ set_property(TEST matrixelements_hydrogenic PROPERTY ENVIRONMENT
 set_property(TEST matrixelements_hydrogenic PROPERTY DEPENDS
     matrixelements_hydrogenic_generate
 )
+
+# Integration tests
+add_subdirectory("integration/")

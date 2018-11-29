@@ -91,7 +91,11 @@
 !
   300 FORMAT(/,'Eigenenergies:')
   301 FORMAT(/,'Level  J Parity',7X,'Hartrees',14X,'Kaysers',16X,'eV'/)
-  302 FORMAT(1I3,2X,2A4,1P,3D22.14)
+  ! Compared to the original output, the number of digits in the energies has
+  ! been reduced to 11 (from 15). This is because the GRASP output values were
+  ! not deterministic up to 15 digits on different hardware, probably due to
+  ! floating point rounding error accumulation.
+  302 FORMAT(1I3,2X,2A4,1P,3D22.10)
   303 FORMAT(/,'Energy of each level relative to immediately lower',' level:')
   304 FORMAT(/,'Energy of each level relative to lowest level:')
       RETURN
