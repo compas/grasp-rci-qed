@@ -1,6 +1,7 @@
 <map id="test" name="test">
-<area shape="rect" id="node2" href="dir_79674a933289b4de086b67d9586e47c8.html" title="data" alt="" coords="267,27,339,75"/>
-<area shape="rect" id="node3" href="dir_3e0c2be18f8dfb7074300c6b86ecf7f6.html" title="grasp&#45;integration" alt="" coords="123,27,241,75"/>
-<area shape="rect" id="node4" href="dir_cb6d4dd8a38058a0954022986ea6be37.html" title="lib" alt="" coords="27,27,99,75"/>
-<area shape="rect" id="clust1" href="dir_13e138d54eb8818da29c3992edef070a.html" alt="" coords="16,16,445,85"/>
+<area shape="rect" id="node2" href="dir_79674a933289b4de086b67d9586e47c8.html" title="data" alt="" coords="372,27,444,75"/>
+<area shape="rect" id="node3" href="dir_3e0c2be18f8dfb7074300c6b86ecf7f6.html" title="grasp&#45;integration" alt="" coords="229,27,347,75"/>
+<area shape="rect" id="node4" href="dir_bbf9f1b56ba6c621651be8934a24eced.html" title="integration" alt="" coords="123,27,204,75"/>
+<area shape="rect" id="node5" href="dir_cb6d4dd8a38058a0954022986ea6be37.html" title="lib" alt="" coords="27,27,99,75"/>
+<area shape="rect" id="clust1" href="dir_13e138d54eb8818da29c3992edef070a.html" alt="" coords="16,16,551,85"/>
 </map>
