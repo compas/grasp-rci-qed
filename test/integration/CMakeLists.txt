@@ -17,8 +17,9 @@ add_test(NAME integration-T4 COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/integration.sh 
 # T5 is same as T3, but limits the number of eigenvalues calculated in each block.
 add_test(NAME integration-T5 COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/integration.sh "T5")
 
-# T6 is neutral tungsten
+# T6 is neutral tungsten. T6b sets maximum self-energy orbital to n=2.
 add_test(NAME integration-T6 COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/integration.sh "T6")
+add_test(NAME integration-T6b COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/integration.sh "T6b")
 
 # T7 is neutral tungsten but no QED. T8 is the same, but runs with `mpirun -n 5`
 add_test(NAME integration-T7 COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/integration.sh "T7")
@@ -28,7 +29,7 @@ add_test(NAME integration-T8 COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/integration.sh 
 # common to all the tests.
 set_property(TEST
     integration-T1 integration-T2 integration-T3 integration-T4 integration-T5
-    integration-T6 integration-T7 integration-T8
+    integration-T6 integration-T6b integration-T7 integration-T8
     PROPERTY ENVIRONMENT
     "GRASP=${GRASP}"
     "GRASP_BUILD_BINDIR=${BUILD_BINDIR}"
