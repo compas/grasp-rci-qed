@@ -1,0 +1,134 @@
+
+ There are 74 electrons in the cloud
+  in 34 relativistic CSFs
+  based on 22 relativistic subshells.
+
+The atomic number is  74.0000000000;
+ the mass of the nucleus is  3.351740345104D+05 electron masses;
+  Fermi nucleus:
+  c = 1.209276344455D-04 Bohr radii,
+  a = 9.890591370096D-06 Bohr radii;
+  there are 170 tabulation points in the nucleus.
+
+Speed of light =  1.370359991390D+02 atomic units.
+
+ To H (Dirac Coulomb) is added
+  H (Normal Mass Shift);
+  H (Specific Mass Shift);
+  the total will be diagonalised.
+
+Radial grid: R(I) = RNT*(exp((I-1)*H)-1), I = 1, ..., N;
+
+ RNT  =  2.702702702703D-08 Bohr radii;
+ H    =  5.000000000000D-02 Bohr radii;
+ N    =  590;
+ R(1) =  0.000000000000D+00 Bohr radii;
+ R(2) =  1.385705307460D-09 Bohr radii;
+ R(N) =  1.666367427958D+05 Bohr radii.
+
+ Subshell radial wavefunction summary:
+
+Subshell      e             p0     gamma     P(2)       Q(2)    MTP
+
+  1s   0.0000000000D+00  0.000D+00  1.00  2.221D-05 -6.513D-06  328
+  2s   0.0000000000D+00  0.000D+00  1.00  8.973D-06 -2.631D-06  343
+  2p-  0.0000000000D+00  0.000D+00  1.00  6.733D-07  2.296D-06  343
+  2p   0.0000000000D+00  0.000D+00  2.00  6.752D-14 -9.288D-15  344
+  3s   0.0000000000D+00  0.000D+00  1.00  4.914D-06 -1.441D-06  354
+  3p-  0.0000000000D+00  0.000D+00  1.00  4.002D-07  1.365D-06  353
+  3p   0.0000000000D+00  0.000D+00  2.00  4.168D-14 -5.734D-15  354
+  3d-  0.0000000000D+00  0.000D+00  2.00  5.889D-16  4.281D-15  354
+  3d   0.0000000000D+00  0.000D+00  3.00  2.048D-22 -1.858D-23  354
+  4s   0.0000000000D+00  0.000D+00  1.00  3.178D-06 -9.317D-07  361
+  4p-  0.0000000000D+00  0.000D+00  1.00  2.654D-07  9.050D-07  361
+  4p   0.0000000000D+00  0.000D+00  2.00  2.812D-14 -3.868D-15  362
+  4d-  0.0000000000D+00  0.000D+00  2.00  4.615D-16  3.355D-15  361
+  4d   0.0000000000D+00  0.000D+00  3.00  1.619D-22 -1.469D-23  361
+  5s   0.0000000000D+00  0.000D+00  1.00  2.263D-06 -6.634D-07  367
+  5p-  0.0000000000D+00  0.000D+00  1.00  1.910D-07  6.515D-07  367
+  5p   0.0000000000D+00  0.000D+00  2.00  2.044D-14 -2.811D-15  368
+  4f-  0.0000000000D+00  0.000D+00  3.00  8.824D-25  9.724D-24  361
+  4f   0.0000000000D+00  0.000D+00  4.00  4.176D-31 -2.832D-32  361
+  5d-  0.0000000000D+00  0.000D+00  2.00  3.549D-16  2.580D-15  367
+  5d   0.0000000000D+00  0.000D+00  3.00  1.251D-22 -1.135D-23  368
+  6s   0.0000000000D+00  0.000D+00  1.00  1.714D-06 -5.026D-07  372
+
+          34  levels will be computed
+           0  (total            1 ) rows read from .res
+CUTOFF set to  1.0000000000D-12
+Dirac-Coulomb one-e radial integrals:     108
+One-e angular integrals that exceed CUTOFF:      108
+Coulomb two-e radial integrals:        0
+Two-e angular integrals that exceed CUTOFF:        2789
+Kinetic energy integrals:      108
+Vinti integrals:      900
+Elements that exceed CUTOFF in the lower triangle of the H matrix:           4
+
+Average energy = -1.402576421873D+04 Hartrees.
+ LAPACK routine DSPEVX selected for eigenvalue problem.
+
+Eigenenergies:
+
+Level  J Parity       Hartrees              Kaysers                eV
+
+  1     0 +       -1.4026859817D+04     -3.0785398875D+09     -3.8169029709D+05
+  2     0 +       -1.4026275887D+04     -3.0784117297D+09     -3.8167440754D+05
+  3     0 +       -1.4026035357D+04     -3.0783589395D+09     -3.8166786240D+05
+  4     0 +       -1.4025079782D+04     -3.0781492151D+09     -3.8164185988D+05
+  5     0 +       -1.4024570252D+04     -3.0780373862D+09     -3.8162799486D+05
+
+Energy of each level relative to immediately lower level:
+
+Level  J Parity       Hartrees              Kaysers                eV
+
+  2     0 +        5.8393000149D-01      1.2815782182D+05      1.5889544678D+01
+  3     0 +        2.4052969409D-01      5.2790165944D+04      6.5451463547D+00
+  4     0 +        9.5557490885D-01      2.0972445087D+05      2.6002517714D+01
+  5     0 +        5.0953007084D-01      1.1182892447D+05      1.3865019445D+01
+
+Energy of each level relative to lowest level:
+
+Level  J Parity       Hartrees              Kaysers                eV
+
+  2     0 +        5.8393000149D-01      1.2815782182D+05      1.5889544678D+01
+  3     0 +        8.2445969558D-01      1.8094798777D+05      2.2434691033D+01
+  4     0 +        1.7800346044D+00      3.9067243863D+05      4.8437208747D+01
+  5     0 +        2.2895646753D+00      5.0250136310D+05      6.2302228192D+01
+
+Weights of major contributors to ASF:
+
+Level J Parity      CSF contributions
+
+  1     0 +      0.90548    0.36437    0.16296   -0.14268    0.02073
+                       1          2          4          3          5
+  2     0 +      0.87922   -0.37593    0.25286    0.14713   -0.00848
+                       2          1          4          3          5
+  3     0 +      0.88289   -0.36610   -0.24340   -0.12121    0.11197
+                       4          3          2          1          5
+  4     0 +      0.81906   -0.38276    0.35830   -0.18126    0.14628
+                       3          5          4          2          1
+  5     0 +      0.91676    0.39127    0.05193   -0.04606    0.04041
+                       5          3          1          2          4
+
+  Self Energy Corrections: 
+
+ Level  J Parity       Hartrees              Kaysers                eV
+
+  1     0 +        1.5190340233D+01      3.3338943230D+06      4.1335021182D+02
+  2     0 +        1.5188569332D+01      3.3335056551D+06      4.1330202315D+02
+  3     0 +        1.5186116422D+01      3.3329673036D+06      4.1323527607D+02
+  4     0 +        1.5185421809D+01      3.3328148537D+06      4.1321637469D+02
+  5     0 +        1.5181821374D+01      3.3320246496D+06      4.1311840187D+02
+
+ Self-energy corrections estimated --- these do not influence the data
+  in the RCI92 MIXing coefficients File.
+
+Eigenenergies:
+
+Level  J Parity       Hartrees              Kaysers                eV
+
+  1     0 +       -1.4011669476D+04     -3.0752059932D+09     -3.8127694688D+05
+  2     0 +       -1.4011087317D+04     -3.0750782240D+09     -3.8126110552D+05
+  3     0 +       -1.4010849240D+04     -3.0750259722D+09     -3.8125462712D+05
+  4     0 +       -1.4009894360D+04     -3.0748164002D+09     -3.8122864350D+05
+  5     0 +       -1.4009388430D+04     -3.0747053615D+09     -3.8121487646D+05

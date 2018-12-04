@@ -247,7 +247,7 @@
          END IF
   301 FORMAT (' Level  J Parity',7X,'Hartrees',14X,'Kaysers',          &
                16X,'eV' )
-  302 FORMAT (1I3,2X,2A4,1P,3D22.14)
+  302 FORMAT (1I3,2X,2A4,1P,3D22.10)
          DO J = 1, nvec
             CALL QED (j,SLFINT,UCF)
             ELEMNT = 0.0D00

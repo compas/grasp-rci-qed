@@ -13,7 +13,7 @@ echo "INFO: RCIQED=${RCIQED}"
 
 # Get the configuration -- the first argument, and check that input files exist
 if [ "$1" == "--update" ]; then
-	>&2 "INFO: Update mode -- updating reference values."
+	>&2 echo "INFO: Update mode -- updating reference values."
 	UPDATE_MODE=true
 	shift
 fi

@@ -20,11 +20,15 @@ add_test(NAME integration-T5 COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/integration.sh 
 # T6 is neutral tungsten
 add_test(NAME integration-T6 COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/integration.sh "T6")
 
+# T7 is neutral tungsten but no QED. T8 is the same, but runs with `mpirun -n 5`
+add_test(NAME integration-T7 COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/integration.sh "T7")
+add_test(NAME integration-T8 COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/integration.sh "T8")
+
 # Set up environment variables that the integration.sh script needs that are
 # common to all the tests.
 set_property(TEST
     integration-T1 integration-T2 integration-T3 integration-T4 integration-T5
-    integration-T6
+    integration-T6 integration-T7 integration-T8
     PROPERTY ENVIRONMENT
     "GRASP=${GRASP}"
     "GRASP_BUILD_BINDIR=${BUILD_BINDIR}"
