@@ -1,25 +1,12 @@
-!***********************************************************************
-!                                                                      *
+!>
+!!
+!! Comment from the original `SETHAM_GG` header:
+!!
+!! > Sets up the Hamiltonian matrix and determines the average energy.  *
+!! >
+!! > Serial I/O moved out; able to run on single/multiple processors
+!! > For this purpose a new common /setham_to_genmat2/ is created                                                           *
       SUBROUTINE SETHAM (myid, nprocs, jblock, ELSTO,ICSTRT, nelmntt)
-!                                                                      *
-!   Sets up the Hamiltonian matrix and determines the average energy.  *
-!
-!   Serial I/O moved out; able to run on single/multiple processors
-!   For this purpose a new common /setham_to_genmat2/ is created
-!                                                                      *
-!   Call(s) to: [LIB92]: ALCBUF, CONVRT, DALLOC, ICHOP, RKCO, TNSRJJ.  *
-!               [RCI92]: BRINT, IABINT, KEINT, RKINTC, VINT, VPINT.    *
-!                                                                      *
-!   Written by Farid A Parpia             Last revision: 30 Oct 1992   *
-!   Block version by Xinghong He          Last revision: 15 Jun 1998   *
-!                                                                      *
-!***********************************************************************
-!...Translated by Pacific-Sierra Research 77to90  4.3E  14:04:58   1/ 3/07
-!...Modified by Charlotte Froese Fischer
-!                     Gediminas Gaigalas  10/05/17
-!-----------------------------------------------
-!   M o d u l e s
-!-----------------------------------------------
       USE vast_kind_param, ONLY: DOUBLE, LONG
       USE parameter_def,   ONLY: NNNP, KEYORB
       USE memory_man
@@ -33,7 +20,7 @@
       USE buffer_C
       USE coeils_C
       USE decide_C
-      USE debug_C
+      USE debug_C, only: IBUG1
       USE def_C
       USE eigv_C
       USE iccu_C
@@ -57,23 +44,12 @@
 !   I n t e r f a c e   B l o c k s
 !-----------------------------------------------
       USE alcbuf_I
-      USE iabint_I
-      USE brint1_I
-      USE brint2_I
-      USE brint3_I
-      USE brint4_I
-      USE brint5_I
-      USE brint6_I
-      USE convrt_I
       USE ichop_I
-      USE keint_I
-      USE rkintc_I
-      USE vint_I
-      USE vpint_I
+      use cord_I
       use grasp_rciqed_qed, only: slfint
-      use grasp_cimatrixelements, only: qed_se_mohr
+      use grasp_cimatrixelements
+      ! Matrix elements smaller than cimatrixelements%cutoff are not accumulated
       IMPLICIT NONE
-      EXTERNAL BREID,CORD
 !----------------------------------------------
 !   D u m m y   A r g u m e n t s
 !-----------------------------------------------
@@ -86,27 +62,16 @@
 !-----------------------------------------------
 
       REAL(DOUBLE), DIMENSION(NNNW) :: tshell
-      REAL(DOUBLE) :: tgrl1, tgrl2, tegral, ATWINV
+      REAL(DOUBLE) :: breit_core, breit_noncore
 
       INTEGER, PARAMETER :: KEY = KEYORB
-!
-!     Matrix elements smaller than CUTOFF are not accumulated
-!
-!cjb cutoff is use associated and cannot be redeclared
-!     REAL(DOUBLE), PARAMETER :: CUTOFF = 1.0D-20
-!cjb CUTOFF = 1.0D-12 below
-!cjb
+
       INTEGER :: ipi, ipj, inc1, inc2, kt, ipt, incor, ncoec, nctec, &
                  i, j, nmcbp, ncore, ic, nelc, irstart, ir, ia, ib,  &
                  itype, nctei, iia
-       REAL(DOUBLE) :: elemnt, precoeff, tcoeff, vcoeff, contr
+       REAL(DOUBLE) :: elemnt, precoeff, tcoeff, vcoeff, contr, t1, t2, t3
 !-----------------------------------------------------------------------
       nelmnt = nelmntt
-!cjb
-!cjb  CUTOFF = 1.0D-12
-      CUTOFF = 1.0D-12
-
-      ATWINV = 1.D0/EMN
 
       IF (IPRERUN .EQ. 2) THEN
          DO IPI = 1,NVEC
@@ -210,54 +175,26 @@
 
 !            ...INC1.EQ.1 ------------>
          IF (INC1 .EQ. 1) THEN   !inc1 is always 1 without PRE-RUN
+
+             !   Accumulate the contribution from the one-body operators:
+             !   kinetic energy, electron-nucleus interaction; update the
+             !   angular integral counter
            CALL ONESCALAR(IC,IR,IA,IB,TSHELL)
+           ELEMNT = ELEMNT + dirac_potential(IC, IR, IA, IB, TSHELL)
+           IF(LNMS) ELEMNT = ELEMNT + nms(IC, IR, IA, IB, TSHELL)
+           IF(LVP) ELEMNT = ELEMNT + qed_vp(IC, IR, IA, IB, TSHELL)
+
+           IF (IA .NE. 0) THEN
+              IF (IA == IB) THEN
+                  DO IA = 1, NW
+                      IF(ABS (TSHELL(IA)) .GT. CUTOFF) NCOEC = NCOEC + 1
+                  ENDDO
+              ELSE IF(ABS(TSHELL(1)) .GT. CUTOFF) THEN
+                 NCOEC = NCOEC + 1
+              ENDIF
+           ENDIF
 !
-!   Accumulate the contribution from the one-body operators:
-!   kinetic energy, electron-nucleus interaction; update the
-!   angular integral counter
 !
-         IF (IA .NE. 0) THEN
-            IF (IA .EQ. IB) THEN
-               DO IA = 1,NW
-                  iia = ia
-                  TCOEFF = TSHELL(IA)
-                  IF (ABS (TCOEFF) .GT. CUTOFF) THEN
-                     NCOEC = NCOEC + 1
-                     CALL IABINT (IIA, IIA, TEGRAL)
-                        !------------------------
-                     ELEMNT = ELEMNT + TEGRAL*TCOEFF
-                     IF (LNMS) THEN
-                        CALL KEINT (IIA,IIA,TEGRAL)
-                        !------------------------
-                        ELEMNT = ELEMNT + TEGRAL*ATWINV*TCOEFF
-                     ENDIF
-                     IF (LVP) THEN
-                        CALL VPINT (IIA, IIA, TEGRAL)
-                        !------------------------
-                        ELEMNT = ELEMNT + TEGRAL*TCOEFF
-                     ENDIF
-                  ENDIF
-               ENDDO
-            ELSE
-               TCOEFF = DBLE(TSHELL(1))
-               IF (DABS (TCOEFF) .GT. CUTOFF) THEN
-                  NCOEC = NCOEC + 1
-                  CALL IABINT (IA, IB, TEGRAL)
-                        !------------------------
-                  ELEMNT = ELEMNT + TEGRAL*TCOEFF
-                  IF (LNMS) THEN
-                     CALL KEINT (IA, IB, TEGRAL)
-                        !------------------------
-                     ELEMNT = ELEMNT + TEGRAL*ATWINV*TCOEFF
-                  ENDIF
-                  IF (LVP) THEN
-                     CALL VPINT (IA, IB, TEGRAL)
-                        !------------------------
-                     ELEMNT = ELEMNT + TEGRAL*TCOEFF
-                  ENDIF
-               ENDIF
-            ENDIF
-         ENDIF
 !
          IBUG1 = 0
 !
@@ -267,26 +204,16 @@
 !   permuted by RKINTC
 !
          NVCOEF = 0
-!
          CALL RKCO_GG (IC, IR, CORD, INCOR, 1)
-!
-         DO 7 I = 1, NVCOEF
+         ELEMNT = ELEMNT + coulomb_cached(ic, ir)
+         IF(LSMS) ELEMNT = ELEMNT + sms_cached(ic, ir)
+
+         DO I = 1, NVCOEF
             VCOEFF = DBLE(COEFF(I))
             IF (DABS (VCOEFF) .GT. CUTOFF) THEN
                NCTEC = NCTEC + 1
-               IF (LSMS) THEN
-                  IF (LABEL(5,I) .EQ. 1) THEN
-                     CALL VINT (LABEL(1,I), LABEL(3,I), TGRL1)
-                     CALL VINT (LABEL(2,I), LABEL(4,I), TGRL2)
-                     ELEMNT = ELEMNT - TGRL1*TGRL2*ATWINV*VCOEFF
-                  ENDIF
-               ENDIF
-               CALL RKINTC (LABEL(1,I), LABEL(2,I),                  &
-                            LABEL(3,I), LABEL(4,I),                  &
-                            LABEL(5,I), TEGRAL)
-               ELEMNT = ELEMNT + TEGRAL*VCOEFF
-            ENDIF
-    7    CONTINUE
+           ENDIF
+         END DO
 !
          IBUG1 = 0
 
@@ -299,59 +226,24 @@
 !
 !   Accumulate the contribution from the two-electron
 !   transverse interaction operator
-!
-            NVCOEF = 0
-!
-            CALL RKCO_GG (IC, IR, BREID, 1, 2)
-!
-            DO 8 I = 1, NVCOEF
+            call breit_split(ic, ir, breit_core, breit_noncore)
+            ELEMNT = ELEMNT + breit_noncore
+            ELSTO = ELSTO + breit_core
+            ! ELSTO is a constant over all diagonals, thus its contribution to
+            ! the total energy can be added later
+            ! IF (IR .EQ. IC) ELEMNT = ELEMNT + ELSTO
+
+            DO I = 1, NVCOEF
                IF (DABS (COEFF(I)) > CUTOFF) THEN
                   NMCBP = NMCBP + 1
-                  ITYPE = ABS (LABEL(6,I))
-                  IF (ITYPE == 1) THEN
-                     CALL BRINT1 (LABEL(1,I), LABEL(2,I),               &
-                                  LABEL(3,I), LABEL(4,I),               &
-                                  LABEL(5,I), TEGRAL)
-                  ELSEIF (ITYPE == 2) THEN
-                     CALL BRINT2 (LABEL(1,I), LABEL(2,I),               &
-                                  LABEL(3,I), LABEL(4,I),               &
-                                  LABEL(5,I), TEGRAL)
-                  ELSEIF (ITYPE == 3) THEN
-                     CALL BRINT3 (LABEL(1,I), LABEL(2,I),               &
-                                  LABEL(3,I), LABEL(4,I),               &
-                                  LABEL(5,I), TEGRAL)
-                  ELSEIF (ITYPE == 4) THEN
-                     CALL BRINT4 (LABEL(1,I), LABEL(2,I),               &
-                                  LABEL(3,I), LABEL(4,I),               &
-                                  LABEL(5,I), TEGRAL)
-                  ELSEIF (ITYPE == 5) THEN
-                     CALL BRINT5 (LABEL(1,I), LABEL(2,I),               &
-                                  LABEL(3,I), LABEL(4,I),               &
-                                  LABEL(5,I), TEGRAL)
-                  ELSEIF (ITYPE == 6) THEN
-                     CALL BRINT6 (LABEL(1,I), LABEL(2,I),               &
-                                  LABEL(3,I), LABEL(4,I),               &
-                                  LABEL(5,I), TEGRAL)
-                  ENDIF
-                  CONTR = COEFF(I)*TEGRAL
-                  IF (LABEL(6,I) > 0) THEN
-                     ELEMNT = ELEMNT + CONTR
-                  ELSE
-!                        ...It comes here only when ic=ir=1
-!                           clue: rkco<-breid<-talk<-label(6,i)
-                     NCORE = NCORE + 1
-                     ELSTO = ELSTO + CONTR
-                  ENDIF
+                  IF(.not.(LABEL(6,I) > 0)) then
+                      ! It comes here only when ic=ir=1
+                      ! clue: rkco<-breid<-talk<-label(6,i)
+                      NCORE = NCORE + 1
+                  endif
                ENDIF
-    8       CONTINUE
-!
+            ENDDO
             IBUG1 = 0
-!
-!               ...ELSTO is a constant over all diagonals, thus its
-!                  contribution to the total energy can be added later
-!            IF (IR .EQ. IC) ELEMNT = ELEMNT + ELSTO
-!
-            !ENDIF   !inc2 is always 1 without PRE-RUN
          ENDIF
 !            ...LTRANS .AND. (INC2.EQ.1) <------------
 !***********************************************************************

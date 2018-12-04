@@ -11,20 +11,30 @@
 !! however, is the same for all the operators of the same particle number and it
 !! does not make sense to repeat it. The `*_cached` versions of the routines can
 !! be used to achieve that.
-!!
-!! TODO: Actually, the two-particle elements (Coulomb and Breit) you can not split
-!! up like that. They need their own `RKCO_GG` calls.
-!!
-!! TODO: Actually, coulomb and sms can share angular state.
 module grasp_cimatrixelements
-    use grasp_kinds, only: real64
+    use grasp_kinds, only: real64, dp
     implicit none
+
+    public dirac_potential, coulomb, coulomb_cached, breit, breit_split, &
+        nms, sms, sms_cached, qed_vp, qed_se_mohr
+    public cutoff
+    private
 
     !> Calculates the many-particle CI matrix elements of the Dirac kinetic and
     !! nuclear potential parts of the Hamiltonian.
     interface dirac_potential
         module procedure dirac_potential, dirac_potential_cached
     end interface dirac_potential
+
+    !> Calculates the many-particle matrix element of the normal mass shift.
+    interface nms
+        module procedure nms, nms_cached
+    end interface nms
+
+    !> Calculates the many-particle matrix element of the QED vacuum polarization.
+    interface qed_vp
+        module procedure qed_vp, qed_vp_cached
+    end interface qed_vp
 
     !> Calculate an estimate of the self-energy of a diagonal matrix element
     !! based on the Mohr hydrogenic values.
@@ -34,20 +44,20 @@ module grasp_cimatrixelements
 
     !> Matrix elements smaller than `cutoff` are set to zero.
     !!
-    !! The use of this constant originates from the `matrix.f` file of the
-    !! original `rci_mpi`.
-    real(real64), parameter :: cutoff = 1d-20
+    !! The use of this constant originates from the `setham_gg.f90` file.
+    real(real64), parameter :: cutoff = 1e-12_dp
 
 contains
-
-    ! TODO: single particle cache
-    ! TODO: two particle cache
 
     !===========================================================================
     ! Routines for single-particle Dirac + nuclear potential matrix elements
     !---------------------------------------------------------------------------
 
-    !> This also calls the `ONESCALAR` routine from lib92.
+    !> This also calls the `ONESCALAR` routine from lib9290.
+    !!
+    !! @param ic, ir The row and column indices of the CSFs.
+    !! @returns The Dirac kinetic + nuclear potential expectation value
+    !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{D}} + \hat{V}_{\textrm{nucl.}}|\Psi_{\textrm{ir}}\rangle\f$.
     function dirac_potential(ic, ir)
         use grasp_kinds, only: real64, dp
         use orb_C
@@ -67,7 +77,12 @@ contains
     end function dirac_potential
 
     !> Calls the `IABINT` routine to evaluate the matrix element. The output from
-    !! `ONESCALAR` can be passed as arguments.
+    !! `ONESCALAR` must be passed as arguments.
+    !!
+    !! @param ic, ir The row and column indices of the CSFs.
+    !! @param k, l, tshell The output from `ONESCALAR`.
+    !! @returns The Dirac kinetic + nuclear potential expectation value
+    !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{D}} + \hat{V}_{\textrm{nucl.}}|\Psi_{\textrm{ir}}\rangle\f$.
     function dirac_potential_cached(ic, ir, k, l, tshell)
         use grasp_kinds, only: real64, dp
         use orb_C
@@ -113,6 +128,11 @@ contains
     ! elements
     !---------------------------------------------------------------------------
 
+    !> This also calls the `ONESCALAR` routing from lib9290.
+    !!
+    !! @param ic, ir The row and column indices of the CSFs.
+    !! @returns The normal mass shift expectation value
+    !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{NMS}}|\Psi_{\textrm{ir}}\rangle\f$.
     function nms(ic, ir)
         use grasp_kinds, only: real64, dp
         use orb_C
@@ -131,6 +151,12 @@ contains
         nms = nms_cached(ic, ir, k, l, tshell)
     end function nms
 
+    !> The `ONESCALAR` output has to be passed as arguments here.
+    !!
+    !! @param ic, ir The row and column indices of the CSFs.
+    !! @param k, l, tshell The output from `ONESCALAR`.
+    !! @returns The normal mass shift expectation value
+    !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{NMS}}|\Psi_{\textrm{ir}}\rangle\f$.
     function nms_cached(ic, ir, k, l, tshell)
         use grasp_kinds, only: real64, dp
         use def_C, only: EMN
@@ -174,6 +200,11 @@ contains
     ! Routines for vacuum polarization matrix elements
     !---------------------------------------------------------------------------
 
+    !> This also calls the `ONESCALAR` routing from lib9290.
+    !!
+    !! @param ic, ir The row and column indices of the CSFs.
+    !! @returns The QED vacuum polarization expectation value
+    !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{VP}}|\Psi_{\textrm{ir}}\rangle\f$.
     function qed_vp(ic, ir)
         use grasp_kinds, only: real64, dp
         use orb_C
@@ -192,6 +223,12 @@ contains
         qed_vp = qed_vp_cached(ic, ir, k, l, tshell)
     end function qed_vp
 
+    !> The `ONESCALAR` output has to be passed as arguments here.
+    !!
+    !! @param ic, ir The row and column indices of the CSFs.
+    !! @param k, l, tshell The output from `ONESCALAR`.
+    !! @returns The QED vacuum polarization expectation value
+    !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{VP}}|\Psi_{\textrm{ir}}\rangle\f$.
     function qed_vp_cached(ic, ir, k, l, tshell)
         use grasp_kinds, only: real64, dp
         use orb_C
@@ -233,17 +270,19 @@ contains
     ! Routines for two-particle Coulomb matrix elements
     !---------------------------------------------------------------------------
 
+    !> Also calls the `RKCO_GG` routine.
+    !!
+    !! @param ic, ir The row and column indices of the CSFs.
+    !! @returns The Coulomb interaction expectation value
+    !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{C}}|\Psi_{\textrm{ir}}\rangle\f$.
     function coulomb(ic, ir)
-        use grasp_kinds, only: real64, dp
-        use buffer_C, only: NVCOEF, COEFF, LABEL
+        use grasp_kinds, only: real64
+        use buffer_C, only: NVCOEF
         use cord_I
         use rkco_gg_I
 
         integer, intent(in) :: ic, ir
         real(real64) :: coulomb
-
-        integer :: i
-        real(real64) :: result
 
         ! And here is the two particle part of DC. Still from setham_gg.f
         !
@@ -264,13 +303,32 @@ contains
         CALL RKCO_GG(ic, ir, CORD, 1, 1)
 
         ! Accumulate the matrix element
-        coulomb = 0.0_dp
+        coulomb = coulomb_cached(ic, ir)
+    end function coulomb
+
+    !> Assumes that `buffer_C` is set up properly by `RKCO_GG`.
+    !!
+    !! @param ic, ir The row and column indices of the CSFs.
+    !! @returns The Coulomb interaction expectation value
+    !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{C}}|\Psi_{\textrm{ir}}\rangle\f$.
+    function coulomb_cached(ic, ir)
+        use grasp_kinds, only: real64
+        use buffer_C, only: NVCOEF, COEFF, LABEL
+
+        integer, intent(in) :: ic, ir
+        real(real64) :: coulomb_cached
+
+        integer :: i
+        real(real64) :: result
+
+        ! Accumulate the matrix element
+        coulomb_cached = 0.0_dp
         do i = 1, NVCOEF
             if(abs(COEFF(i)) < cutoff) cycle
             call rkintc_safe(LABEL(1,i), LABEL(2,i), LABEL(3,i), LABEL(4,i), LABEL(5,i), result)
-            coulomb = coulomb + result * COEFF(i)
+            coulomb_cached = coulomb_cached + result * COEFF(i)
         enddo
-    end function coulomb
+    end function coulomb_cached
 
     !> Calls the RKINTC, but makes sure that the input LABEL values do not get
     !! changed.
@@ -286,36 +344,55 @@ contains
     ! Routines for two-particle mass shift (special mass shift; SMS)
     !---------------------------------------------------------------------------
 
+    !> Also calls the `RKCO_GG` routine.
+    !!
+    !! @param ic, ir The row and column indices of the CSFs.
+    !! @returns The special mass shift expectation value
+    !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{SMS}}|\Psi_{\textrm{ir}}\rangle\f$.
     function sms(ic, ir)
-        use grasp_kinds, only: real64, dp
-        use def_C, only: EMN
-        use buffer_C, only: NVCOEF, COEFF, LABEL
+        use grasp_kinds, only: real64
+        use buffer_C, only: NVCOEF
         use cord_I
         use rkco_gg_I
-        use vint_I
 
         integer, intent(in) :: ic, ir
         real(real64) :: sms
+
+        NVCOEF = 0 ! this is done in SETHAM and then the variable used later
+        ! The first `1` was called `incor`
+        CALL RKCO_GG(ic, ir, CORD, 1, 1)
+        sms = sms_cached(ic, ir)
+    end function sms
+
+    !> Assumes that `buffer_C` is set up properly by `RKCO_GG`.
+    !!
+    !! @param ic, ir The row and column indices of the CSFs.
+    !! @returns The special mass shift expectation value
+    !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{SMS}}|\Psi_{\textrm{ir}}\rangle\f$.
+    function sms_cached(ic, ir)
+        use grasp_kinds, only: real64, dp
+        use def_C, only: EMN
+        use buffer_C, only: NVCOEF, COEFF, LABEL
+        use vint_I
+
+        integer, intent(in) :: ic, ir
+        real(real64) :: sms_cached
 
         integer :: i
         real(real64) :: result1, result2, ATWINV
 
         ATWINV = 1.0_dp/EMN ! this is calculated in setham_gg.f
 
-        NVCOEF = 0 ! this is done in SETHAM and then the variable used later
-        ! The first `1` was called `incor`
-        CALL RKCO_GG(ic, ir, CORD, 1, 1)
-
-        sms = 0.0_dp
+        sms_cached = 0.0_dp
         do i = 1, NVCOEF
             if(abs(COEFF(i)) < cutoff) cycle
             if(LABEL(5,I) == 1) then
                 call VINT(LABEL(1,i), LABEL(3,i), result1)
                 call VINT(LABEL(2,i), LABEL(4,i), result2)
-                sms = sms - result1 * result2 * ATWINV * COEFF(i)
+                sms_cached = sms_cached - result1 * result2 * ATWINV * COEFF(i)
             endif
         enddo
-    end function sms
+    end function sms_cached
 
     !===========================================================================
     ! Routines for two-particle Breit matrix elements
