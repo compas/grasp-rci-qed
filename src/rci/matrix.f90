@@ -61,8 +61,11 @@
       USE maneig_I
       USE engout_I
       USE wghtd5_I
-      USE qed_I
       USE mpi_C
+
+      use grasp_rciqed_qed, only: slfint
+      use grasp_cimatrixelements, only: qed_se_mohr
+
       IMPLICIT NONE
 !-----------------------------------------------
 !   D u m m y   A r g u m e n t s
@@ -72,16 +75,20 @@
 !-----------------------------------------------
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
-      REAL(DOUBLE), DIMENSION(NNNW) :: slfint
       CHARACTER(LEN=8) :: CNUM
       REAL(DOUBLE) :: elsto, eau, ecm, eev, elemnt
-      REAL(DOUBLE), DIMENSION(:), pointer :: slf_en, ucf, etot
+      REAL(DOUBLE), DIMENSION(:), pointer :: etot
       INTEGER(LONG) :: nelmnt_a
       INTEGER :: iiatjpo, iiaspar
-      INTEGER :: i, j, irestart, ncminpas, jblock, ic, ip, mode
+      INTEGER :: i, j, irestart, ncminpas, jblock, ic, ip, mode, k
 !-----------------------------------------------
 !     ...Common to all blocks - place here to save CPU time
       CALL auxblk (j2max)
+      ! Populate the global array in grasp_rciqed_qed with the per-orbital
+      ! values of the self-energy. Note that we'll do this even if self-energy
+      ! is disabled, as we still need these values when estimating the SE
+      ! perturbatively.
+      CALL QED_SLFEN(SLFINT)
 
 !***************************************************************
 !      Loop over blocks
@@ -123,48 +130,27 @@
          CALL ALLOC (IQA, NNNW, ncf, 'IQA', 'MATRIX')
          CALL ALLOC (JQSA, NNNW, 3, ncf, 'JQSA', 'MATRIX')
          CALL ALLOC (JCUPA, NNNW, ncf, 'JCUPA', 'MATRIX')
-         CALL ALLOC (SLF_EN,ncf,'SLF_EN', 'MATRIX')
-         CALL ALLOC (UCF, nw,'UCF', 'MATRIX')
-          do ic=1,ncf
-               SLF_EN(IC) = 0.0
-          enddo
 
 !      ...Load CSF list of the current block
         CALL lodcslmpi (21, ncore, jblock)
-! zou
 
-         IF (LSE) THEN
-            IF (myid .EQ. 0) THEN
-              PRINT *, 'Entering QED ...'
-
-              WRITE (24,*)
-              WRITE (24,*) ' Self Energy Corrections: '
-              WRITE (24,*)
-            endif
-            CALL QED_SLFEN (SLFINT)
-            DO IC = 1, NCF
-               ELEMNT = 0.0D00
-               DO I = 1,NW
-                  ELEMNT = ELEMNT+IQ (I,IC)*SLFINT(I)
-               ENDDO
-               SLF_EN(IC) = ELEMNT
-            ENDDO
-
-            IF (myid .EQ. 0) THEN
-               WRITE (24,*)
-               WRITE (24,*) 'Self-energy corrections estimated'       &
+         ! Make a note about self-energy
+         IF (LSE .AND. (myid .EQ. 0)) THEN
+            WRITE (24,*)
+            WRITE (24,*) ' Self Energy Corrections: '
+            WRITE (24,*)
+            WRITE (24,*)
+            WRITE (24,*) 'Self-energy corrections estimated'       &
                        //' --- these will influence the data'
-               WRITE (24,*) ' in the RCI92 MIXing coefficients File.'
-               endif
-            ENDIF
+            WRITE (24,*) ' in the RCI92 MIXing coefficients File.'
+         ENDIF
 
-! zou
+
          IF (nvec <= 0) THEN
             IF (myid .EQ. 0) WRITE (25) jblock, ncf, nvec, 999, 999
 !           ...Generate H matrix of the current block and write to disk
 !           ...eav, nelmnt are also obtained from genmat
-            CALL genmat (jblock, myid, nprocs, elsto, irestart,&
-           slf_en)
+            CALL genmat (jblock, myid, nprocs, elsto, irestart)
              ! This call is optional, meaning the matrix of this block
                ! does not need to be computed. But don't comment it out
                ! since other programs may assume thet existence of them.
@@ -172,8 +158,7 @@
             GOTO 80 ! need to clear memory
          ENDIF
 !        ------------------------
-         CALL genmat (jblock, myid, nprocs, elsto, irestart,   &
-           slf_en)
+         CALL genmat (jblock, myid, nprocs, elsto, irestart)
          CALL genmat2 (irestart, nelmnt_a, elsto)
 !
 !   Allocate and deallocate memory for the mixing coefficients
@@ -249,18 +234,13 @@
                16X,'eV' )
   302 FORMAT (1I3,2X,2A4,1P,3D22.10)
          DO J = 1, nvec
-            CALL QED (j,SLFINT,UCF)
-            ELEMNT = 0.0D00
-            IC = IVEC(J)
-            DO I = 1,NW
-               ELEMNT = ELEMNT+UCF(I)*SLFINT(I)
-!              ELEMNT = ELEMNT+IQ (I,IC)*SLFINT(I)
+            EAU = 0.0D0
+            DO ic = 1, NCF
+                EAU = EAU + qed_se_mohr(ic, slfint) * EVEC(ic + (J - 1)*NCF)**2
             ENDDO
-            ETOT(J) = EVAL(J)+ELEMNT
-!
-            EAU = ELEMNT
             ECM = EAU*AUCM
             EEV = EAU*AUEV
+            ETOT(J) = EVAL(J) + EAU
             IP = (IIASPAR+3)/2
             IF (myid .EQ. 0)                                           &
                WRITE (24,302) j,LABJ(IiATJPO),LABP(IP),EAU,ECM,EEV
@@ -289,8 +269,6 @@
          CALL dalloc (IQA, 'IQA', 'MATRIX')
          CALL dalloc (JQSA, 'JQSA', 'MATRIX')
          CALL dalloc (JCUPA, 'JCUPA', 'MATRIX')
-         CALL dalloc (SLF_EN, 'SLF_EN', 'MATRIX')
-         CALL dalloc (UCF, 'UCF', 'MATRIX')
 
   100 CONTINUE
 !

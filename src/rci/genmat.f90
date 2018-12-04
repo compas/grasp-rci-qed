@@ -1,6 +1,6 @@
 !***********************************************************************
 !                                                                      *
-      SUBROUTINE GENMAT(JBLOCK, MYID, NPROCS, ELSTO, IRESTART, SLF_EN)
+      SUBROUTINE GENMAT(JBLOCK, MYID, NPROCS, ELSTO, IRESTART)
 !
 !        Generate Hamiltonian matrix for all blocks
 !        This routine calls setham to do the computation. It makes
@@ -41,7 +41,6 @@
       INTEGER  :: NPROCS
       INTEGER, INTENT(OUT) :: IRESTART
       REAL(DOUBLE)  :: ELSTO
-      REAL(DOUBLE), DIMENSION(*) :: SLF_EN
 !-----------------------------------------------
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
@@ -118,8 +117,7 @@
       IF (IREAD < NROWS) THEN
          ICSTRT = IREAD*NPROCS + MYID + 1
 !     ...Generate the rest of the Hamiltonian matrix
-         CALL SETHAM (MYID, NPROCS, JBLOCK, ELSTO, ICSTRT, NELMNT, &
-            SLF_EN)
+         CALL SETHAM (MYID, NPROCS, JBLOCK, ELSTO, ICSTRT, NELMNT)
       ELSE
          NELMNTTMP = NELMNT
          NCFTMP = NCF

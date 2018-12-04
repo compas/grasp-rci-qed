@@ -1,5 +1,10 @@
 module grasp_rciqed_qed
+    use grasp_kinds, only: real64
+    use parameter_def, only: NNNW
     implicit none
+
+    !> Stores the self-energy shifts for orbitals.
+    real(real64) :: slfint(NNNW)
 
 contains
 

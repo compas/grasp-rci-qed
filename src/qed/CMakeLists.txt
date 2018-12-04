@@ -14,10 +14,8 @@ add_library(rci_qed STATIC
     fzalf.f90 fzalf_I.f90
     klamaq.f90 klamaq_I.f90
     mohr.f90 mohr_I.f90
-    ## routine implementation was renamed to claim the 'qed' module name
-    qed.f90 qed_I.f90
     qed_slfen.f90 qed_slfen_I.f90
-    ratden_I.f90
+    ratden.f90 ratden_I.f90
 )
 setup_fortran_modules(rci_qed)
-target_link_libraries_Fortran(rci_qed PRIVATE mod 9290)
+target_link_libraries_Fortran(rci_qed PRIVATE mod 9290 grasp)

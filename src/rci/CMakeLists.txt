@@ -34,5 +34,5 @@ add_library(rci_rci
 setup_fortran_modules(rci_rci)
 target_link_libraries_Fortran(rci_rci PRIVATE
     mod 9290 rang90 mpi90 dvd90
-    rci_breit rci_qed rci_mass_shifts
+    rci_breit rci_qed rci_mass_shifts rci-qed_matrixelements
 )

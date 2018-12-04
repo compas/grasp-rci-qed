@@ -1,6 +1,6 @@
 !***********************************************************************
 !                                                                      *
-      SUBROUTINE SETHAM (myid, nprocs, jblock, ELSTO,ICSTRT, nelmntt, slf_en)
+      SUBROUTINE SETHAM (myid, nprocs, jblock, ELSTO,ICSTRT, nelmntt)
 !                                                                      *
 !   Sets up the Hamiltonian matrix and determines the average energy.  *
 !
@@ -70,6 +70,8 @@
       USE rkintc_I
       USE vint_I
       USE vpint_I
+      use grasp_rciqed_qed, only: slfint
+      use grasp_cimatrixelements, only: qed_se_mohr
       IMPLICIT NONE
       EXTERNAL BREID,CORD
 !----------------------------------------------
@@ -79,7 +81,6 @@
       INTEGER             :: JBLOCK, ICSTRT
       INTEGER, INTENT(IN) :: MYID, NPROCS
       REAL(DOUBLE)        :: ELSTO
-      REAL(DOUBLE), DIMENSION(*) :: slf_en
 !-----------------------------------------------
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
@@ -365,11 +366,10 @@
          ENDIF
 !
    85    CONTINUE
-! zou
-!        print *, ic,SLF_EN(IC)
-         IF(LSE) EMT(NELC) = EMT(NELC) + SLF_EN(IC)
-! zou
-!
+
+         ! If LSE, then add self-energy to the diagonal of the CI matrix.
+         IF(LSE) EMT(NELC) = EMT(NELC) + qed_se_mohr(IC, slfint)
+
 !   This column is done; write it to disk
 !
          WRITE (imcdf) NELC, ELSTO, (EMT(IR), IR = 1, NELC),       &
