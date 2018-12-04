@@ -95,7 +95,7 @@
   ! been reduced to 11 (from 15). This is because the GRASP output values were
   ! not deterministic up to 15 digits on different hardware, probably due to
   ! floating point rounding error accumulation.
-  302 FORMAT(1I3,2X,2A4,1P,3D22.10)
+  302 FORMAT(1I3,2X,2A4,1P,3D22.7)
   303 FORMAT(/,'Energy of each level relative to immediately lower',' level:')
   304 FORMAT(/,'Energy of each level relative to lowest level:')
       RETURN

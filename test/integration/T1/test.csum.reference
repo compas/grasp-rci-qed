@@ -71,7 +71,7 @@ Eigenenergies:
 
 Level  J Parity       Hartrees              Kaysers                eV
 
-  1   1/2 -       -1.2222081668D+04     -2.6824368687D+09     -3.3257978222D+05
+  1   1/2 -          -1.2222082D+04        -2.6824369D+09        -3.3257978D+05
 
 Weights of major contributors to ASF:
 
@@ -107,23 +107,23 @@ Eigenenergies:
 
 Level  J Parity       Hartrees              Kaysers                eV
 
-  1   3/2 -       -1.2235291878D+04     -2.6853361747D+09     -3.3293925035D+05
-  2   3/2 -       -1.2223288831D+04     -2.6827018104D+09     -3.3261263080D+05
-  3   3/2 -       -1.2209957813D+04     -2.6797759901D+09     -3.3224987531D+05
+  1   3/2 -          -1.2235292D+04        -2.6853362D+09        -3.3293925D+05
+  2   3/2 -          -1.2223289D+04        -2.6827018D+09        -3.3261263D+05
+  3   3/2 -          -1.2209958D+04        -2.6797760D+09        -3.3224988D+05
 
 Energy of each level relative to immediately lower level:
 
 Level  J Parity       Hartrees              Kaysers                eV
 
-  2   3/2 -        1.2003047194D+01      2.6343643582D+06      3.2661955059D+02
-  3   3/2 -        1.3331018229D+01      2.9258203115D+06      3.6275548303D+02
+  2   3/2 -           1.2003047D+01         2.6343644D+06         3.2661955D+02
+  3   3/2 -           1.3331018D+01         2.9258203D+06         3.6275548D+02
 
 Energy of each level relative to lowest level:
 
 Level  J Parity       Hartrees              Kaysers                eV
 
-  2   3/2 -        1.2003047194D+01      2.6343643582D+06      3.2661955059D+02
-  3   3/2 -        2.5334065422D+01      5.5601846697D+06      6.8937503362D+02
+  2   3/2 -           1.2003047D+01         2.6343644D+06         3.2661955D+02
+  3   3/2 -           2.5334065D+01         5.5601847D+06         6.8937503D+02
 
 Weights of major contributors to ASF:
 
@@ -163,7 +163,7 @@ Eigenenergies:
 
 Level  J Parity       Hartrees              Kaysers                eV
 
-  1   5/2 -       -1.2222782624D+04     -2.6825907106D+09     -3.3259885619D+05
+  1   5/2 -          -1.2222783D+04        -2.6825907D+09        -3.3259886D+05
 
 Weights of major contributors to ASF:
 

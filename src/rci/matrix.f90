@@ -232,7 +232,7 @@
          END IF
   301 FORMAT (' Level  J Parity',7X,'Hartrees',14X,'Kaysers',          &
                16X,'eV' )
-  302 FORMAT (1I3,2X,2A4,1P,3D22.10)
+  302 FORMAT (1I3,2X,2A4,1P,3D22.7)
          DO J = 1, nvec
             EAU = 0.0D0
             DO ic = 1, NCF
