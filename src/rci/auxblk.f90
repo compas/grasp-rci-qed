@@ -1,5 +1,5 @@
 !************************************************************************
-     SUBROUTINE AUXBLK(J2MAX, ATWINV)
+     SUBROUTINE AUXBLK(J2MAX)
 !************************************************************************
 !...Translated by Pacific-Sierra Research 77to90  4.3E  14:04:58   1/ 3/07
 !...Modified by Charlotte Froese Fischer
@@ -31,7 +31,6 @@
 !   D u m m y   A r g u m e n t s
 !-----------------------------------------------
       INTEGER, INTENT(IN) :: J2MAX
-      REAL(DOUBLE), INTENT(OUT) :: ATWINV
 !-----------------------------------------------
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
@@ -91,7 +90,6 @@
 !   Initialisations for nuclear translational energy corrections
 !
       IF (EMN > 0.D0) THEN
-         ATWINV = 1.D0/EMN
          IF (LNMS) THEN
             FRSTKI = .TRUE.
             NKEI = 0
@@ -101,7 +99,6 @@
             NVINTI = 0
          ENDIF
       ELSE
-         ! atwinv will not be used
          LNMS = .FALSE.
          LSMS = .FALSE.
       ENDIF

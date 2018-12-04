@@ -1,7 +1,6 @@
 !***********************************************************************
 !                                                                      *
-      SUBROUTINE SETHAM (myid, nprocs, jblock, ELSTO,ICSTRT, nelmntt, &
-                         atwinv,slf_en)
+      SUBROUTINE SETHAM (myid, nprocs, jblock, ELSTO,ICSTRT, nelmntt, slf_en)
 !                                                                      *
 !   Sets up the Hamiltonian matrix and determines the average energy.  *
 !
@@ -79,14 +78,14 @@
       INTEGER(LONG)       :: NELMNTT
       INTEGER             :: JBLOCK, ICSTRT
       INTEGER, INTENT(IN) :: MYID, NPROCS
-      REAL(DOUBLE)        :: ELSTO, ATWINV
+      REAL(DOUBLE)        :: ELSTO
       REAL(DOUBLE), DIMENSION(*) :: slf_en
 !-----------------------------------------------
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
 
       REAL(DOUBLE), DIMENSION(NNNW) :: tshell
-      REAL(DOUBLE) :: tgrl1, tgrl2, tegral
+      REAL(DOUBLE) :: tgrl1, tgrl2, tegral, ATWINV
 
       INTEGER, PARAMETER :: KEY = KEYORB
 !

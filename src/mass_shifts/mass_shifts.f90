@@ -16,7 +16,6 @@ contains
 
         ! From AUXBLK
         IF (EMN > 0.D0) THEN
-            !ATWINV = 1.D0/EMN
             LNMS = .TRUE.
             FRSTKI = .TRUE.
             NKEI = 0
@@ -25,7 +24,6 @@ contains
             FRSTVI = .TRUE.
             NVINTI = 0
         ELSE
-            ! atwinv will not be used
             LNMS = .FALSE.
             LSMS = .FALSE.
         ENDIF

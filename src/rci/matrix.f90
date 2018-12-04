@@ -74,14 +74,14 @@
 !-----------------------------------------------
       REAL(DOUBLE), DIMENSION(NNNW) :: slfint
       CHARACTER(LEN=8) :: CNUM
-      REAL(DOUBLE) :: atwinv, elsto, eau, ecm, eev, elemnt
+      REAL(DOUBLE) :: elsto, eau, ecm, eev, elemnt
       REAL(DOUBLE), DIMENSION(:), pointer :: slf_en, ucf, etot
       INTEGER(LONG) :: nelmnt_a
       INTEGER :: iiatjpo, iiaspar
       INTEGER :: i, j, irestart, ncminpas, jblock, ic, ip, mode
 !-----------------------------------------------
 !     ...Common to all blocks - place here to save CPU time
-      CALL auxblk (j2max, atwinv)
+      CALL auxblk (j2max)
 
 !***************************************************************
 !      Loop over blocks
@@ -163,7 +163,7 @@
             IF (myid .EQ. 0) WRITE (25) jblock, ncf, nvec, 999, 999
 !           ...Generate H matrix of the current block and write to disk
 !           ...eav, nelmnt are also obtained from genmat
-            CALL genmat (atwinv, jblock, myid, nprocs, elsto, irestart,&
+            CALL genmat (jblock, myid, nprocs, elsto, irestart,&
            slf_en)
              ! This call is optional, meaning the matrix of this block
                ! does not need to be computed. But don't comment it out
@@ -172,7 +172,7 @@
             GOTO 80 ! need to clear memory
          ENDIF
 !        ------------------------
-         CALL genmat (atwinv, jblock, myid, nprocs, elsto, irestart,   &
+         CALL genmat (jblock, myid, nprocs, elsto, irestart,   &
            slf_en)
          CALL genmat2 (irestart, nelmnt_a, elsto)
 !
