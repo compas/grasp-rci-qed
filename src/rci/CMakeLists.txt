@@ -1,5 +1,7 @@
 add_library(rci_rci
     rciqed.f90
+    # Cleaned up legacy code
+    setham.f90
     # Legacy code
     auxblk.f90 auxblk_I.f90
     dnicmv.f90 dnicmv_I.f90
@@ -20,7 +22,6 @@ add_library(rci_rci
     maneig.f90 maneig_I.f90
     matrix.f90 matrix_I.f90
     setdbg.f90 setdbg_I.f90
-    setham_gg.f90 setham_gg_I.f90
     setmixmpi.f90 setmixmpi_I.f90
     setres.f90 setres_I.f90
     setsum.f90 setsum_I.f90
