@@ -37,7 +37,7 @@
       USE prnt_C
       USE stat_C
       USE wave_C
-      USE where_C
+      use grasp_rciqed, only: IMCDF => res_unit
       USE blim_C
       USE eigvec1_C
       USE iccu_C

@@ -2,6 +2,14 @@
 module grasp_rciqed
     implicit none
 
+    !> I/O unit of the `.res` file.
+    !!
+    !! The default value is `-1`, so that it would not be possible to confuse
+    !! this with any other open unit (negative unit number are generally not
+    !! allowed and `newunit=` never returns a `-1`; i.e. it is never possible
+    !! to write to `unit = -1`).
+    integer :: res_unit = -1
+
 contains
 
     !> Initializes the global state for the RK integrals, i.e. DC matrix elements.

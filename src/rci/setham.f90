@@ -31,7 +31,7 @@ contains
         USE vinlst_C, only: nvinti
         USE vpilst_C, only: nvpi
         USE blim_c, only: coeffcut1, coeffcut2, ncsfpre, iprerun
-        USE where_C, only: imcdf
+        use grasp_rciqed, only: IMCDF => res_unit
         USE eigvec1_C, only: evec1
         ! Routines
         USE alcbuf_I

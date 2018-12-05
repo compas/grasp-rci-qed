@@ -23,7 +23,7 @@
       USE eigv_C
       USE iccu_C
       USE orb_C
-      USE where_C
+      use grasp_rciqed, only: IMCDF => res_unit
       USE hblock_C
       USE hmat_C
       USE iounit_C

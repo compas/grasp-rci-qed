@@ -23,7 +23,7 @@
 !-----------------------------------------------
       USE vast_kind_param, ONLY:  DOUBLE
       USE eigv_C
-      USE Where_C
+      use grasp_rciqed, only: IMCDF => res_unit
       USE fposition_C
       USE mpi_C,           ONLY:  myid, nprocs
 !-----------------------------------------------

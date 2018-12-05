@@ -68,7 +68,7 @@
       USE hmat_C
       USE orb_C,           ONLY: ncf, nw, iqa
       USE prnt_C
-      USE where_C
+      use grasp_rciqed, only: IMCDF => res_unit
       USE WCHBLK_C
       USE iounit_C
       USE mpi_C

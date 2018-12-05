@@ -45,7 +45,6 @@
 !-----------------------------------------------
       USE default_C
       USE blim_C
-      USE where_C
       USE cons_C
       USE def_C
       USE hblock_C
@@ -69,6 +68,7 @@
       USE strsum_I
       USE factt_I
       USE matrix_I
+      use grasp_rciqed, only: IMCDF => res_unit
       IMPLICIT NONE
 !-----------------------------------------------
 !   L o c a l   P a r a m e t e r s

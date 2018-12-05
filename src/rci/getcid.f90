@@ -34,7 +34,7 @@
       USE wave_C
       USE wfac_C
       USE blim_C
-      USE where_C
+      use grasp_rciqed, only: IMCDF => res_unit
       USE qedcut_C
       USE mpi_C
 !-----------------------------------------------
