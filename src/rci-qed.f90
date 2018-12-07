@@ -68,7 +68,7 @@
       USE strsum_I
       USE factt_I
       USE matrix_I
-      use grasp_rciqed, only: IMCDF => res_unit
+      use grasp_rciqed, only: IMCDF => res_unit, write_job_toml
       IMPLICIT NONE
 !-----------------------------------------------
 !   L o c a l   P a r a m e t e r s
@@ -216,6 +216,8 @@
          IPRERUN = 2
          GO TO 99
       ENDIF
+
+      if(myid == 0) call write_job_toml(name)
 !=======================================================================
 !  Execution finished; Statistics output
 !=======================================================================
