@@ -4,6 +4,7 @@ add_subdirectory("qed")
 add_subdirectory("mass_shifts")
 add_subdirectory("rci")
 add_subdirectory("matrixelements")
+add_subdirectory("toml")
 
 # rci-qed is the main program in this module
 add_executable(rci-qed

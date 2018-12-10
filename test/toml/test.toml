@@ -1,0 +1,13 @@
+[nucleus]
+  Z = 42.0
+  atomic_mass_amu = 88.234
+  model = "point"
+
+[grid]
+  H = 2e-3
+  RNT = 1e-3
+  N = 500
+
+[hamiltonian]
+  breit = true
+  nms = false

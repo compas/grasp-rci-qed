@@ -81,3 +81,16 @@ set_property(TEST matrixelements_hydrogenic PROPERTY DEPENDS
 
 # Integration tests
 add_subdirectory("integration/")
+
+# Unit tests for the TOML library
+add_executable(test.toml
+    toml/tests.f90
+)
+target_link_libraries_Fortran(test.toml PUBLIC
+    toml rci-qed.test grasp
+)
+add_test(
+    NAME toml
+    COMMAND test.toml
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/toml"
+)
