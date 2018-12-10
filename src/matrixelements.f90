@@ -171,6 +171,7 @@ contains
     end subroutine write_matrixelement
 
     subroutine check_file(filename)
+        use grasp_system, only: file_exists
         character(*), intent(in) :: filename
 
         if(.not.file_exists(filename)) then
@@ -178,12 +179,6 @@ contains
             error stop
         endif
     end subroutine check_file
-
-    function file_exists(filename)
-        character(*), intent(in) :: filename
-        logical :: file_exists
-        inquire(file=filename, exist=file_exists)
-    end function file_exists
 
     subroutine eval_asfs(hamiltonian, k, hk)
         use grasp_kinds, only: real64, dp
