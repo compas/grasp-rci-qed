@@ -15,6 +15,7 @@ program matrixelements
     use grasp_rciqed_breit, only: init_breit
     use grasp_rciqed_mass_shifts, only: init_mass_shifts
     use grasp_rciqed_qed, only: init_vacuum_polarization
+    use grasp_rciqed_rcisettings, only: rcisettings, read_settings_toml
     use grasp_cimatrixelements
     use prnt_C, only: NVEC
     implicit none
@@ -26,6 +27,7 @@ program matrixelements
     character(256) :: state
     integer :: state_len
     character(:), allocatable :: file_csls, file_wfns, file_mixing
+    type(rcisettings) :: settings
 
     integer :: status, k, i, j, j2max
     integer :: fh
@@ -41,7 +43,7 @@ program matrixelements
     if (command_argument_count() /= 1) then
         error stop 'Missing command line argument: ./rci_qedreport <STATE>'
     endif
-    call get_command_argument(1, state)
+    call get_command_argument(1, state) ! TODO: make state allocatable
     state_len = len_trim(state)
 
     ! The input files are assumed to be <state>.c, <state>.w and <state>.cm
@@ -60,9 +62,10 @@ program matrixelements
     call check_file(file_csls)
     call check_file(file_wfns)
     call check_file(file_mixing)
+    call check_file(trim(state)//".settings.toml")
 
     ! Load the isotope information, CSL, radial orbitals and the CI mixing coefficents.
-    print '(a)', ">>> CALLING: lib92_init_cw"
+    print '(a)', ">>> CALLING: grasp_lib9290::init_isocw_full"
     call init_isocw_full(isodata, file_csls, file_wfns)
     print '(a)', ">>> CALLING: lib92_init_mixing"
     call load_mixing(file_mixing)
@@ -71,6 +74,22 @@ program matrixelements
     call init_breit(j2max)
     call init_vacuum_polarization
     call init_mass_shifts
+
+    ! Load the info in $(state).settings.toml file
+    print '(">>> LOADING: ",a,".settings.toml")', trim(state)
+    if(.not.read_settings_toml(trim(state), settings)) then
+        print '("ERROR: failed to read ",a,".setting.toml")', trim(state)
+        error stop
+    endif
+    call verify_rcisettings(settings)
+
+    print "(a)", "Hamiltonian parts enabled in RCI calculation:"
+    print '(" ",a,"  ",a)', check(.true.), "Dirac + nuclear potential"
+    print '(" ",a,"  ",a)', check(settings%breit_enabled), "Breit"
+    print '(" ",a,"  ",a)', check(settings%nms_enabled), "Normal mass shift"
+    print '(" ",a,"  ",a)', check(settings%sms_enabled), "Special mass shift"
+    print '(" ",a,"  ",a)', check(settings%qed_vp_enabled), "QED vacuum polarization"
+    print '(" ",a,"  ",a)', check(settings%qed_se_enabled), "QED self-energy"
 
     ! Allocate the dense CI matrix
     allocate(hamiltonian(ncsfs_global(), ncsfs_global()))
@@ -99,37 +118,26 @@ program matrixelements
     print '(a)', ">>> Evaluating ASF expectation values:"
 
     open(newunit=fh, file=trim(state)//".asfenergies.csv", action='write')
-    write(fh, '(a9)', advance='no') "asf_index"
-    write(fh, '(3(",",a24))', advance='no') "diracpot", "coulomb", "breit"
-    write(fh, '(1(",",a24))', advance='no') "vp"
-    write(fh, '(2(",",a24))', advance='no') "nms", "sms"
-    write(fh, '(2(",",a24))', advance='no') "sum_dcb"
-    write(fh, '()')
+    call write_csv_header(fh)
 
     do k = 1, NVEC
         call eval_asfs(hamiltonian, k, hij)
 
         ! Write to the CSV file
-        write(fh, '(i9)', advance='no') k
-        write(fh, '(3(",",e24.15))', advance='no') hij%diracpot, hij%coulomb, hij%breit
-        write(fh, '(1(",",e24.15))', advance='no') hij%vp
-        write(fh, '(2(",",e24.15))', advance='no') hij%nms, hij%sms
-        write(fh, '(2(",",e24.15))', advance='no') &
-            hij%diracpot + hij%coulomb + hij%breit ! sum_dcb
-        write(fh, '()') ! write the newline
+        call write_csv_asf_line(fh, hij)
 
         ! Also print them out
         print '(80("="))'
         print '(">>> ASF #",i0)', k
         print '(80("-"))'
-        print '(a1,a10,a24)',    " ", "Type", "<H_i> (Ha)"
-        print '(a1,a10,e24.15)', " ", "DC", hij%diracpot + hij%coulomb
-        print '(a1,a10,e24.15)', " ", "Breit", hij%breit
-        print '(a1,a10,e24.15)', ">", "DC+B", hij%diracpot + hij%coulomb + hij%breit
-        print '(a1,a10,e24.15)', " ", "QED VP", hij%vp
-        print '(a1,a10,e24.15)', " ", "NMS+SMS", hij%nms + hij%sms
-        print '(a1,a10,e24.15)', " ", "SE(Mohr)", hij%se_mohr
-        print '(a1,a10,e24.15)', ">", "Full", &
+        print '(a1,a10,a18)',    " ", "Type", "<H_i> (Ha)"
+        print '(a1,a10,e18.8)', " ", "DC", hij%diracpot + hij%coulomb
+        print '(a1,a10,e18.8)', " ", "Breit", hij%breit
+        print '(a1,a10,e18.8)', ">", "DC+B", hij%diracpot + hij%coulomb + hij%breit
+        print '(a1,a10,e18.8)', " ", "QED VP", hij%vp
+        print '(a1,a10,e18.8)', " ", "NMS+SMS", hij%nms + hij%sms
+        print '(a1,a10,e18.8)', " ", "SE(Mohr)", hij%se_mohr
+        print '(a1,a10,e18.8)', ">", "Full", &
             hij%diracpot + hij%coulomb + hij%breit + hij%vp + hij%nms + hij%sms + hij%se_mohr
     enddo
 
@@ -137,38 +145,28 @@ program matrixelements
 
 contains
 
-    subroutine print_matrixelement(k, l, hij)
-        integer, intent(in) :: k, l
-        type(matrixelement), intent(in) :: hij
+    subroutine write_csv_header(unit)
+        integer, intent(in) :: unit
+        write(unit, '(a9)', advance='no') "asf_index"
+        write(unit, '(3(",",a16))', advance='no') "diracpot", "coulomb", "breit"
+        write(unit, '(1(",",a16))', advance='no') "vp"
+        write(unit, '(2(",",a16))', advance='no') "nms", "sms"
+        write(unit, '(1(",",a16))', advance='no') "sum_dcb"
+        write(unit, '()')
+    end subroutine write_csv_header
 
-        real(real64) :: total_dcb
+    subroutine write_csv_asf_line(unit, me)
+        integer, intent(in) :: unit
+        type(matrixelement), intent(in) :: me
 
-        print '(80("="))'
-        print '(">>> RUNNING: matrixelement(",i0,", ",i0,")")', k, l
-        print '(80("-"))'
-        print '("> Dirac + potential      = ",d24.15)', hij%diracpot
-        print '("> Coulomb                = ",d24.15)', hij%coulomb
-        print '("> Breit                  = ",d24.15)', hij%breit
-        print '("> Vacuum polarization    = ",d24.15)', hij%vp
-        print '("> Normal mass shift      = ",d24.15)', hij%nms
-        print '("> Special mass shift     = ",d24.15)', hij%sms
-        print '("> Self-energy (Mohr)     = ",d24.15)', hij%se_mohr
-
-        total_dcb = hij%diracpot + hij%coulomb + hij%breit
-        print '("H(",i0,", ",i0,"; DCB) = ",d20.10)', k, l, total_dcb
-    end subroutine print_matrixelement
-
-    subroutine write_matrixelement(fh, k, l, hij)
-        integer, intent(in) :: fh, k, l
-        type(matrixelement), intent(in) :: hij
-
-        write(fh, '(i6,",",i6)', advance='no') k, l
-        write(fh, '(3(",",e30.20))', advance='no') hij%diracpot, hij%coulomb, hij%breit
-        write(fh, '(1(",",e30.20))', advance='no') hij%vp
-        write(fh, '(2(",",e30.20))', advance='no') hij%nms, hij%sms
-        write(fh, '(1(",",e30.20))', advance='no') hij%se_mohr
-        write(fh, '()') ! write the newline
-    end subroutine write_matrixelement
+        write(unit, '(i9)', advance='no') k
+        write(unit, '(3(",",e16.8))', advance='no') me%diracpot, me%coulomb, me%breit
+        write(unit, '(1(",",e16.8))', advance='no') me%vp
+        write(unit, '(2(",",e16.8))', advance='no') me%nms, me%sms
+        write(unit, '(1(",",e16.8))', advance='no') &
+            me%diracpot + me%coulomb + me%breit ! sum_dcb
+        write(unit, '()') ! write the newline
+    end subroutine write_csv_asf_line
 
     subroutine check_file(filename)
         use grasp_system, only: file_exists
@@ -225,5 +223,92 @@ contains
         real(real64) :: asf_coefficient
         asf_coefficient = EVEC(i + (k - 1) * NCF)
     end function asf_coefficient
+
+    !> Verifies if the nuclear and grid values in the `.settings.toml` file match
+    !! the ones set by loading the `isodata` files.
+    !!
+    !! Does not abort if there are discrepancies, just prints warnings.
+    subroutine verify_rcisettings(settings)
+        use grasp_kinds, only: real64, dp
+        use grasp_rciqed_rcisettings, only: rcisettings
+        use decide_C, only: LTRANS, LNMS, LSMS, LVP, LSE
+        use def_C, only: Z, EMN, AUMAMU, FMTOAU
+        use grid_C, only: RNT, H, N
+        use npar_C, only: NPARM, PARM
+
+        real(real64), parameter :: rtol = 1e-15_dp
+
+        type(rcisettings), intent(in) :: settings
+
+        if(.not.within_tolerance(settings%Z, Z, rtol)) then
+            print '(a)', "WARNING: discrepancy between isodata and .settings.toml"
+            print '(a)', "  values for Z do not match"
+            print '(a,e22.16)', "  Z in isodata (global): ", Z
+            print '(a,e22.16)', "  Z in .settings.toml  : ", settings%Z
+        endif
+
+        if(.not.within_tolerance(settings%atomic_mass_amu, EMN * AUMAMU, rtol)) then
+            print '(a)', "WARNING: discrepancy between isodata and .settings.toml"
+            print '(a)', "  values for atomic_mass_amu <-> EMN do not match"
+            print '(a,e22.16)', "  EMN * AUMAMU (global)            : ", EMN * AUMAMU
+            print '(a,e22.16)', "  atomic_mass_amu in .settings.toml: ", settings%atomic_mass_amu
+        endif
+
+        if(.not.within_tolerance(settings%atomic_mass_amu, EMN * AUMAMU, rtol)) then
+            print '(a)', "WARNING: discrepancy between isodata and .settings.toml"
+            print '(a)', "  values for atomic_mass_amu <-> EMN do not match"
+            print '(a,e22.16)', "  EMN * AUMAMU (global)            : ", EMN * AUMAMU
+            print '(a,e22.16)', "  atomic_mass_amu in .settings.toml: ", settings%atomic_mass_amu
+        endif
+
+    end subroutine verify_rcisettings
+
+    !> Checks if the difference of `a` and `b` are within the tolerance relative
+    !! to \f$\max(|a|,|b|)\f$.
+    !!
+    !! @param a,b Values to be checked.
+    !! @param relative_tolerance Relative tolerance \f$\sigma\f$.
+    !! @returns Whether \f$|a-b| / \max(|a|,|b|) < \sigma\f$.
+    function within_tolerance(a, b, relative_tolerance)
+        use grasp_kinds, only: real64
+
+        real(real64), intent(in) :: a, b, relative_tolerance
+        logical :: within_tolerance
+        real(real64) :: relative_difference
+
+        relative_difference = abs(a-b) / max(abs(a), abs(b))
+        if (relative_difference < relative_tolerance) then
+            within_tolerance = .true.
+        else
+            within_tolerance = .false.
+        endif
+    end function within_tolerance
+
+    !> Calculate the relative difference of `a` and `b`.
+    !!
+    !! The relative difference is defined as:
+    !!
+    !! \f[
+    !!   \frac{|a-b|}{\max(|a|, |b|)}
+    !! \f]
+    !!
+    !! @param a,b Input values.
+    !! @returns The relative difference of `a` and `b`.
+    function reldiff(a, b)
+        use grasp_kinds, only: real64
+        real(real64), intent(in) :: a, b
+        real(real64) :: reldiff
+        reldiff = abs(a-b) / max(abs(a), abs(b))
+    end function reldiff
+
+    pure function check(yesno)
+        logical, intent(in) :: yesno
+        character(:), allocatable :: check
+        if(yesno) then
+            check = "✔"
+        else
+            check = "✘"
+        endif
+    end function check
 
 end program matrixelements

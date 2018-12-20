@@ -68,7 +68,8 @@
       USE strsum_I
       USE factt_I
       USE matrix_I
-      use grasp_rciqed, only: IMCDF => res_unit, write_job_toml
+      use grasp_rciqed, only: IMCDF => res_unit
+      use grasp_rciqed_rcisettings, only: write_settings_toml
       IMPLICIT NONE
 !-----------------------------------------------
 !   L o c a l   P a r a m e t e r s
@@ -217,7 +218,7 @@
          GO TO 99
       ENDIF
 
-      if(myid == 0) call write_job_toml(name)
+      if(myid == 0) call write_settings_toml(name)
 !=======================================================================
 !  Execution finished; Statistics output
 !=======================================================================
