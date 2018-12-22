@@ -1,4 +1,5 @@
 set(BUILD_BINDIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+set(TEST_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 # Make sure the test libraries and executables do not end up in build/{lib,bin}/
 unset(CMAKE_RUNTIME_OUTPUT_DIRECTORY)
 unset(CMAKE_LIBRARY_OUTPUT_DIRECTORY)
@@ -60,24 +61,7 @@ add_test(hydrogenic_se test.hydrogenic_se)
 
 
 # Unit tests for matrix element calculations
-add_executable(test.matrixelements_hydrogenic
-    matrixelements_hydrogenic.f90
-    lib/testing.f90
-)
-target_link_libraries_Fortran(test.matrixelements_hydrogenic PUBLIC
-    mod 9290 grasp
-    rci-qed_matrixelements
-    rci_rci rci_breit rci_qed rci_mass_shifts
-    rci-qed.tools rci-qed.test
-)
-add_test(matrixelements_hydrogenic_generate ../tools/rci-qed.exporthydrogenic)
-add_test(matrixelements_hydrogenic test.matrixelements_hydrogenic)
-set_property(TEST matrixelements_hydrogenic PROPERTY ENVIRONMENT
-    "RCIQED_TESTDATA=${CMAKE_CURRENT_SOURCE_DIR}/data"
-)
-set_property(TEST matrixelements_hydrogenic PROPERTY DEPENDS
-    matrixelements_hydrogenic_generate
-)
+add_subdirectory("matrixelements/")
 
 # Integration tests
 add_subdirectory("integration/")
