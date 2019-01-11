@@ -21,8 +21,18 @@ program matrixelements
     implicit none
 
     type matrixelement
-        real(real64) :: diracpot, coulomb, breit, vp, nms, sms, se_mohr
+        real(real64) :: diracpot, coulomb, breit, nms, sms, vp, se_mohr
     end type matrixelement
+
+    integer, parameter :: hcs_len = 7
+    character(*), dimension(hcs_len), parameter :: hcs_pretty = (/ &
+        "KE + Nuc.pot", "Coulomb     ", "Breit       ", "NMS         ", "SMS         ", &
+        "QED VP      ", "QED SE      " &
+    /)
+    character(*), dimension(hcs_len), parameter :: hcs_technical = (/ &
+        "kinetic_nucl", "coulomb     ", "breit       ", "nms         ", "sms         ", &
+        "qed_vp      ", "qed_se      " &
+    /)
 
     character(256) :: state
     integer :: state_len
@@ -32,10 +42,12 @@ program matrixelements
     integer :: status, k, i, j, j2max
     integer :: fh
 
-    type(matrixelement) :: hij
-    type(matrixelement), dimension(:,:), allocatable :: hamiltonian
-    real(real64) :: result
-    real(real64), dimension(20) :: tshell
+    type(matrixelement) :: hij, asfv
+    type(matrixelement), dimension(:), allocatable :: asfvalues
+    real(real64) :: sum
+
+    type(integer), dimension(:), allocatable :: hcs_rci, hcs_pt
+    type(logical), dimension(hcs_len) :: hcs_cat
 
     character(*), parameter :: isodata = 'isodata' ! name of the isodata file
 
@@ -91,67 +103,115 @@ program matrixelements
     print '(" ",a,"  ",a)', check(settings%qed_vp_enabled), "QED vacuum polarization"
     print '(" ",a,"  ",a)', check(settings%qed_se_enabled), "QED self-energy"
 
-    ! Allocate the dense CI matrix
-    allocate(hamiltonian(ncsfs_global(), ncsfs_global()))
+    hcs_cat(1) = .true.
+    hcs_cat(2) = .true.
+    hcs_cat(3) = settings%breit_enabled
+    hcs_cat(4) = settings%nms_enabled
+    hcs_cat(5) = settings%sms_enabled
+    hcs_cat(6) = settings%qed_vp_enabled
+    hcs_cat(7) = settings%qed_se_enabled
 
-    print '(a)', ">>> Calculating matrixelements"
+    ! Evaluate the ASF expectation values and write them to a CSV file.
+    print '(a)', ">>> Evaluating ASF expectation values"
+    allocate(asfvalues(NVEC))
+    do k = 1, NVEC
+        call matrixelement_zero(asfvalues(k))
+    enddo
+
     do i = 1, ncsfs_global()
         do j = 1, i
-            hamiltonian(i,j)%diracpot = dirac_potential(i, j)
-            hamiltonian(i,j)%coulomb = coulomb(i, j)
-            hamiltonian(i,j)%breit = breit(i, j)
-            hamiltonian(i,j)%vp = qed_vp(i, j)
-            hamiltonian(i,j)%nms = nms(i, j)
-            hamiltonian(i,j)%sms = sms(i, j)
+            ! Evaluate the (i, j) CI matrix elements for all the components of
+            ! the Hamiltonian
+            hij%diracpot = dirac_potential(i, j)
+            hij%coulomb = coulomb(i, j)
+            hij%breit = breit(i, j)
+            hij%vp = qed_vp(i, j)
+            hij%nms = nms(i, j)
+            hij%sms = sms(i, j)
             if (i == j) then
-                hamiltonian(i,j)%se_mohr = qed_se_mohr(i)
+                hij%se_mohr = qed_se_mohr(i)
             else
-                hamiltonian(i,j)%se_mohr = 0.0_dp
-                hamiltonian(j,i) = hamiltonian(i,j)
+                hij%se_mohr = 0.0_dp
             endif
+
+            ! Add the values to the ASF values
+            do k = 1, NVEC
+                call add_asfvalue(i, j, hij, k, asfvalues(k))
+                if(i /= j) call add_asfvalue(j, i, hij, k, asfvalues(k))
+            enddo
         enddo
     enddo
     close(fh)
 
-    ! Evaluate the ASF expectation values and write them to a CSV file.
-    print *
-    print '(a)', ">>> Evaluating ASF expectation values:"
-
+    print '(a)', ">>> Outputting data:"
     open(newunit=fh, file=trim(state)//".asfenergies.csv", action='write')
     call write_csv_header(fh)
 
     do k = 1, NVEC
-        call eval_asfs(hamiltonian, k, hij)
+        asfv = asfvalues(k)
 
         ! Write to the CSV file
-        call write_csv_asf_line(fh, hij)
+        call write_csv_asf_line(fh, asfv)
 
         ! Also print them out
         print '(80("="))'
         print '(">>> ASF #",i0)', k
         print '(80("-"))'
-        print '(a1,a10,a18)',    " ", "Type", "<H_i> (Ha)"
-        print '(a1,a10,e18.8)', " ", "DC", hij%diracpot + hij%coulomb
-        print '(a1,a10,e18.8)', " ", "Breit", hij%breit
-        print '(a1,a10,e18.8)', ">", "DC+B", hij%diracpot + hij%coulomb + hij%breit
-        print '(a1,a10,e18.8)', " ", "QED VP", hij%vp
-        print '(a1,a10,e18.8)', " ", "NMS+SMS", hij%nms + hij%sms
-        print '(a1,a10,e18.8)', " ", "SE(Mohr)", hij%se_mohr
-        print '(a1,a10,e18.8)', ">", "Full", &
-            hij%diracpot + hij%coulomb + hij%breit + hij%vp + hij%nms + hij%sms + hij%se_mohr
+        print '(a1,a12,a18)',    " ", "Type", "<H_i> (Ha)"
+        sum = 0.0_dp
+        do i = 1, hcs_len
+            if(.not.hcs_cat(i)) cycle
+            print '(a1,a12,1p,e18.8)', " ", trim(hcs_pretty(i)), getindex(asfv, i)
+            sum = sum + getindex(asfv, i)
+        enddo
+        print '(a1,a12,1p,e18.8)', ">", "DC", asfv%diracpot + asfv%coulomb
+        print '(a1,a12,1p,e18.8)', ">", "Non.pet", sum
+        do i = 1, hcs_len
+            if(hcs_cat(i)) cycle
+            print '(a1,a12,1p,e18.8)', " ", trim(hcs_pretty(i)), getindex(asfv, i)
+            sum = sum + getindex(asfv, i)
+        enddo
+        print '(a1,a12,1p,e18.8)', ">", "Full", &
+            asfv%diracpot + asfv%coulomb + asfv%breit + asfv%vp + asfv%nms + asfv%sms + asfv%se_mohr
     enddo
 
     close(fh)
 
 contains
 
+    function getindex(me, idx)
+        use grasp_kinds, only: real64
+        type(matrixelement), intent(in) :: me
+        integer, intent(in) :: idx
+        real(real64) :: getindex
+
+        if(idx < 1 .or. idx > 7) then
+            error stop "Bad index in getindex(::matrixelement)"
+        endif
+
+        if(idx == 1) getindex = me%diracpot
+        if(idx == 2) getindex = me%coulomb
+        if(idx == 3) getindex = me%breit
+        if(idx == 4) getindex = me%nms
+        if(idx == 5) getindex = me%sms
+        if(idx == 6) getindex = me%vp
+        if(idx == 7) getindex = me%se_mohr
+    end function getindex
+
     subroutine write_csv_header(unit)
         integer, intent(in) :: unit
+
         write(unit, '(a9)', advance='no') "asf_index"
-        write(unit, '(3(",",a16))', advance='no') "diracpot", "coulomb", "breit"
-        write(unit, '(1(",",a16))', advance='no') "vp"
-        write(unit, '(2(",",a16))', advance='no') "nms", "sms"
-        write(unit, '(1(",",a16))', advance='no') "sum_dcb"
+        do i = 1, hcs_len
+            if(.not.hcs_cat(i)) cycle
+            write(unit, '(",",a24)', advance='no') trim(hcs_technical(i))
+        enddo
+        write(unit, '(",",a24)', advance='no') "sum:non_pt"
+        do i = 1, hcs_len
+            if(hcs_cat(i)) cycle
+            write(unit, '(",",a24)', advance='no') "pt:"//trim(hcs_technical(i))
+        enddo
+        write(unit, '(",",a24)', advance='no') "sum:with_pt"
         write(unit, '()')
     end subroutine write_csv_header
 
@@ -159,12 +219,21 @@ contains
         integer, intent(in) :: unit
         type(matrixelement), intent(in) :: me
 
+        real(real64) :: sum = 0.0_dp
+
         write(unit, '(i9)', advance='no') k
-        write(unit, '(3(",",e16.8))', advance='no') me%diracpot, me%coulomb, me%breit
-        write(unit, '(1(",",e16.8))', advance='no') me%vp
-        write(unit, '(2(",",e16.8))', advance='no') me%nms, me%sms
-        write(unit, '(1(",",e16.8))', advance='no') &
-            me%diracpot + me%coulomb + me%breit ! sum_dcb
+        do i = 1, hcs_len
+            if(.not.hcs_cat(i)) cycle
+            write(unit, '(1(",",e24.16))', advance='no') getindex(me, i)
+            sum = sum + getindex(me, i)
+        enddo
+        write(unit, '(1(",",e24.16))', advance='no') sum
+        do i = 1, hcs_len
+            if(hcs_cat(i)) cycle
+            write(unit, '(1(",",e24.16))', advance='no') getindex(me, i)
+            sum = sum + getindex(me, i)
+        enddo
+        write(unit, '(1(",",e24.16))', advance='no') sum
         write(unit, '()') ! write the newline
     end subroutine write_csv_asf_line
 
@@ -178,7 +247,26 @@ contains
         endif
     end subroutine check_file
 
-    subroutine eval_asfs(hamiltonian, k, hk)
+    !> Zeroes all the fields of a `matrixelement`.
+    subroutine matrixelement_zero(h)
+        use grasp_kinds, only: dp
+
+        type(matrixelement), intent(out) :: h
+
+        h%diracpot = 0.0_dp
+        h%coulomb = 0.0_dp
+        h%breit = 0.0_dp
+        h%vp = 0.0_dp
+        h%nms = 0.0_dp
+        h%sms = 0.0_dp
+        h%se_mohr = 0.0_dp
+    end subroutine matrixelement_zero
+
+    !> Adds the contribution of the `(i, j)` matrix element to the `asfvalue`.
+    !!
+    !! `hij` must contain the `(i, j)` Hamiltonian matrix element and asfvalue
+    !! must be the `k`-th ASF value.
+    subroutine add_asfvalue(i, j, hij, k, asfvalue)
         use grasp_kinds, only: real64, dp
         use orb_C
         use prnt_C
@@ -187,33 +275,21 @@ contains
         use eigvec1_C
         implicit none
 
-        type(matrixelement), dimension(:,:), intent(in) :: hamiltonian
-        integer, intent(in) :: k
-        type(matrixelement), intent(out) :: hk
+        integer, intent(in) :: i, j, k
+        type(matrixelement), intent(out) :: hij
+        type(matrixelement), intent(inout) :: asfvalue
 
-        integer :: i, j
         real(real64) :: cicj
 
-        hk%diracpot = 0.0_dp
-        hk%coulomb = 0.0_dp
-        hk%breit = 0.0_dp
-        hk%vp = 0.0_dp
-        hk%nms = 0.0_dp
-        hk%sms = 0.0_dp
-        hk%se_mohr = 0.0_dp
-        do i = 1, NCF
-            do j = 1, NCF
-                cicj = asf_coefficient(k, i) * asf_coefficient(k, j)
-                hk%diracpot = hk%diracpot + hamiltonian(i, j)%diracpot * cicj
-                hk%coulomb = hk%coulomb + hamiltonian(i, j)%coulomb * cicj
-                hk%breit = hk%breit + hamiltonian(i, j)%breit * cicj
-                hk%vp  = hk%vp  + hamiltonian(i, j)%vp * cicj
-                hk%nms = hk%nms + hamiltonian(i, j)%nms * cicj
-                hk%sms = hk%sms + hamiltonian(i, j)%sms * cicj
-                hk%se_mohr = hk%se_mohr + hamiltonian(i, j)%se_mohr * cicj
-            enddo
-        enddo
-    end subroutine eval_asfs
+        cicj = asf_coefficient(k, i) * asf_coefficient(k, j)
+        asfvalue%diracpot = asfvalue%diracpot + hij%diracpot * cicj
+        asfvalue%coulomb = asfvalue%coulomb + hij%coulomb * cicj
+        asfvalue%breit = asfvalue%breit + hij%breit * cicj
+        asfvalue%vp  = asfvalue%vp  + hij%vp * cicj
+        asfvalue%nms = asfvalue%nms + hij%nms * cicj
+        asfvalue%sms = asfvalue%sms + hij%sms * cicj
+        asfvalue%se_mohr = asfvalue%se_mohr + hij%se_mohr * cicj
+    end subroutine add_asfvalue
 
     !> Returns the i-th ASF coefficient of the k-th state
     function asf_coefficient(k, i)
