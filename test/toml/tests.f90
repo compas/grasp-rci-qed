@@ -1,7 +1,7 @@
 program tomltest
     use grasp_rciqed_kinds, only: real64, dp
     use grasptest_testing
-    use toml
+    use grasp_rciqed_toml
 
     character(len=:), allocatable :: valuestr
 

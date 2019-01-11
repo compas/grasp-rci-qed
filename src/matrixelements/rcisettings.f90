@@ -24,7 +24,7 @@ contains
     !!         there was a problem.
     function read_settings_toml(jobname, settings)
         use grasp_rciqed_system, only: file_exists
-        use toml
+        use grasp_rciqed_toml
 
         character(len=*), intent(in) :: jobname
         type(rcisettings), intent(out) :: settings

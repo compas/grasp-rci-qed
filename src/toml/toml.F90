@@ -1,4 +1,4 @@
-module toml
+module grasp_rciqed_toml
     use, intrinsic :: iso_c_binding
     use, intrinsic :: iso_fortran_env
     implicit none
@@ -170,4 +170,4 @@ contains
         cstr = trim(str) // c_null_char
     end function cstr
 
-end module toml
+end module grasp_rciqed_toml
