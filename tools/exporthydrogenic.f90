@@ -1,6 +1,6 @@
 !> Creates a `.w` file with hydrogenic wavefunctions.
 program exporthydrogenic
-    use grasp_kinds, only: real64, dp
+    use grasp_rciqed_kinds, only: real64, dp
     use grasptest_lib9290_setup
     use grasptest_lib9290_hydrogenic
     use orbout_I

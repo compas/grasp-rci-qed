@@ -32,7 +32,7 @@ contains
     contains
 
         subroutine populate_hydrogenic(idx)
-            use grasp_kinds, only: real64
+            use grasp_rciqed_kinds, only: real64
             use def_C
             use wave_C
             use dcbsrw_I

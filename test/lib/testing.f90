@@ -19,7 +19,7 @@ contains
     !! @param a,b Input values.
     !! @returns The relative difference of `a` and `b`.
     function reldiff(a, b)
-        use grasp_kinds, only: real64
+        use grasp_rciqed_kinds, only: real64
         real(real64), intent(in) :: a, b
         real(real64) :: reldiff
         reldiff = abs(a-b) / max(abs(a), abs(b))
@@ -32,7 +32,7 @@ contains
     !! @param relative_tolerance Relative tolerance \f$\sigma\f$.
     !! @returns Whether \f$|a-b| / \max(|a|,|b|) < \sigma\f$.
     function within_tolerance(a, b, relative_tolerance)
-        use grasp_kinds, only: real64
+        use grasp_rciqed_kinds, only: real64
 
         real(real64), intent(in) :: a, b, relative_tolerance
         logical :: within_tolerance
@@ -80,7 +80,7 @@ contains
     !! @param a,b Values to be compared.
     !! @param relative_tolerance The relative tolerance \f$\sigma\f$.
     subroutine test_isequal_real64(test_passed, which, a, b, relative_tolerance)
-        use grasp_kinds, only: real64
+        use grasp_rciqed_kinds, only: real64
 
         logical, intent(inout) :: test_passed
         character(*), intent(in) :: which

@@ -7,7 +7,7 @@
 !! Depends on files: `isodata`, `<state>.c`, `<state>.w` and `<state>.cm`
 !!
 program rci_qed_pt
-    use grasp_kinds, only: real64, dp
+    use grasp_rciqed_kinds, only: real64, dp
     use grasp_lib9290, only: init_isocw_full
     use grasp_lib9290_files, only: load_mixing
     use grasp_lib9290_csls, only: ncsfs_global
@@ -180,7 +180,7 @@ program rci_qed_pt
 contains
 
     function getindex(me, idx)
-        use grasp_kinds, only: real64
+        use grasp_rciqed_kinds, only: real64
         type(matrixelement), intent(in) :: me
         integer, intent(in) :: idx
         real(real64) :: getindex
@@ -249,7 +249,7 @@ contains
 
     !> Zeroes all the fields of a `matrixelement`.
     subroutine matrixelement_zero(h)
-        use grasp_kinds, only: dp
+        use grasp_rciqed_kinds, only: dp
 
         type(matrixelement), intent(out) :: h
 
@@ -267,7 +267,7 @@ contains
     !! `hij` must contain the `(i, j)` Hamiltonian matrix element and asfvalue
     !! must be the `k`-th ASF value.
     subroutine add_asfvalue(i, j, hij, k, asfvalue)
-        use grasp_kinds, only: real64, dp
+        use grasp_rciqed_kinds, only: real64, dp
         use orb_C
         use prnt_C
         use syma_C
@@ -305,7 +305,7 @@ contains
     !!
     !! Does not abort if there are discrepancies, just prints warnings.
     subroutine verify_rcisettings(settings)
-        use grasp_kinds, only: real64, dp
+        use grasp_rciqed_kinds, only: real64, dp
         use grasp_rciqed_rcisettings, only: rcisettings
         use decide_C, only: LTRANS, LNMS, LSMS, LVP, LSE
         use def_C, only: Z, EMN, AUMAMU, FMTOAU
@@ -346,7 +346,7 @@ contains
     !! @param relative_tolerance Relative tolerance \f$\sigma\f$.
     !! @returns Whether \f$|a-b| / \max(|a|,|b|) < \sigma\f$.
     function within_tolerance(a, b, relative_tolerance)
-        use grasp_kinds, only: real64
+        use grasp_rciqed_kinds, only: real64
 
         real(real64), intent(in) :: a, b, relative_tolerance
         logical :: within_tolerance
@@ -371,7 +371,7 @@ contains
     !! @param a,b Input values.
     !! @returns The relative difference of `a` and `b`.
     function reldiff(a, b)
-        use grasp_kinds, only: real64
+        use grasp_rciqed_kinds, only: real64
         real(real64), intent(in) :: a, b
         real(real64) :: reldiff
         reldiff = abs(a-b) / max(abs(a), abs(b))

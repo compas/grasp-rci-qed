@@ -1,5 +1,5 @@
 program hydrogenic_se
-    use grasp_kinds, only: real64, dp
+    use grasp_rciqed_kinds, only: real64, dp
     use grasptest_testing, only: test_isequal, reldiff
     use grasptest_lib9290_setup
     use parameter_def, only: NNNW

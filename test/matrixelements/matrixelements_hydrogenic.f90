@@ -1,5 +1,5 @@
 program matrixelements_hydrogenic
-    use grasp_kinds, only: real64, dp
+    use grasp_rciqed_kinds, only: real64, dp
     use grasp_lib9290_init
     use grasp_lib9290_files, only: load_csl
     use grasp_rciqed, only: init_rkintc
@@ -108,7 +108,7 @@ contains
 
     subroutine verify_dcb(ic, ir, reference)
         use grasp_cimatrixelements
-        use grasp_kinds, only: real64, dp
+        use grasp_rciqed_kinds, only: real64, dp
         use grasptest_testing, only: reldiff, test_isequal
 
         integer, intent(in) :: ir, ic
@@ -126,7 +126,7 @@ contains
 
     subroutine verify_dcbmsvp(ic, ir, reference)
         use grasp_cimatrixelements
-        use grasp_kinds, only: real64, dp
+        use grasp_rciqed_kinds, only: real64, dp
         use grasptest_testing, only: reldiff, test_isequal
 
         integer, intent(in) :: ir, ic
@@ -147,7 +147,7 @@ contains
 
     subroutine verify_se_mohr(ic, reference)
         use grasp_cimatrixelements
-        use grasp_kinds, only: real64, dp
+        use grasp_rciqed_kinds, only: real64, dp
         use grasptest_testing, only: reldiff, test_isequal
 
         integer, intent(in) :: ic

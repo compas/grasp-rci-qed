@@ -4,11 +4,11 @@
 !! 64-bit floats. Variable declarations should therefore use `real(real64)` and
 !! floating point literals should always have `_dp` appended (e.g. `0.23_dp`).
 !!
-module grasp_kinds
+module grasp_rciqed_kinds
     use, intrinsic :: iso_fortran_env, only: int32, int64
     use, intrinsic :: iso_fortran_env, only: real64
     implicit none
 
     integer, parameter :: dp = real64
 
-end module grasp_kinds
+end module grasp_rciqed_kinds

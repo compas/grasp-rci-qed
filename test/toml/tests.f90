@@ -1,5 +1,5 @@
 program tomltest
-    use grasp_kinds, only: real64, dp
+    use grasp_rciqed_kinds, only: real64, dp
     use grasptest_testing
     use toml
 
