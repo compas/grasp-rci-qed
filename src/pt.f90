@@ -238,7 +238,7 @@ contains
     end subroutine write_csv_asf_line
 
     subroutine check_file(filename)
-        use grasp_system, only: file_exists
+        use grasp_rciqed_system, only: file_exists
         character(*), intent(in) :: filename
 
         if(.not.file_exists(filename)) then

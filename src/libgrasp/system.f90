@@ -1,5 +1,5 @@
 !> Routines and functions for interacting with the OS, filesystem etc.
-module grasp_system
+module grasp_rciqed_system
     implicit none
 
 contains
@@ -14,4 +14,4 @@ contains
         inquire(file=filename, exist=file_exists)
     end function file_exists
 
-end module grasp_system
+end module grasp_rciqed_system

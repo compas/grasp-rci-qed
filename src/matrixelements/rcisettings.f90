@@ -23,7 +23,7 @@ contains
     !! @return Returns `.true.` it the parsing was successful, and `.false.` if
     !!         there was a problem.
     function read_settings_toml(jobname, settings)
-        use grasp_system, only: file_exists
+        use grasp_rciqed_system, only: file_exists
         use toml
 
         character(len=*), intent(in) :: jobname
