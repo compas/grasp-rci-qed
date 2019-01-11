@@ -9,8 +9,8 @@
 program rci_qed_pt
     use grasp_rciqed_kinds, only: real64, dp
     use grasp_lib9290, only: init_isocw_full
-    use grasp_lib9290_files, only: load_mixing
-    use grasp_lib9290_csls, only: ncsfs_global
+    use grasp_rciqed_lib9290_files, only: load_mixing
+    use grasp_rciqed_lib9290_csls, only: ncsfs_global
     use grasp_rciqed, only: init_rkintc
     use grasp_rciqed_breit, only: init_breit
     use grasp_rciqed_mass_shifts, only: init_mass_shifts

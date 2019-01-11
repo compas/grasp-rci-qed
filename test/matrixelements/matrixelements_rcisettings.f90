@@ -2,7 +2,7 @@ program matrixelements_rcisettings
     use grasp_rciqed_kinds, only: real64, dp
     use grasptest_testing
     use grasp_rciqed_rcisettings
-    use grasp_lib9290_init, only: lib9290_init_constants
+    use grasp_rciqed_lib9290_init, only: lib9290_init_constants
     implicit none
 
     character(*), parameter :: jobname = "testjob"

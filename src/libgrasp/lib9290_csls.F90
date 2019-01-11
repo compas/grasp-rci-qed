@@ -1,5 +1,5 @@
 !> Routines used for interacting with the configuration state list (CSL) files.
-module grasp_lib9290_csls
+module grasp_rciqed_lib9290_csls
     implicit none
 
 contains
@@ -86,4 +86,4 @@ contains
         ncsfs_global = NCF
     end function ncsfs_global
 
-end module grasp_lib9290_csls
+end module grasp_rciqed_lib9290_csls

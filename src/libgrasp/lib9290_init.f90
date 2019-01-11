@@ -2,7 +2,7 @@
 !!
 !! This primarily means populating the various `libmod` modules (derived from
 !! the old COMMON blocks) with appropriate values.
-module grasp_lib9290_init
+module grasp_rciqed_lib9290_init
     implicit none
 
 contains
@@ -109,4 +109,4 @@ contains
         call ALCBUF(1)
     end subroutine lib9290_init_rkco_gg
 
-end module grasp_lib9290_init
+end module grasp_rciqed_lib9290_init

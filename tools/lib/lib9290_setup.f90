@@ -11,7 +11,7 @@ contains
     !! assumed to be a point.
     subroutine setup(nuclear_z, nuclear_mass)
         use grasp_rciqed_kinds, only: real64
-        use grasp_lib9290_init
+        use grasp_rciqed_lib9290_init
 
         real(real64), intent(in) :: nuclear_z, nuclear_mass
 

@@ -14,8 +14,8 @@ contains
     !! @param wfile Orbital wavefunction file (usually `*.w`).
     !!
     subroutine init_isocw_full(isofile, cfile, wfile)
-        use grasp_lib9290_init
-        use grasp_lib9290_files
+        use grasp_rciqed_lib9290_init
+        use grasp_rciqed_lib9290_files
 
         character(*), intent(in) :: isofile, cfile, wfile
 

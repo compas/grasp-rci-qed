@@ -1,7 +1,7 @@
 program matrixelements_hydrogenic
     use grasp_rciqed_kinds, only: real64, dp
-    use grasp_lib9290_init
-    use grasp_lib9290_files, only: load_csl
+    use grasp_rciqed_lib9290_init
+    use grasp_rciqed_lib9290_files, only: load_csl
     use grasp_rciqed, only: init_rkintc
     use grasp_rciqed_breit, only: init_breit
     use grasp_rciqed_mass_shifts, only: init_mass_shifts

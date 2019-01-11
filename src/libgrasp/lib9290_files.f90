@@ -1,6 +1,6 @@
 !> Routines for initializing GRASP global state from input files (`isodata`,
 !! CSLs, wavefunction files, mixing files).
-module grasp_lib9290_files
+module grasp_rciqed_lib9290_files
     implicit none
 
 contains
@@ -24,7 +24,7 @@ contains
     !! TODO: Document prerequisites (what needs to be loaded before this can be
     !! called?).
     subroutine load_csl(cfile)
-        use grasp_lib9290_csls, only: count_blocks
+        use grasp_rciqed_lib9290_csls, only: count_blocks
         use memory_man
         use alcbuf_I
         use setcsll_I
@@ -93,7 +93,7 @@ contains
     !!
     !! @param isofile Path to the `isodata` file.
     subroutine load_isodata(isofile)
-        use grasp_lib9290_init, only: lib9290_init_grid
+        use grasp_rciqed_lib9290_init, only: lib9290_init_grid
         use def_C, only: CVAC, C, Z
         use nucpot_I
         use setiso_I
@@ -129,4 +129,4 @@ contains
         call getmixblock(sumfile) ! TODO: implicit local routine
     end subroutine load_mixing
 
-end module grasp_lib9290_files
+end module grasp_rciqed_lib9290_files
