@@ -64,7 +64,7 @@
       USE mpi_C
 
       use grasp_rciqed_qed, only: slfint
-      use grasp_cimatrixelements, only: qed_se_mohr
+      use grasp_rciqed_cimatrixelements, only: qed_se_mohr
 
       IMPLICIT NONE
 !-----------------------------------------------

@@ -16,7 +16,7 @@ program rci_qed_pt
     use grasp_rciqed_mass_shifts, only: init_mass_shifts
     use grasp_rciqed_qed, only: init_vacuum_polarization
     use grasp_rciqed_rcisettings, only: rcisettings, read_settings_toml
-    use grasp_cimatrixelements
+    use grasp_rciqed_cimatrixelements
     use prnt_C, only: NVEC
     implicit none
 

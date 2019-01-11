@@ -11,7 +11,7 @@
 !! however, is the same for all the operators of the same particle number and it
 !! does not make sense to repeat it. The `*_cached` versions of the routines can
 !! be used to achieve that.
-module grasp_cimatrixelements
+module grasp_rciqed_cimatrixelements
     use grasp_rciqed_kinds, only: real64, dp
     implicit none
 
@@ -420,7 +420,7 @@ contains
                 ! as expected.
                 print '("┌ WARNING: Unexpected non-zero value for breit_core")'
                 print '("│ ir, ic = ",i0,", ", i0)', ir, ic
-                print '("└ @ grasp_cimatrixelements % breit W101")'
+                print '("└ @ grasp_rciqed_cimatrixelements % breit W101")'
             endif
             breit = elsto + breit_noncore
         else ! ic /= ir
@@ -432,7 +432,7 @@ contains
                 ! as expected.
                 print '("┌ WARNING: Unexpected non-zero value for breit_core")'
                 print '("│ ir, ic = ",i0,", ", i0)', ir, ic
-                print '("└ @ grasp_cimatrixelements % breit W101")'
+                print '("└ @ grasp_rciqed_cimatrixelements % breit W101")'
             endif
             breit = breit_noncore
         endif
@@ -541,7 +541,7 @@ contains
                     ! to be false, we will just crash the program here.
                     print '("┌ ERROR: Unexpected negative LABEL(6,i)")'
                     print '("│ ir, ic = ",i0,", ", i0)', ir, ic
-                    print '("└ @ grasp_cimatrixelements % breit_split E201")'
+                    print '("└ @ grasp_rciqed_cimatrixelements % breit_split E201")'
                     error stop
                 endif
                 breit_core = breit_core + result * COEFF(i)
@@ -550,7 +550,7 @@ contains
                 ! will never be zero.
                 print '("┌ ERROR: Unexpected zero LABEL(6,i)")'
                 print '("│ ir, ic = ",i0,", ", i0)', ir, ic
-                print '("└ @ grasp_cimatrixelements % breit_split E202")'
+                print '("└ @ grasp_rciqed_cimatrixelements % breit_split E202")'
                 error stop
             endif
         enddo
@@ -611,4 +611,4 @@ contains
         end do
     end function qed_se_mohr_cached
 
-end module grasp_cimatrixelements
+end module grasp_rciqed_cimatrixelements

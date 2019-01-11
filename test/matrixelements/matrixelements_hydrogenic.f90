@@ -107,7 +107,7 @@ program matrixelements_hydrogenic
 contains
 
     subroutine verify_dcb(ic, ir, reference)
-        use grasp_cimatrixelements
+        use grasp_rciqed_cimatrixelements
         use grasp_rciqed_kinds, only: real64, dp
         use grasptest_testing, only: reldiff, test_isequal
 
@@ -125,7 +125,7 @@ contains
     end subroutine verify_dcb
 
     subroutine verify_dcbmsvp(ic, ir, reference)
-        use grasp_cimatrixelements
+        use grasp_rciqed_cimatrixelements
         use grasp_rciqed_kinds, only: real64, dp
         use grasptest_testing, only: reldiff, test_isequal
 
@@ -146,7 +146,7 @@ contains
     end subroutine verify_dcbmsvp
 
     subroutine verify_se_mohr(ic, reference)
-        use grasp_cimatrixelements
+        use grasp_rciqed_cimatrixelements
         use grasp_rciqed_kinds, only: real64, dp
         use grasptest_testing, only: reldiff, test_isequal
 
