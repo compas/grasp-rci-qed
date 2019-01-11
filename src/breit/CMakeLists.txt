@@ -1,4 +1,4 @@
-add_library(rci_breit STATIC
+add_library(rciqed-breit STATIC
     breit.f90
     # Legacy code
     bessel.f90 bessel_I.f90
@@ -23,5 +23,5 @@ add_library(rci_breit STATIC
     triangbreit2.f90 triangbreit2_I.f90
     zkf.f90 zkf_I.f90
 )
-setup_fortran_modules(rci_breit)
-target_link_libraries_Fortran(rci_breit PRIVATE mod 9290 rang90)
+setup_fortran_modules(rciqed-breit)
+target_link_libraries_Fortran(rciqed-breit PRIVATE mod 9290 rang90)

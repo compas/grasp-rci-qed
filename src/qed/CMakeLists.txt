@@ -1,4 +1,4 @@
-add_library(rci_qed STATIC
+add_library(rciqed-qed STATIC
     rciqed_qed.f90
     # Legacy code
     ## Vacuum polarization related routines
@@ -17,5 +17,5 @@ add_library(rci_qed STATIC
     qed_slfen.f90 qed_slfen_I.f90
     ratden.f90 ratden_I.f90
 )
-setup_fortran_modules(rci_qed)
-target_link_libraries_Fortran(rci_qed PRIVATE mod 9290 grasp)
+setup_fortran_modules(rciqed-qed)
+target_link_libraries_Fortran(rciqed-qed PRIVATE mod 9290 rciqed-grasp)

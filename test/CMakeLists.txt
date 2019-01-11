@@ -10,12 +10,12 @@ unset(CMAKE_ARCHIVE_OUTPUT_DIRECTORY)
 set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Werror=implicit-procedure -Werror=implicit-interface")
 
 # A library of test helper routines etc.
-add_library(rci-qed.test STATIC
+add_library(rciqed-test STATIC
     lib/testing.f90
 )
-setup_fortran_modules(rci-qed.test)
-target_link_libraries_Fortran(rci-qed.test PUBLIC
-    grasp
+setup_fortran_modules(rciqed-test)
+target_link_libraries_Fortran(rciqed-test PUBLIC
+    rciqed-grasp
 )
 
 # Script-based tests
@@ -43,9 +43,9 @@ add_executable(test.hydrogenic_vp
     hydrogenic_vp.f90
 )
 target_link_libraries_Fortran(test.hydrogenic_vp PUBLIC
-    mod 9290 grasp
-    rci_rci rci_qed
-    rci-qed.tools rci-qed.test
+    mod 9290
+    rciqed-grasp rciqed-rci rciqed-qed
+    rciqed-tools rciqed-test
 )
 add_test(hydrogenic_vp test.hydrogenic_vp)
 
@@ -53,9 +53,9 @@ add_executable(test.hydrogenic_se
     hydrogenic_se.f90
 )
 target_link_libraries_Fortran(test.hydrogenic_se PUBLIC
-    mod 9290 grasp
-    rci_rci rci_qed
-    rci-qed.tools rci-qed.test
+    mod 9290
+    rciqed-grasp rciqed-rci rciqed-qed
+    rciqed-tools rciqed-test
 )
 add_test(hydrogenic_se test.hydrogenic_se)
 
@@ -71,7 +71,8 @@ add_executable(test.toml
     toml/tests.f90
 )
 target_link_libraries_Fortran(test.toml PUBLIC
-    toml rci-qed.test grasp
+    rciqed-grasp rciqed-toml
+    rciqed-test
 )
 add_test(
     NAME toml

@@ -1,4 +1,4 @@
-!>     ./rci.matrixelements <state>
+!>     ./rci-qed.pt <state>
 !!
 !! Performs analysis and perturbative calculation on the RCI state.
 !!
@@ -6,7 +6,7 @@
 !!
 !! Depends on files: `isodata`, `<state>.c`, `<state>.w` and `<state>.cm`
 !!
-program matrixelements
+program rci_qed_pt
     use grasp_kinds, only: real64, dp
     use grasp_lib9290, only: init_isocw_full
     use grasp_lib9290_files, only: load_mixing
@@ -387,4 +387,4 @@ contains
         endif
     end function check
 
-end program matrixelements
+end program rci_qed_pt

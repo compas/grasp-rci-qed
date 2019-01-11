@@ -1,12 +1,10 @@
 add_executable(test.matrixelements_hydrogenic
     matrixelements_hydrogenic.f90
-    ${TEST_SOURCE_DIR}/lib/testing.f90
 )
 target_link_libraries_Fortran(test.matrixelements_hydrogenic PUBLIC
-    mod 9290 grasp
-    rci-qed_matrixelements
-    rci_rci rci_breit rci_qed rci_mass_shifts
-    rci-qed.tools rci-qed.test
+    mod 9290
+    rciqed-grasp rciqed-matrixelements rciqed-rci rciqed-breit rciqed-qed rciqed-mass_shifts
+    rciqed-tools rciqed-test
 )
 add_test(matrixelements_hydrogenic_generate "../../tools/rci-qed.exporthydrogenic")
 add_test(matrixelements_hydrogenic test.matrixelements_hydrogenic)
@@ -22,7 +20,7 @@ add_executable(test.matrixelements_rcisettings_expfloat
     matrixelements_rcisettings_expfloat.f90
 )
 target_link_libraries_Fortran(test.matrixelements_rcisettings_expfloat PUBLIC
-    grasp rci-qed_matrixelements
+    rciqed-grasp rciqed-matrixelements
 )
 add_test(matrixelements_rcisettings_expfloat test.matrixelements_rcisettings_expfloat)
 add_test(NAME matrixelements_rcisettings_expfloat-check
@@ -38,9 +36,10 @@ set_tests_properties(matrixelements_rcisettings_expfloat-check
 
 add_executable(test.matrixelements_rcisettings
     matrixelements_rcisettings.f90
-    ${TEST_SOURCE_DIR}/lib/testing.f90
 )
 target_link_libraries_Fortran(test.matrixelements_rcisettings PUBLIC
-    mod grasp rci-qed_matrixelements
+    mod
+    rciqed-grasp rciqed-matrixelements
+    rciqed-test
 )
 add_test(matrixelements_rcisettings test.matrixelements_rcisettings)

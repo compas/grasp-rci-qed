@@ -12,17 +12,16 @@ add_executable(rci-qed
 )
 target_link_libraries_Fortran(rci-qed PUBLIC
     mod 9290 mpi90
-    rci_rci rci-qed_matrixelements
+    rciqed-rci rciqed-matrixelements
 )
 install(TARGETS rci-qed DESTINATION bin/)
 
 # rci-qed.matrixelements
-add_executable(rci-qed.matrixelements
-    matrixelements.f90
+add_executable(rci-qed.pt
+    pt.f90
 )
-target_link_libraries_Fortran(rci-qed.matrixelements PUBLIC
+target_link_libraries_Fortran(rci-qed.pt PUBLIC
     mod 9290 rang90
-    grasp rci_rci rci_breit rci_qed rci_mass_shifts
-    rci-qed_matrixelements
+    rciqed-grasp rciqed-rci rciqed-breit rciqed-qed rciqed-mass_shifts rciqed-matrixelements
 )
-install(TARGETS rci-qed.matrixelements DESTINATION bin/)
+install(TARGETS rci-qed.pt DESTINATION bin/)

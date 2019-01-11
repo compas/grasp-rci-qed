@@ -1,4 +1,4 @@
-add_library(rci_rci
+add_library(rciqed-rci
     rciqed.f90
     # Cleaned up legacy code
     setham.f90
@@ -30,8 +30,8 @@ add_library(rci_rci
     triangrk.f90 triangrk_I.f90
     wghtd5.f90 wghtd5_I.f90
 )
-setup_fortran_modules(rci_rci)
-target_link_libraries_Fortran(rci_rci PRIVATE
+setup_fortran_modules(rciqed-rci)
+target_link_libraries_Fortran(rciqed-rci PRIVATE
     mod 9290 rang90 mpi90 dvd90
-    rci_breit rci_qed rci_mass_shifts rci-qed_matrixelements
+    rciqed-breit rciqed-qed rciqed-mass_shifts rciqed-matrixelements
 )
