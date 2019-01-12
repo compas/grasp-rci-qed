@@ -1,0 +1,23 @@
+[nucleus]
+  Z = 74.0000000000000000
+  atomic_mass_amu = 183.8697413743560105
+  nuclear_model = "fermi"
+  #fermi_a: 0.5233875553104315E+00
+  fermi_a = 0.5233875553104315e0
+  #fermi_c: 0.6399214828878925E+01
+  fermi_c = 0.6399214828878925e1
+[grid]
+  RNT = 0.2702702702702702e-7
+  #R: 0.2702702702702702E-07 # = 2e-6 / Z
+  H = 0.5000000000000000e-1
+  #H: 0.5000000000000000E-01
+  N = 590
+[hamiltonian]
+  # Contains the following booleans:
+  #   breit, nms, sms, qed_vp, qed_se
+  # Indicating if the corresponding part of the Hamiltonian
+  # was enabled. If it is omitted, it is assumed to have been off.
+  nms = true
+  sms = true
+  qed_vp = true
+  qed_se = true

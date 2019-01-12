@@ -7,9 +7,11 @@ if [ -z ${GRASP_BUILD_BINDIR+x} ]; then >&2 echo "ERROR: \$GRASP_BUILD_BINDIR va
 if [ -z ${GRASP_EXPORTHYDROGENIC+x} ]; then >&2 echo "ERROR: \$GRASP_EXPORTHYDROGENIC variable is unset."; exit 1; fi
 if ! [ -f ${GRASP_EXPORTHYDROGENIC} ]; then >&2 echo "ERROR: \$GRASP_EXPORTHYDROGENIC not pointing to a file."; exit 1; fi
 
-# We'll need to locate the rci-qed binary
+# We'll need to locate the rci-qed and rci-qed.pt binaries
 RCIQED=`find-grasp-binary rci-qed` || exit
 echo "INFO: RCIQED=${RCIQED}"
+RCIQEDPT=`find-grasp-binary rci-qed.pt` || exit
+echo "INFO: RCIQEDPT=${RCIQEDPT}"
 
 # Get the configuration -- the first argument, and check that input files exist
 if [ "$1" == "--update" ]; then
@@ -75,16 +77,34 @@ mpirun -n ${GRASP_MPI_NPROCS} --output-filename stdout ${RCIQED} < rci.input || 
 >&2 echo "INFO: Cleanup:" && rm -Rv "${MPI_TMP}"
 >&2 echo "${RCIQED} ran successfully!"
 
-# Verify the ouput
->&2 echo "INFO: Diffing test.csum"
-diff ${TEST_DIR}/test.csum.reference test.csum || {
-	>&2 echo "ERROR: There are differences in test.csum"
-	if [ "$UPDATE_MODE" == "true" ]; then
-		>&2 echo "INFO: updating ${TEST_DIR}/test.csum.reference"
-		mv test.csum ${TEST_DIR}/test.csum.reference
-	fi
+# Run rci-qed.pt
+>&2 echo "INFO: Running ${RCIQEDPT}"
+${RCIQEDPT} test 2>&1 | tee rci-qed.pt.stdout
+if ! [ "${PIPESTATUS[0]}" == "0" ]; then
+	>&2 echo "FATAL ERROR: rci-qed.pt failed with ${PIPESTATUS[0]}"
 	exit 1
+fi
+>&2 echo "${RCIQEDPT} ran successfully!"
+
+# Verify the ouput
+function verify_file {
+	filename=$1
+	>&2 echo "INFO: Diffing ${filename}"
+	diff "${TEST_DIR}/${filename}.reference" "${filename}" || {
+		>&2 echo "ERROR: There are differences in ${filename}"
+		if [ "$UPDATE_MODE" == "true" ]; then
+			>&2 echo "INFO: updating ${TEST_DIR}/${filename}.reference"
+			mv "${filename}" "${TEST_DIR}/${filename}.reference"
+		else
+			exit 1
+		fi
+	}
 }
+
+verify_file "test.csum"
+verify_file "test.settings.toml"
+verify_file "rci-qed.pt.stdout"
+
 
 # TODO: Also diff stdout. But it has (1) timing information, which is not
 # deterministic, and (2) the MPI temporary directory is non-deterministic at
