@@ -1,0 +1,9 @@
+<map id="cpptoml::parser::parse_number" name="cpptoml::parser::parse_number">
+<area shape="rect" id="node2" href="$classcpptoml_1_1parser.html#a776744b1c13e791ccd9adcb33997a61b" title="cpptoml::parser::find\l_end_of_number" alt="" coords="221,5,363,46"/>
+<area shape="rect" id="node3" href="$namespacecpptoml.html#a5e79389ffd4c8d77d5518d4bb6ed83c3" title="cpptoml::is_number" alt="" coords="435,71,571,97"/>
+<area shape="rect" id="node4" href="$classcpptoml_1_1parser.html#a41e95ebcda5c2dcb1758ae2ed3f4e7b6" title="cpptoml::parser::throw\l_parse_exception" alt="" coords="427,215,579,257"/>
+<area shape="rect" id="node5" href="$namespacecpptoml.html#a8920dd98d64555bc47a96593a1a07989" title="cpptoml::is_hex" alt="" coords="235,121,349,148"/>
+<area shape="rect" id="node6" href="$classcpptoml_1_1parser.html#adfd25bc8093162e45794b203e667c348" title="cpptoml::parser::parse_int" alt="" coords="205,223,379,249"/>
+<area shape="rect" id="node7" href="$namespacecpptoml.html#acaf82cf5747e83b7f43224fd68826831" title="cpptoml::make_value" alt="" coords="219,273,365,300"/>
+<area shape="rect" id="node8" href="$classcpptoml_1_1parser.html#abc42822bd30487b620bcd2c74f1f8612" title="cpptoml::parser::parse\l_float" alt="" coords="216,325,368,366"/>
+</map>

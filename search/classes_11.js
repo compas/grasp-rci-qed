@@ -1,11 +1,19 @@
 var searchData=
 [
-  ['talk',['talk',['../interfacetalk__i_1_1talk.html',1,'talk_i']]],
-  ['talk_5fi',['talk_i',['../classtalk__i.html',1,'']]],
-  ['triangbreit1',['TRIANGBREIT1',['../interfacetriangbreit1__i_1_1TRIANGBREIT1.html',1,'triangbreit1_i']]],
-  ['triangbreit1_5fi',['triangbreit1_i',['../classtriangbreit1__i.html',1,'']]],
-  ['triangbreit2',['TRIANGBREIT2',['../interfacetriangbreit2__i_1_1TRIANGBREIT2.html',1,'triangbreit2_i']]],
-  ['triangbreit2_5fi',['triangbreit2_i',['../classtriangbreit2__i.html',1,'']]],
-  ['triangrk',['triangrk',['../interfacetriangrk__i_1_1triangrk.html',1,'triangrk_i']]],
-  ['triangrk_5fi',['triangrk_i',['../classtriangrk__i.html',1,'']]]
+  ['setdbg',['setdbg',['../interfacesetdbg__i_1_1setdbg.html',1,'setdbg_i']]],
+  ['setdbg_5fi',['setdbg_i',['../classsetdbg__i.html',1,'']]],
+  ['setham_5fi',['setham_i',['../classsetham__i.html',1,'']]],
+  ['setmixmpi',['setmixmpi',['../interfacesetmixmpi__i_1_1setmixmpi.html',1,'setmixmpi_i']]],
+  ['setmixmpi_5fi',['setmixmpi_i',['../classsetmixmpi__i.html',1,'']]],
+  ['setres',['setres',['../interfacesetres__i_1_1setres.html',1,'setres_i']]],
+  ['setres_5fi',['setres_i',['../classsetres__i.html',1,'']]],
+  ['setsum',['setsum',['../interfacesetsum__i_1_1setsum.html',1,'setsum_i']]],
+  ['setsum_5fi',['setsum_i',['../classsetsum__i.html',1,'']]],
+  ['skint',['skint',['../interfaceskint__i_1_1skint.html',1,'skint_i']]],
+  ['skint_5fi',['skint_i',['../classskint__i.html',1,'']]],
+  ['spodmv',['spodmv',['../interfacespodmv__i_1_1spodmv.html',1,'spodmv_i']]],
+  ['spodmv_5fi',['spodmv_i',['../classspodmv__i.html',1,'']]],
+  ['string_5fdelete_5f',['string_delete_',['../interfacegrasp__rciqed__toml_1_1string__delete__.html',1,'grasp_rciqed_toml']]],
+  ['strsum',['strsum',['../interfacestrsum__i_1_1strsum.html',1,'strsum_i']]],
+  ['strsum_5fi',['strsum_i',['../classstrsum__i.html',1,'']]]
 ];

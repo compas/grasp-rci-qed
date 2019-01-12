@@ -1,0 +1,9 @@
+<map id="cpptoml::parser::determine_value_type" name="cpptoml::parser::determine_value_type">
+<area shape="rect" id="node2" href="$classcpptoml_1_1parser.html#a41e95ebcda5c2dcb1758ae2ed3f4e7b6" title="cpptoml::parser::throw\l_parse_exception" alt="" coords="464,5,616,46"/>
+<area shape="rect" id="node3" href="$classcpptoml_1_1parser.html#a9e265bbaf0bc02260ce53bc760efb05b" title="cpptoml::parser::is_time" alt="" coords="459,127,621,153"/>
+<area shape="rect" id="node5" href="$namespacecpptoml.html#a5e79389ffd4c8d77d5518d4bb6ed83c3" title="cpptoml::is_number" alt="" coords="859,188,995,215"/>
+<area shape="rect" id="node6" href="$classcpptoml_1_1parser.html#a99f832a76682b58058ed1b334c3f4ee6" title="cpptoml::parser::date_type" alt="" coords="233,180,410,207"/>
+<area shape="rect" id="node8" href="$classcpptoml_1_1parser.html#ab6cd7c81c666553e78071280336bc6e2" title="cpptoml::parser::determine\l_number_type" alt="" coords="233,63,410,105"/>
+<area shape="rect" id="node4" href="$classcpptoml_1_1parser.html#a7438d26980b0d56bf3bd01ec23d9b4c0" title="cpptoml::parser::find\l_end_of_time" alt="" coords="669,147,811,189"/>
+<area shape="rect" id="node7" href="$classcpptoml_1_1parser.html#a681b6fa73c1c6667b36dbe8fc3dceb9d" title="cpptoml::parser::find\l_end_of_date" alt="" coords="669,213,811,254"/>
+</map>

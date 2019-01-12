@@ -1,4 +1,0 @@
-<map id="grasp_cimatrixelements::qed_se_mohr::qed_se_mohr_cached" name="grasp_cimatrixelements::qed_se_mohr::qed_se_mohr_cached">
-<area shape="rect" id="node2" href="$classgrasp__cimatrixelements.html#a11f8e254f7d3b90d7fd24d9f6430e5f2" title="This version initializes the slfint array, which contains the per&#45;orbital self&#45;energy contributions..." alt="" coords="213,5,373,46"/>
-<area shape="rect" id="node3" href="$classgrasp__cimatrixelements.html#a2e0dba6361c9e1a2cbeeb0f933b2182c" title="Calculates the QED contribution to a CI diagonal element using the orbital self&#45;energy values in the ..." alt="" coords="213,70,373,111"/>
-</map>

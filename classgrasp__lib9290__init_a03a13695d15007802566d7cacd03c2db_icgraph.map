@@ -1,6 +1,0 @@
-<map id="grasp_lib9290_init::lib9290_init_grid" name="grasp_lib9290_init::lib9290_init_grid">
-<area shape="rect" id="node2" href="$classgrasp__lib9290__files.html#a26a079e6264b3428cc85be7db6ad245c" title="Loads the nuclear data and initializes the grid and the nuclear model. " alt="" coords="196,5,329,46"/>
-<area shape="rect" id="node5" href="$classgrasptest__lib9290__setup.html#a52f6ff712b40031699cf68122ae02d99" title="Call all the setup routines to set up parts of the lib9290 global state for a point nucleus with char..." alt="" coords="181,70,344,111"/>
-<area shape="rect" id="node3" href="$classgrasp__lib9290.html#a398491464ff065dd7a5728868c9f31e4" title="Initializes the GRASP global state based on the input files. " alt="" coords="393,5,519,46"/>
-<area shape="rect" id="node4" href="$matrixelements_8f90.html#abd96acc41708554a4f0e1a85a37a6a8c" title="./rci.matrixelements &lt;state&gt; " alt="" coords="569,12,679,39"/>
-</map>

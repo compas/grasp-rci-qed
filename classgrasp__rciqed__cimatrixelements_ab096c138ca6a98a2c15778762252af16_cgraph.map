@@ -1,0 +1,4 @@
+<map id="grasp_rciqed_cimatrixelements::coulomb" name="grasp_rciqed_cimatrixelements::coulomb">
+<area shape="rect" id="node2" href="$classgrasp__rciqed__cimatrixelements.html#a1381b29b99c6e09de32b44903f5a1466" title="Assumes that buffer_C is set up properly by RKCO_GG. " alt="" coords="256,5,459,46"/>
+<area shape="rect" id="node3" href="$classgrasp__rciqed__cimatrixelements.html#a488d680a837588eb535c9ec496c4f350" title="Calls the RKINTC, but makes sure that the input LABEL values do not get changed. " alt="" coords="507,5,709,46"/>
+</map>

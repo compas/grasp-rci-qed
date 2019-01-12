@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['base',['base',['../classcpptoml_1_1base.html',1,'cpptoml']]],
   ['bessel',['bessel',['../interfacebessel__i_1_1bessel.html',1,'bessel_i']]],
   ['bessel_5fi',['bessel_i',['../classbessel__i.html',1,'']]],
   ['breid',['breid',['../interfacebreid__i_1_1breid.html',1,'breid_i']]],

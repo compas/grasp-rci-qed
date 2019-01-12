@@ -1,5 +1,16 @@
 var searchData=
 [
+  ['offset_5fdatetime',['offset_datetime',['../structcpptoml_1_1offset__datetime.html',1,'cpptoml']]],
+  ['offset_5fdatetime',['OFFSET_DATETIME',['../classcpptoml_1_1parser.html#a7dac457d50581a0bc5b824dd3624ac21ab309aac5542484be4acec8f3ce12a697',1,'cpptoml::parser']]],
+  ['on_5ferror_5f',['on_error_',['../classcpptoml_1_1consumer.html#a44c71f951ac17f0d0d042e3a140274a3',1,'cpptoml::consumer']]],
+  ['operator_20bool',['operator bool',['../classcpptoml_1_1option.html#aa998dd9a8d47d8993023c2abeb13073f',1,'cpptoml::option']]],
+  ['operator_28_29',['operator()',['../classcpptoml_1_1consumer.html#aab5a5278301bc40bfbf39a8a88556ceb',1,'cpptoml::consumer::operator()(char c)'],['../classcpptoml_1_1consumer.html#a94bdfbc70ba9a61003f9084434156db4',1,'cpptoml::consumer::operator()(const char(&amp;str)[N])']]],
+  ['operator_2a',['operator*',['../classcpptoml_1_1option.html#aafdd351ec295bd6ca25d9ff5ceee7771',1,'cpptoml::option']]],
+  ['operator_2d_3e',['operator-&gt;',['../classcpptoml_1_1option.html#af7f0ecd5d44b4b99b484ef56fdb2415a',1,'cpptoml::option']]],
+  ['operator_3c_3c',['operator&lt;&lt;',['../namespacecpptoml.html#ab64f9befa78c9faf0c201499f4544605',1,'cpptoml::operator&lt;&lt;(std::ostream &amp;os, const local_date &amp;dt)'],['../namespacecpptoml.html#a8781e4b45b1b98128d2b29195d510c2f',1,'cpptoml::operator&lt;&lt;(std::ostream &amp;os, const local_time &amp;ltime)'],['../namespacecpptoml.html#aa9a2e060c7a07a97089fe4540642f301',1,'cpptoml::operator&lt;&lt;(std::ostream &amp;os, const zone_offset &amp;zo)'],['../namespacecpptoml.html#a392ac7da307d76f7861e0f448af7acc5',1,'cpptoml::operator&lt;&lt;(std::ostream &amp;os, const local_datetime &amp;dt)'],['../namespacecpptoml.html#a07df4ecf7eb86c669ec6a972551cadb8',1,'cpptoml::operator&lt;&lt;(std::ostream &amp;os, const offset_datetime &amp;dt)'],['../namespacecpptoml.html#a96288c878af8b297a66e2839b7ff4db5',1,'cpptoml::operator&lt;&lt;(std::ostream &amp;stream, const base &amp;b)'],['../namespacecpptoml.html#a074d8ac1666d8ce2b2f727581c05ec12',1,'cpptoml::operator&lt;&lt;(std::ostream &amp;stream, const value&lt; T &gt; &amp;v)'],['../namespacecpptoml.html#a210a7b74fe1be0a49ff840c9a57d827a',1,'cpptoml::operator&lt;&lt;(std::ostream &amp;stream, const table &amp;t)'],['../namespacecpptoml.html#a019ffb17408735059607e8b5f882af18',1,'cpptoml::operator&lt;&lt;(std::ostream &amp;stream, const table_array &amp;t)'],['../namespacecpptoml.html#aabffb373a70d10dcd48029307d33df30',1,'cpptoml::operator&lt;&lt;(std::ostream &amp;stream, const array &amp;a)']]],
+  ['operator_3d',['operator=',['../classcpptoml_1_1value.html#a4a16c1ea47727badf1666cc602ab8e5c',1,'cpptoml::value::operator=()'],['../classcpptoml_1_1array.html#af96555fb82daa323ad7294a02185f2ce',1,'cpptoml::array::operator=()'],['../classcpptoml_1_1table__array.html#ab82bf1578d53af23ec5c9d62e862364b',1,'cpptoml::table_array::operator=()'],['../classcpptoml_1_1table.html#a714073da9797bacee5ddaf34f3f1d973',1,'cpptoml::table::operator=()'],['../classcpptoml_1_1parser.html#a36444a1ca0500e33a38627252a12730a',1,'cpptoml::parser::operator=()']]],
+  ['option',['option',['../classcpptoml_1_1option.html#a650485b170f84667faff4e5ccd85dc32',1,'cpptoml::option::option()'],['../classcpptoml_1_1option.html#ab21e9036f5f6b058a2851c0cac3fcc83',1,'cpptoml::option::option(T value)']]],
+  ['option',['option',['../classcpptoml_1_1option.html',1,'cpptoml']]],
   ['orbital_5fdefinition',['orbital_definition',['../structgrasptest__lib9290__hydrogenic_1_1orbital__definition.html',1,'grasptest_lib9290_hydrogenic']]],
   ['orbital_5fkappa',['orbital_kappa',['../structorbital__reference.html#a685135beaa0ec0877b85e9c9f8dd0456',1,'orbital_reference']]],
   ['orbital_5fn',['orbital_n',['../structorbital__reference.html#a80f35c9e8ecea53fef312003d9c65273',1,'orbital_reference']]],
@@ -9,5 +20,6 @@ var searchData=
   ['orbout_2ef90',['orbout.f90',['../orbout_8f90.html',1,'']]],
   ['orbout_5fi',['orbout_i',['../classorbout__i.html',1,'']]],
   ['orbout_5fi_2ef90',['orbout_I.f90',['../orbout__I_8f90.html',1,'']]],
+  ['os_5f',['os_',['../classcpptoml_1_1fill__guard.html#ab0f734b06d96ae33735ce8047d8bd70e',1,'cpptoml::fill_guard']]],
   ['oxygen_2ec',['oxygen.c',['../oxygen_8c.html',1,'']]]
 ];

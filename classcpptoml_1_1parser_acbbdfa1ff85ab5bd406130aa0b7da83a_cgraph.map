@@ -1,0 +1,5 @@
+<map id="cpptoml::parser::skip_whitespace_and_comments" name="cpptoml::parser::skip_whitespace_and_comments">
+<area shape="rect" id="node2" href="$classcpptoml_1_1parser.html#a653d8cd4fffce5aa1682e39388259ffa" title="cpptoml::parser::consume\l_whitespace" alt="" coords="245,5,419,46"/>
+<area shape="rect" id="node3" href="$namespacecpptoml_1_1detail.html#a3d07d1cff6567b9981f84f9247623af3" title="cpptoml::detail::getline" alt="" coords="255,71,409,97"/>
+<area shape="rect" id="node4" href="$classcpptoml_1_1parser.html#a41e95ebcda5c2dcb1758ae2ed3f4e7b6" title="cpptoml::parser::throw\l_parse_exception" alt="" coords="256,122,408,163"/>
+</map>

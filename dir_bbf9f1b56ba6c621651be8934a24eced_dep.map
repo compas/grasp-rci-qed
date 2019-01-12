@@ -1,10 +1,13 @@
 <map id="test/integration" name="test/integration">
-<area shape="rect" id="node2" href="dir_1f34237474be5b651dfc7bd500f57ff7.html" title="T1" alt="" coords="517,63,589,111"/>
-<area shape="rect" id="node3" href="dir_4511d8caa7ed47f5ca45a5343ad4b7d8.html" title="T2" alt="" coords="421,63,493,111"/>
-<area shape="rect" id="node4" href="dir_11a0ae962a396312462cd64f67d03274.html" title="T3" alt="" coords="325,63,397,111"/>
-<area shape="rect" id="node5" href="dir_ec2217ceb4b45085c41bc4e66062f673.html" title="T4" alt="" coords="229,63,301,111"/>
-<area shape="rect" id="node6" href="dir_280eb87023b7908b85f7f83ae43feace.html" title="T5" alt="" coords="133,63,205,111"/>
-<area shape="rect" id="node7" href="dir_eed0dfa53b834867c76f8cdaad9945be.html" title="T6" alt="" coords="37,63,109,111"/>
-<area shape="rect" id="clust2" href="dir_bbf9f1b56ba6c621651be8934a24eced.html" alt="" coords="27,52,707,121"/>
-<area shape="rect" id="clust1" href="dir_13e138d54eb8818da29c3992edef070a.html" title="test" alt="" coords="16,16,717,132"/>
+<area shape="rect" id="node2" href="dir_1f34237474be5b651dfc7bd500f57ff7.html" title="T1" alt="" coords="805,63,877,111"/>
+<area shape="rect" id="node3" href="dir_4511d8caa7ed47f5ca45a5343ad4b7d8.html" title="T2" alt="" coords="709,63,781,111"/>
+<area shape="rect" id="node4" href="dir_11a0ae962a396312462cd64f67d03274.html" title="T3" alt="" coords="613,63,685,111"/>
+<area shape="rect" id="node5" href="dir_ec2217ceb4b45085c41bc4e66062f673.html" title="T4" alt="" coords="517,63,589,111"/>
+<area shape="rect" id="node6" href="dir_280eb87023b7908b85f7f83ae43feace.html" title="T5" alt="" coords="421,63,493,111"/>
+<area shape="rect" id="node7" href="dir_eed0dfa53b834867c76f8cdaad9945be.html" title="T6" alt="" coords="325,63,397,111"/>
+<area shape="rect" id="node8" href="dir_ff3134d0508587663e20ddec7c8f3d8b.html" title="T6b" alt="" coords="229,63,301,111"/>
+<area shape="rect" id="node9" href="dir_c633ce811289c147e84e9ac711c8c4b4.html" title="T7" alt="" coords="133,63,205,111"/>
+<area shape="rect" id="node10" href="dir_969cbb55033e9381425dc36938dca459.html" title="T8" alt="" coords="37,63,109,111"/>
+<area shape="rect" id="clust2" href="dir_bbf9f1b56ba6c621651be8934a24eced.html" alt="" coords="27,52,995,121"/>
+<area shape="rect" id="clust1" href="dir_13e138d54eb8818da29c3992edef070a.html" title="test" alt="" coords="16,16,1005,132"/>
 </map>

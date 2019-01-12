@@ -1,0 +1,6 @@
+<map id="cpptoml::offset_datetime" name="cpptoml::offset_datetime">
+<area shape="rect" id="node2" href="$structcpptoml_1_1local__datetime.html" title="cpptoml::local_datetime" alt="" coords="71,80,229,107"/>
+<area shape="rect" id="node3" href="$structcpptoml_1_1local__date.html" title="cpptoml::local_date" alt="" coords="5,5,139,32"/>
+<area shape="rect" id="node4" href="$structcpptoml_1_1local__time.html" title="cpptoml::local_time" alt="" coords="163,5,297,32"/>
+<area shape="rect" id="node5" href="$structcpptoml_1_1zone__offset.html" title="cpptoml::zone_offset" alt="" coords="255,80,399,107"/>
+</map>

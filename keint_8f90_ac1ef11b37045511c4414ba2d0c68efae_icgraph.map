@@ -1,9 +1,4 @@
 <map id="keint" name="keint">
-<area shape="rect" id="node2" href="$classgrasp__cimatrixelements.html#a79a2312d7330ecec2e29568444dadd80" title="Calls the KEINT routine, but ensures that the input k and l arguments do not get swapped. " alt="" coords="104,5,264,46"/>
-<area shape="rect" id="node7" href="$setham__gg_8f90.html#a167f4b5b022ccc0a3e4d03148d8d392a" title="setham" alt="" coords="151,71,217,97"/>
-<area shape="rect" id="node3" href="$classgrasp__cimatrixelements.html#a3841fefe14781216e89b37dab22f778b" title="grasp_cimatrixelements\l::nms_cached" alt="" coords="312,5,472,46"/>
-<area shape="rect" id="node4" href="$classgrasp__cimatrixelements.html#a31a92dfa6ba603ab5f93fe72919e8bdd" title="grasp_cimatrixelements::nms" alt="" coords="521,12,714,39"/>
-<area shape="rect" id="node5" href="$matrixelements__hydrogenic_8f90.html#ac70bf8550a5bb3dfbde6e060ddd7f222" title="verify_dcbmsvp" alt="" coords="763,12,877,39"/>
-<area shape="rect" id="node6" href="$matrixelements__hydrogenic_8f90.html#a3d6dd33862b729ae9e2363184220ca6a" title="matrixelements_hydrogenic" alt="" coords="925,12,1107,39"/>
-<area shape="rect" id="node8" href="$genmat_8f90.html#a32eb33778b36295326eaf91bc5e269f8" title="genmat" alt="" coords="359,71,425,97"/>
+<area shape="rect" id="node2" href="$classgrasp__rciqed__cimatrixelements.html#a65f82164b704df6518c7a98752896522" title="Calls the KEINT routine, but ensures that the input k and l arguments do not get swapped. " alt="" coords="104,5,307,46"/>
+<area shape="rect" id="node3" href="$classgrasp__rciqed__cimatrixelements.html#ac3cbfdc998668a328e2cacbcc67db491" title="The ONESCALAR output has to be passed as arguments here. " alt="" coords="355,5,557,46"/>
 </map>

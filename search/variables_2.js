@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['diracpot',['diracpot',['../structmatrixelement.html#a876ee288c8902996e8fed9d01947f861',1,'matrixelement']]],
-  ['dp',['dp',['../classgrasp__kinds.html#a93023cb6b38a0587fbe4b9b96e953e74',1,'grasp_kinds']]]
+  ['coulomb',['coulomb',['../structmatrixelement.html#a95d05e3b3680fc3a0f91eaabb6b1be78',1,'matrixelement']]],
+  ['cutoff',['cutoff',['../classgrasp__rciqed__cimatrixelements.html#a966d8e86d7191b1b33dcc6f0fea21008',1,'grasp_rciqed_cimatrixelements']]]
 ];

@@ -1,19 +1,14 @@
 var searchData=
 [
-  ['setdbg_2ef90',['setdbg.f90',['../setdbg_8f90.html',1,'']]],
-  ['setdbg_5fi_2ef90',['setdbg_I.f90',['../setdbg__I_8f90.html',1,'']]],
-  ['setham_5fgg_2ef90',['setham_gg.f90',['../setham__gg_8f90.html',1,'']]],
-  ['setham_5fgg_5fi_2ef90',['setham_gg_I.f90',['../setham__gg__I_8f90.html',1,'']]],
-  ['setmixmpi_2ef90',['setmixmpi.f90',['../setmixmpi_8f90.html',1,'']]],
-  ['setmixmpi_5fi_2ef90',['setmixmpi_I.f90',['../setmixmpi__I_8f90.html',1,'']]],
-  ['setres_2ef90',['setres.f90',['../setres_8f90.html',1,'']]],
-  ['setres_5fi_2ef90',['setres_I.f90',['../setres__I_8f90.html',1,'']]],
-  ['setsum_2ef90',['setsum.f90',['../setsum_8f90.html',1,'']]],
-  ['setsum_5fi_2ef90',['setsum_I.f90',['../setsum__I_8f90.html',1,'']]],
-  ['skint_2ef90',['skint.f90',['../skint_8f90.html',1,'']]],
-  ['skint_5fi_2ef90',['skint_I.f90',['../skint__I_8f90.html',1,'']]],
-  ['spodmv_2ef90',['spodmv.f90',['../spodmv_8f90.html',1,'']]],
-  ['spodmv_5fi_2ef90',['spodmv_I.f90',['../spodmv__I_8f90.html',1,'']]],
-  ['strsum_2ef90',['strsum.f90',['../strsum_8f90.html',1,'']]],
-  ['strsum_5fi_2ef90',['strsum_I.f90',['../strsum__I_8f90.html',1,'']]]
+  ['ratden_2ef90',['ratden.f90',['../ratden_8f90.html',1,'']]],
+  ['ratden_5fi_2ef90',['ratden_I.f90',['../ratden__I_8f90.html',1,'']]],
+  ['rci_2dqed_2ef90',['rci-qed.f90',['../rci-qed_8f90.html',1,'']]],
+  ['rciqed_2ef90',['rciqed.f90',['../rciqed_8f90.html',1,'']]],
+  ['rciqed_5fqed_2ef90',['rciqed_qed.f90',['../rciqed__qed_8f90.html',1,'']]],
+  ['rcisettings_2ef90',['rcisettings.f90',['../rcisettings_8f90.html',1,'']]],
+  ['readme_2emd',['README.md',['../README_8md.html',1,'']]],
+  ['rkint_2ef90',['rkint.f90',['../rkint_8f90.html',1,'']]],
+  ['rkint_5fi_2ef90',['rkint_I.f90',['../rkint__I_8f90.html',1,'']]],
+  ['rkintc_2ef90',['rkintc.f90',['../rkintc_8f90.html',1,'']]],
+  ['rkintc_5fi_2ef90',['rkintc_I.f90',['../rkintc__I_8f90.html',1,'']]]
 ];

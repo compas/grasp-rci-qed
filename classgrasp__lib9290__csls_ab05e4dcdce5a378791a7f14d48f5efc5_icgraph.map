@@ -1,6 +1,0 @@
-<map id="grasp_lib9290_csls::count_blocks" name="grasp_lib9290_csls::count_blocks">
-<area shape="rect" id="node2" href="$classgrasp__lib9290__files.html#a060b29b90ea1cc1f0816378d1cac7787" title="Loads a configuration state list (CSL) files (typically either rcsf.inp or *.c). " alt="" coords="187,34,320,75"/>
-<area shape="rect" id="node3" href="$classgrasp__lib9290.html#a398491464ff065dd7a5728868c9f31e4" title="Initializes the GRASP global state based on the input files. " alt="" coords="395,5,522,46"/>
-<area shape="rect" id="node5" href="$matrixelements__hydrogenic_8f90.html#a3d6dd33862b729ae9e2363184220ca6a" title="matrixelements_hydrogenic" alt="" coords="368,71,549,97"/>
-<area shape="rect" id="node4" href="$matrixelements_8f90.html#abd96acc41708554a4f0e1a85a37a6a8c" title="./rci.matrixelements &lt;state&gt; " alt="" coords="598,12,709,39"/>
-</map>

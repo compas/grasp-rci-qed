@@ -1,9 +1,4 @@
 <map id="vpint" name="vpint">
-<area shape="rect" id="node2" href="$classgrasp__cimatrixelements.html#a9fc96e0c97471b7391dc931c0d037f6a" title="Calls the VPINT routine, but ensures that the input k and l arguments do not get swapped. " alt="" coords="104,5,264,46"/>
-<area shape="rect" id="node7" href="$setham__gg_8f90.html#a167f4b5b022ccc0a3e4d03148d8d392a" title="setham" alt="" coords="151,71,217,97"/>
-<area shape="rect" id="node3" href="$classgrasp__cimatrixelements.html#aa7f94afb7a420959900bb9cf1dc99f98" title="grasp_cimatrixelements\l::qed_vp_cached" alt="" coords="312,5,472,46"/>
-<area shape="rect" id="node4" href="$classgrasp__cimatrixelements.html#aa967fa07b3a8c80d5c62f1351ed2c72a" title="grasp_cimatrixelements\l::qed_vp" alt="" coords="520,5,680,46"/>
-<area shape="rect" id="node5" href="$matrixelements__hydrogenic_8f90.html#ac70bf8550a5bb3dfbde6e060ddd7f222" title="verify_dcbmsvp" alt="" coords="728,12,843,39"/>
-<area shape="rect" id="node6" href="$matrixelements__hydrogenic_8f90.html#a3d6dd33862b729ae9e2363184220ca6a" title="matrixelements_hydrogenic" alt="" coords="891,12,1072,39"/>
-<area shape="rect" id="node8" href="$genmat_8f90.html#a32eb33778b36295326eaf91bc5e269f8" title="genmat" alt="" coords="359,71,425,97"/>
+<area shape="rect" id="node2" href="$classgrasp__rciqed__cimatrixelements.html#a390bfdae10ded08afc4e7223f29d8ba5" title="Calls the VPINT routine, but ensures that the input k and l arguments do not get swapped. " alt="" coords="104,5,307,46"/>
+<area shape="rect" id="node3" href="$classgrasp__rciqed__cimatrixelements.html#a482f154b79cf06803a2ce754e275a04d" title="The ONESCALAR output has to be passed as arguments here. " alt="" coords="355,5,557,46"/>
 </map>
