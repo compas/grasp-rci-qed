@@ -9,7 +9,6 @@ var searchData=
   ['rci90mpi',['rci90mpi',['../rci-qed_8f90.html#a8eeee1dd6d149c94af2cdde0c4e733c6',1,'rci-qed.f90']]],
   ['rci_5fqed_5fpt',['rci_qed_pt',['../pt_8f90.html#a5d0a61dea29614076614dde84eedd280',1,'pt.f90']]],
   ['rciqed_2ef90',['rciqed.f90',['../rciqed_8f90.html',1,'']]],
-  ['rciqed_5fqed_2ef90',['rciqed_qed.f90',['../rciqed__qed_8f90.html',1,'']]],
   ['rcisettings',['rcisettings',['../structgrasp__rciqed__rcisettings_1_1rcisettings.html',1,'grasp_rciqed_rcisettings']]],
   ['rcisettings_2ef90',['rcisettings.f90',['../rcisettings_8f90.html',1,'']]],
   ['read_5fsettings_5ftoml',['read_settings_toml',['../classgrasp__rciqed__rcisettings.html#a77db53ade651dafa4290882b95d71510',1,'grasp_rciqed_rcisettings']]],
