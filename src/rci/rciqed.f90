@@ -1,5 +1,7 @@
-!> Types and routines for RCI.
+!> Types, routines and global variables for RCI.
 module grasp_rciqed
+    use grasp_rciqed_kinds, only: real64
+    use parameter_def, only: NNNW
     implicit none
 
     !> I/O unit of the `.res` file.
@@ -9,6 +11,9 @@ module grasp_rciqed
     !! allowed and `newunit=` never returns a `-1`; i.e. it is never possible
     !! to write to `unit = -1`).
     integer :: res_unit = -1
+
+    integer :: setype
+    real(real64) :: sematrix(NNNW,NNNW)
 
 contains
 

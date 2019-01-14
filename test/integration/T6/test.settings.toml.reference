@@ -14,10 +14,19 @@
   N = 590
 [hamiltonian]
   # Contains the following booleans:
-  #   breit, nms, sms, qed_vp, qed_se
-  # Indicating if the corresponding part of the Hamiltonian
+  #   breit, nms, sms, qed_vp
+  # Each indicates if the corresponding part of the Hamiltonian
   # was enabled. If it is omitted, it is assumed to have been off.
+  #
+  # May also contain qed_se (string), which indicates that a particular
+  # QED self-energy operator was also included in the Hamiltonian.
+  # The possible values are: 'hydrogenic', 'qedmod', 'flambaum' and 'pyykkoe'
+  #
+  # Finally, for the hydrogenic QED self-energy, qed_se_hydrogenic_cutoff
+  # (integer) may be defined, which sets the n-quantum number cutoff. If not
+  # present, the implementation default is used.
   nms = true
   sms = true
   qed_vp = true
-  qed_se = true
+  qed_se = "hydrogenic"
+  qed_se_hydrogenic_cutoff = 8

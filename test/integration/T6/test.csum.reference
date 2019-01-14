@@ -57,12 +57,6 @@ Subshell      e             p0     gamma     P(2)       Q(2)    MTP
   6s   0.0000000000D+00  0.000D+00  1.00  1.714D-06 -5.026D-07  372
 
           34  levels will be computed
-
-  Self Energy Corrections: 
-
-
- Self-energy corrections estimated --- these will influence the data
-  in the RCI92 MIXing coefficients File.
            0  (total            5 ) rows read from .res
 CUTOFF set to  1.0000000000D-12
 Dirac-Coulomb one-e radial integrals:      22
@@ -119,12 +113,6 @@ Level J Parity      CSF contributions
                        3          5          4          2          1
   5     0 +      0.91536    0.39428    0.05256   -0.04668    0.04135
                        5          3          1          2          4
-
-  Self Energy Corrections: 
-
-
- Self-energy corrections estimated --- these will influence the data
-  in the RCI92 MIXing coefficients File.
            0  (total            4 ) rows read from .res
 CUTOFF set to  1.0000000000D-12
 Dirac-Coulomb one-e radial integrals:      22
@@ -176,12 +164,6 @@ Level J Parity      CSF contributions
                        3          1          4          2
   4     1 +      0.98433    0.17006   -0.04347   -0.01681
                        4          1          3          2
-
-  Self Energy Corrections: 
-
-
- Self-energy corrections estimated --- these will influence the data
-  in the RCI92 MIXing coefficients File.
            0  (total            8 ) rows read from .res
 CUTOFF set to  1.0000000000D-12
 Dirac-Coulomb one-e radial integrals:      22
@@ -253,12 +235,6 @@ Level J Parity      CSF contributions
                        4          5          6          2          7
   8     2 +      0.96542    0.20150    0.10998   -0.10424    0.05388
                        8          7          2          5          4
-
-  Self Energy Corrections: 
-
-
- Self-energy corrections estimated --- these will influence the data
-  in the RCI92 MIXing coefficients File.
            0  (total            6 ) rows read from .res
 CUTOFF set to  1.0000000000D-12
 Dirac-Coulomb one-e radial integrals:      22
@@ -320,12 +296,6 @@ Level J Parity      CSF contributions
                        4          5          6          1          3
   6     3 +      0.97474    0.17231    0.10967    0.08635    0.02541
                        6          5          4          1          2
-
-  Self Energy Corrections: 
-
-
- Self-energy corrections estimated --- these will influence the data
-  in the RCI92 MIXing coefficients File.
            0  (total            7 ) rows read from .res
 CUTOFF set to  1.0000000000D-12
 Dirac-Coulomb one-e radial integrals:      22
@@ -392,12 +362,6 @@ Level J Parity      CSF contributions
                        4          5          7          6          3
   7     4 +      0.95907   -0.19783    0.15052   -0.12936    0.03878
                        7          4          2          5          6
-
-  Self Energy Corrections: 
-
-
- Self-energy corrections estimated --- these will influence the data
-  in the RCI92 MIXing coefficients File.
            0  (total            2 ) rows read from .res
 CUTOFF set to  1.0000000000D-12
 Dirac-Coulomb one-e radial integrals:      22
@@ -439,12 +403,6 @@ Level J Parity      CSF contributions
                        1          2
   2     5 +      0.99874   -0.05028
                        2          1
-
-  Self Energy Corrections: 
-
-
- Self-energy corrections estimated --- these will influence the data
-  in the RCI92 MIXing coefficients File.
            0  (total            2 ) rows read from .res
 CUTOFF set to  1.0000000000D-12
 Dirac-Coulomb one-e radial integrals:      22

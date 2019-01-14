@@ -11,5 +11,5 @@ add_library(rciqed-matrixelements STATIC
 setup_fortran_modules(rciqed-matrixelements)
 target_link_libraries_Fortran(rciqed-matrixelements PRIVATE
     mod 9290 rang90
-    rciqed-grasp rciqed-rci rciqed-breit rciqed-qed rciqed-mass_shifts rciqed-toml
+    rciqed-grasp rciqed-breit rciqed-qed rciqed-mass_shifts rciqed-toml
 )

@@ -63,6 +63,7 @@ sed 's/[ \t]*#.*//' <<-EOF > rci.input
 	y                  # Include NMS?
 	y                  # Include SMS?
 	y                  # Estimate self-energy?
+	1                  # Self-energy type?
 	8                  # Max n for self-energy?
 	1                  # J blocks 1-3
 	1-3

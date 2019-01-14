@@ -6,6 +6,7 @@ y                  # Include vacuum polarization?
 y                  # Include NMS?
 y                  # Include SMS?
 y                  # Estimate self-energy?
+1                  # Type of self-energy?
 8                  # Max n for self-energy?
 1-5                # J blocks 1-3
 1-4

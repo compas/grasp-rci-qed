@@ -34,9 +34,10 @@
       USE wave_C
       USE wfac_C
       USE blim_C
-      use grasp_rciqed, only: IMCDF => res_unit
       USE qedcut_C
       USE mpi_C
+      use getcid_I, only: getcid_qedse
+      use grasp_rciqed, only: IMCDF => res_unit, setype
 !-----------------------------------------------
 !   I n t e r f a c e   B l o c k s
 !-----------------------------------------------
@@ -196,14 +197,7 @@
          WRITE (istde,*) 'Include H (Specific Mass Shift)?'
          LSMS = GETYN ()
 
-         WRITE (istde,*) 'Estimate self-energy?'
-         LSE = GETYN ()
-         IF (LSE.EQV..TRUE.) THEN
-            WRITE (istde,*)                                           &
-        'Largest n quantum number for including self-energy for orbital'
-            WRITE (istde,*) 'n should be less or equal 8'
-            READ *, NQEDMAX
-         END IF
+         call getcid_qedse
 
          IF (LTRANS) THEN
           WRITE(734,'(a)')'y            ! Contribution of H Transverse?'
@@ -233,6 +227,7 @@
          END IF
          IF (LSE) THEN
            WRITE(734,'(a)') 'y            ! Self energy?'
+           WRITE(734,*) setype, '   ! Self energy type?'
            WRITE(734,*) NQEDMAX, '! Max n for including self energy'
          ELSE
            WRITE(734,'(a)') 'n            ! Self energy?'
@@ -243,6 +238,7 @@
       CALL MPI_Bcast (LNMS, 1, MPI_LOGICAL, 0, MPI_COMM_WORLD, ierr)
       CALL MPI_Bcast (LSMS, 1, MPI_LOGICAL, 0, MPI_COMM_WORLD, ierr)
       CALL MPI_Bcast (LSE,  1, MPI_LOGICAL, 0, MPI_COMM_WORLD, ierr)
+      CALL MPI_Bcast (setype,  1, MPI_INTEGER, 0, MPI_COMM_WORLD, ierr)
       CALL MPI_Bcast (NQEDMAX, 1, MPI_INTEGER, 0, MPI_COMM_WORLD, ierr)
 !
 ! Parameters controlling the radial grid

@@ -37,7 +37,7 @@ contains
         USE alcbuf_I
         USE ichop_I
         use cord_I
-        use grasp_rciqed_qed, only: slfint
+        use grasp_rciqed, only: sematrix
         use grasp_rciqed_cimatrixelements ! NOTE: Matrix elements smaller than cimatrixelements%cutoff are not accumulated
 
         ! Dummy arguments
@@ -148,6 +148,7 @@ contains
                     ELEMNT = ELEMNT + dirac_potential(IC, IR, IA, IB, TSHELL)
                     IF (LNMS) ELEMNT = ELEMNT + nms(IC, IR, IA, IB, TSHELL)
                     IF (LVP) ELEMNT = ELEMNT + qed_vp(IC, IR, IA, IB, TSHELL)
+                    IF (LSE) ELEMNT = ELEMNT + qed_se(sematrix, IC, IR, IA, IB, TSHELL)
 
                     IF (IA .NE. 0) THEN
                         IF (IA == IB) THEN
@@ -211,9 +212,6 @@ contains
                     IROW(NELC) = IR
                 ENDIF
             enddo ! loop over columns
-
-            ! If LSE, then add self-energy to the diagonal of the CI matrix.
-            IF (LSE) EMT(NELC) = EMT(NELC) + qed_se_mohr(IC, slfint)
 
             !   This column is done; write it to disk
             WRITE (imcdf) NELC, ELSTO, (EMT(IR), IR=1, NELC), (IROW(IR), IR=1, NELC)

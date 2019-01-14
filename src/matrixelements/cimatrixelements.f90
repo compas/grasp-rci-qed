@@ -16,7 +16,7 @@ module grasp_rciqed_cimatrixelements
     implicit none
 
     public dirac_potential, coulomb, coulomb_cached, breit, breit_split, &
-        nms, sms, sms_cached, qed_vp, qed_se_mohr
+        nms, sms, sms_cached, qed_vp, qed_se_mohr, qed_se
     public cutoff
     private
 
@@ -36,11 +36,17 @@ module grasp_rciqed_cimatrixelements
         module procedure qed_vp, qed_vp_cached
     end interface qed_vp
 
-    !> Calculate an estimate of the self-energy of a diagonal matrix element
+    !> Calculates an estimate of the self-energy of a diagonal matrix element
     !! based on the Mohr hydrogenic values.
     interface qed_se_mohr
         module procedure qed_se_mohr, qed_se_mohr_cached
     end interface qed_se_mohr
+
+    !> Calculates the self-energy many-body matrix element using the 1-particle
+    !! matrix.
+    interface qed_se
+        module procedure qed_se, qed_se_cached
+    end interface qed_se
 
     !> Matrix elements smaller than `cutoff` are set to zero.
     !!
@@ -610,5 +616,65 @@ contains
             qed_se_mohr_cached = qed_se_mohr_cached + IQ(I,IC) * slfint(I)
         end do
     end function qed_se_mohr_cached
+
+    !===========================================================================
+    ! Generic routines for self-energy, based on the 1-particle matrix.
+    !---------------------------------------------------------------------------
+
+    !> This also calls the `ONESCALAR` routing from lib9290.
+    !!
+    !! @param ic, ir The row and column indices of the CSFs.
+    !! @returns The QED self-energy expectation value
+    !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{VP}}|\Psi_{\textrm{ir}}\rangle\f$.
+    function qed_se(sematrix, ic, ir)
+        use grasp_rciqed_kinds, only: real64, dp
+        use orb_C
+        use onescalar_I
+        implicit none
+
+        real(real64), intent(in) :: sematrix(NW, NW)
+        integer, intent(in) :: ic, ir
+        real(real64) :: qed_se
+
+        real(real64) :: tshell(NW)
+        integer :: k, l
+
+        ! This part calculates the one-particle matrix elements. Based on
+        ! setham_gg.f from rci_mpi.
+        call ONESCALAR(ic, ir, k, l, tshell)
+        qed_se = qed_se_cached(sematrix, ic, ir, k, l, tshell)
+    end function qed_se
+
+    !> The `ONESCALAR` output has to be passed as arguments here.
+    !!
+    !! @param ic, ir The row and column indices of the CSFs.
+    !! @param k, l, tshell The output from `ONESCALAR`.
+    !! @returns The QED self-energy expectation value
+    !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{VP}}|\Psi_{\textrm{ir}}\rangle\f$.
+    function qed_se_cached(sematrix, ic, ir, k, l, tshell)
+        use grasp_rciqed_kinds, only: real64, dp
+        use orb_C
+        implicit none
+
+        real(real64), intent(in) :: sematrix(NW, NW)
+        integer, intent(in) :: ic, ir, k, l
+        real(real64), intent(in) :: tshell(NW)
+        real(real64) :: qed_se_cached
+
+        integer :: m
+        real(real64) :: result
+
+        ! QED parts of the matrix element. The loops have the same logic as in
+        ! the 1-particle DC.
+        qed_se_cached = 0.0_dp
+        if(k /= 0 .and. k == l) then
+            do m = 1, NW
+                if(abs(tshell(m)) <= cutoff) cycle
+                qed_se_cached = qed_se_cached + sematrix(m, m) * tshell(m)
+            enddo
+        elseif(k /= 0 .and. k /= l .and. abs(tshell(1)) > cutoff) then
+            qed_se_cached = qed_se_cached + sematrix(k, l) * tshell(1)
+        endif
+    end function qed_se_cached
 
 end module grasp_rciqed_cimatrixelements

@@ -33,5 +33,5 @@ add_library(rciqed-rci
 setup_fortran_modules(rciqed-rci)
 target_link_libraries_Fortran(rciqed-rci PRIVATE
     mod 9290 rang90 mpi90 dvd90
-    rciqed-breit rciqed-qed rciqed-mass_shifts rciqed-matrixelements
+    rciqed-breit rciqed-qed rciqed-mass_shifts rciqed-matrixelements rciqed-grasp
 )

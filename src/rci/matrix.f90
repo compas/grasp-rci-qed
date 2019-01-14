@@ -37,7 +37,6 @@
       USE prnt_C
       USE stat_C
       USE wave_C
-      use grasp_rciqed, only: IMCDF => res_unit
       USE blim_C
       USE eigvec1_C
       USE iccu_C
@@ -63,7 +62,8 @@
       USE wghtd5_I
       USE mpi_C
 
-      use grasp_rciqed_qed, only: slfint
+      use grasp_rciqed, only: IMCDF => res_unit, setype, sematrix
+      use grasp_rciqed_qed, only: qedse
       use grasp_rciqed_cimatrixelements, only: qed_se_mohr
 
       IMPLICIT NONE
@@ -84,11 +84,11 @@
 !-----------------------------------------------
 !     ...Common to all blocks - place here to save CPU time
       CALL auxblk (j2max)
-      ! Populate the global array in grasp_rciqed_qed with the per-orbital
-      ! values of the self-energy. Note that we'll do this even if self-energy
-      ! is disabled, as we still need these values when estimating the SE
-      ! perturbatively.
-      CALL QED_SLFEN(SLFINT)
+      ! Populate the global array in grasp_rciqed with the matrix elements of
+      ! the self-energy operator picked in GETCID.
+      if(LSE) then
+          call qedse(setype, sematrix)
+      endif
 
 !***************************************************************
 !      Loop over blocks
@@ -133,18 +133,6 @@
 
 !      ...Load CSF list of the current block
         CALL lodcslmpi (21, ncore, jblock)
-
-         ! Make a note about self-energy
-         IF (LSE .AND. (myid .EQ. 0)) THEN
-            WRITE (24,*)
-            WRITE (24,*) ' Self Energy Corrections: '
-            WRITE (24,*)
-            WRITE (24,*)
-            WRITE (24,*) 'Self-energy corrections estimated'       &
-                       //' --- these will influence the data'
-            WRITE (24,*) ' in the RCI92 MIXing coefficients File.'
-         ENDIF
-
 
          IF (nvec <= 0) THEN
             IF (myid .EQ. 0) WRITE (25) jblock, ncf, nvec, 999, 999
@@ -214,47 +202,6 @@
                EVEC1(I+(J-1)*NCF) = EVEC(I+(J-1)*NCF)
             ENDDO
          ENDDO
-      ENDIF
-!
-!   Estimate diagonal self-energy corrections; the stored
-!   eigenvalues and eigenvectors are not modified by these
-!   estimates
-!
-      IF (.not.LSE) THEN
-         IF (myid .EQ. 0)            PRINT *, 'Entering QED ...'
-            CALL ALLOC (ETOT,NVEC,'ETOT', 'MATRIX')
-         IF (myid .EQ. 0) THEN
-            WRITE (24,*)
-            WRITE (24,*) ' Self Energy Corrections: '
-            WRITE (24,*)
-            WRITE (24,301)
-            WRITE (24,*)
-         END IF
-  301 FORMAT (' Level  J Parity',7X,'Hartrees',14X,'Kaysers',          &
-               16X,'eV' )
-  302 FORMAT (1I3,2X,2A4,1P,3D22.7)
-         DO J = 1, nvec
-            EAU = 0.0D0
-            DO ic = 1, NCF
-                EAU = EAU + qed_se_mohr(ic, slfint) * EVEC(ic + (J - 1)*NCF)**2
-            ENDDO
-            ECM = EAU*AUCM
-            EEV = EAU*AUEV
-            ETOT(J) = EVAL(J) + EAU
-            IP = (IIASPAR+3)/2
-            IF (myid .EQ. 0)                                           &
-               WRITE (24,302) j,LABJ(IiATJPO),LABP(IP),EAU,ECM,EEV
-!
-         ENDDO
-         IF (myid .EQ. 0) THEN
-            WRITE (24,*)
-            WRITE (24,*) 'Self-energy corrections estimated'           &
-                    //' --- these do not influence the data'
-            WRITE (24,*) ' in the RCI92 MIXing coefficients File.'
-            CALL ENGOUT (EAV,ETOT,IiATJPO,iIASPAR,IVEC,NVEC,MODE)
-! zou       CALL ENGOUT (EAV+elsto,ETOT,IiATJPO,iIASPAR,IVEC,NVEC,MODE)
-         ENDIF
-         CALL dalloc (ETOT, 'ETOT', 'MATRIX')
       ENDIF
 
 !        ...Locals

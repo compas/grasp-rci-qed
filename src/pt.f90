@@ -14,14 +14,20 @@ program rci_qed_pt
     use grasp_rciqed, only: init_rkintc
     use grasp_rciqed_breit, only: init_breit
     use grasp_rciqed_mass_shifts, only: init_mass_shifts
-    use grasp_rciqed_qed, only: init_vacuum_polarization
+    use grasp_rciqed_qed, only: init_vacuum_polarization, qedse, &
+        nsetypes, setypes_long, setypes_short
     use grasp_rciqed_rcisettings, only: rcisettings, read_settings_toml
     use grasp_rciqed_cimatrixelements
+    use orb_C, only: NW
     use prnt_C, only: NVEC
+    use qedcut_C, only: NQEDCUT, NQEDMAX
     implicit none
 
+    integer :: i
     type matrixelement
-        real(real64) :: diracpot, coulomb, breit, nms, sms, vp, se_mohr
+        real(real64) :: diracpot = 0.0_dp, coulomb = 0.0_dp, breit = 0.0_dp, &
+            nms = 0.0_dp, sms = 0.0_dp, vp = 0.0_dp, se = 0.0_dp, &
+            se_array(nsetypes) = (/(0.0_dp, i = 1, nsetypes)/)
     end type matrixelement
 
     integer, parameter :: hcs_len = 7
@@ -39,11 +45,12 @@ program rci_qed_pt
     character(:), allocatable :: file_csls, file_wfns, file_mixing
     type(rcisettings) :: settings
 
-    integer :: status, k, i, j, j2max
+    integer :: status, k, j, j2max
     integer :: fh
 
     type(matrixelement) :: hij, asfv
     type(matrixelement), dimension(:), allocatable :: asfvalues
+    real(real64), allocatable :: sematrix(:,:,:)
     real(real64) :: sum
 
     type(integer), dimension(:), allocatable :: hcs_rci, hcs_pt
@@ -101,7 +108,16 @@ program rci_qed_pt
     print '(" ",a,"  ",a)', check(settings%nms_enabled), "Normal mass shift"
     print '(" ",a,"  ",a)', check(settings%sms_enabled), "Special mass shift"
     print '(" ",a,"  ",a)', check(settings%qed_vp_enabled), "QED vacuum polarization"
-    print '(" ",a,"  ",a)', check(settings%qed_se_enabled), "QED self-energy"
+    if(settings%qed_se /= 0) then
+        print '(" ",a,"  ",a,": ",a," (#",i0,": ",a,")")', &
+            check(.true.), "QED self-energy", trim(setypes_short(settings%qed_se)), &
+            settings%qed_se, trim(setypes_long(settings%qed_se))
+    else
+        print '(" ",a,"  ",a)', check(.false.), "QED self-energy"
+    endif
+    if(settings%qed_se_hydrogenic_cutoff >= 0) then
+        print '("    ",a,":  ",i0)', "Hydrogenic SE n cutoff", settings%qed_se_hydrogenic_cutoff
+    endif
 
     hcs_cat(1) = .true.
     hcs_cat(2) = .true.
@@ -109,14 +125,30 @@ program rci_qed_pt
     hcs_cat(4) = settings%nms_enabled
     hcs_cat(5) = settings%sms_enabled
     hcs_cat(6) = settings%qed_vp_enabled
-    hcs_cat(7) = settings%qed_se_enabled
+    hcs_cat(7) = .not.(settings%qed_se == 0)
+
+    ! Calculate the self-energy matrix (or matrices, if SE in in PT mode).
+    ! If settings%qed_se == 0, then we need to calculate _all_ SE operators.
+    if(settings%qed_se == 0) then
+        allocate(sematrix(nsetypes,NW,NW))
+        do i = 1, nsetypes
+            call qedse(i, sematrix(i,:,:))
+        enddo
+    else
+        allocate(sematrix(1,NW,NW))
+        call qedse(settings%qed_se, sematrix(1,:,:))
+    endif
+    ! Also set the hydrogenic cutoffs in qedcut_C appropriately
+    if(settings%qed_se_hydrogenic_cutoff >= 0) then
+        NQEDCUT = 1
+        NQEDMAX = settings%qed_se_hydrogenic_cutoff
+    else
+        NQEDCUT = 0
+    endif
 
     ! Evaluate the ASF expectation values and write them to a CSV file.
     print '(a)', ">>> Evaluating ASF expectation values"
     allocate(asfvalues(NVEC))
-    do k = 1, NVEC
-        call matrixelement_zero(asfvalues(k))
-    enddo
 
     do i = 1, ncsfs_global()
         do j = 1, i
@@ -125,13 +157,16 @@ program rci_qed_pt
             hij%diracpot = dirac_potential(i, j)
             hij%coulomb = coulomb(i, j)
             hij%breit = breit(i, j)
-            hij%vp = qed_vp(i, j)
             hij%nms = nms(i, j)
             hij%sms = sms(i, j)
-            if (i == j) then
-                hij%se_mohr = qed_se_mohr(i)
+            hij%vp = qed_vp(i, j)
+
+            if(settings%qed_se == 0) then
+                do k = 1, nsetypes
+                    hij%se_array(k) = qed_se(sematrix(k,:,:), i, j)
+                enddo
             else
-                hij%se_mohr = 0.0_dp
+                hij%se = qed_se(sematrix(1,:,:), i, j)
             endif
 
             ! Add the values to the ASF values
@@ -157,22 +192,33 @@ program rci_qed_pt
         print '(80("="))'
         print '(">>> ASF #",i0)', k
         print '(80("-"))'
-        print '(a1,a12,a18)',    " ", "Type", "<H_i> (Ha)"
+        print '(a1,a16,a18)',    " ", "Type", "<H_i> (Ha)"
         sum = 0.0_dp
         do i = 1, hcs_len
             if(.not.hcs_cat(i)) cycle
-            print '(a1,a12,1p,e18.8)', " ", trim(hcs_pretty(i)), getindex(asfv, i)
+            if(i == 7) then
+                ! Self-energy gets special treatment
+                print '("QED SE ",a10,1p,e18.8)', &
+                    trim(setypes_short(settings%qed_se)), getindex(asfv, i)
+            else
+                print '(a1,a16,1p,e18.8)', " ", trim(hcs_pretty(i)), getindex(asfv, i)
+            endif
             sum = sum + getindex(asfv, i)
         enddo
-        print '(a1,a12,1p,e18.8)', ">", "DC", asfv%diracpot + asfv%coulomb
-        print '(a1,a12,1p,e18.8)', ">", "Non.pet", sum
+        print '(a1,a16,1p,e18.8)', ">", "DC", asfv%diracpot + asfv%coulomb
+        print '(a1,a16,1p,e18.8)', ">", "Non.pet", sum
         do i = 1, hcs_len
             if(hcs_cat(i)) cycle
-            print '(a1,a12,1p,e18.8)', " ", trim(hcs_pretty(i)), getindex(asfv, i)
-            sum = sum + getindex(asfv, i)
+            if(i == 7) then
+                ! Self-energy gets special treatment, since in PT mode, we have
+                ! several parallel methods.
+                do j = 1, nsetypes
+                    print '("QED SE ",a10,1p,e18.8)', trim(setypes_short(j)), asfv%se_array(j)
+                enddo
+            else
+                print '(a1,a16,1p,e18.8)', " ", trim(hcs_pretty(i)), getindex(asfv, i)
+            endif
         enddo
-        print '(a1,a12,1p,e18.8)', ">", "Full", &
-            asfv%diracpot + asfv%coulomb + asfv%breit + asfv%vp + asfv%nms + asfv%sms + asfv%se_mohr
     enddo
 
     close(fh)
@@ -185,7 +231,7 @@ contains
         integer, intent(in) :: idx
         real(real64) :: getindex
 
-        if(idx < 1 .or. idx > 7) then
+        if(idx < 1 .or. idx > 8) then
             error stop "Bad index in getindex(::matrixelement)"
         endif
 
@@ -195,7 +241,7 @@ contains
         if(idx == 4) getindex = me%nms
         if(idx == 5) getindex = me%sms
         if(idx == 6) getindex = me%vp
-        if(idx == 7) getindex = me%se_mohr
+        if(idx == 7) getindex = me%se
     end function getindex
 
     subroutine write_csv_header(unit)
@@ -247,21 +293,6 @@ contains
         endif
     end subroutine check_file
 
-    !> Zeroes all the fields of a `matrixelement`.
-    subroutine matrixelement_zero(h)
-        use grasp_rciqed_kinds, only: dp
-
-        type(matrixelement), intent(out) :: h
-
-        h%diracpot = 0.0_dp
-        h%coulomb = 0.0_dp
-        h%breit = 0.0_dp
-        h%vp = 0.0_dp
-        h%nms = 0.0_dp
-        h%sms = 0.0_dp
-        h%se_mohr = 0.0_dp
-    end subroutine matrixelement_zero
-
     !> Adds the contribution of the `(i, j)` matrix element to the `asfvalue`.
     !!
     !! `hij` must contain the `(i, j)` Hamiltonian matrix element and asfvalue
@@ -276,7 +307,7 @@ contains
         implicit none
 
         integer, intent(in) :: i, j, k
-        type(matrixelement), intent(out) :: hij
+        type(matrixelement), intent(in) :: hij
         type(matrixelement), intent(inout) :: asfvalue
 
         real(real64) :: cicj
@@ -288,7 +319,8 @@ contains
         asfvalue%vp  = asfvalue%vp  + hij%vp * cicj
         asfvalue%nms = asfvalue%nms + hij%nms * cicj
         asfvalue%sms = asfvalue%sms + hij%sms * cicj
-        asfvalue%se_mohr = asfvalue%se_mohr + hij%se_mohr * cicj
+        asfvalue%se = asfvalue%se + hij%se * cicj
+        asfvalue%se_array(:) = asfvalue%se_array(:) + hij%se_array(:) * cicj
     end subroutine add_asfvalue
 
     !> Returns the i-th ASF coefficient of the k-th state

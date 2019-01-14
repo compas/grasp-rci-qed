@@ -16,7 +16,7 @@ target_link_libraries_Fortran(rci-qed PUBLIC
 )
 install(TARGETS rci-qed DESTINATION bin/)
 
-# rci-qed.matrixelements
+# rci-qed.pt
 add_executable(rci-qed.pt
     pt.f90
 )
@@ -25,3 +25,13 @@ target_link_libraries_Fortran(rci-qed.pt PUBLIC
     rciqed-grasp rciqed-rci rciqed-breit rciqed-qed rciqed-mass_shifts rciqed-matrixelements
 )
 install(TARGETS rci-qed.pt DESTINATION bin/)
+
+# rci-qed.orbitals
+add_executable(rci-qed.orbitals
+    orbitals.F90
+)
+target_link_libraries_Fortran(rci-qed.orbitals PUBLIC
+    mod 9290 rang90
+    rciqed-grasp rciqed-rci rciqed-breit rciqed-qed rciqed-mass_shifts rciqed-matrixelements
+)
+install(TARGETS rci-qed.orbitals DESTINATION bin/)
