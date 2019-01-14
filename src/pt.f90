@@ -14,24 +14,27 @@ program rci_qed_pt
     use grasp_rciqed, only: init_rkintc
     use grasp_rciqed_breit, only: init_breit
     use grasp_rciqed_mass_shifts, only: init_mass_shifts
-    use grasp_rciqed_qed, only: init_vacuum_polarization
+    use grasp_rciqed_qed, only: init_vacuum_polarization, qedse
     use grasp_rciqed_rcisettings, only: rcisettings, read_settings_toml
     use grasp_rciqed_cimatrixelements
+    use orb_C, only: NW
     use prnt_C, only: NVEC
     implicit none
 
     type matrixelement
-        real(real64) :: diracpot, coulomb, breit, nms, sms, vp, se_mohr
+        real(real64) :: diracpot = 0.0_dp, coulomb = 0.0_dp, breit = 0.0_dp, &
+            nms = 0.0_dp, sms = 0.0_dp, vp = 0.0_dp, se = 0.0_dp, &
+            se_mohr = 0.0_dp
     end type matrixelement
 
-    integer, parameter :: hcs_len = 7
+    integer, parameter :: hcs_len = 8
     character(*), dimension(hcs_len), parameter :: hcs_pretty = (/ &
         "KE + Nuc.pot", "Coulomb     ", "Breit       ", "NMS         ", "SMS         ", &
-        "QED VP      ", "QED SE      " &
+        "QED VP      ", "QED SE      ", "QED SE(Mohr)" &
     /)
     character(*), dimension(hcs_len), parameter :: hcs_technical = (/ &
         "kinetic_nucl", "coulomb     ", "breit       ", "nms         ", "sms         ", &
-        "qed_vp      ", "qed_se      " &
+        "qed_vp      ", "qed_se      ", "qed_se_mohr " &
     /)
 
     character(256) :: state
@@ -44,6 +47,7 @@ program rci_qed_pt
 
     type(matrixelement) :: hij, asfv
     type(matrixelement), dimension(:), allocatable :: asfvalues
+    real(real64), allocatable :: sematrix(:,:)
     real(real64) :: sum
 
     type(integer), dimension(:), allocatable :: hcs_rci, hcs_pt
@@ -110,13 +114,15 @@ program rci_qed_pt
     hcs_cat(5) = settings%sms_enabled
     hcs_cat(6) = settings%qed_vp_enabled
     hcs_cat(7) = settings%qed_se_enabled
+    hcs_cat(8) = .false.
+
+    ! Calculate the self-energy matrix
+    allocate(sematrix(NW,NW))
+    call qedse(0, sematrix)
 
     ! Evaluate the ASF expectation values and write them to a CSV file.
     print '(a)', ">>> Evaluating ASF expectation values"
     allocate(asfvalues(NVEC))
-    do k = 1, NVEC
-        call matrixelement_zero(asfvalues(k))
-    enddo
 
     do i = 1, ncsfs_global()
         do j = 1, i
@@ -125,9 +131,10 @@ program rci_qed_pt
             hij%diracpot = dirac_potential(i, j)
             hij%coulomb = coulomb(i, j)
             hij%breit = breit(i, j)
-            hij%vp = qed_vp(i, j)
             hij%nms = nms(i, j)
             hij%sms = sms(i, j)
+            hij%vp = qed_vp(i, j)
+            hij%se = qed_se(sematrix, i, j)
             if (i == j) then
                 hij%se_mohr = qed_se_mohr(i)
             else
@@ -167,7 +174,7 @@ program rci_qed_pt
         print '(a1,a12,1p,e18.8)', ">", "DC", asfv%diracpot + asfv%coulomb
         print '(a1,a12,1p,e18.8)', ">", "Non.pet", sum
         do i = 1, hcs_len
-            if(hcs_cat(i)) cycle
+            if(i==8 .or. hcs_cat(i)) cycle
             print '(a1,a12,1p,e18.8)', " ", trim(hcs_pretty(i)), getindex(asfv, i)
             sum = sum + getindex(asfv, i)
         enddo
@@ -185,7 +192,7 @@ contains
         integer, intent(in) :: idx
         real(real64) :: getindex
 
-        if(idx < 1 .or. idx > 7) then
+        if(idx < 1 .or. idx > 8) then
             error stop "Bad index in getindex(::matrixelement)"
         endif
 
@@ -195,7 +202,8 @@ contains
         if(idx == 4) getindex = me%nms
         if(idx == 5) getindex = me%sms
         if(idx == 6) getindex = me%vp
-        if(idx == 7) getindex = me%se_mohr
+        if(idx == 7) getindex = me%se
+        if(idx == 8) getindex = me%se_mohr
     end function getindex
 
     subroutine write_csv_header(unit)
@@ -247,21 +255,6 @@ contains
         endif
     end subroutine check_file
 
-    !> Zeroes all the fields of a `matrixelement`.
-    subroutine matrixelement_zero(h)
-        use grasp_rciqed_kinds, only: dp
-
-        type(matrixelement), intent(out) :: h
-
-        h%diracpot = 0.0_dp
-        h%coulomb = 0.0_dp
-        h%breit = 0.0_dp
-        h%vp = 0.0_dp
-        h%nms = 0.0_dp
-        h%sms = 0.0_dp
-        h%se_mohr = 0.0_dp
-    end subroutine matrixelement_zero
-
     !> Adds the contribution of the `(i, j)` matrix element to the `asfvalue`.
     !!
     !! `hij` must contain the `(i, j)` Hamiltonian matrix element and asfvalue
@@ -276,7 +269,7 @@ contains
         implicit none
 
         integer, intent(in) :: i, j, k
-        type(matrixelement), intent(out) :: hij
+        type(matrixelement), intent(in) :: hij
         type(matrixelement), intent(inout) :: asfvalue
 
         real(real64) :: cicj
@@ -288,6 +281,7 @@ contains
         asfvalue%vp  = asfvalue%vp  + hij%vp * cicj
         asfvalue%nms = asfvalue%nms + hij%nms * cicj
         asfvalue%sms = asfvalue%sms + hij%sms * cicj
+        asfvalue%se = asfvalue%se + hij%se * cicj
         asfvalue%se_mohr = asfvalue%se_mohr + hij%se_mohr * cicj
     end subroutine add_asfvalue
 

@@ -59,6 +59,28 @@ target_link_libraries_Fortran(test.hydrogenic_se PUBLIC
 )
 add_test(hydrogenic_se test.hydrogenic_se)
 
+# Flambaum QED w/ hydrogenic orbitals
+add_executable(test.qed_flambaum_hydrogenic
+    qed/flambaum_hydrogenic.f90
+)
+target_link_libraries_Fortran(test.qed_flambaum_hydrogenic PUBLIC
+    mod 9290
+    rciqed-grasp rciqed-rci rciqed-qed
+    rciqed-tools rciqed-test
+)
+add_test(qed_flambaum_hydrogenic test.qed_flambaum_hydrogenic)
+
+# QEDMOD QED w/ hydrogenic orbitals
+add_executable(test.qed_qedmod_hydrogenic
+    qed/qedmod_hydrogenic.f90
+)
+target_link_libraries_Fortran(test.qed_qedmod_hydrogenic PUBLIC
+    mod 9290
+    rciqed-grasp rciqed-rci rciqed-qed
+    rciqed-tools rciqed-test
+)
+add_test(qed_qedmod_hydrogenic test.qed_qedmod_hydrogenic)
+
 
 # Unit tests for matrix element calculations
 add_subdirectory("matrixelements/")
