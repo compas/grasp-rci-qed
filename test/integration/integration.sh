@@ -12,6 +12,8 @@ RCIQED=`find-grasp-binary rci-qed` || exit
 echo "INFO: RCIQED=${RCIQED}"
 RCIQEDPT=`find-grasp-binary rci-qed.pt` || exit
 echo "INFO: RCIQEDPT=${RCIQEDPT}"
+RCIQEDORBITALS=`find-grasp-binary rci-qed.orbitals` || exit
+echo "INFO: RCIQEDORBITALS=${RCIQEDORBITALS}"
 
 # Get the configuration -- the first argument, and check that input files exist
 if [ "$1" == "--update" ]; then
@@ -86,6 +88,15 @@ if ! [ "${PIPESTATUS[0]}" == "0" ]; then
 fi
 >&2 echo "${RCIQEDPT} ran successfully!"
 
+# Run rci-qed.orbitals
+>&2 echo "INFO: Running ${RCIQEDORBITALS}"
+${RCIQEDORBITALS} test 2>&1 | tee rci-qed.orbitals.stdout
+if ! [ "${PIPESTATUS[0]}" == "0" ]; then
+	>&2 echo "FATAL ERROR: rci-qed.orbitals failed with ${PIPESTATUS[0]}"
+	exit 1
+fi
+>&2 echo "${RCIQEDORBITALS} ran successfully!"
+
 # Verify the ouput
 function verify_file {
 	filename=$1
@@ -104,6 +115,7 @@ function verify_file {
 verify_file "test.csum"
 verify_file "test.settings.toml"
 verify_file "rci-qed.pt.stdout"
+verify_file "rci-qed.orbitals.stdout"
 
 
 # TODO: Also diff stdout. But it has (1) timing information, which is not
