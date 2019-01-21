@@ -63,7 +63,7 @@
       USE wghtd5_I
       USE mpi_C
 
-      use grasp_rciqed_qed, only: slfint
+      use grasp_rciqed, only: slfint
       use grasp_rciqed_cimatrixelements, only: qed_se_mohr
 
       IMPLICIT NONE

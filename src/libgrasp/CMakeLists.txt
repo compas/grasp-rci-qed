@@ -2,6 +2,7 @@
 set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Wimplicit-interface -Wimplicit-procedure")
 
 add_library(rciqed-grasp STATIC
+    cli.f90
     kinds.f90
     system.f90
     nucleus.f90

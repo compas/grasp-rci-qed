@@ -37,7 +37,7 @@ contains
         USE alcbuf_I
         USE ichop_I
         use cord_I
-        use grasp_rciqed_qed, only: slfint
+        use grasp_rciqed, only: slfint
         use grasp_rciqed_cimatrixelements ! NOTE: Matrix elements smaller than cimatrixelements%cutoff are not accumulated
 
         ! Dummy arguments
