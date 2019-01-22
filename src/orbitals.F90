@@ -46,32 +46,23 @@ contains
     !> Prints a table of QED self-energy estimates for all the orbitals.
     subroutine qed_orbital_summary
         use grasp_rciqed_kinds, only: real64, dp
-        use grasp_rciqed_qed, only: qedse
+        use grasp_rciqed_qed, only: qedse, nsetypes, setypes_long
         use orb_C, only: NW
         use vacpol_I
         implicit none
 
         real(real64) :: matrix(NW, NW)
+        integer :: i
 
         print *, 'QED operator matrix: vacuum polarization (U+KS)'
         call fill_vpint_matrix(matrix)
         call writematrix(matrix)
 
-        print *, 'QED operator matrix: self-energy (Hydrogenic / Mohr)'
-        call qedse(0, matrix)
-        call writematrix(matrix)
-
-        print *, 'QED operator matrix: self-energy (QEDMOD)'
-        call qedse(1, matrix)
-        call writematrix(matrix)
-
-        print *, 'QED operator matrix: self-energy (Flambaum)'
-        call qedse(2, matrix)
-        call writematrix(matrix)
-
-        print *, 'QED operator matrix: self-energy (Pyykkoe)'
-        call qedse(3, matrix)
-        call writematrix(matrix)
+        do i = 1, nsetypes
+            print '("QED operator matrix: self-energy (",a,")")', trim(setypes_long(i))
+            call qedse(i, matrix)
+            call writematrix(matrix)
+        enddo
     end subroutine qed_orbital_summary
 
     subroutine print_orbital_qed

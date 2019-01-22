@@ -13,7 +13,7 @@ module grasp_rciqed
     integer :: res_unit = -1
 
     integer :: setype
-    real(real64) :: slfint(NNNW)
+    real(real64) :: sematrix(NNNW,NNNW)
 
 contains
 

@@ -79,7 +79,7 @@
  4f-   -7.30158E-09
                  4f 
  4f    -2.06652E-09
- QED operator matrix: self-energy (Hydrogenic / Mohr)
+QED operator matrix: self-energy (Scaled hydrogenic (default))
                  1s             2s             3s             4s             5s             6s 
  1s     5.69696E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00
  2s                    9.47303E-01    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00
@@ -109,7 +109,7 @@
  4f-   -1.24592E-03
                  4f 
  4f     1.16889E-03
- QED operator matrix: self-energy (QEDMOD)
+QED operator matrix: self-energy (QEDMOD (Shabaev et al., 2015))
  WARNING: qedse_qedmod_init called multiple times.
                  1s             2s             3s             4s             5s             6s 
  1s     5.69081E+00    2.31625E+00    1.26406E+00    8.16235E-01    5.80775E-01    4.39789E-01
@@ -140,7 +140,7 @@
  4f-    0.00000E+00
                  4f 
  4f     0.00000E+00
- QED operator matrix: self-energy (Flambaum)
+QED operator matrix: self-energy (Flambaum & Ginges, 2005)
                  1s             2s             3s             4s             5s             6s 
  1s     5.67435E+00    2.43273E+00    1.31265E+00    8.44723E-01    6.00157E-01    4.54114E-01
  2s                    9.44224E-01    5.33919E-01    3.43705E-01    2.44220E-01    1.84800E-01
@@ -170,7 +170,7 @@
  4f-   -1.24733E-03
                  4f 
  4f     1.22426E-03
- QED operator matrix: self-energy (Pyykkoe)
+QED operator matrix: self-energy (Pyykkö & Zhao, 2003)
                  1s             2s             3s             4s             5s             6s 
  1s     6.41812E+00    2.50704E+00    1.36366E+00    8.79826E-01    6.25817E-01    4.73819E-01
  2s                    9.80431E-01    5.33412E-01    3.44181E-01    2.44823E-01    1.85364E-01

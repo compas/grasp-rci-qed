@@ -109,29 +109,6 @@ Level J Parity      CSF contributions
                        3          5          4          2          1
   5     0 +      0.91676    0.39127    0.05193   -0.04606    0.04041
                        5          3          1          2          4
-
-  Self Energy Corrections: 
-
- Level  J Parity       Hartrees              Kaysers                eV
-
-  1     0 +           1.5190340D+01         3.3338943D+06         4.1335021D+02
-  2     0 +           1.5188569D+01         3.3335057D+06         4.1330202D+02
-  3     0 +           1.5186116D+01         3.3329673D+06         4.1323528D+02
-  4     0 +           1.5185422D+01         3.3328149D+06         4.1321637D+02
-  5     0 +           1.5181821D+01         3.3320246D+06         4.1311840D+02
-
- Self-energy corrections estimated --- these do not influence the data
-  in the RCI92 MIXing coefficients File.
-
-Eigenenergies:
-
-Level  J Parity       Hartrees              Kaysers                eV
-
-  1     0 +          -1.4011669D+04        -3.0752060D+09        -3.8127695D+05
-  2     0 +          -1.4011087D+04        -3.0750782D+09        -3.8126111D+05
-  3     0 +          -1.4010849D+04        -3.0750260D+09        -3.8125463D+05
-  4     0 +          -1.4009894D+04        -3.0748164D+09        -3.8122864D+05
-  5     0 +          -1.4009388D+04        -3.0747054D+09        -3.8121488D+05
            0  (total            2 ) rows read from .res
 CUTOFF set to  1.0000000000D-12
 Dirac-Coulomb one-e radial integrals:      66
@@ -182,27 +159,6 @@ Level J Parity      CSF contributions
                        3          1          4          2
   4     1 +      0.98448    0.16917   -0.04359   -0.01688
                        4          1          3          2
-
-  Self Energy Corrections: 
-
- Level  J Parity       Hartrees              Kaysers                eV
-
-  1     1 +           1.5188260D+01         3.3334378D+06         4.1329361D+02
-  2     1 +           1.5188224D+01         3.3334299D+06         4.1329263D+02
-  3     1 +           1.5186191D+01         3.3329838D+06         4.1323732D+02
-  4     1 +           1.5183634D+01         3.3324225D+06         4.1316773D+02
-
- Self-energy corrections estimated --- these do not influence the data
-  in the RCI92 MIXing coefficients File.
-
-Eigenenergies:
-
-Level  J Parity       Hartrees              Kaysers                eV
-
-  1     1 +          -1.4011432D+04        -3.0751538D+09        -3.8127047D+05
-  2     1 +          -1.4011059D+04        -3.0750720D+09        -3.8126033D+05
-  3     1 +          -1.4010604D+04        -3.0749722D+09        -3.8124796D+05
-  4     1 +          -1.4010209D+04        -3.0748854D+09        -3.8123720D+05
            0  (total            3 ) rows read from .res
 CUTOFF set to  1.0000000000D-12
 Dirac-Coulomb one-e radial integrals:      66
@@ -273,35 +229,6 @@ Level J Parity      CSF contributions
                        4          5          6          2          7
   8     2 +      0.96567    0.20104    0.10941   -0.10345    0.05398
                        8          7          2          5          4
-
-  Self Energy Corrections: 
-
- Level  J Parity       Hartrees              Kaysers                eV
-
-  1     2 +           1.5190718D+01         3.3339773D+06         4.1336049D+02
-  2     2 +           1.5188390D+01         3.3334662D+06         4.1329714D+02
-  3     2 +           1.5187964D+01         3.3333728D+06         4.1328556D+02
-  4     2 +           1.5186155D+01         3.3329757D+06         4.1323632D+02
-  5     2 +           1.5186070D+01         3.3329571D+06         4.1323401D+02
-  6     2 +           1.5186000D+01         3.3329417D+06         4.1323210D+02
-  7     2 +           1.5186113D+01         3.3329665D+06         4.1323517D+02
-  8     2 +           1.5183684D+01         3.3324334D+06         4.1316907D+02
-
- Self-energy corrections estimated --- these do not influence the data
-  in the RCI92 MIXing coefficients File.
-
-Eigenenergies:
-
-Level  J Parity       Hartrees              Kaysers                eV
-
-  1     2 +          -1.4011881D+04        -3.0752525D+09        -3.8128272D+05
-  2     2 +          -1.4011245D+04        -3.0751129D+09        -3.8126540D+05
-  3     2 +          -1.4011066D+04        -3.0750735D+09        -3.8126052D+05
-  4     2 +          -1.4010892D+04        -3.0750354D+09        -3.8125579D+05
-  5     2 +          -1.4010555D+04        -3.0749614D+09        -3.8124663D+05
-  6     2 +          -1.4010407D+04        -3.0749290D+09        -3.8124260D+05
-  7     2 +          -1.4010090D+04        -3.0748594D+09        -3.8123398D+05
-  8     2 +          -1.4009935D+04        -3.0748254D+09        -3.8122976D+05
            0  (total            2 ) rows read from .res
 CUTOFF set to  1.0000000000D-12
 Dirac-Coulomb one-e radial integrals:      66
@@ -362,31 +289,6 @@ Level J Parity      CSF contributions
                        4          5          6          1          3
   6     3 +      0.97490    0.17183    0.10930    0.08600    0.02533
                        6          5          4          1          2
-
-  Self Energy Corrections: 
-
- Level  J Parity       Hartrees              Kaysers                eV
-
-  1     3 +           1.5188276D+01         3.3334413D+06         4.1329405D+02
-  2     3 +           1.5188337D+01         3.3334547D+06         4.1329571D+02
-  3     3 +           1.5188394D+01         3.3334672D+06         4.1329725D+02
-  4     3 +           1.5186152D+01         3.3329751D+06         4.1323624D+02
-  5     3 +           1.5185913D+01         3.3329226D+06         4.1322974D+02
-  6     3 +           1.5183629D+01         3.3324214D+06         4.1316759D+02
-
- Self-energy corrections estimated --- these do not influence the data
-  in the RCI92 MIXing coefficients File.
-
-Eigenenergies:
-
-Level  J Parity       Hartrees              Kaysers                eV
-
-  1     3 +          -1.4011497D+04        -3.0751682D+09        -3.8127226D+05
-  2     3 +          -1.4011229D+04        -3.0751093D+09        -3.8126496D+05
-  3     3 +          -1.4011003D+04        -3.0750597D+09        -3.8125881D+05
-  4     3 +          -1.4010748D+04        -3.0750037D+09        -3.8125187D+05
-  5     3 +          -1.4010657D+04        -3.0749838D+09        -3.8124939D+05
-  6     3 +          -1.4009915D+04        -3.0748209D+09        -3.8122921D+05
            0  (total            3 ) rows read from .res
 CUTOFF set to  1.0000000000D-12
 Dirac-Coulomb one-e radial integrals:      66
@@ -452,30 +354,3 @@ Level J Parity      CSF contributions
                        4          5          7          6          3
   7     4 +      0.95955   -0.19658    0.14981   -0.12852    0.03872
                        7          4          2          5          6
-
-  Self Energy Corrections: 
-
- Level  J Parity       Hartrees              Kaysers                eV
-
-  1     4 +           1.5190717D+01         3.3339770D+06         4.1336046D+02
-  2     4 +           1.5188502D+01         3.3334910D+06         4.1330020D+02
-  3     4 +           1.5188175D+01         3.3334191D+06         4.1329129D+02
-  4     4 +           1.5186031D+01         3.3329486D+06         4.1323295D+02
-  5     4 +           1.5186103D+01         3.3329644D+06         4.1323492D+02
-  6     4 +           1.5185866D+01         3.3329123D+06         4.1322846D+02
-  7     4 +           1.5183739D+01         3.3324454D+06         4.1317057D+02
-
- Self-energy corrections estimated --- these do not influence the data
-  in the RCI92 MIXing coefficients File.
-
-Eigenenergies:
-
-Level  J Parity       Hartrees              Kaysers                eV
-
-  1     4 +          -1.4011986D+04        -3.0752755D+09        -3.8128556D+05
-  2     4 +          -1.4011449D+04        -3.0751577D+09        -3.8127096D+05
-  3     4 +          -1.4011049D+04        -3.0750697D+09        -3.8126005D+05
-  4     4 +          -1.4010795D+04        -3.0750141D+09        -3.8125315D+05
-  5     4 +          -1.4010565D+04        -3.0749635D+09        -3.8124688D+05
-  6     4 +          -1.4010354D+04        -3.0749172D+09        -3.8124114D+05
-  7     4 +          -1.4010008D+04        -3.0748414D+09        -3.8123175D+05

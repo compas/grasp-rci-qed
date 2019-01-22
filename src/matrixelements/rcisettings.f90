@@ -11,7 +11,9 @@ module grasp_rciqed_rcisettings
         ! Grid parameters
         !real(real64) :: RNT, H, N
         ! Hamiltonian parameters
-        logical :: breit_enabled, nms_enabled, sms_enabled, qed_vp_enabled, qed_se_enabled
+        logical :: breit_enabled, nms_enabled, sms_enabled, qed_vp_enabled
+        ! For self-energy, we store:
+        integer :: qed_se, qed_se_hydrogenic_cutoff
     end type rcisettings
 
 contains
@@ -25,13 +27,15 @@ contains
     function read_settings_toml(jobname, settings)
         use grasp_rciqed_system, only: file_exists
         use grasp_rciqed_toml
+        use grasp_rciqed_qed, only: nsetypes, setypes_short
 
         character(len=*), intent(in) :: jobname
         type(rcisettings), intent(out) :: settings
         logical :: read_settings_toml
 
-        character(len=:), allocatable :: tomlfile
+        character(len=:), allocatable :: tomlfile, setype_string
         type(cpptoml_table) :: table
+        integer :: i
 
         tomlfile = trim(jobname) // '.settings.toml'
         if(.not.file_exists(tomlfile)) then
@@ -59,7 +63,25 @@ contains
         call get_logical_default(table, "hamiltonian.nms", .false., settings%nms_enabled)
         call get_logical_default(table, "hamiltonian.sms", .false., settings%sms_enabled)
         call get_logical_default(table, "hamiltonian.qed_vp", .false., settings%qed_vp_enabled)
-        call get_logical_default(table, "hamiltonian.qed_se", .false., settings%qed_se_enabled)
+
+        ! Parse the self-energy
+        settings%qed_se = 0 ! If hamiltonian.qed_se is missing => QED SE was disabled
+        if(get_string(table, "hamiltonian.qed_se", setype_string)) then
+            do i = 1, nsetypes
+                if(trim(setypes_short(i)) == trim(setype_string)) then
+                    settings%qed_se = i
+                    exit
+                endif
+            enddo
+            if(settings%qed_se == 0) then
+                print '("WARNING[read_settings_toml]: hamiltonian.qed_se has bad value.")'
+                print '("  Contains: ",a)', trim(setype_string)
+                print '("  Expected one of: ",10(a,:", "))', (trim(setypes_short(i)), i = 1,4)
+                read_settings_toml = .false.
+                return
+            endif
+        endif
+        call get_integer_default(table, "hamiltonian.qed_se_hydrogenic_cutoff", -1, settings%qed_se_hydrogenic_cutoff)
 
         ! If we didn't return by now, it all went well
         read_settings_toml = .true.
@@ -72,6 +94,9 @@ contains
         use def_C, only: Z, EMN, AUMAMU, FMTOAU
         use grid_C, only: RNT, H, N
         use npar_C, only: NPARM, PARM
+        use qedcut_C, only: NQEDCUT, NQEDMAX
+        use grasp_rciqed, only: setype
+        use grasp_rciqed_qed, only: nsetypes, setypes_short
 
         character(len=*), intent(in) :: jobname
         character(len=:), allocatable :: tomlfile
@@ -92,7 +117,7 @@ contains
             write(toml_unit, '(a,e22.16)') "  #fermi_c: ", PARM(1) / FMTOAU
             call write_toml_expfloat(toml_unit, "fermi_c", PARM(1) / FMTOAU)
         else
-            print *, "ERROR: Bad nuclear model; NPARM = ", NPARM
+            print *, "WARNING: Bad nuclear model; NPARM = ", NPARM
             write(toml_unit, '(a,i0)') "  nuclear_model = ", NPARM
         endif
 
@@ -105,14 +130,31 @@ contains
 
         write(toml_unit, '(a)') "[hamiltonian]"
         write(toml_unit, '(a)') "  # Contains the following booleans:"
-        write(toml_unit, '(a)') "  #   breit, nms, sms, qed_vp, qed_se"
-        write(toml_unit, '(a)') "  # Indicating if the corresponding part of the Hamiltonian"
+        write(toml_unit, '(a)') "  #   breit, nms, sms, qed_vp"
+        write(toml_unit, '(a)') "  # Each indicates if the corresponding part of the Hamiltonian"
         write(toml_unit, '(a)') "  # was enabled. If it is omitted, it is assumed to have been off."
+        write(toml_unit, '(a)') "  #"
+        write(toml_unit, '(a)') "  # May also contain qed_se (string), which indicates that a particular"
+        write(toml_unit, '(a)') "  # QED self-energy operator was also included in the Hamiltonian."
+        write(toml_unit, '(a)') "  # The possible values are: 'hydrogenic', 'qedmod', 'flambaum' and 'pyykkoe'"
+        write(toml_unit, '(a)') "  #"
+        write(toml_unit, '(a)') "  # Finally, for the hydrogenic QED self-energy, qed_se_hydrogenic_cutoff"
+        write(toml_unit, '(a)') "  # (integer) may be defined, which sets the n-quantum number cutoff. If not"
+        write(toml_unit, '(a)') "  # present, the implementation default is used."
         if(LTRANS) write(toml_unit, '(a)') "  breit = true"
         if(LNMS) write(toml_unit, '(a)') "  nms = true"
         if(LSMS) write(toml_unit, '(a)') "  sms = true"
         if(LVP) write(toml_unit, '(a)') "  qed_vp = true"
-        if(LSE) write(toml_unit, '(a)') "  qed_se = true"
+        if(LSE) then
+            if(setype < 1 .or. setype > nsetypes) then
+                print *, "ERROR: Bad self-energy type."
+                error stop
+            endif
+            write(toml_unit, '("  qed_se = """,a,"""")') trim(setypes_short(setype))
+            if(setype == 1 .and. NQEDCUT == 1) then
+                write(toml_unit, '(a,i0)') "  qed_se_hydrogenic_cutoff = ", NQEDMAX
+            endif
+        endif
 
         close(toml_unit)
 

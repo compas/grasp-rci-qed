@@ -1,0 +1,16 @@
+y                  # Default settings?
+test               # Name of state
+n                  # Include Breit?
+n                  # Modify frequency?
+y                  # Include vacuum polarization?
+y                  # Include NMS?
+y                  # Include SMS?
+y                  # Estimate self-energy?
+3                  # Type of self-energy?
+1-5                # J blocks 1-3
+1-4
+1-8
+1-6
+1-7
+1-2
+1-2
