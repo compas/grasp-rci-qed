@@ -47,7 +47,7 @@ contains
         Z = 77
         EMN = 100.0_dp / AUMAMU
 
-        call write_settings_toml(jobname)
+        call write_settings_toml(jobname, 1)
 
     end subroutine write_testsettings
 

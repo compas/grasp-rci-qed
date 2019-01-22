@@ -89,16 +89,21 @@ contains
 
     !> Writes a $(jobname).settings.toml file with the nuclear, grid and
     !! Hamiltonian settings that were used for the RCI run.
-    subroutine write_settings_toml(jobname)
+    subroutine write_settings_toml(jobname, setype)
         use decide_C, only: LTRANS, LNMS, LSMS, LVP, LSE
         use def_C, only: Z, EMN, AUMAMU, FMTOAU
         use grid_C, only: RNT, H, N
         use npar_C, only: NPARM, PARM
         use qedcut_C, only: NQEDCUT, NQEDMAX
-        use grasp_rciqed, only: setype
         use grasp_rciqed_qed, only: nsetypes, setypes_short
 
         character(len=*), intent(in) :: jobname
+        ! TODO: passing setype explicitly here like this, while otherwise we
+        ! rely on the global common block modules is a bit of an inconsistent
+        ! hack to resolve a circular dependency problem. This should be fixed
+        ! at some point.
+        integer, intent(in) :: setype
+
         character(len=:), allocatable :: tomlfile
         integer :: toml_unit
 
