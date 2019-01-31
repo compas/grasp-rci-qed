@@ -4,7 +4,7 @@
 !...Modified by Charlotte Froese Fischer
 !                     Gediminas Gaigalas  11/02/17
       SUBROUTINE getmixblock (NAME)
-      CHARACTER (LEN = 24), INTENT(IN) :: NAME
+      CHARACTER (LEN = *), INTENT(IN) :: NAME
       END SUBROUTINE
       END INTERFACE
       END MODULE
