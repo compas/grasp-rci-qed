@@ -1,0 +1,14 @@
+<map id="qedse_hydrogenic_grasp" name="qedse_hydrogenic_grasp">
+<area shape="rect" id="node2" href="$wfunc__interpolate_8f.html#a35fd0d7b172a27fc32f4426228ba9109" title="shab_wfunc_interpolate" alt="" coords="227,107,386,133"/>
+<area shape="rect" id="node3" href="$qedmod__hydrogenic_8f90.html#a1199d3fc7f4053967f933b30aac6cf3a" title="compute_qedmod_values" alt="" coords="221,157,392,184"/>
+<area shape="rect" id="node4" href="$uehling_8f.html#a4c741ad7b7067334ea121a2f15263c37" title="shab_uehling" alt="" coords="455,56,553,83"/>
+<area shape="rect" id="node8" href="$integr_8f.html#a31ff20c833f39696ada8ea5c2655f2ce" title="shab_tint" alt="" coords="628,171,703,197"/>
+<area shape="rect" id="node9" href="$integr_8f.html#ace585d2875f5bbf932c2dc755e5b604a" title="shab_sint" alt="" coords="465,157,543,184"/>
+<area shape="rect" id="node10" href="$wk_8f.html#a213de2beb7bc6c6b0ed810f0f417ae7b" title="shab_wk" alt="" coords="467,259,541,285"/>
+<area shape="rect" id="node13" href="$pot__wav_8f.html#a8e5cf3a87e48bad7788bf1c291d5e18f" title="shab_se_pot_wav" alt="" coords="441,208,567,235"/>
+<area shape="rect" id="node5" href="$uehling_8f.html#a70f128c0ce0978e0c37f9dbfdbd359f0" title="shab_dk0" alt="" coords="626,5,705,32"/>
+<area shape="rect" id="node6" href="$nucl_8f.html#aaa406f6a1cd78612241540eae6518d4d" title="shab_ro_nucl" alt="" coords="616,56,715,83"/>
+<area shape="rect" id="node7" href="$uehling_8f.html#a84261babe1eb775508688f9e91ffc849" title="shab_dk1" alt="" coords="626,107,705,133"/>
+<area shape="rect" id="node11" href="$wk_8f.html#ad9fd91003620962babced6c5457f9185" title="shab_wk_init" alt="" coords="616,233,715,260"/>
+<area shape="rect" id="node12" href="$wk_8f.html#af286eac46cc91593222b1ebaa5e713b7" title="shab_u_wk" alt="" coords="621,284,709,311"/>
+</map>

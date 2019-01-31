@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Types and routines for RCI.  
+<p>Types, routines and global variables for RCI.  
  <a href="classgrasp__rciqed.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -112,9 +112,13 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:acdce472a86589944d5ce44ccffe045ec"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrasp__rciqed.html#acdce472a86589944d5ce44ccffe045ec">res_unit</a> = -1</td></tr>
 <tr class="memdesc:acdce472a86589944d5ce44ccffe045ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">I/O unit of the <code>.res</code> file.  <a href="#acdce472a86589944d5ce44ccffe045ec">More...</a><br/></td></tr>
 <tr class="separator:acdce472a86589944d5ce44ccffe045ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25cad75ce40a654103ed23a8f951745a"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrasp__rciqed.html#a25cad75ce40a654103ed23a8f951745a">setype</a></td></tr>
+<tr class="separator:a25cad75ce40a654103ed23a8f951745a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c7f0d297ba6e8373c9aedfbbbfa7b03"><td class="memItemLeft" align="right" valign="top">real(real64), dimension(nnnw, nnnw)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrasp__rciqed.html#a8c7f0d297ba6e8373c9aedfbbbfa7b03">sematrix</a></td></tr>
+<tr class="separator:a8c7f0d297ba6e8373c9aedfbbbfa7b03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Types and routines for RCI. </p>
+<div class="textblock"><p>Types, routines and global variables for RCI. </p>
 </div><h2 class="groupheader">Member Function/Subroutine Documentation</h2>
 <a class="anchor" id="ab5a3eedafad8f39f713038abde3d527a"></a>
 <div class="memitem">
@@ -156,6 +160,30 @@ Here is the caller graph for this function:</div>
 
 <p>I/O unit of the <code>.res</code> file. </p>
 <p>The default value is <code>-1</code>, so that it would not be possible to confuse this with any other open unit (negative unit number are generally not allowed and <code>newunit=</code> never returns a <code>-1</code>; i.e. it is never possible to write to <code>unit = -1</code>). </p>
+
+</div>
+</div>
+<a class="anchor" id="a8c7f0d297ba6e8373c9aedfbbbfa7b03"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(real64), dimension(nnnw,nnnw) grasp_rciqed::sematrix</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a25cad75ce40a654103ed23a8f951745a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer grasp_rciqed::setype</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

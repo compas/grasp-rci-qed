@@ -110,8 +110,11 @@ Data Types</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacegrasp__rciqed__cimatrixelements_1_1nms.html">nms</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the many-particle matrix element of the normal mass shift.  <a href="interfacegrasp__rciqed__cimatrixelements_1_1nms.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacegrasp__rciqed__cimatrixelements_1_1qed__se.html">qed_se</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the self-energy many-body matrix element using the 1-particle matrix.  <a href="interfacegrasp__rciqed__cimatrixelements_1_1qed__se.html#details">More...</a><br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacegrasp__rciqed__cimatrixelements_1_1qed__se__mohr.html">qed_se_mohr</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate an estimate of the self-energy of a diagonal matrix element based on the Mohr hydrogenic values.  <a href="interfacegrasp__rciqed__cimatrixelements_1_1qed__se__mohr.html#details">More...</a><br/></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates an estimate of the self-energy of a diagonal matrix element based on the Mohr hydrogenic values.  <a href="interfacegrasp__rciqed__cimatrixelements_1_1qed__se__mohr.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacegrasp__rciqed__cimatrixelements_1_1qed__vp.html">qed_vp</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the many-particle matrix element of the QED vacuum polarization.  <a href="interfacegrasp__rciqed__cimatrixelements_1_1qed__vp.html#details">More...</a><br/></td></tr>
@@ -173,6 +176,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab41eebb69e9d117691c34371d01518ac"><td class="memItemLeft" align="right" valign="top">real(real64) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrasp__rciqed__cimatrixelements.html#ab41eebb69e9d117691c34371d01518ac">qed_se_mohr_cached</a> (ic, slfint)</td></tr>
 <tr class="memdesc:ab41eebb69e9d117691c34371d01518ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the QED contribution to a CI diagonal element using the orbital self-energy values in the <code>slfint</code> array.  <a href="#ab41eebb69e9d117691c34371d01518ac">More...</a><br/></td></tr>
 <tr class="separator:ab41eebb69e9d117691c34371d01518ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb18bf10d57823b631e80b12f9babcb8"><td class="memItemLeft" align="right" valign="top">real(real64) function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrasp__rciqed__cimatrixelements.html#acb18bf10d57823b631e80b12f9babcb8">qed_se</a> (sematrix, ic, ir)</td></tr>
+<tr class="memdesc:acb18bf10d57823b631e80b12f9babcb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This also calls the <code>ONESCALAR</code> routing from lib9290.  <a href="#acb18bf10d57823b631e80b12f9babcb8">More...</a><br/></td></tr>
+<tr class="separator:acb18bf10d57823b631e80b12f9babcb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae95015233b8c2bd8c8b52880981887e4"><td class="memItemLeft" align="right" valign="top">real(real64) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrasp__rciqed__cimatrixelements.html#ae95015233b8c2bd8c8b52880981887e4">qed_se_cached</a> (sematrix, ic, ir, k, l, tshell)</td></tr>
+<tr class="memdesc:ae95015233b8c2bd8c8b52880981887e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <code>ONESCALAR</code> output has to be passed as arguments here.  <a href="#ae95015233b8c2bd8c8b52880981887e4">More...</a><br/></td></tr>
+<tr class="separator:ae95015233b8c2bd8c8b52880981887e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -712,6 +721,125 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="classgrasp__rciqed__cimatrixelements_ac3cbfdc998668a328e2cacbcc67db491_cgraph.png" border="0" usemap="#classgrasp__rciqed__cimatrixelements_ac3cbfdc998668a328e2cacbcc67db491_cgraph" alt=""/></div>
 <map name="classgrasp__rciqed__cimatrixelements_ac3cbfdc998668a328e2cacbcc67db491_cgraph" id="classgrasp__rciqed__cimatrixelements_ac3cbfdc998668a328e2cacbcc67db491_cgraph">
 <area shape="rect" id="node2" href="interfacegrasp__rciqed__cimatrixelements_1_1nms.html#a9fe5420a80ecef316119240679016f56" title="The ONESCALAR output has to be passed as arguments here. " alt="" coords="256,5,459,46"/><area shape="rect" id="node3" href="classgrasp__rciqed__cimatrixelements.html#a65f82164b704df6518c7a98752896522" title="Calls the KEINT routine, but ensures that the input k and l arguments do not get swapped. " alt="" coords="256,70,459,111"/><area shape="rect" id="node4" href="keint_8f90.html#ac1ef11b37045511c4414ba2d0c68efae" title="keint" alt="" coords="507,77,557,104"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="acb18bf10d57823b631e80b12f9babcb8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(real64) function, public <a class="el" href="interfacegrasp__rciqed__cimatrixelements_1_1qed__se.html">grasp_rciqed_cimatrixelements::qed_se</a> </td>
+          <td>(</td>
+          <td class="paramtype">real(real64), dimension(nw, nw), intent(in)&#160;</td>
+          <td class="paramname"><em>sematrix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>ic</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>ir</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This also calls the <code>ONESCALAR</code> routing from lib9290. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ic,ir</td><td>The row and column indices of the CSFs. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The QED self-energy expectation value \(\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{VP}}|\Psi_{\textrm{ir}}\rangle\). </dd></dl>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classgrasp__rciqed__cimatrixelements_acb18bf10d57823b631e80b12f9babcb8_cgraph.png" border="0" usemap="#classgrasp__rciqed__cimatrixelements_acb18bf10d57823b631e80b12f9babcb8_cgraph" alt=""/></div>
+<map name="classgrasp__rciqed__cimatrixelements_acb18bf10d57823b631e80b12f9babcb8_cgraph" id="classgrasp__rciqed__cimatrixelements_acb18bf10d57823b631e80b12f9babcb8_cgraph">
+<area shape="rect" id="node2" href="interfacegrasp__rciqed__cimatrixelements_1_1qed__se.html#a6de95bedd1849ec801530f25720ba0ba" title="The ONESCALAR output has to be passed as arguments here. " alt="" coords="256,5,459,46"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ae95015233b8c2bd8c8b52880981887e4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(real64) function grasp_rciqed_cimatrixelements::qed_se_cached </td>
+          <td>(</td>
+          <td class="paramtype">real(real64), dimension(nw, nw), intent(in)&#160;</td>
+          <td class="paramname"><em>sematrix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>ic</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>ir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(real64), dimension(nw), intent(in)&#160;</td>
+          <td class="paramname"><em>tshell</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The <code>ONESCALAR</code> output has to be passed as arguments here. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ic,ir</td><td>The row and column indices of the CSFs. </td></tr>
+    <tr><td class="paramname">k,l,tshell</td><td>The output from <code>ONESCALAR</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The QED self-energy expectation value \(\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{VP}}|\Psi_{\textrm{ir}}\rangle\). </dd></dl>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classgrasp__rciqed__cimatrixelements_ae95015233b8c2bd8c8b52880981887e4_cgraph.png" border="0" usemap="#classgrasp__rciqed__cimatrixelements_ae95015233b8c2bd8c8b52880981887e4_cgraph" alt=""/></div>
+<map name="classgrasp__rciqed__cimatrixelements_ae95015233b8c2bd8c8b52880981887e4_cgraph" id="classgrasp__rciqed__cimatrixelements_ae95015233b8c2bd8c8b52880981887e4_cgraph">
+<area shape="rect" id="node2" href="interfacegrasp__rciqed__cimatrixelements_1_1qed__se.html#a6de95bedd1849ec801530f25720ba0ba" title="The ONESCALAR output has to be passed as arguments here. " alt="" coords="256,5,459,46"/></map>
 </div>
 </p>
 

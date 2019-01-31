@@ -1,0 +1,12 @@
+<map id="compute_qedmod_values" name="compute_qedmod_values">
+<area shape="rect" id="node2" href="$uehling_8f.html#a4c741ad7b7067334ea121a2f15263c37" title="shab_uehling" alt="" coords="239,56,337,83"/>
+<area shape="rect" id="node6" href="$integr_8f.html#a31ff20c833f39696ada8ea5c2655f2ce" title="shab_tint" alt="" coords="412,171,487,197"/>
+<area shape="rect" id="node7" href="$integr_8f.html#ace585d2875f5bbf932c2dc755e5b604a" title="shab_sint" alt="" coords="249,157,327,184"/>
+<area shape="rect" id="node8" href="$wk_8f.html#a213de2beb7bc6c6b0ed810f0f417ae7b" title="shab_wk" alt="" coords="251,259,325,285"/>
+<area shape="rect" id="node11" href="$pot__wav_8f.html#a8e5cf3a87e48bad7788bf1c291d5e18f" title="shab_se_pot_wav" alt="" coords="225,208,351,235"/>
+<area shape="rect" id="node3" href="$uehling_8f.html#a70f128c0ce0978e0c37f9dbfdbd359f0" title="shab_dk0" alt="" coords="410,5,489,32"/>
+<area shape="rect" id="node4" href="$nucl_8f.html#aaa406f6a1cd78612241540eae6518d4d" title="shab_ro_nucl" alt="" coords="400,56,499,83"/>
+<area shape="rect" id="node5" href="$uehling_8f.html#a84261babe1eb775508688f9e91ffc849" title="shab_dk1" alt="" coords="410,107,489,133"/>
+<area shape="rect" id="node9" href="$wk_8f.html#ad9fd91003620962babced6c5457f9185" title="shab_wk_init" alt="" coords="400,233,499,260"/>
+<area shape="rect" id="node10" href="$wk_8f.html#af286eac46cc91593222b1ebaa5e713b7" title="shab_u_wk" alt="" coords="405,284,493,311"/>
+</map>

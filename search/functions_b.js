@@ -11,7 +11,6 @@ var searchData=
   ['make_5fvalue',['make_value',['../namespacecpptoml.html#acaf82cf5747e83b7f43224fd68826831',1,'cpptoml']]],
   ['maneig',['maneig',['../interfacemaneig__i_1_1maneig.html#a5a26dddeb957d5e39c09c4c458cc1e64',1,'maneig_i::maneig::maneig()'],['../maneig_8f90.html#a14b8291376ebcf1f0e27b451170aafb2',1,'maneig():&#160;maneig.f90']]],
   ['matrix',['matrix',['../interfacematrix__i_1_1MATRIX.html#a6fb0f133c94359818ec3026ed3defebd',1,'matrix_i::MATRIX::matrix()'],['../matrix_8f90.html#a446f99dc54f47f27b629d290a2f8c69f',1,'matrix():&#160;matrix.f90']]],
-  ['matrixelement_5fzero',['matrixelement_zero',['../pt_8f90.html#a172771a2b1c2374eb234c41abced9019',1,'pt.f90']]],
   ['matrixelements_5fhydrogenic',['matrixelements_hydrogenic',['../matrixelements__hydrogenic_8f90.html#a3d6dd33862b729ae9e2363184220ca6a',1,'matrixelements_hydrogenic.f90']]],
   ['matrixelements_5frcisettings',['matrixelements_rcisettings',['../matrixelements__rcisettings_8f90.html#a96988b3947ecc557d7ccf33e5771c9ea',1,'matrixelements_rcisettings.f90']]],
   ['matrixelements_5frcisettings_5fexpfloat',['matrixelements_rcisettings_expfloat',['../matrixelements__rcisettings__expfloat_8f90.html#a7fab5fbfdfcca81b74305f19bce4438c',1,'matrixelements_rcisettings_expfloat.f90']]],

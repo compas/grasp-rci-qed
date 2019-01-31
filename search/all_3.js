@@ -6,6 +6,7 @@ var searchData=
   ['day',['day',['../structcpptoml_1_1local__date.html#acc59662ee9e5ace97d7612467baebd76',1,'cpptoml::local_date']]],
   ['determine_5fnumber_5ftype',['determine_number_type',['../classcpptoml_1_1parser.html#ab6cd7c81c666553e78071280336bc6e2',1,'cpptoml::parser']]],
   ['determine_5fvalue_5ftype',['determine_value_type',['../classcpptoml_1_1parser.html#adca6aff775f887440f8cafe1cfcbcc73',1,'cpptoml::parser']]],
+  ['dirac_2ef',['dirac.f',['../dirac_8f.html',1,'']]],
   ['dirac_5fpotential',['dirac_potential',['../interfacegrasp__rciqed__cimatrixelements_1_1dirac__potential.html',1,'grasp_rciqed_cimatrixelements']]],
   ['dirac_5fpotential',['dirac_potential',['../interfacegrasp__rciqed__cimatrixelements_1_1dirac__potential.html#a568b95dcf5d0c967bf2058fd44318048',1,'grasp_rciqed_cimatrixelements::dirac_potential::dirac_potential()'],['../classgrasp__rciqed__cimatrixelements.html#ab198803b6a93f4f19cd58e6d2ff1e13d',1,'grasp_rciqed_cimatrixelements::dirac_potential()']]],
   ['dirac_5fpotential_5fcached',['dirac_potential_cached',['../interfacegrasp__rciqed__cimatrixelements_1_1dirac__potential.html#a6cf6dd2058434f6b6e7f6fcb91f8c8b3',1,'grasp_rciqed_cimatrixelements::dirac_potential::dirac_potential_cached()'],['../classgrasp__rciqed__cimatrixelements.html#a2e501771ba6c2ead35f18994f33aea8b',1,'grasp_rciqed_cimatrixelements::dirac_potential_cached()']]],
@@ -17,8 +18,8 @@ var searchData=
   ['dnicmv_5fi',['dnicmv_i',['../classdnicmv__i.html',1,'']]],
   ['dnicmv_5fi_2ef90',['dnicmv_I.f90',['../dnicmv__I_8f90.html',1,'']]],
   ['dp',['dp',['../classgrasp__rciqed__kinds.html#a61d527ae7323846c555b85efc227d621',1,'grasp_rciqed_kinds']]],
-  ['dspevx',['dspevx',['../interfacedspevx__i_1_1dspevx.html#a59fd758e729936b0392b4d1d85238928',1,'dspevx_i::dspevx']]],
   ['dspevx',['dspevx',['../interfacedspevx__i_1_1dspevx.html',1,'dspevx_i']]],
+  ['dspevx',['dspevx',['../interfacedspevx__i_1_1dspevx.html#a59fd758e729936b0392b4d1d85238928',1,'dspevx_i::dspevx']]],
   ['dspevx_5fi',['dspevx_i',['../classdspevx__i.html',1,'']]],
   ['dspevx_5fi_2ef90',['dspevx_I.f90',['../dspevx__I_8f90.html',1,'']]],
   ['development_20notes',['Development notes',['../md_doc_notes.html',1,'']]]

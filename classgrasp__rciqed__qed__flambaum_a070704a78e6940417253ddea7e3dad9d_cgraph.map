@@ -1,0 +1,7 @@
+<map id="grasp_rciqed_qed_flambaum::qedse_flambaum" name="grasp_rciqed_qed_flambaum::qedse_flambaum">
+<area shape="rect" id="node2" href="$classgrasp__rciqed__qed__flambaum.html#a7ad4d7f7aca556f76dfea60e705c5d62" title="Populates the t and f arrays (of length ntmax) with grid (t) and integrand (f) values to prepare for ..." alt="" coords="243,70,431,111"/>
+<area shape="rect" id="node6" href="$classgrasp__rciqed__qed__flambaum.html#a10a7d0834324e884ead2d043f5f55b8e" title="Uses the Simpson&#39;s rule for a non&#45;uniform grid t to evaluate the integral of f. " alt="" coords="243,135,431,177"/>
+<area shape="rect" id="node3" href="$classgrasp__rciqed__qed__flambaum.html#aa9012a62d31f0ad13b7dc4b862c8ee34" title="Calculate the integral&#45;kernel for the radiative &#160;potential. " alt="" coords="481,5,669,46"/>
+<area shape="rect" id="node4" href="$classgrasp__rciqed__qed__flambaum.html#ae0fc05ea21cd41e0c3a381d037f00ef5" title="Calculate the first part of the integral&#45;kernel for the radiative &#160;potential. " alt="" coords="481,70,669,111"/>
+<area shape="rect" id="node5" href="$classgrasp__rciqed__qed__flambaum.html#a52e43d028d6bd48eefe58c0a1593efa5" title="Calculate the second part of the integral&#45;kernel for the radiative &#160;potential. " alt="" coords="481,135,669,177"/>
+</map>

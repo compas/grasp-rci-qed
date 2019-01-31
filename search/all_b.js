@@ -23,7 +23,6 @@ var searchData=
   ['matrix_5fi',['matrix_i',['../classmatrix__i.html',1,'']]],
   ['matrix_5fi_2ef90',['matrix_I.f90',['../matrix__I_8f90.html',1,'']]],
   ['matrixelement',['matrixelement',['../structmatrixelement.html',1,'']]],
-  ['matrixelement_5fzero',['matrixelement_zero',['../pt_8f90.html#a172771a2b1c2374eb234c41abced9019',1,'pt.f90']]],
   ['matrixelements_5fhydrogenic',['matrixelements_hydrogenic',['../matrixelements__hydrogenic_8f90.html#a3d6dd33862b729ae9e2363184220ca6a',1,'matrixelements_hydrogenic.f90']]],
   ['matrixelements_5fhydrogenic_2ef90',['matrixelements_hydrogenic.f90',['../matrixelements__hydrogenic_8f90.html',1,'']]],
   ['matrixelements_5frcisettings',['matrixelements_rcisettings',['../matrixelements__rcisettings_8f90.html#a96988b3947ecc557d7ccf33e5771c9ea',1,'matrixelements_rcisettings.f90']]],

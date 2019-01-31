@@ -20,6 +20,7 @@ var searchData=
   ['get_5fint_5f',['get_int_',['../interfacegrasp__rciqed__toml_1_1get__int__.html#a7f8c44827bf69c48db3706bcb29cad53',1,'grasp_rciqed_toml::get_int_']]],
   ['get_5finteger',['get_integer',['../classgrasp__rciqed__toml.html#a819749c49ba9412cb172a8bbbff01706',1,'grasp_rciqed_toml']]],
   ['get_5finteger_5fdefault',['get_integer_default',['../classgrasp__rciqed__toml.html#a64bbcd9b0496f5966862dc80594310c0',1,'grasp_rciqed_toml']]],
+  ['get_5fkappas',['get_kappas',['../orbitals_8F90.html#a133a4650199df52b126b3c83dd5f848b',1,'orbitals.F90']]],
   ['get_5flogical',['get_logical',['../classgrasp__rciqed__toml.html#acce716e8f6baa31b4e360cfa5707142c',1,'grasp_rciqed_toml']]],
   ['get_5flogical_5fdefault',['get_logical_default',['../classgrasp__rciqed__toml.html#aaec53ba3ed67c8c2ebb804b33f927e82',1,'grasp_rciqed_toml']]],
   ['get_5fqualified',['get_qualified',['../classcpptoml_1_1table.html#ab92748e93e25a0779f50a0244c516525',1,'cpptoml::table']]],
@@ -32,8 +33,10 @@ var searchData=
   ['get_5ftable_5farray_5fqualified',['get_table_array_qualified',['../classcpptoml_1_1table.html#a0963f77b4633fe35a205e68772b6ed6e',1,'cpptoml::table']]],
   ['get_5ftable_5fqualified',['get_table_qualified',['../classcpptoml_1_1table.html#a8c3b0945fc45d3de2d4f04e32b59e53f',1,'cpptoml::table']]],
   ['getcid',['getcid',['../interfacegetcid__i_1_1GETCID.html#aaaa1ea40dd2c0874040d168307b35c50',1,'getcid_i::GETCID::getcid()'],['../getcid_8f90.html#a9f1ffc2a0cbf3f970906500d083ae064',1,'getcid():&#160;getcid.f90']]],
+  ['getcid_5fqedse',['getcid_qedse',['../classgetcid__i.html#a3b66eb6cb3330f0e66638501460ff68d',1,'getcid_i']]],
   ['getenv_5fallocating',['getenv_allocating',['../matrixelements__hydrogenic_8f90.html#a6b4e1b36311ac7363513db3a020795c3',1,'matrixelements_hydrogenic.f90']]],
   ['getindex',['getindex',['../pt_8f90.html#afab7b4d8142250a083a2d6f7dbd5271c',1,'pt.f90']]],
   ['getline',['getline',['../namespacecpptoml_1_1detail.html#a3d07d1cff6567b9981f84f9247623af3',1,'cpptoml::detail']]],
-  ['getmixblock',['getmixblock',['../interfacegetmixblock__i_1_1getmixblock.html#abe91d1532edb52c14cee886dcc16fecc',1,'getmixblock_i::getmixblock::getmixblock()'],['../getmixblock_8f90.html#ac9583a6aea3409dfaf425e663beeb275',1,'getmixblock():&#160;getmixblock.f90']]]
+  ['getmixblock',['getmixblock',['../interfacegetmixblock__i_1_1getmixblock.html#abe91d1532edb52c14cee886dcc16fecc',1,'getmixblock_i::getmixblock::getmixblock()'],['../getmixblock_8f90.html#ac9583a6aea3409dfaf425e663beeb275',1,'getmixblock():&#160;getmixblock.f90']]],
+  ['getoption',['getoption',['../classgrasp__rciqed__cli.html#ae4d8654dedf9cf2b354a56a352e72192',1,'grasp_rciqed_cli']]]
 ];

@@ -2,6 +2,7 @@ var searchData=
 [
   ['ratden',['ratden',['../interfaceratden__i_1_1ratden.html#aa3cb503ee42b6f6ed887b6fb48292c1d',1,'ratden_i::ratden::ratden()'],['../ratden_8f90.html#a756fce8232c77705ad6c6e86ee894eb2',1,'ratden():&#160;ratden.f90']]],
   ['rci90mpi',['rci90mpi',['../rci-qed_8f90.html#a8eeee1dd6d149c94af2cdde0c4e733c6',1,'rci-qed.f90']]],
+  ['rci_5fqed_5forbitals',['rci_qed_orbitals',['../orbitals_8F90.html#a31f871f000fb152207534d0916752cca',1,'orbitals.F90']]],
   ['rci_5fqed_5fpt',['rci_qed_pt',['../pt_8f90.html#a5d0a61dea29614076614dde84eedd280',1,'pt.f90']]],
   ['read_5fsettings_5ftoml',['read_settings_toml',['../classgrasp__rciqed__rcisettings.html#a77db53ade651dafa4290882b95d71510',1,'grasp_rciqed_rcisettings']]],
   ['read_5ftime',['read_time',['../classcpptoml_1_1parser.html#acb89cb5c3b45bf9675c017cb12e68669',1,'cpptoml::parser']]],

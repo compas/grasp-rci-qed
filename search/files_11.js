@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['se_5fpot_2ef',['se_pot.f',['../se__pot_8f.html',1,'']]],
   ['setdbg_2ef90',['setdbg.f90',['../setdbg_8f90.html',1,'']]],
   ['setdbg_5fi_2ef90',['setdbg_I.f90',['../setdbg__I_8f90.html',1,'']]],
   ['setham_2ef90',['setham.f90',['../setham_8f90.html',1,'']]],
@@ -9,6 +10,8 @@ var searchData=
   ['setres_5fi_2ef90',['setres_I.f90',['../setres__I_8f90.html',1,'']]],
   ['setsum_2ef90',['setsum.f90',['../setsum_8f90.html',1,'']]],
   ['setsum_5fi_2ef90',['setsum_I.f90',['../setsum__I_8f90.html',1,'']]],
+  ['skfun_2ef90',['skfun.f90',['../skfun_8f90.html',1,'']]],
+  ['skfun_5fi_2ef90',['skfun_I.f90',['../skfun__I_8f90.html',1,'']]],
   ['skint_2ef90',['skint.f90',['../skint_8f90.html',1,'']]],
   ['skint_5fi_2ef90',['skint_I.f90',['../skint__I_8f90.html',1,'']]],
   ['spodmv_2ef90',['spodmv.f90',['../spodmv_8f90.html',1,'']]],

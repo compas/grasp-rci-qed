@@ -102,12 +102,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a41500f5196c3da5ba44f73682363b0d2"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrasp__rciqed__qed.html#a41500f5196c3da5ba44f73682363b0d2">init_vacuum_polarization</a></td></tr>
 <tr class="separator:a41500f5196c3da5ba44f73682363b0d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a676ccb2eb2f657aa4a86468547d171b1"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrasp__rciqed__qed.html#a676ccb2eb2f657aa4a86468547d171b1">qedse</a> (setype, <a class="el" href="matrix_8f90.html#a446f99dc54f47f27b629d290a2f8c69f">matrix</a>)</td></tr>
+<tr class="memdesc:a676ccb2eb2f657aa4a86468547d171b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populates the <code>matrix</code> with QED self-energy matrix elements for each orbital.  <a href="#a676ccb2eb2f657aa4a86468547d171b1">More...</a><br/></td></tr>
+<tr class="separator:a676ccb2eb2f657aa4a86468547d171b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:aae52f4179e90d4aea20eafba0dbeed53"><td class="memItemLeft" align="right" valign="top">real(real64), dimension(nnnw)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrasp__rciqed__qed.html#aae52f4179e90d4aea20eafba0dbeed53">slfint</a></td></tr>
-<tr class="memdesc:aae52f4179e90d4aea20eafba0dbeed53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the self-energy shifts for orbitals.  <a href="#aae52f4179e90d4aea20eafba0dbeed53">More...</a><br/></td></tr>
-<tr class="separator:aae52f4179e90d4aea20eafba0dbeed53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bb39bff836205eec26ec74d546da0ed"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrasp__rciqed__qed.html#a2bb39bff836205eec26ec74d546da0ed">nsetypes</a> = 4</td></tr>
+<tr class="separator:a2bb39bff836205eec26ec74d546da0ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eef6eaeed5d94239f7f71105cbaffae"><td class="memItemLeft" align="right" valign="top">character(*), dimension(<a class="el" href="classgrasp__rciqed__qed.html#a2bb39bff836205eec26ec74d546da0ed">nsetypes</a>), <br class="typebreak"/>
+parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrasp__rciqed__qed.html#a6eef6eaeed5d94239f7f71105cbaffae">setypes_long</a> = (/ &quot;Scaled hydrogenic (default) &quot;, &quot;QEDMOD (Shabaev et al., 2015) &quot;, &quot;Flambaum &amp; Ginges, 2005 &quot;, &quot;Pyykkö &amp; Zhao, 2003 &quot; /)</td></tr>
+<tr class="separator:a6eef6eaeed5d94239f7f71105cbaffae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac95631f4715d874b6bf14dfbf0b250fb"><td class="memItemLeft" align="right" valign="top">character(*), dimension(<a class="el" href="classgrasp__rciqed__qed.html#a2bb39bff836205eec26ec74d546da0ed">nsetypes</a>), <br class="typebreak"/>
+parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrasp__rciqed__qed.html#ac95631f4715d874b6bf14dfbf0b250fb">setypes_short</a> = (/ &quot;hydrogenic&quot;, &quot;qedmod &quot;, &quot;flambaum &quot;, &quot;pyykkoe &quot; /)</td></tr>
+<tr class="separator:ac95631f4715d874b6bf14dfbf0b250fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function/Subroutine Documentation</h2>
 <a class="anchor" id="a41500f5196c3da5ba44f73682363b0d2"></a>
@@ -128,24 +136,100 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgrasp__rciqed__qed_a41500f5196c3da5ba44f73682363b0d2_icgraph.png" border="0" usemap="#classgrasp__rciqed__qed_a41500f5196c3da5ba44f73682363b0d2_icgraph" alt=""/></div>
 <map name="classgrasp__rciqed__qed_a41500f5196c3da5ba44f73682363b0d2_icgraph" id="classgrasp__rciqed__qed_a41500f5196c3da5ba44f73682363b0d2_icgraph">
-<area shape="rect" id="node2" href="pt_8f90.html#a5d0a61dea29614076614dde84eedd280" title="./rci&#45;qed.pt &lt;state&gt; " alt="" coords="252,5,335,32"/><area shape="rect" id="node3" href="matrixelements__hydrogenic_8f90.html#a3d6dd33862b729ae9e2363184220ca6a" title="matrixelements_hydrogenic" alt="" coords="203,56,384,83"/></map>
+<area shape="rect" id="node2" href="orbitals_8F90.html#a31f871f000fb152207534d0916752cca" title="./rci&#45;qed.orbitals &lt;state&gt; " alt="" coords="237,5,350,32"/><area shape="rect" id="node3" href="pt_8f90.html#a5d0a61dea29614076614dde84eedd280" title="./rci&#45;qed.pt &lt;state&gt; " alt="" coords="252,56,335,83"/><area shape="rect" id="node4" href="matrixelements__hydrogenic_8f90.html#a3d6dd33862b729ae9e2363184220ca6a" title="matrixelements_hydrogenic" alt="" coords="203,107,384,133"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a676ccb2eb2f657aa4a86468547d171b1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine grasp_rciqed_qed::qedse </td>
+          <td>(</td>
+          <td class="paramtype">integer&#160;</td>
+          <td class="paramname"><em>setype</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(real64), dimension(nw, nw)&#160;</td>
+          <td class="paramname"><em>matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Populates the <code>matrix</code> with QED self-energy matrix elements for each orbital. </p>
+<p><code>setype</code> determines the method used to estimate self-energy and can take the following values:</p>
+<ul>
+<li><code>1</code> &ndash; SE estimate based on hydrogenic wavefunctions (<code>qedse_mohr</code> in libqed)</li>
+<li><code>2</code> &ndash; Model operator approch for SE due to Shabaeva &amp; Tupitsyna &amp; Yerokhin (<code>qedse_shabaev</code> in libqed)</li>
+<li><code>3</code> &ndash; Flambaum &amp; Ginges semi-empiric self-energy (<code>qedse_flambaum</code> in libqed)</li>
+<li><code>4</code> &ndash; Pyykkö &amp; Zhao empiric self-energy (<code>qedse_pyykkoe</code> in libqed)</li>
+</ul>
+<p><code>matrix</code> is assumed to be an <code>NW x NW</code> <code>real64</code> array. </p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classgrasp__rciqed__qed_a676ccb2eb2f657aa4a86468547d171b1_cgraph.png" border="0" usemap="#classgrasp__rciqed__qed_a676ccb2eb2f657aa4a86468547d171b1_cgraph" alt=""/></div>
+<map name="classgrasp__rciqed__qed_a676ccb2eb2f657aa4a86468547d171b1_cgraph" id="classgrasp__rciqed__qed_a676ccb2eb2f657aa4a86468547d171b1_cgraph">
+<area shape="rect" id="node2" href="qed__slfen_8f90.html#a3ee5bfb2f477d61777d79f7d48c10876" title="qed_slfen" alt="" coords="277,471,355,498"/><area shape="rect" id="node3" href="matrix_8f90.html#a446f99dc54f47f27b629d290a2f8c69f" title="matrix" alt="" coords="287,522,345,548"/><area shape="rect" id="node5" href="classgrasp__rciqed__qed__qedmod.html#a7920b6b28bc49c3a0f82a96a27f830f2" title="grasp_rciqed_qed_qedmod\l::qedse_qedmod_init" alt="" coords="227,573,405,614"/><area shape="rect" id="node38" href="classgrasp__rciqed__qed__qedmod.html#aed77f90089ef8f955781cc32b0fd5c0d" title="Estimates the QED self&#45;energy of the kth orbital using the model operator approach described in [Shab..." alt="" coords="465,928,642,969"/><area shape="rect" id="node42" href="classgrasp__rciqed__qed__flambaum.html#a070704a78e6940417253ddea7e3dad9d" title="Estimates the QED self&#45;energy of the kth orbital using potentials presented in [Flambaum &amp; Ginges..." alt="" coords="222,980,410,1021"/><area shape="rect" id="node48" href="classgrasp__rciqed__qed__pyykkoe.html#a91aa47f6db70c52ba2f60a7bdf4c2cd0" title="Calculates (k1, k2) matrix element of the effective local QED self&#45;energy potential [Pyykkö &amp; Zhao..." alt="" coords="226,1045,406,1086"/><area shape="rect" id="node4" href="wghtd5_8f90.html#af37001bece47c084252c83f9d5d60029" title="wghtd5" alt="" coords="521,32,585,59"/><area shape="rect" id="node6" href="classgrasp__rciqed__nucleus.html#ac81012f9bcc5eddd7e7e9d9eec823463" title="Estimates the RMS of a Fermi nucleus, given the a and c parameters. " alt="" coords="479,84,627,125"/><area shape="rect" id="node7" href="grid__args_8f.html#a28691dfb88b1f95db5a5d753dc95f75a" title="shab_grid_args" alt="" coords="498,150,609,176"/><area shape="rect" id="node11" href="nucl_8f.html#a40f3a34c23b9a855261c11b071c92891" title="shab_nucl" alt="" coords="513,276,594,303"/><area shape="rect" id="node21" href="init__se_8f.html#ad61a5dee50ab0cddd3b5cac672777543" title="shab_init_se" alt="" coords="506,479,601,506"/><area shape="rect" id="node26" href="populate__hydrogenics_8f90.html#aa09c8af79d71a68980dc29ac2ad6ffd4" title="Populates the /ff/ common block with hydrogenic wavefunctions. " alt="" coords="462,580,645,607"/><area shape="rect" id="node32" href="se__pot_8f.html#a4ef72ab21e019cc89fe34923ec662a1c" title="shab_local_se_pot" alt="" coords="488,656,619,683"/><area shape="rect" id="node35" href="se__pot_8f.html#a86d5376736f9d6f6871eef97daa57330" title="shab_nonlocal_se_pot" alt="" coords="478,732,629,759"/><area shape="rect" id="node8" href="exit_8f.html#a054145e2e7ae8643df326516bbf52cd2" title="shab_exit1" alt="" coords="981,150,1067,176"/><area shape="rect" id="node9" href="grid__args_8f.html#a07cfe6b5e8e46d7b4f7910a0cd1e74cf" title="shab_rr" alt="" coords="763,48,829,75"/><area shape="rect" id="node10" href="grid__args_8f.html#a39262d3ccf516c68d3adaf51a5b0d1a9" title="shab_tbr" alt="" coords="760,99,832,126"/><area shape="rect" id="node12" href="nucl_8f.html#a04336d2e00fc86f3330e767b5abb97bb" title="shab_sk" alt="" coords="989,226,1059,252"/><area shape="rect" id="node14" href="nucl_8f.html#a97fbe5ae665a864e61a39da92ac3f2a0" title="shab_rm" alt="" coords="760,302,832,328"/><area shape="rect" id="node18" href="nucl_8f.html#adeabf6df2e54475a43b0967d19cf65b2" title="shab_vpot_fermi" alt="" coords="737,251,855,278"/><area shape="rect" id="node19" href="nucl_8f.html#a44eb85dc13e7043b172be7e481a56993" title="shab_vpot_gauss" alt="" coords="734,352,858,379"/><area shape="rect" id="node13" href="classcpptoml_1_1consumer.html#a2cf9e33fe9091d6ed34f9a479f709192" title="cpptoml::consumer::\lerror" alt="" coords="1152,240,1293,281"/><area shape="rect" id="node15" href="nucl_8f.html#aa77631ff9d6aa314fb4108a88d5879e7" title="shab_fxneax" alt="" coords="976,327,1072,354"/><area shape="rect" id="node16" href="nucl_8f.html#a16bad5ae2af11a3031355d8c711d08c4" title="shab_dfac" alt="" coords="1181,316,1264,343"/><area shape="rect" id="node17" href="nucl_8f.html#a02d841a197adf07674bdf75f05b944f0" title="shab_stpdi" alt="" coords="1180,367,1265,394"/><area shape="rect" id="node20" href="nucl_8f.html#a236ec25abce7d49adc81c3176b98b3da" title="shab_erf" alt="" coords="988,378,1060,404"/><area shape="rect" id="node22" href="fse__dat_8f.html#a343bc47003fd0ac782d163bfae6606b5" title="shab_se_pnt_stor" alt="" coords="733,403,859,430"/><area shape="rect" id="node23" href="fse__dat_8f.html#a384a9bec93b467baa6b3cc543a399bba" title="shab_se_fn_stor" alt="" coords="737,454,855,480"/><area shape="rect" id="node24" href="fse__dat_8f.html#a1f157ab4538d67ed67a6eacdacb00117" title="shab_fse_dat" alt="" coords="746,504,846,531"/><area shape="rect" id="node25" href="fse__dat_8f.html#af3331deed8bbc54ac0633fef2c445845" title="shab_dinterpolation" alt="" coords="957,504,1091,531"/><area shape="rect" id="node27" href="dirac_8f.html#af07e5b8b8a04ffe3ff3053fdde0298f9" title="shab_dirac" alt="" coords="753,555,839,582"/><area shape="rect" id="node31" href="write__func_8f.html#a8dd8d10d3d871b890b8c4618973cff53" title="shab_write_func" alt="" coords="737,606,855,632"/><area shape="rect" id="node28" href="dirac_8f.html#a8080593e5fc000098aa391b78bf9b0d5" title="shab_origin" alt="" coords="980,555,1068,582"/><area shape="rect" id="node29" href="dirac_8f.html#a70863a1a1d4e124cd3a9d31fb86b03f5" title="shab_correct" alt="" coords="975,606,1073,632"/><area shape="rect" id="node30" href="integr_8f.html#a31ff20c833f39696ada8ea5c2655f2ce" title="shab_tint" alt="" coords="987,834,1061,860"/><area shape="rect" id="node33" href="read__func_8f.html#ad3e9fbb08e890a4f88642bf70de601ee" title="shab_read_func" alt="" coords="739,656,853,683"/><area shape="rect" id="node34" href="integr_8f.html#ace585d2875f5bbf932c2dc755e5b604a" title="shab_sint" alt="" coords="757,707,835,734"/><area shape="rect" id="node36" href="se__pot_8f.html#a8444427a762c2cc62cba08b97e249510" title="shab_dminv" alt="" coords="750,808,842,835"/><area shape="rect" id="node37" href="se__pot_8f.html#a8cfe8f57e2cfc11cb942857c5fea8ef1" title="shab_dab_matrix" alt="" coords="735,859,857,886"/><area shape="rect" id="node39" href="classgrasp__rciqed__qed__qedmod.html#a21e659233805c782b2d256c37a93afeb" title="Interpolate the GRASP orbital k onto the QEDMOD grid. " alt="" coords="697,1012,895,1053"/><area shape="rect" id="node41" href="pot__wav_8f.html#a8e5cf3a87e48bad7788bf1c291d5e18f" title="shab_se_pot_wav" alt="" coords="733,960,859,987"/><area shape="rect" id="node40" href="wfunc__interpolate_8f.html#a35fd0d7b172a27fc32f4426228ba9109" title="shab_wfunc_interpolate" alt="" coords="945,1019,1103,1046"/><area shape="rect" id="node43" href="classgrasp__rciqed__qed__flambaum.html#a7ad4d7f7aca556f76dfea60e705c5d62" title="Populates the t and f arrays (of length ntmax) with grid (t) and integrand (f) values to prepare for ..." alt="" coords="459,1077,647,1118"/><area shape="rect" id="node47" href="classgrasp__rciqed__qed__flambaum.html#a10a7d0834324e884ead2d043f5f55b8e" title="Uses the Simpson&#39;s rule for a non&#45;uniform grid t to evaluate the integral of f. " alt="" coords="459,1142,647,1184"/><area shape="rect" id="node44" href="classgrasp__rciqed__qed__flambaum.html#aa9012a62d31f0ad13b7dc4b862c8ee34" title="Calculate the integral&#45;kernel for the radiative &#160;potential. " alt="" coords="702,1077,890,1118"/><area shape="rect" id="node45" href="classgrasp__rciqed__qed__flambaum.html#ae0fc05ea21cd41e0c3a381d037f00ef5" title="Calculate the first part of the integral&#45;kernel for the radiative &#160;potential. " alt="" coords="702,1142,890,1184"/><area shape="rect" id="node46" href="classgrasp__rciqed__qed__flambaum.html#a52e43d028d6bd48eefe58c0a1593efa5" title="Calculate the second part of the integral&#45;kernel for the radiative &#160;potential. " alt="" coords="702,1208,890,1249"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classgrasp__rciqed__qed_a676ccb2eb2f657aa4a86468547d171b1_icgraph.png" border="0" usemap="#classgrasp__rciqed__qed_a676ccb2eb2f657aa4a86468547d171b1_icgraph" alt=""/></div>
+<map name="classgrasp__rciqed__qed_a676ccb2eb2f657aa4a86468547d171b1_icgraph" id="classgrasp__rciqed__qed_a676ccb2eb2f657aa4a86468547d171b1_icgraph">
+<area shape="rect" id="node2" href="orbitals_8F90.html#a4bc989e4db39f1a581815da8ca547fa0" title="Prints a table of QED self&#45;energy estimates for all the orbitals. " alt="" coords="691,33,837,60"/><area shape="rect" id="node4" href="pt_8f90.html#a5d0a61dea29614076614dde84eedd280" title="./rci&#45;qed.pt &lt;state&gt; " alt="" coords="221,33,304,60"/><area shape="rect" id="node5" href="matrix_8f90.html#a446f99dc54f47f27b629d290a2f8c69f" title="matrix" alt="" coords="233,84,292,110"/><area shape="rect" id="node3" href="orbitals_8F90.html#a31f871f000fb152207534d0916752cca" title="./rci&#45;qed.orbitals &lt;state&gt; " alt="" coords="886,33,999,60"/><area shape="rect" id="node6" href="orbitals_8F90.html#aea684baecda2e4e287f9925dcc87d16d" title="fill_vpint_matrix" alt="" coords="529,58,642,85"/><area shape="rect" id="node7" href="orbitals_8F90.html#ab7694672e50240c08a912251b7380543" title="writematrix" alt="" coords="542,109,629,136"/><area shape="rect" id="node8" href="orbitals_8F90.html#abcfe701120f34ac2853aaea979632277" title="writematrix_kappa" alt="" coords="352,160,480,186"/><area shape="rect" id="node9" href="rci-qed_8f90.html#a8eeee1dd6d149c94af2cdde0c4e733c6" title="rci90mpi" alt="" coords="381,210,451,237"/></map>
 </div>
 </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="aae52f4179e90d4aea20eafba0dbeed53"></a>
+<a class="anchor" id="a2bb39bff836205eec26ec74d546da0ed"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">real(real64), dimension(nnnw) grasp_rciqed_qed::slfint</td>
+          <td class="memname">integer, parameter grasp_rciqed_qed::nsetypes = 4</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Stores the self-energy shifts for orbitals. </p>
+</div>
+</div>
+<a class="anchor" id="a6eef6eaeed5d94239f7f71105cbaffae"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">character(*), dimension(<a class="el" href="classgrasp__rciqed__qed.html#a2bb39bff836205eec26ec74d546da0ed">nsetypes</a>), parameter grasp_rciqed_qed::setypes_long = (/ &quot;Scaled hydrogenic (default) &quot;, &quot;QEDMOD (Shabaev et al., 2015) &quot;, &quot;Flambaum &amp; Ginges, 2005 &quot;, &quot;Pyykkö &amp; Zhao, 2003 &quot; /)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac95631f4715d874b6bf14dfbf0b250fb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">character(*), dimension(<a class="el" href="classgrasp__rciqed__qed.html#a2bb39bff836205eec26ec74d546da0ed">nsetypes</a>), parameter grasp_rciqed_qed::setypes_short = (/ &quot;hydrogenic&quot;, &quot;qedmod &quot;, &quot;flambaum &quot;, &quot;pyykkoe &quot; /)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

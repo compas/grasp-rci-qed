@@ -1,9 +1,12 @@
 <map id="grasp_rciqed_rcisettings::read_settings_toml" name="grasp_rciqed_rcisettings::read_settings_toml">
 <area shape="rect" id="node2" href="$classgrasp__rciqed__system.html#ae95514890f033dd3923644f9a26baa6b" title="Wraps the inquire statement to check if a file exists in a function. " alt="" coords="216,5,363,46"/>
-<area shape="rect" id="node3" href="$classcpptoml_1_1table.html#aa015406ceb358322640c30720a0b5979" title="cpptoml::table::table" alt="" coords="605,129,745,156"/>
-<area shape="rect" id="node4" href="$classgrasp__rciqed__toml.html#a24589331136534b624c1eeb6fc5a9f02" title="grasp_rciqed_toml::\lget_double" alt="" coords="411,173,547,214"/>
-<area shape="rect" id="node7" href="$classgrasp__rciqed__toml.html#aaec53ba3ed67c8c2ebb804b33f927e82" title="grasp_rciqed_toml::\lget_logical_default" alt="" coords="221,219,357,261"/>
-<area shape="rect" id="node5" href="$classgrasp__rciqed__toml.html#ac5d84627ea9e534c624785ce27e839bd" title="grasp_rciqed_toml::cstr" alt="" coords="595,188,754,215"/>
-<area shape="rect" id="node6" href="$classcpptoml_1_1value.html#aa33eca40f41a74e97e94058454127902" title="cpptoml::value::value" alt="" coords="601,245,748,272"/>
-<area shape="rect" id="node8" href="$classgrasp__rciqed__toml.html#acce716e8f6baa31b4e360cfa5707142c" title="grasp_rciqed_toml::\lget_logical" alt="" coords="411,238,547,279"/>
+<area shape="rect" id="node3" href="$classcpptoml_1_1table.html#aa015406ceb358322640c30720a0b5979" title="cpptoml::table::table" alt="" coords="605,231,745,257"/>
+<area shape="rect" id="node4" href="$classgrasp__rciqed__toml.html#a24589331136534b624c1eeb6fc5a9f02" title="grasp_rciqed_toml::\lget_double" alt="" coords="411,289,547,330"/>
+<area shape="rect" id="node7" href="$classgrasp__rciqed__toml.html#aaec53ba3ed67c8c2ebb804b33f927e82" title="grasp_rciqed_toml::\lget_logical_default" alt="" coords="221,226,357,267"/>
+<area shape="rect" id="node9" href="$classgrasp__rciqed__toml.html#ad3aae33f2593aaa9308db3499ea54b44" title="grasp_rciqed_toml::\lget_string" alt="" coords="411,419,547,461"/>
+<area shape="rect" id="node10" href="$classgrasp__rciqed__toml.html#a64bbcd9b0496f5966862dc80594310c0" title="grasp_rciqed_toml::\lget_integer_default" alt="" coords="221,349,357,390"/>
+<area shape="rect" id="node5" href="$classgrasp__rciqed__toml.html#ac5d84627ea9e534c624785ce27e839bd" title="grasp_rciqed_toml::cstr" alt="" coords="595,329,754,356"/>
+<area shape="rect" id="node6" href="$classcpptoml_1_1value.html#aa33eca40f41a74e97e94058454127902" title="cpptoml::value::value" alt="" coords="601,404,748,431"/>
+<area shape="rect" id="node8" href="$classgrasp__rciqed__toml.html#acce716e8f6baa31b4e360cfa5707142c" title="grasp_rciqed_toml::\lget_logical" alt="" coords="411,223,547,265"/>
+<area shape="rect" id="node11" href="$classgrasp__rciqed__toml.html#a819749c49ba9412cb172a8bbbff01706" title="grasp_rciqed_toml::\lget_integer" alt="" coords="411,354,547,395"/>
 </map>
