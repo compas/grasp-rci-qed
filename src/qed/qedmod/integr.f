@@ -56,6 +56,13 @@ c       - - - - - - - - - - - - - - - - - - - - - - - - -
         f5=(p(5)*a(5)+q(5)*b(5))*r(5)**k
         g=dlog(f5/f1)/dlog(r(5)/r(1))
         t0=r(1)*f1/(g+1)
+        if(t0 /= t0) then
+c         This should be relatively safe to do, since t0 is basically always
+c         insignificant.
+          print '(a,"[",a,"]: ",a)', "qedmod::shab_tint", "WARNING",
+     &      "t0 estimation failed, setting to zero"
+          t0 = 0.0d0
+        endif
 c       - - - - - - - - - - - - - - - - - - - - - - - - -
         ds=0.d0
         i1=1
