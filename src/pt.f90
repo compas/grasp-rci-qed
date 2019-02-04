@@ -250,14 +250,26 @@ contains
         write(unit, '(a9)', advance='no') "asf_index"
         do i = 1, hcs_len
             if(.not.hcs_cat(i)) cycle
-            write(unit, '(",",a24)', advance='no') trim(hcs_technical(i))
+            if(i == 7) then
+                ! Self-energy gets special treatment
+                write(unit, '(",",a24)', advance='no') trim(hcs_technical(i))//":"//trim(setypes_short(settings%qed_se))
+            else
+                write(unit, '(",",a24)', advance='no') trim(hcs_technical(i))
+            endif
         enddo
         write(unit, '(",",a24)', advance='no') "sum:non_pt"
         do i = 1, hcs_len
             if(hcs_cat(i)) cycle
-            write(unit, '(",",a24)', advance='no') "pt:"//trim(hcs_technical(i))
+            if(i == 7) then
+                ! Self-energy gets special treatment, since in PT mode, we have
+                ! several parallel methods.
+                do j = 1, nsetypes
+                    write(unit, '(",",a24)', advance='no') "pt:"//trim(hcs_technical(i))//":"//trim(setypes_short(j))
+                enddo
+            else
+                write(unit, '(",",a24)', advance='no') "pt:"//trim(hcs_technical(i))
+            endif
         enddo
-        write(unit, '(",",a24)', advance='no') "sum:with_pt"
         write(unit, '()')
     end subroutine write_csv_header
 
@@ -276,10 +288,16 @@ contains
         write(unit, '(1(",",e24.16))', advance='no') sum
         do i = 1, hcs_len
             if(hcs_cat(i)) cycle
-            write(unit, '(1(",",e24.16))', advance='no') getindex(me, i)
-            sum = sum + getindex(me, i)
+            if(i == 7) then
+                ! Self-energy gets special treatment, since in PT mode, we have
+                ! several parallel methods.
+                do j = 1, nsetypes
+                    write(unit, '(1(",",e24.16))', advance='no') me%se_array(j)
+                enddo
+            else
+                write(unit, '(1(",",e24.16))', advance='no') getindex(me, i)
+            endif
         enddo
-        write(unit, '(1(",",e24.16))', advance='no') sum
         write(unit, '()') ! write the newline
     end subroutine write_csv_asf_line
 
