@@ -1,7 +1,7 @@
 # `rci-qed` program for GRASP
 
-[![Doxygen Documentation](https://img.shields.io/badge/documentation-master-blue.svg)](http://mortenpi.eu/grasp-rci-qed/)
-[![Build Status](https://travis-ci.com/mortenpi/grasp-rci-qed.svg?token=J2TJDmxGV6c9f8C3LXps&branch=master)](https://travis-ci.com/mortenpi/grasp-rci-qed)
+[![Doxygen Documentation][doc-img]][doc-url]
+[![Build Status][travis-img]][travis-url]
 
 **An updated RCI program with new QED for GRASP.**
 
@@ -36,3 +36,7 @@ source /path/to/grasp/envset.sh
 
 [compas-grasp2018]: https://github.com/compas/grasp2018
 [mortenpi-grasp]: https://github.com/mortenpi/grasp
+[doc-img]: https://img.shields.io/badge/documentation-master-blue.svg
+[doc-url]: http://compas.github.io/grasp-rci-qed/
+[travis-img]: https://travis-ci.com/compas/grasp-rci-qed.svg?token=J2TJDmxGV6c9f8C3LXps&branch=master
+[travis-url]: https://travis-ci.com/compas/grasp-rci-qed
