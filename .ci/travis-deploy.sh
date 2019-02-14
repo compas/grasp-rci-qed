@@ -32,7 +32,7 @@ if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]
 	# temporary directory and clone the repository again, and cd there:
 	gh_pages_dir=`mktemp -d`
 	echo "INFO: Cloning gh-pages into ${gh_pages_dir}"
-	git clone -b gh-pages git@github.com:mortenpi/grasp-rci-qed.git "${gh_pages_dir}" || exit
+	git clone -b gh-pages git@github.com:compas/grasp-rci-qed.git "${gh_pages_dir}" || exit
 	cd "${gh_pages_dir}" || exit
 	# Remove all the old files (but not stuff under .git)
 	find . -type f -not -regex "\./\.git/.*" -delete
