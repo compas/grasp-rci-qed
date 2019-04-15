@@ -35,3 +35,13 @@ target_link_libraries_Fortran(rci-qed.orbitals PUBLIC
     rciqed-grasp rciqed-rci rciqed-breit rciqed-qed rciqed-mass_shifts rciqed-matrixelements
 )
 install(TARGETS rci-qed.orbitals DESTINATION bin/)
+
+# rci-qed.pt
+add_executable(rci-qed.energyexpressions
+    energyexpressions.f90
+)
+target_link_libraries_Fortran(rci-qed.energyexpressions PUBLIC
+    mod 9290 rang90
+    rciqed-grasp rciqed-rci rciqed-breit rciqed-qed rciqed-mass_shifts rciqed-matrixelements
+)
+install(TARGETS rci-qed.energyexpressions DESTINATION bin/)
