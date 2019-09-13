@@ -40,9 +40,7 @@ program rci_qed_pt
         "qed_vp      ", "qed_se      " &
     /)
 
-    character(256) :: state
-    integer :: state_len
-    character(:), allocatable :: file_csls, file_wfns, file_mixing
+    character(:), allocatable :: file_csls, file_wfns, file_mixing, state
     type(rcisettings) :: settings
 
     integer :: status, k, j, j2max
@@ -56,24 +54,54 @@ program rci_qed_pt
     type(integer), dimension(:), allocatable :: hcs_rci, hcs_pt
     type(logical), dimension(hcs_len) :: hcs_cat
 
+    character(:), allocatable :: cli_argument, cli_cutoff_value_string
+    logical :: cli_status
+    logical :: cli_state_found = .false.
+    character(*), parameter :: cli_cutoff_name = '--qed-se-hydrogenic-cutoff='
+    integer :: cli_cutoff_value = -1
+
     character(*), parameter :: isodata = 'isodata' ! name of the isodata file
 
-    ! Fetch the first command line argument, which should be the name of the state.
-    if (command_argument_count() /= 1) then
-        error stop 'Missing command line argument: ./rci_qedreport <STATE>'
+    ! Parse the command line arguments
+    do i = 1, command_argument_count()
+        cli_status = get_command_argument_allocating(i, cli_argument)
+        if(.not.cli_status) then
+            error stop 'Error while parsing command line arguments'
+        endif
+        if(len(cli_argument) > 0 .and. cli_argument(1:1) == "-") then
+            if(cli_argument(1:len(cli_cutoff_name)) == cli_cutoff_name) then
+                cli_cutoff_value_string = cli_argument(len(cli_cutoff_name)+1:len(cli_argument))
+                read(cli_cutoff_value_string, *, iostat=status) cli_cutoff_value
+                if(status /= 0) then
+                    print '(a," ",a)', "ERROR: Parsing an option failed:", cli_argument
+                    print '(a," ",a)', "Unable to convert to integer:", cli_cutoff_value_string
+                    error stop 'Error while parsing command line arguments'
+                endif
+                if(cli_cutoff_value < 0) then
+                    print '(a," ",a)', "ERROR: Parsing an option failed:", cli_argument
+                    print '(a," ",i0)', "Cutoff must be >= 0. Passed:", cli_cutoff_value
+                    error stop 'Error while parsing command line arguments'
+                endif
+            else
+                print '(a," ",a)', "ERROR: Invalid option passed:", cli_argument
+                error stop 'Error while parsing command line arguments'
+            endif
+        elseif(.not.cli_state_found) then
+            state = cli_argument
+            cli_state_found = .true.
+        else
+            print '(a)', "ERROR: Multiple positional arguments passed."
+            error stop 'Error while parsing command line arguments'
+        endif
+    enddo
+    if(.not.cli_state_found) then
+        print '(a)', "ERROR: STATE positional argument not passed."
+        error stop 'Error while parsing command line arguments'
     endif
-    call get_command_argument(1, state) ! TODO: make state allocatable
-    state_len = len_trim(state)
 
     ! The input files are assumed to be <state>.c, <state>.w and <state>.cm
-    allocate(character(state_len+2) :: file_csls)
     file_csls = trim(state)//'.c'
-
-    allocate(character(state_len+2) :: file_wfns)
     file_wfns = trim(state)//'.w'
-
-    ! TODO: should be +3? Or rather, allocate is not actually necessary?
-    allocate(character(state_len+2) :: file_mixing)
     file_mixing = trim(state)//'.cm'
 
     ! Make sure that all the files exist, or ERROR STOP otherwise
@@ -101,6 +129,13 @@ program rci_qed_pt
         error stop
     endif
     call verify_rcisettings(settings)
+
+    ! Optionally, override the QED SE cutoff value with command line arguments
+    if(cli_cutoff_value >= 0 .and. settings%qed_se_hydrogenic_cutoff >= 0) then
+        print '(a)', "WARNING: Hydrogenic SE cutoff overriden with command line argument"
+    elseif(cli_cutoff_value >= 0 .and. settings%qed_se_hydrogenic_cutoff < 0) then
+        settings%qed_se_hydrogenic_cutoff = cli_cutoff_value
+    endif
 
     print "(a)", "Hamiltonian parts enabled in RCI calculation:"
     print '(" ",a,"  ",a)', check(.true.), "Dirac + nuclear potential"
@@ -436,5 +471,47 @@ contains
             check = "✘"
         endif
     end function check
+
+    !> Retrieves the `n`-th command line argument.
+    !!
+    !! If it was able to fetch the argument value, returns `.true.` and sets
+    !! `value` to the value ([re]allocating if necessary). Returns `.false.` if
+    !! there was an error retrieving the argument.
+    !!
+    !! Under the hood it calls `get_command_argument`, but it properly allocates
+    !! or re-allocates the `value` to match the actual length of the argument.
+    !!
+    !! TODO: For this to be a proper library function, it should be implemented
+    !! as an interface with additional methods to handle pointers and fixed-length
+    !! strings.
+    function get_command_argument_allocating(n, value)
+        logical :: get_command_argument_allocating
+        integer, intent(in) :: n
+        character(:), allocatable, intent(inout) :: value
+        integer :: length, status
+        character(1) :: test
+
+        ! First, make an inquiry call to get_environment_variable to determine
+        ! whether the variable exists and, if so, its length.
+        call get_command_argument(n, test, length, status)
+        if(status > 0) then
+            ! From the GFortran manual:
+            !
+            ! > If the argument retrieval fails, STATUS is a positive number;
+            !
+            ! So a positive status will make this function fail (i.e. return
+            ! .false.)
+            get_command_argument_allocating = .false.
+            return
+        endif
+        ! Will allocate or re-allocate value, unless it already has the correct length.
+        if(allocated(value) .and. len(value) /= length) deallocate(value)
+        if(.not.allocated(value)) allocate(character(length) :: value)
+        ! Only call get_command_argument again if the argument is non-empty
+        if(length > 0) then
+            call get_command_argument(n, value, length, status)
+        endif
+        get_command_argument_allocating = .true.
+    end
 
 end program rci_qed_pt
