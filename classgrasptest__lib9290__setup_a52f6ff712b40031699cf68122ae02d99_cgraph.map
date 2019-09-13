@@ -1,6 +1,0 @@
-<map id="grasptest_lib9290_setup::setup" name="grasptest_lib9290_setup::setup">
-<area shape="rect" id="node2" href="$classgrasp__rciqed__lib9290__init.html#ad91897d2b5a564f0da486552dcea32ad" title="Initialize physical and unit&#45;related constants and machine&#45;dependent parameters. " alt="" coords="230,5,413,46"/>
-<area shape="rect" id="node3" href="$classgrasp__rciqed__lib9290__init.html#aad8035267e4ce0905d8a816243090b96" title="Initializes the radial grid, suitable for the given nuclear charge nuclear_z. " alt="" coords="248,70,395,111"/>
-<area shape="rect" id="node4" href="$classgrasp__rciqed__lib9290__init.html#ad8f8763eddb910d581df1182457ee2fe" title="Sets up the nuclear parameters for a point nucleus with charge nuclear_z. " alt="" coords="236,135,407,177"/>
-<area shape="rect" id="node5" href="$classgrasp__rciqed__lib9290__init.html#abfa582d794d5272ad18241d6dc295cb9" title="Sets up the nuclear mass, important for nuclear mass shifts. " alt="" coords="216,201,427,242"/>
-</map>

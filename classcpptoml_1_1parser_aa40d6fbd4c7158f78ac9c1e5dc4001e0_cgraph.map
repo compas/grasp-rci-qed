@@ -1,8 +1,0 @@
-<map id="cpptoml::parser::parse_escape_code" name="cpptoml::parser::parse_escape_code">
-<area shape="rect" id="node2" href="$classcpptoml_1_1parser.html#a41e95ebcda5c2dcb1758ae2ed3f4e7b6" title="cpptoml::parser::throw\l_parse_exception" alt="" coords="635,18,787,59"/>
-<area shape="rect" id="node3" href="$classcpptoml_1_1parser.html#a81c393030d761a4a7f3eaa28c7229bb3" title="cpptoml::parser::parse\l_unicode" alt="" coords="205,34,357,75"/>
-<area shape="rect" id="node4" href="$classcpptoml_1_1parser.html#a8fff19d194b4aee612c23d5d4ed6444e" title="cpptoml::parser::parse_hex" alt="" coords="406,84,586,111"/>
-<area shape="rect" id="node5" href="$namespacecpptoml.html#a8920dd98d64555bc47a96593a1a07989" title="cpptoml::is_hex" alt="" coords="653,84,768,111"/>
-<area shape="rect" id="node7" href="$classcpptoml_1_1parser.html#a71302c9888ce97f700b8700ac86ada3b" title="cpptoml::parser::hex\l_to_digit" alt="" coords="640,135,781,177"/>
-<area shape="rect" id="node6" href="$namespacecpptoml.html#a5e79389ffd4c8d77d5518d4bb6ed83c3" title="cpptoml::is_number" alt="" coords="835,113,971,140"/>
-</map>

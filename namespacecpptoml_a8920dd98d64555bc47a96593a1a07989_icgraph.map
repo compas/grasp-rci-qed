@@ -1,22 +1,4 @@
 <map id="cpptoml::is_hex" name="cpptoml::is_hex">
-<area shape="rect" id="node2" href="$classcpptoml_1_1parser.html#a8fff19d194b4aee612c23d5d4ed6444e" title="cpptoml::parser::parse_hex" alt="" coords="169,147,349,173"/>
-<area shape="rect" id="node21" href="$classcpptoml_1_1parser.html#ace88eae4330b5f0ff0e041bc024d7bd1" title="cpptoml::parser::parse\l_number" alt="" coords="397,201,549,242"/>
-<area shape="rect" id="node3" href="$classcpptoml_1_1parser.html#a81c393030d761a4a7f3eaa28c7229bb3" title="cpptoml::parser::parse\l_unicode" alt="" coords="397,135,549,177"/>
-<area shape="rect" id="node4" href="$classcpptoml_1_1parser.html#aa40d6fbd4c7158f78ac9c1e5dc4001e0" title="cpptoml::parser::parse\l_escape_code" alt="" coords="597,135,749,177"/>
-<area shape="rect" id="node5" href="$classcpptoml_1_1parser.html#a2b65d5595a9c44ee6bd7d9e2f880fe98" title="cpptoml::parser::parse\l_multiline_string" alt="" coords="797,139,949,181"/>
-<area shape="rect" id="node15" href="$classcpptoml_1_1parser.html#ab5df500ad5d88b9ba4c0f9cfa97ba173" title="cpptoml::parser::string\l_literal" alt="" coords="797,74,949,115"/>
-<area shape="rect" id="node6" href="$classcpptoml_1_1parser.html#af5f15459073e86f5be87c6711769c869" title="cpptoml::parser::parse\l_string" alt="" coords="997,139,1149,181"/>
-<area shape="rect" id="node7" href="$classcpptoml_1_1parser.html#ace6d6d3e8cc5e0bb1e9fc010872b781b" title="cpptoml::parser::parse\l_value" alt="" coords="1212,201,1364,242"/>
-<area shape="rect" id="node8" href="$classcpptoml_1_1parser.html#a4974807353aad06be5b995db9f343308" title="cpptoml::parser::parse\l_key_value" alt="" coords="1427,135,1579,177"/>
-<area shape="rect" id="node14" href="$classcpptoml_1_1parser.html#a8f900bbd75b3b84fd3728412e2390c17" title="cpptoml::parser::parse\l_value_array" alt="" coords="1427,201,1579,242"/>
-<area shape="rect" id="node9" href="$classcpptoml_1_1parser.html#ada6145ed2440069d575fbc1c305898b7" title="cpptoml::parser::parse" alt="" coords="1827,109,1979,136"/>
-<area shape="rect" id="node12" href="$classcpptoml_1_1parser.html#af1ae1edf218a1a6ebb17f06740273ca3" title="cpptoml::parser::parse\l_inline_table" alt="" coords="1627,251,1779,293"/>
-<area shape="rect" id="node10" href="$namespacecpptoml.html#afea416cdae1e7237ee3571272d6f6625" title="cpptoml::parse_file" alt="" coords="2027,109,2159,136"/>
-<area shape="rect" id="node11" href="$toml_8h.html#aa1ce051e2e7b2ea4b6f7c5a6e180977f" title="toml_parse_file" alt="" coords="2209,109,2319,136"/>
-<area shape="rect" id="node13" href="$classcpptoml_1_1parser.html#ae947486896aac5f814168d4575f95241" title="cpptoml::parser::parse\l_array" alt="" coords="1827,281,1979,322"/>
-<area shape="rect" id="node16" href="$classcpptoml_1_1parser.html#a75c69acea3af22370b2d87ba448229dd" title="cpptoml::parser::parse\l_simple_key" alt="" coords="997,73,1149,114"/>
-<area shape="rect" id="node17" href="$classcpptoml_1_1parser.html#abbe5ad1b86fd90ff636324e7ae6df35a" title="cpptoml::parser::parse_key" alt="" coords="1198,79,1378,105"/>
-<area shape="rect" id="node18" href="$classcpptoml_1_1parser.html#a343c2f112e1c169ab74e79c2efa7e864" title="cpptoml::parser::parse\l_single_table" alt="" coords="1427,5,1579,46"/>
-<area shape="rect" id="node20" href="$classcpptoml_1_1parser.html#ab5ad3a507eabf5c207f44daa726508c9" title="cpptoml::parser::parse\l_table_array" alt="" coords="1427,70,1579,111"/>
-<area shape="rect" id="node19" href="$classcpptoml_1_1parser.html#a8ebe7a4db132dbf70a8e7c17cff636f0" title="cpptoml::parser::parse\l_table" alt="" coords="1627,70,1779,111"/>
+<area shape="rect" id="node2" href="$classcpptoml_1_1parser.html#a8fff19d194b4aee612c23d5d4ed6444e" title="cpptoml::parser::parse_hex" alt="" coords="176,5,373,32"/>
+<area shape="rect" id="node3" href="$classcpptoml_1_1parser.html#ace88eae4330b5f0ff0e041bc024d7bd1" title="cpptoml::parser::parse\l_number" alt="" coords="191,57,358,98"/>
 </map>

@@ -1,6 +1,3 @@
 <map id="toml_get_string" name="toml_get_string">
-<area shape="rect" id="node2" href="$classcpptoml_1_1table.html#a1ecc122e8d0c5f31c80e08f12d0397b6" title="cpptoml::table::get\l_qualified_as" alt="" coords="165,5,296,46"/>
-<area shape="rect" id="node3" href="$classcpptoml_1_1table.html#ab92748e93e25a0779f50a0244c516525" title="cpptoml::table::get\l_qualified" alt="" coords="344,5,475,46"/>
-<area shape="rect" id="node4" href="$classcpptoml_1_1table.html#a5812324d0292cf21e3eaf0b30f67a4e7" title="cpptoml::table::resolve\l_qualified" alt="" coords="523,5,677,46"/>
-<area shape="rect" id="node5" href="$classcpptoml_1_1table.html#a35a4107248d63854f82869257aed2003" title="cpptoml::table::split" alt="" coords="725,12,861,39"/>
+<area shape="rect" id="node2" href="$classcpptoml_1_1table.html#a1ecc122e8d0c5f31c80e08f12d0397b6" title="cpptoml::table::get\l_qualified_as" alt="" coords="176,5,319,47"/>
 </map>

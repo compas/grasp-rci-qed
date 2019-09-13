@@ -1,4 +1,4 @@
 <map id="getcid" name="getcid">
-<area shape="rect" id="node2" href="$classgetcid__i.html#a3b66eb6cb3330f0e66638501460ff68d" title="QED self&#45;energy part of the GETCID routine. " alt="" coords="112,5,264,32"/>
-<area shape="rect" id="node3" href="$classgrasp__rciqed__cli.html#ae4d8654dedf9cf2b354a56a352e72192" title="Reads a numeric input from the user and checks that it is within the given range (min &lt;= n &lt;= max)..." alt="" coords="313,5,490,32"/>
+<area shape="rect" id="node2" href="$namespacegetcid__i.html#a3b66eb6cb3330f0e66638501460ff68d" title="QED self&#45;energy part of the GETCID routine. " alt="" coords="115,5,279,32"/>
+<area shape="rect" id="node3" href="$namespacegrasp__rciqed__cli.html#ae4d8654dedf9cf2b354a56a352e72192" title="Reads a numeric input from the user and checks that it is within the given range (min &lt;= n &lt;= max)..." alt="" coords="327,5,520,32"/>
 </map>

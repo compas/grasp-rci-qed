@@ -1,5 +1,0 @@
-<map id="grasp_rciqed_cimatrixelements::dirac_potential_cached" name="grasp_rciqed_cimatrixelements::dirac_potential_cached">
-<area shape="rect" id="node2" href="$interfacegrasp__rciqed__cimatrixelements_1_1dirac__potential.html#a6cf6dd2058434f6b6e7f6fcb91f8c8b3" title="Calls the IABINT routine to evaluate the matrix element. The output from ONESCALAR must be passed as ..." alt="" coords="256,5,459,61"/>
-<area shape="rect" id="node3" href="$classgrasp__rciqed__cimatrixelements.html#a146035f1b9ead0fc20246db3f1d8cd5b" title="Calls the IABINT routine, but ensures that the input k and l arguments do not get swapped..." alt="" coords="256,85,459,126"/>
-<area shape="rect" id="node4" href="$iabint_8f90.html#a1729581785d3221723fb43c5f124d6a6" title="iabint" alt="" coords="507,92,560,119"/>
-</map>

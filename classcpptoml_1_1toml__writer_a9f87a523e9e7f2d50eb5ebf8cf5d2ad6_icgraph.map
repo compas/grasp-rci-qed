@@ -1,8 +1,0 @@
-<map id="cpptoml::toml_writer::write" name="cpptoml::toml_writer::write">
-<area shape="rect" id="node2" href="$classcpptoml_1_1toml__writer.html#afb4822db300bba013ef4f853c7958aa5" title="cpptoml::toml_writer\l::visit" alt="" coords="195,5,335,46"/>
-<area shape="rect" id="node3" href="$classcpptoml_1_1toml__writer.html#a103730649b042b060e94a19bfc038c42" title="cpptoml::toml_writer\l::write" alt="" coords="195,70,335,111"/>
-<area shape="rect" id="node4" href="$classcpptoml_1_1toml__writer.html#a4ec1f090b9c6876eebd61daea86ac827" title="cpptoml::toml_writer\l::write_table_header" alt="" coords="399,155,539,197"/>
-<area shape="rect" id="node6" href="$classcpptoml_1_1toml__writer.html#a0d7b524e40bc9aec1ccbdff9cf6bfa3c" title="cpptoml::toml_writer\l::write_table_item_header" alt="" coords="384,221,555,262"/>
-<area shape="rect" id="node7" href="$classcpptoml_1_1toml__writer.html#a253dfe7107f87a460d3e8a90e5a351da" title="cpptoml::toml_writer\l::indent" alt="" coords="195,187,335,229"/>
-<area shape="rect" id="node5" href="$classcpptoml_1_1toml__writer.html#a0b2113b3b58ad7fcf19346760677820c" title="cpptoml::toml_writer\l::visit" alt="" coords="603,189,743,230"/>
-</map>

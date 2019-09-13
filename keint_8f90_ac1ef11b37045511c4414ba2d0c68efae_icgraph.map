@@ -1,4 +1,5 @@
 <map id="keint" name="keint">
-<area shape="rect" id="node2" href="$classgrasp__rciqed__cimatrixelements.html#a65f82164b704df6518c7a98752896522" title="Calls the KEINT routine, but ensures that the input k and l arguments do not get swapped. " alt="" coords="104,5,307,46"/>
-<area shape="rect" id="node3" href="$classgrasp__rciqed__cimatrixelements.html#ac3cbfdc998668a328e2cacbcc67db491" title="The ONESCALAR output has to be passed as arguments here. " alt="" coords="355,5,557,46"/>
+<area shape="rect" id="node2" href="$namespacegrasp__rciqed__cimatrixelements.html#a65f82164b704df6518c7a98752896522" title="Calls the KEINT routine, but ensures that the input k and l arguments do not get swapped. " alt="" coords="107,5,329,47"/>
+<area shape="rect" id="node3" href="$namespacegrasp__rciqed__cimatrixelements.html#ac3cbfdc998668a328e2cacbcc67db491" title="The ONESCALAR output has to be passed as arguments here. " alt="" coords="377,5,600,47"/>
+<area shape="rect" id="node4" href="$namespacegrasp__rciqed__cimatrixelements.html#ae21d3d0a52ef13ca6551ff547d3fdfbd" title="This also calls the ONESCALAR routing from lib9290. " alt="" coords="648,13,907,39"/>
 </map>

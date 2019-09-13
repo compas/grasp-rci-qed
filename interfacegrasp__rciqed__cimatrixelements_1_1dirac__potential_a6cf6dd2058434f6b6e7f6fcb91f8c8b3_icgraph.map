@@ -1,4 +1,0 @@
-<map id="grasp_rciqed_cimatrixelements::dirac_potential::dirac_potential_cached" name="grasp_rciqed_cimatrixelements::dirac_potential::dirac_potential_cached">
-<area shape="rect" id="node2" href="$classgrasp__rciqed__cimatrixelements.html#ab198803b6a93f4f19cd58e6d2ff1e13d" title="This also calls the ONESCALAR routine from lib9290. " alt="" coords="256,5,459,46"/>
-<area shape="rect" id="node3" href="$classgrasp__rciqed__cimatrixelements.html#a2e501771ba6c2ead35f18994f33aea8b" title="Calls the IABINT routine to evaluate the matrix element. The output from ONESCALAR must be passed as ..." alt="" coords="256,70,459,111"/>
-</map>

@@ -19,7 +19,7 @@ var searchData=
   ['orbout',['orbout',['../interfaceorbout__i_1_1orbout.html',1,'orbout_i']]],
   ['orbout',['orbout',['../interfaceorbout__i_1_1orbout.html#a4e27cfa86157dfb41c03cda307a2539e',1,'orbout_i::orbout::orbout()'],['../orbout_8f90.html#a64adb20a6414bdc32843875b6d7cd93b',1,'orbout():&#160;orbout.f90']]],
   ['orbout_2ef90',['orbout.f90',['../orbout_8f90.html',1,'']]],
-  ['orbout_5fi',['orbout_i',['../classorbout__i.html',1,'']]],
+  ['orbout_5fi',['orbout_i',['../namespaceorbout__i.html',1,'']]],
   ['orbout_5fi_2ef90',['orbout_I.f90',['../orbout__I_8f90.html',1,'']]],
   ['os_5f',['os_',['../classcpptoml_1_1fill__guard.html#ab0f734b06d96ae33735ce8047d8bd70e',1,'cpptoml::fill_guard']]],
   ['overlap',['overlap',['../structqedmod__values.html#a8826a04168ddc105edd5966a1af6c500',1,'qedmod_values']]],

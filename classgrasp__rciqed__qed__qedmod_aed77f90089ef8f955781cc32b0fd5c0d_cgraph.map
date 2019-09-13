@@ -1,6 +1,0 @@
-<map id="grasp_rciqed_qed_qedmod::qedse_qedmod" name="grasp_rciqed_qed_qedmod::qedse_qedmod">
-<area shape="rect" id="node2" href="$classgrasp__rciqed__qed__qedmod.html#a21e659233805c782b2d256c37a93afeb" title="Interpolate the GRASP orbital k onto the QEDMOD grid. " alt="" coords="233,5,431,46"/>
-<area shape="rect" id="node4" href="$pot__wav_8f.html#a8e5cf3a87e48bad7788bf1c291d5e18f" title="shab_se_pot_wav" alt="" coords="269,71,395,97"/>
-<area shape="rect" id="node5" href="$integr_8f.html#a31ff20c833f39696ada8ea5c2655f2ce" title="shab_tint" alt="" coords="523,96,597,123"/>
-<area shape="rect" id="node3" href="$wfunc__interpolate_8f.html#a35fd0d7b172a27fc32f4426228ba9109" title="shab_wfunc_interpolate" alt="" coords="481,12,639,39"/>
-</map>

@@ -1,23 +1,8 @@
 <map id="cpptoml::parser::parse_table_array" name="cpptoml::parser::parse_table_array">
-<area shape="rect" id="node2" href="$classcpptoml_1_1parser.html#a41e95ebcda5c2dcb1758ae2ed3f4e7b6" title="cpptoml::parser::throw\l_parse_exception" alt="" coords="1485,577,1637,618"/>
-<area shape="rect" id="node3" href="$classcpptoml_1_1table.html#af4d51bc16094dcdd42e13d7a68f32139" title="cpptoml::table::contains" alt="" coords="215,46,377,72"/>
-<area shape="rect" id="node4" href="$classcpptoml_1_1table.html#ac5b06ea28043fba3c5323becac7b1a37" title="cpptoml::table::get" alt="" coords="231,96,361,123"/>
-<area shape="rect" id="node5" href="$namespacecpptoml.html#a233bc1326fad496c4cadbbb22ffd5b2b" title="cpptoml::make_table" alt="" coords="225,147,367,174"/>
-<area shape="rect" id="node6" href="$classcpptoml_1_1table.html#a4275af44e7655c001686d7225cd0387c" title="cpptoml::table::insert" alt="" coords="224,198,368,224"/>
-<area shape="rect" id="node7" href="$namespacecpptoml.html#a54d387d2ecd802ca998036befa63854b" title="cpptoml::make_table\l_array" alt="" coords="225,249,367,290"/>
-<area shape="rect" id="node8" href="$classcpptoml_1_1table__array.html#a297a1d70aa521ff5d78b914a1a9e8497" title="cpptoml::table_array::get" alt="" coords="213,315,379,342"/>
-<area shape="rect" id="node9" href="$classcpptoml_1_1parser.html#abbe5ad1b86fd90ff636324e7ae6df35a" title="cpptoml::parser::parse_key" alt="" coords="206,416,386,443"/>
-<area shape="rect" id="node11" href="$classcpptoml_1_1parser.html#a653d8cd4fffce5aa1682e39388259ffa" title="cpptoml::parser::consume\l_whitespace" alt="" coords="835,800,1008,841"/>
-<area shape="rect" id="node21" href="$namespacecpptoml.html#a8cb8f2ec053d9ed2459618ba2671294b" title="cpptoml::make_consumer" alt="" coords="210,467,382,494"/>
-<area shape="rect" id="node22" href="$classcpptoml_1_1parser.html#a9d38b96e8faafc4f4162b6e908ac7ce9" title="cpptoml::parser::eol\l_or_comment" alt="" coords="442,144,579,185"/>
-<area shape="rect" id="node10" href="$classcpptoml_1_1parser.html#a75c69acea3af22370b2d87ba448229dd" title="cpptoml::parser::parse\l_simple_key" alt="" coords="435,577,587,618"/>
-<area shape="rect" id="node12" href="$classcpptoml_1_1parser.html#ab5df500ad5d88b9ba4c0f9cfa97ba173" title="cpptoml::parser::string\l_literal" alt="" coords="635,640,787,681"/>
-<area shape="rect" id="node19" href="$classcpptoml_1_1parser.html#a3428aee40a93f23dd85ffe81a37d4ee3" title="cpptoml::parser::parse\l_bare_key" alt="" coords="635,518,787,560"/>
-<area shape="rect" id="node13" href="$classcpptoml_1_1parser.html#aa40d6fbd4c7158f78ac9c1e5dc4001e0" title="cpptoml::parser::parse\l_escape_code" alt="" coords="845,640,997,681"/>
-<area shape="rect" id="node14" href="$classcpptoml_1_1parser.html#a81c393030d761a4a7f3eaa28c7229bb3" title="cpptoml::parser::parse\l_unicode" alt="" coords="1056,686,1208,728"/>
-<area shape="rect" id="node15" href="$classcpptoml_1_1parser.html#a8fff19d194b4aee612c23d5d4ed6444e" title="cpptoml::parser::parse_hex" alt="" coords="1257,803,1437,830"/>
-<area shape="rect" id="node16" href="$namespacecpptoml.html#a8920dd98d64555bc47a96593a1a07989" title="cpptoml::is_hex" alt="" coords="1504,774,1619,800"/>
-<area shape="rect" id="node18" href="$classcpptoml_1_1parser.html#a71302c9888ce97f700b8700ac86ada3b" title="cpptoml::parser::hex\l_to_digit" alt="" coords="1491,825,1632,866"/>
-<area shape="rect" id="node17" href="$namespacecpptoml.html#a5e79389ffd4c8d77d5518d4bb6ed83c3" title="cpptoml::is_number" alt="" coords="1685,803,1821,830"/>
-<area shape="rect" id="node20" href="$classcpptoml_1_1parser.html#ad9ef1172337e45d2bda6111d963ac90f" title="cpptoml::parser::consume\l_backwards_whitespace" alt="" coords="835,468,1008,509"/>
+<area shape="rect" id="node2" href="$classcpptoml_1_1table.html#af4d51bc16094dcdd42e13d7a68f32139" title="cpptoml::table::contains" alt="" coords="227,5,403,32"/>
+<area shape="rect" id="node3" href="$classcpptoml_1_1table.html#ac5b06ea28043fba3c5323becac7b1a37" title="cpptoml::table::get" alt="" coords="243,56,386,83"/>
+<area shape="rect" id="node4" href="$namespacecpptoml.html#a233bc1326fad496c4cadbbb22ffd5b2b" title="cpptoml::make_table" alt="" coords="236,107,393,133"/>
+<area shape="rect" id="node5" href="$classcpptoml_1_1table.html#a4275af44e7655c001686d7225cd0387c" title="cpptoml::table::insert" alt="" coords="235,157,394,184"/>
+<area shape="rect" id="node6" href="$namespacecpptoml.html#a54d387d2ecd802ca998036befa63854b" title="cpptoml::make_table\l_array" alt="" coords="236,209,393,250"/>
+<area shape="rect" id="node7" href="$namespacecpptoml.html#a8cb8f2ec053d9ed2459618ba2671294b" title="cpptoml::make_consumer" alt="" coords="220,275,409,301"/>
 </map>

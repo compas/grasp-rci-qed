@@ -1,0 +1,13 @@
+<map id="setham_i::setham" name="setham_i::setham">
+<area shape="rect" id="node2" href="$namespacegrasp__rciqed__cimatrixelements.html#a1381b29b99c6e09de32b44903f5a1466" title="Assumes that buffer_C is set up properly by RKCO_GG. " alt="" coords="192,5,415,47"/>
+<area shape="rect" id="node4" href="$namespacegrasp__rciqed__cimatrixelements.html#a424641d813eef13a2e31e9b72dee47f2" title="Assumes that buffer_C is set up properly by RKCO_GG. " alt="" coords="192,71,415,112"/>
+<area shape="rect" id="node6" href="$namespacegrasp__rciqed__cimatrixelements.html#adc9e9ef07f6f0e61d0b878c6349c75d2" title="Calculates the Breit matrix element, but calculates the core part only sometimes. ..." alt="" coords="192,219,415,260"/>
+<area shape="rect" id="node3" href="$namespacegrasp__rciqed__cimatrixelements.html#a488d680a837588eb535c9ec496c4f350" title="Calls the RKINTC, but makes sure that the input LABEL values do not get changed. " alt="" coords="463,5,685,47"/>
+<area shape="rect" id="node5" href="$vint_8f90.html#a909b5fc0a806f1a549843a911d9d7ca8" title="vint" alt="" coords="551,74,597,101"/>
+<area shape="rect" id="node7" href="$brint1_8f90.html#a849f1f3ba4f10477b2c126b628a57974" title="brint1" alt="" coords="545,125,603,151"/>
+<area shape="rect" id="node8" href="$brint2_8f90.html#a45c778317fafab10e7fff2eb982120c9" title="brint2" alt="" coords="545,175,603,202"/>
+<area shape="rect" id="node9" href="$brint3_8f90.html#a35c720fabeda86ef046b211c91542edb" title="brint3" alt="" coords="545,226,603,253"/>
+<area shape="rect" id="node10" href="$brint4_8f90.html#a1c578337bcfe812fe6fe1128d7446f83" title="brint4" alt="" coords="545,277,603,303"/>
+<area shape="rect" id="node11" href="$brint5_8f90.html#abb8c9e809ba0e8e9443578505c10fb29" title="brint5" alt="" coords="545,327,603,354"/>
+<area shape="rect" id="node12" href="$brint6_8f90.html#a4338682afc000cc58bdf4e7b455840c4" title="brint6" alt="" coords="545,378,603,405"/>
+</map>

@@ -1,7 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structcpptoml_1_1local__date.html" title="cpptoml::local_date" alt="" coords="6,5,141,32"/>
-<area shape="rect" id="node2" href="$structcpptoml_1_1local__datetime.html" title="cpptoml::local_datetime" alt="" coords="189,31,349,57"/>
-<area shape="rect" id="node3" href="$structcpptoml_1_1offset__datetime.html" title="cpptoml::offset_datetime" alt="" coords="398,56,565,83"/>
-<area shape="rect" id="node4" href="$structcpptoml_1_1local__time.html" title="cpptoml::local_time" alt="" coords="6,56,141,83"/>
-<area shape="rect" id="node5" href="$structcpptoml_1_1zone__offset.html" title="cpptoml::zone_offset" alt="" coords="197,81,341,108"/>
+<area shape="rect" id="node1" href="$interfacegenintbreit2__i_1_1genintbreit2.html" title="genintbreit2_i::genintbreit2" alt="" coords="5,5,200,32"/>
 </map>

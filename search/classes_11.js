@@ -1,17 +1,10 @@
 var searchData=
 [
   ['setdbg',['setdbg',['../interfacesetdbg__i_1_1setdbg.html',1,'setdbg_i']]],
-  ['setdbg_5fi',['setdbg_i',['../classsetdbg__i.html',1,'']]],
-  ['setham_5fi',['setham_i',['../classsetham__i.html',1,'']]],
   ['setmixmpi',['setmixmpi',['../interfacesetmixmpi__i_1_1setmixmpi.html',1,'setmixmpi_i']]],
-  ['setmixmpi_5fi',['setmixmpi_i',['../classsetmixmpi__i.html',1,'']]],
   ['setres',['setres',['../interfacesetres__i_1_1setres.html',1,'setres_i']]],
-  ['setres_5fi',['setres_i',['../classsetres__i.html',1,'']]],
   ['setsum',['setsum',['../interfacesetsum__i_1_1setsum.html',1,'setsum_i']]],
-  ['setsum_5fi',['setsum_i',['../classsetsum__i.html',1,'']]],
   ['shab_5fdirac',['SHAB_dirac',['../interfacegrasp__rciqed__qed__qedmod__common_1_1SHAB__dirac.html',1,'grasp_rciqed_qed_qedmod_common']]],
-  ['shab_5fgrid_5fcommon',['shab_grid_common',['../classshab__grid__common.html',1,'']]],
-  ['shab_5fpopulate_5fhydrogenics_5fcommon',['shab_populate_hydrogenics_common',['../classshab__populate__hydrogenics__common.html',1,'']]],
   ['shab_5fse_5fpot_5fwav',['SHAB_se_pot_wav',['../interfacegrasp__rciqed__qed__qedmod__common_1_1SHAB__se__pot__wav.html',1,'grasp_rciqed_qed_qedmod_common']]],
   ['shab_5fsint',['SHAB_sint',['../interfacegrasp__rciqed__qed__qedmod__common_1_1SHAB__sint.html',1,'grasp_rciqed_qed_qedmod_common']]],
   ['shab_5ftint',['SHAB_tint',['../interfacegrasp__rciqed__qed__qedmod__common_1_1SHAB__tint.html',1,'grasp_rciqed_qed_qedmod_common']]],
@@ -19,12 +12,8 @@ var searchData=
   ['shab_5fwfunc_5finterpolate',['SHAB_wfunc_interpolate',['../interfacegrasp__rciqed__qed__qedmod__common_1_1SHAB__wfunc__interpolate.html',1,'grasp_rciqed_qed_qedmod_common']]],
   ['shab_5fwk',['SHAB_wk',['../interfacegrasp__rciqed__qed__qedmod__common_1_1SHAB__wk.html',1,'grasp_rciqed_qed_qedmod_common']]],
   ['skfun',['skfun',['../interfaceskfun__i_1_1skfun.html',1,'skfun_i']]],
-  ['skfun_5fi',['skfun_i',['../classskfun__i.html',1,'']]],
   ['skint',['skint',['../interfaceskint__i_1_1skint.html',1,'skint_i']]],
-  ['skint_5fi',['skint_i',['../classskint__i.html',1,'']]],
   ['spodmv',['spodmv',['../interfacespodmv__i_1_1spodmv.html',1,'spodmv_i']]],
-  ['spodmv_5fi',['spodmv_i',['../classspodmv__i.html',1,'']]],
   ['string_5fdelete_5f',['string_delete_',['../interfacegrasp__rciqed__toml_1_1string__delete__.html',1,'grasp_rciqed_toml']]],
-  ['strsum',['strsum',['../interfacestrsum__i_1_1strsum.html',1,'strsum_i']]],
-  ['strsum_5fi',['strsum_i',['../classstrsum__i.html',1,'']]]
+  ['strsum',['strsum',['../interfacestrsum__i_1_1strsum.html',1,'strsum_i']]]
 ];

@@ -1,11 +1,6 @@
 <map id="cpptoml::make_array" name="cpptoml::make_array">
-<area shape="rect" id="node2" href="$namespacecpptoml_1_1detail.html#a5daa933a5f1aff8332403fa6adecdbcc" title="cpptoml::detail::make\l_element\&lt; array \&gt;" alt="" coords="200,5,347,46"/>
-<area shape="rect" id="node3" href="$classcpptoml_1_1parser.html#ae947486896aac5f814168d4575f95241" title="cpptoml::parser::parse\l_array" alt="" coords="197,70,349,111"/>
-<area shape="rect" id="node10" href="$classcpptoml_1_1parser.html#a8f900bbd75b3b84fd3728412e2390c17" title="cpptoml::parser::parse\l_value_array" alt="" coords="597,135,749,177"/>
-<area shape="rect" id="node4" href="$classcpptoml_1_1parser.html#ace6d6d3e8cc5e0bb1e9fc010872b781b" title="cpptoml::parser::parse\l_value" alt="" coords="397,70,549,111"/>
-<area shape="rect" id="node5" href="$classcpptoml_1_1parser.html#a4974807353aad06be5b995db9f343308" title="cpptoml::parser::parse\l_key_value" alt="" coords="597,70,749,111"/>
-<area shape="rect" id="node6" href="$classcpptoml_1_1parser.html#ada6145ed2440069d575fbc1c305898b7" title="cpptoml::parser::parse" alt="" coords="797,77,949,104"/>
-<area shape="rect" id="node9" href="$classcpptoml_1_1parser.html#af1ae1edf218a1a6ebb17f06740273ca3" title="cpptoml::parser::parse\l_inline_table" alt="" coords="797,11,949,53"/>
-<area shape="rect" id="node7" href="$namespacecpptoml.html#afea416cdae1e7237ee3571272d6f6625" title="cpptoml::parse_file" alt="" coords="998,77,1130,104"/>
-<area shape="rect" id="node8" href="$toml_8h.html#aa1ce051e2e7b2ea4b6f7c5a6e180977f" title="toml_parse_file" alt="" coords="1179,77,1290,104"/>
+<area shape="rect" id="node2" href="$namespacecpptoml_1_1detail.html#a5daa933a5f1aff8332403fa6adecdbcc" title="cpptoml::detail::make\l_element\&lt; array \&gt;" alt="" coords="215,5,376,47"/>
+<area shape="rect" id="node3" href="$classcpptoml_1_1array.html#aecbf0b65103aa06a9f8b4aa563152040" title="cpptoml::array::clone" alt="" coords="217,71,373,98"/>
+<area shape="rect" id="node4" href="$classcpptoml_1_1parser.html#ae947486896aac5f814168d4575f95241" title="cpptoml::parser::parse\l_array" alt="" coords="212,123,379,164"/>
+<area shape="rect" id="node5" href="$classcpptoml_1_1parser.html#a8f900bbd75b3b84fd3728412e2390c17" title="cpptoml::parser::parse\l_value_array" alt="" coords="212,188,379,229"/>
 </map>

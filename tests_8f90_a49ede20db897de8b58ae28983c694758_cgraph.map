@@ -1,6 +1,4 @@
 <map id="test_get_string" name="test_get_string">
-<area shape="rect" id="node2" href="$classgrasp__rciqed__toml.html#ad3aae33f2593aaa9308db3499ea54b44" title="grasp_rciqed_toml::\lget_string" alt="" coords="163,53,299,94"/>
-<area shape="rect" id="node3" href="$classcpptoml_1_1table.html#aa015406ceb358322640c30720a0b5979" title="cpptoml::table::table" alt="" coords="357,5,497,32"/>
-<area shape="rect" id="node5" href="$classcpptoml_1_1value.html#aa33eca40f41a74e97e94058454127902" title="cpptoml::value::value" alt="" coords="353,115,500,141"/>
-<area shape="rect" id="node4" href="$classgrasp__rciqed__toml.html#ac5d84627ea9e534c624785ce27e839bd" title="grasp_rciqed_toml::cstr" alt="" coords="347,60,506,87"/>
+<area shape="rect" id="node2" href="$namespacegrasp__rciqed__toml.html#ad3aae33f2593aaa9308db3499ea54b44" title="grasp_rciqed_toml::\lget_string" alt="" coords="172,5,320,47"/>
+<area shape="rect" id="node3" href="$namespacegrasp__rciqed__toml.html#ac5d84627ea9e534c624785ce27e839bd" title="grasp_rciqed_toml::cstr" alt="" coords="368,13,540,39"/>
 </map>
