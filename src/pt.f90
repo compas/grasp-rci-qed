@@ -18,6 +18,7 @@ program rci_qed_pt
         nsetypes, setypes_long, setypes_short
     use grasp_rciqed_rcisettings, only: rcisettings, read_settings_toml
     use grasp_rciqed_cimatrixelements
+    use decide_C, only: LSE
     use orb_C, only: NW
     use prnt_C, only: NVEC
     use qedcut_C, only: NQEDCUT, NQEDMAX
@@ -162,6 +163,17 @@ program rci_qed_pt
     hcs_cat(6) = settings%qed_vp_enabled
     hcs_cat(7) = .not.(settings%qed_se == 0)
 
+    ! Also set the hydrogenic settings in qedcut_C appropriately:
+    ! LSE needs to be set to .true. since QED_SLFEN checks for it when applying
+    ! NQEDMAX for some reason.
+    LSE = .true.
+    if(settings%qed_se_hydrogenic_cutoff >= 0) then
+        NQEDCUT = 1
+        NQEDMAX = settings%qed_se_hydrogenic_cutoff
+    else
+        NQEDCUT = 0
+    endif
+
     ! Calculate the self-energy matrix (or matrices, if SE in in PT mode).
     ! If settings%qed_se == 0, then we need to calculate _all_ SE operators.
     if(settings%qed_se == 0) then
@@ -172,13 +184,6 @@ program rci_qed_pt
     else
         allocate(sematrix(1,NW,NW))
         call qedse(settings%qed_se, sematrix(1,:,:))
-    endif
-    ! Also set the hydrogenic cutoffs in qedcut_C appropriately
-    if(settings%qed_se_hydrogenic_cutoff >= 0) then
-        NQEDCUT = 1
-        NQEDMAX = settings%qed_se_hydrogenic_cutoff
-    else
-        NQEDCUT = 0
     endif
 
     ! Evaluate the ASF expectation values and write them to a CSV file.
