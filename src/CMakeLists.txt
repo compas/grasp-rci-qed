@@ -35,3 +35,5 @@ target_link_libraries_Fortran(rci-qed.orbitals PUBLIC
     rciqed-grasp rciqed-rci rciqed-breit rciqed-qed rciqed-mass_shifts rciqed-matrixelements
 )
 install(TARGETS rci-qed.orbitals DESTINATION bin/)
+
+add_subdirectory("libgrasp-rci")
