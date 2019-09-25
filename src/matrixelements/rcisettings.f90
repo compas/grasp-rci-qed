@@ -111,8 +111,18 @@ contains
 
         open(newunit=toml_unit, file=tomlfile)
         write(toml_unit, '(a)') "[nucleus]"
-        write(toml_unit, '(a,f0.16)') "  Z = ", Z
-        write(toml_unit, '(a,f0.16)') "  atomic_mass_amu = ", EMN * AUMAMU
+        ! Note: if value is zero, the fw.d formatting does not add a leading zero
+        ! So 'f0.16' ends up as e.g. '.000000000'
+        if(Z == 0.0) then
+            write(toml_unit, '(a)') "  Z = 0.0"
+        else
+            write(toml_unit, '(a,f0.16)') "  Z = ", Z
+        endif
+        if(EMN * AUMAMU == 0.0) then
+            write(toml_unit, '(a,f0.16)') "  atomic_mass_amu = 0.0"
+        else
+            write(toml_unit, '(a,f0.16)') "  atomic_mass_amu = ", EMN * AUMAMU
+        endif
         if(NPARM == 0) then
             write(toml_unit, '(a)') "  nuclear_model = ""point"""
         elseif(NPARM == 2) then

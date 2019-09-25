@@ -15,6 +15,27 @@ module grasp_rciqed_qed
         "pyykkoe   "  &
     /)
 
+    !> Populates the `matrix` with QED self-energy matrix elements for each orbital.
+    !!
+    !! `setype` determines the method used to estimate self-energy and can take the
+    !! following values:
+    !!
+    !!   - `1` -- SE estimate based on hydrogenic wavefunctions (`qedse_mohr` in libqed)
+    !!   - `2` -- Model operator approch for SE due to Shabaeva & Tupitsyna & Yerokhin (`qedse_shabaev` in libqed)
+    !!   - `3` -- Flambaum & Ginges semi-empiric self-energy (`qedse_flambaum` in libqed)
+    !!   - `4` -- Pyykkö & Zhao empiric self-energy (`qedse_pyykkoe` in libqed)
+    !!
+    !! `matrix` is assumed to be an `NW x NW` `real64` array.
+    !!
+    !! Optionally, a third argument, `orbitals`, can be passed which should be a
+    !! and array of logicals of length `NW`, indicating which orbitals should be
+    !! considered. The matrix elements for which one of the orbitals is marked
+    !! as `.false.`, get a matrix element of `0`.
+    !!
+    interface qedse
+        module procedure qedse, qedse_allorbitals
+    end interface qedse
+
 contains
 
     subroutine init_vacuum_polarization
@@ -36,19 +57,8 @@ contains
         NVPI = 0
     end subroutine init_vacuum_polarization
 
-    !> Populates the `matrix` with QED self-energy matrix elements for each orbital.
-    !!
-    !! `setype` determines the method used to estimate self-energy and can take the
-    !! following values:
-    !!
-    !!   - `1` -- SE estimate based on hydrogenic wavefunctions (`qedse_mohr` in libqed)
-    !!   - `2` -- Model operator approch for SE due to Shabaeva & Tupitsyna & Yerokhin (`qedse_shabaev` in libqed)
-    !!   - `3` -- Flambaum & Ginges semi-empiric self-energy (`qedse_flambaum` in libqed)
-    !!   - `4` -- Pyykkö & Zhao empiric self-energy (`qedse_pyykkoe` in libqed)
-    !!
-    !! `matrix` is assumed to be an `NW x NW` `real64` array.
-    !!
-    subroutine qedse(setype, matrix)
+    !>
+    subroutine qedse(setype, matrix, orbitals)
         use grasp_rciqed_kinds, only: real64, dp
         use orb_C, only: NW, NAK
         use grasp_rciqed_qed_pyykkoe
@@ -57,6 +67,7 @@ contains
 
         integer :: setype
         real(real64) :: matrix(NW, NW)
+        logical :: orbitals(NW)
 
         real(real64) :: seij, searray(NW)
         integer :: k, l
@@ -69,7 +80,7 @@ contains
             call QED_SLFEN(searray)
             do k = 1, NW
                 do l = k, NW
-                    if(k == l) then
+                    if(orbitals(k) .and. orbitals(l) .and. k == l) then
                         seij = searray(k)
                     else
                         seij = 0_dp
@@ -83,7 +94,7 @@ contains
             call qedse_qedmod_init
             do k = 1, NW
                 do l = k, NW
-                    if(NAK(k) == NAK(l)) then
+                    if(orbitals(k) .and. orbitals(l) .and. NAK(k) == NAK(l)) then
                         seij = qedse_qedmod(k, l)
                     else
                         seij = 0_dp
@@ -96,7 +107,7 @@ contains
             ! Self-energy operator by Flambaum & Ginges
             do k = 1, NW
                 do l = k, NW
-                    if(NAK(k) == NAK(l)) then
+                    if(orbitals(k) .and. orbitals(l) .and. NAK(k) == NAK(l)) then
                         seij = qedse_flambaum(k, l, se_flam_phi_l, se_flam_phi_g, se_flam_phi_f)
                     else
                         seij = 0_dp
@@ -109,7 +120,7 @@ contains
             ! Self-energy operator by Pyykkö & Zhao
             do k = 1, NW
                 do l = k, NW
-                    if(NAK(k) == NAK(l)) then
+                    if(orbitals(k) .and. orbitals(l) .and. NAK(k) == NAK(l)) then
                         seij = qedse_pyykkoe(k, l)
                     else
                         seij = 0_dp
@@ -122,5 +133,22 @@ contains
             stop "ERROR: Invalid setype for subroutine qedse"
         end select
     end subroutine qedse
+
+    subroutine qedse_allorbitals(setype, matrix)
+        use grasp_rciqed_kinds, only: real64, dp
+        use orb_C, only: NW
+
+        integer :: setype
+        real(real64) :: matrix(NW, NW)
+
+        logical :: orbitals(NW)
+        integer :: i
+
+        do i = 1, NW
+            orbitals(i) = .true.
+        enddo
+
+        call qedse(setype, matrix, orbitals)
+    end subroutine qedse_allorbitals
 
 end module grasp_rciqed_qed

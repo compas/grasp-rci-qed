@@ -13,6 +13,16 @@ function grasp_error_string() bind(c)
     grasp_error_string = c_loc(lasterror_cstr)
 end
 
+subroutine grasp_ci_init_qedvp() bind(c)
+    use, intrinsic :: iso_c_binding
+    use libgrasprci, only: qedvp_initialized
+    use grasp_rciqed_qed, only: init_vacuum_polarization
+    implicit none
+
+    call init_vacuum_polarization
+    qedvp_initialized = .true.
+end subroutine grasp_ci_init_qedvp
+
 !!
 function grasp_initialize_constants() bind(c)
     use, intrinsic :: iso_c_binding
@@ -209,4 +219,36 @@ function grasp_orbital_grid(i) bind(c)
     print *, i, R(1), R(2), R(i)
 
     grasp_orbital_grid = R(i)
+end
+
+function grasp_ci_qedvp(i, j) bind(c)
+    use, intrinsic :: iso_c_binding
+    use grasp_rciqed_cimatrixelements
+    implicit none
+
+    integer(c_int), intent(in), value :: i, j
+    real(c_double) :: grasp_ci_qedvp
+
+    grasp_ci_qedvp = qed_vp(i, j)
+end
+
+function grasp_orbitals_nw() bind(c)
+    use, intrinsic :: iso_c_binding
+    use orb_C, only: NW
+    implicit none
+    integer(c_int) :: grasp_orbitals_nw
+    grasp_orbitals_nw = NW
+end
+
+subroutine grasp_orbitals(nw_c, np_c, nak_c) bind(c)
+    use, intrinsic :: iso_c_binding
+    use orb_C, only: NW, NP, NAK
+    implicit none
+
+    integer(c_int), intent(out) :: nw_c
+    integer(c_int), intent(out) :: np_c(NW), nak_c(NW)
+
+    nw_c = NW
+    np_c(1:NW) = NP(1:NW)
+    nak_c(1:NW) = NAK(1:NW)
 end
