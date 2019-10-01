@@ -24,22 +24,6 @@ subroutine grasp_ci_init_qedvp() bind(c)
 end subroutine grasp_ci_init_qedvp
 
 !!
-function grasp_initialize_constants() bind(c)
-    use, intrinsic :: iso_c_binding
-    use libgrasprci
-    !use grasp_c_interface
-    use grasp_rciqed_lib9290_init, only: lib9290_init_constants
-    implicit none
-
-    integer(c_int) :: grasp_initialize_constants
-
-    call lib9290_init_constants
-    constants_initialized = .true.
-    grasp_initialize_constants = 0
-
-end function grasp_initialize_constants
-
-!!
 function grasp_load_isodata(filename_cstr) bind(c)
     use, intrinsic :: iso_c_binding
     use libgrasprci
@@ -186,6 +170,14 @@ function grasp_ncsfs() bind(c)
     grasp_ncsfs = ncsfs_global()
 end
 
+function grasp_prnt_nvec() bind(c)
+    use, intrinsic :: iso_c_binding
+    use prnt_C, only: NVEC
+    implicit none
+    integer(c_int) :: grasp_prnt_nvec
+    grasp_prnt_nvec = NVEC
+end
+
 function grasp_ci_diracnuclear(i, j) bind(c)
     use, intrinsic :: iso_c_binding
     use grasp_rciqed_cimatrixelements
@@ -230,25 +222,4 @@ function grasp_ci_qedvp(i, j) bind(c)
     real(c_double) :: grasp_ci_qedvp
 
     grasp_ci_qedvp = qed_vp(i, j)
-end
-
-function grasp_orbitals_nw() bind(c)
-    use, intrinsic :: iso_c_binding
-    use orb_C, only: NW
-    implicit none
-    integer(c_int) :: grasp_orbitals_nw
-    grasp_orbitals_nw = NW
-end
-
-subroutine grasp_orbitals(nw_c, np_c, nak_c) bind(c)
-    use, intrinsic :: iso_c_binding
-    use orb_C, only: NW, NP, NAK
-    implicit none
-
-    integer(c_int), intent(out) :: nw_c
-    integer(c_int), intent(out) :: np_c(NW), nak_c(NW)
-
-    nw_c = NW
-    np_c(1:NW) = NP(1:NW)
-    nak_c(1:NW) = NAK(1:NW)
 end
