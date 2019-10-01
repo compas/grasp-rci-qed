@@ -87,6 +87,10 @@ contains
         ! CALL ALLOC (SLF_EN,ncf,'SLF_EN', 'MATRIX')
         ! CALL ALLOC (UCF, nw,'UCF', 'MATRIX')
         CALL LODCSH2(21, ncore, -119)
+
+        ! Close the CSL file, as we should not need to access it anymore and
+        ! this allows the load_csl routine to be called again.
+        close(21)
     end subroutine load_csl
 
     !> Loads the nuclear data and initializes the grid and the nuclear model.
