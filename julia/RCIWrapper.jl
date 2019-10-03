@@ -1,10 +1,5 @@
 module RCIWrapper
-# May need to set:
-#
-#    GFORTRAN_CONVERT_UNIT="big_endian"
-#
 using AtomicLevels
-using Test
 using Libdl
 
 #-------------------------------------------------------------------------------------------
@@ -82,8 +77,18 @@ function globals(mod::Symbol, variable::Symbol)
         if variable === :NW
             sym = Libdl.dlsym(libgrasp_lib[], :libgraspci_global_orb_nw)
             Int(ccall(sym, Cint, ()))
+        elseif variable === :NCF
+            sym = Libdl.dlsym(libgrasp_lib[], :libgrasprci_global_orb_ncf)
+            Int(ccall(sym, Cint, ()))
         else
             error("Unsupported variable in orb_C: $variable")
+        end
+    elseif mod === :prnt_C
+        if variable === :NVEC
+            sym = Libdl.dlsym(libgrasp_lib[], :libgrasprci_global_prnt_nvec)
+            Int(ccall(sym, Cint, ()))
+        else
+            error("Unsupported variable in prnt_C: $variable")
         end
     else
         error("Unsupported module $mod")
@@ -104,16 +109,27 @@ function globals_orbitals()
     return map(args -> RelativisticOrbital(args...), zip(np, nak))
 end
 
+function asfcoefficients()
+    ncf, nvec = globals(:orb_C, :NCF), globals(:prnt_C, :NVEC)
+    sym = Libdl.dlsym(libgrasp_lib[], :libgrasprci_asfcoefficient)
+    asf(k, i)::Float64 = ccall(sym, Cdouble, (Cint, Cint), k, i)
+    Float64[asf(k, i) for i = 1:ncf, k = 1:nvec]
+end
+
+
 #-------------------------------------------------------------------------------------------
 # 1 particle scalar operators (generic API)
 # -----------------------------------------
+
+abstract type Operator end
+abstract type OneScalarOperator <: Operator end
 
 """
     mutable struct Matrix1PScalar
 
 Stores a reference to an object of the Fortran `matrix1pscalar` type.
 """
-mutable struct Matrix1PScalar
+mutable struct Matrix1PScalar <: OneScalarOperator
     p :: Ptr{Cvoid}
 
     function Matrix1PScalar(p::Ptr)
@@ -164,9 +180,35 @@ function disable_orbital!(m1ps::Matrix1PScalar, i::Integer)
     return
 end
 
+"""
+    struct DiracPotential <: Operator
+
+A singleton type representing the Dirac + central potential operator.
+"""
+struct DiracPotential <: OneScalarOperator end
+const diracpot = DiracPotential()
+
+"""
+    struct Coulomb <: Operator
+
+A singleton type representing the Coulomb operator.
+"""
+struct Coulomb <: OneScalarOperator end
+const coulomb = Coulomb()
+
 #-------------------------------------------------------------------------------------------
 # libgrasp-rci QED operators
 # --------------------------
+
+function diracpot()
+    p = Ref{Ptr{Cvoid}}()
+    sym = Libdl.dlsym(libgrasp_lib[], :libgrasprci_diracpot_matrix1pscalar)
+    status = ccall(sym, Cint, (Ptr{Ptr{Cvoid}},), p)
+    if status != 0
+        error(grasp_error_string())
+    end
+    return Matrix1PScalar(p[])
+end
 
 function qedse(setype::Integer)
     @debug "Starting ccall: grasp_ci_qedse_matrix"
@@ -204,11 +246,13 @@ function OneScalarCache_finalizer(osc::OneScalarCache)
     return
 end
 
-function onescalar(ic::Integer, ir::Integer)
+function onescalar(ir::Integer, ic::Integer)
     sym = Libdl.dlsym(libgrasp_lib[], :libgrasprci_onescalar)
-    r = ccall(sym, Ptr{Cvoid}, (Cint, Cint), ic, ir)
+    r = ccall(sym, Ptr{Cvoid}, (Cint, Cint), ir, ic)
     return OneScalarCache(r)
 end
+
+matrixelement(operator::OneScalarOperator, ir::Integer, ic::Integer) = matrixelement(operator, onescalar(ic, ir))
 
 function matrixelement(operator::Matrix1PScalar, osc::OneScalarCache)
     sym = Libdl.dlsym(libgrasp_lib[], :libgrasprci_matrixelement_1p)
@@ -216,7 +260,17 @@ function matrixelement(operator::Matrix1PScalar, osc::OneScalarCache)
     return Float64(r)
 end
 
-matrixelement(operator::Matrix1PScalar, ic::Integer, ir::Integer) = matrixelement(operator, onescalar(ic, ir))
+function matrixelement(::DiracPotential, osc::OneScalarCache)
+    sym = Libdl.dlsym(libgrasp_lib[], :libgrasprci_matrixelement_diracpot)
+    r = ccall(sym, Cdouble, (Ptr{Cvoid},), osc.p)
+    return Float64(r)
+end
+
+function matrixelement(::Coulomb, ir::Integer, ic::Integer)
+    sym = Libdl.dlsym(libgrasp_lib[], :libgrasprci_matrixelement_coulomb)
+    r = ccall(sym, Cdouble, (Cint, Cint), ir, ic)
+    return Float64(r)
+end
 
 #
 #-------------------------------------------------------------------------------------------
@@ -284,22 +338,6 @@ function grasp_init_dcb()
     return
 end
 
-function grasp_ncsfs()
-    @debug "Starting ccall: grasp_ncsfs"
-    ncsfs = ccall( (:grasp_ncsfs, libgrasp[]),
-        Cint, (),
-    )
-    return Int(ncsfs)
-end
-
-function grasp_nvec()
-    @debug "Starting ccall: grasp_prnt_nvec"
-    nvec = ccall( (:grasp_prnt_nvec, libgrasp[]),
-        Cint, (),
-    )
-    return Int(nvec)
-end
-
 function grasp_ci_init_qedvp()
     @debug "Starting ccall: grasp_ci_init_qedvp"
     ccall( (:grasp_ci_init_qedvp, libgrasp[]),
@@ -341,38 +379,5 @@ function grasp_orbital_grid(i::Integer)
     r = ccall( (:grasp_orbital_grid, libgrasp[]), Cdouble, (Cint,), i)
     return Float64(r)
 end
-
-function grasp_ci_matrix1p(matrix1p::Nothing, ic::Integer, ir::Integer)
-    @debug "Starting ccall: grasp_ci_matrix1p"
-    osc = grasp_ci_onescalar(ic, ir)
-    r = ccall( (:grasp_ci_matrixelement_1p_cached, libgrasp[]),
-        Cdouble, (Ptr{Cvoid}, Ptr{Cvoid}),
-        osc.p, matrix1p.p
-    )
-    Float64(r)
-end
-
-function grasp_ci_pt_matrix1p(matrix1p::Nothing)
-    @debug "Starting ccall: grasp_ci_pt_matrix1p"
-    nvec = grasp_nvec()
-    contributions = Vector{Cdouble}(undef, nvec)
-    contributions = Cdouble[i for i = 1:nvec]
-    ccall( (:grasp_ci_pt_matrix1p, libgrasp[]),
-        Cvoid, (Ptr{Cvoid}, Ptr{Cdouble}),
-        matrix1p.p, contributions
-    )
-    Float64.(contributions)
-end
-
-function grasp_libgraspci_matrix1p_copy(matrix1p::Nothing)
-    @debug "Starting ccall: grasp_libgraspci_matrix1p_copy"
-    p = ccall( (:grasp_libgraspci_matrix1p_copy, libgrasp[]),
-        Ptr{Cvoid}, (Ptr{Cvoid},),
-        matrix1p.p
-    )
-    Matrix1PCache(p)
-end
-
-dc(i, j) = grasp_ci_diracnuclear(i, j) + grasp_ci_coulomb(i, j)
 
 end

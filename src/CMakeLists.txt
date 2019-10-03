@@ -1,3 +1,7 @@
+# Set up a variable that points to the root of the grasp-rci-qed repository
+get_filename_component(GRASPRCI_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/.." ABSOLUTE)
+message("* GRASPRCI_ROOT: ${GRASPRCI_ROOT}")
+
 add_subdirectory("libgrasp")
 add_subdirectory("breit")
 add_subdirectory("qed")

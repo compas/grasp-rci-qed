@@ -1,18 +1,5 @@
 !! Public functions of the libgrasp-rci shared library.
 
-!>
-!!
-!! Note: calling this function again will invalidate the previously returned
-!! pointer.
-function grasp_error_string() bind(c)
-    use, intrinsic :: iso_c_binding
-    use libgrasprci
-    implicit none
-    type(c_ptr) :: grasp_error_string
-    lasterror_cstr = trim(lasterror)//c_null_char
-    grasp_error_string = c_loc(lasterror_cstr)
-end
-
 subroutine grasp_ci_init_qedvp() bind(c)
     use, intrinsic :: iso_c_binding
     use libgrasprci, only: qedvp_initialized
@@ -160,44 +147,6 @@ function grasp_init_dcb() bind(c)
     call init_breit(j2max)
 
     grasp_init_dcb = 0
-end
-
-function grasp_ncsfs() bind(c)
-    use, intrinsic :: iso_c_binding
-    use grasp_rciqed_lib9290_csls, only: ncsfs_global
-    implicit none
-    integer(c_int) :: grasp_ncsfs
-    grasp_ncsfs = ncsfs_global()
-end
-
-function grasp_prnt_nvec() bind(c)
-    use, intrinsic :: iso_c_binding
-    use prnt_C, only: NVEC
-    implicit none
-    integer(c_int) :: grasp_prnt_nvec
-    grasp_prnt_nvec = NVEC
-end
-
-function grasp_ci_diracnuclear(i, j) bind(c)
-    use, intrinsic :: iso_c_binding
-    use grasp_rciqed_cimatrixelements
-    implicit none
-
-    integer(c_int), intent(in), value :: i, j
-    real(c_double) :: grasp_ci_diracnuclear
-
-    grasp_ci_diracnuclear = dirac_potential(i, j)
-end
-
-function grasp_ci_coulomb(i, j) bind(c)
-    use, intrinsic :: iso_c_binding
-    use grasp_rciqed_cimatrixelements
-    implicit none
-
-    integer(c_int), intent(in), value :: i, j
-    real(c_double) :: grasp_ci_coulomb
-
-    grasp_ci_coulomb = coulomb(i, j)
 end
 
 function grasp_orbital_grid(i) bind(c)

@@ -18,6 +18,10 @@ module libgrasprci
 
     integer :: j2max
 
+    !> If set to `.true.`, will enable various debug output to the standard
+    !! output.
+    logical :: debug = .false.
+
     !> Stores the matrix elements of a scalar single-particle operator.
     type matrix1pscalar
         !> @var n
@@ -68,13 +72,26 @@ contains
         libgraspci_global_j2max = j2max
     end function libgraspci_global_j2max
 
-    !> Accessor function for the `j2max` global variable in the `libgrasprci`
-    !! module.
+    !> Accessor function for the `NW` global variable in the `orb_C` module.
     function libgraspci_global_orb_nw() bind(c)
         use orb_C, only: NW
         integer(c_int) :: libgraspci_global_orb_nw
         libgraspci_global_orb_nw = NW
     end function libgraspci_global_orb_nw
+
+    !> Accessor function for the `NCF` global variable in the `orb_C` module.
+    function libgrasprci_global_orb_ncf() bind(c)
+        use orb_C, only: NCF
+        integer(c_int) :: libgrasprci_global_orb_ncf
+        libgrasprci_global_orb_ncf = NCF
+    end function libgrasprci_global_orb_ncf
+
+    !> Accessor function for the `NVEC` global variable in the `prnt_C` module.
+    function libgrasprci_global_prnt_nvec() bind(c)
+        use prnt_C, only: NVEC
+        integer(c_int) :: libgrasprci_global_prnt_nvec
+        libgrasprci_global_prnt_nvec = NVEC
+    end function libgrasprci_global_prnt_nvec
 
     !> Returns the `n` first values in `NP` and `NAK` arrays in `orb_C`.
     !!
@@ -96,6 +113,24 @@ contains
         n = min(n, NW)
         np_c(1:n) = NP(1:n)
         nak_c(1:n) = NAK(1:n)
+    end
+
+    !> Returns the C string of the last error
+    !!
+    !! Note: calling this function again will invalidate the previously returned
+    !! pointer.
+    function libgrasprci_error_string() bind(c)
+        type(c_ptr) :: libgrasprci_error_string
+        lasterror_cstr = trim(lasterror)//c_null_char
+        libgrasprci_error_string = c_loc(lasterror_cstr)
+    end
+
+    !> Enable or disable debug output from `libgrasp-rci` routines.
+    !!
+    !! @param setting `true`/`false` enables/disables the debug output.
+    subroutine libgrasprci_debug(setting) bind(c)
+        logical(c_bool), value :: setting
+        debug = setting
     end
 
     !===========================================================================
@@ -140,7 +175,9 @@ contains
     subroutine libgrasprci_matrix1pscalar_delete(matrix1pscalar_cptr) bind(c)
         type(c_ptr), intent(in), value :: matrix1pscalar_cptr
         type(matrix1pscalar), pointer :: matrix
-        print '(a,z16.16)', "Deallocating matrix1pscalar: 0x", matrix1pscalar_cptr
+        if(debug) then
+            print '(a,z16.16)', "Deallocating matrix1pscalar: 0x", matrix1pscalar_cptr
+        endif
         call c_f_pointer(matrix1pscalar_cptr, matrix)
         deallocate(matrix%matrix)
         deallocate(matrix)
@@ -215,8 +252,69 @@ contains
     end function libgrasprci_initalize
 
     !===========================================================================
+    ! C API for accessing the orbitals, ASFs coefficients etc.
+    !---------------------------------------------------------------------------
+
+    !> Returns the coefficient of the `i`th CSF in the `k`th ASF.
+    !!
+    !! @param k Index of the ASF (`1 <= k <= NVEC`)
+    !! @param i Index of the CSF (many-body basis state; `1 <= i <= NCF`)
+    !! @return The corresponding expansion coefficient of the specified ASF.
+    !!
+    !! Internally, it accesses the appropriate element on the `eigv_C::EVEC`
+    !! array.
+    function libgrasprci_asfcoefficient(k, i) bind(c)
+        use eigv_C, only: EVEC
+        use orb_C, only: NCF
+        integer(c_int), intent(in), value :: k, i
+        real(c_double) :: libgrasprci_asfcoefficient
+        libgrasprci_asfcoefficient = EVEC(i + (k - 1) * NCF)
+    end function libgrasprci_asfcoefficient
+
+    !===========================================================================
     ! C API for calculating various physical operators
     !---------------------------------------------------------------------------
+
+    !> Allocates and stores a C pointer to a `matrix1pscalar` type in
+    !! `matrix_cptr`, filled with the 1-particle matrix elements of Dirac
+    !! operator + the central potential.
+    !!
+    !! @param matrix_cptr A reference to a pointer that will be set to the
+    !!     address of the `matrix1pscalar` object.
+    !! @return Non-zero if there was an error.
+    function libgrasprci_diracpot_matrix1pscalar(matrix_cptr) bind(c)
+        use grasp_rciqed_kinds, only: dp
+        use orb_C, only: NW, NAK
+        type(c_ptr), intent(out) :: matrix_cptr
+        integer(c_int) :: libgrasprci_diracpot_matrix1pscalar
+        type(matrix1pscalar), pointer :: matrix
+        integer :: i, j
+
+        allocate(matrix)
+        matrix%n = NW
+        allocate(matrix%matrix(NW,NW))
+        do i = 1, NW
+            do j = 1, NW ! TODO: only calculate one half of the matrix
+                if(NAK(i) == NAK(j)) then
+                    call iabint_safe(i, j, matrix%matrix(i, j))
+                else
+                    matrix%matrix(i, j) = 0.0_dp
+                endif
+            enddo
+        enddo
+        matrix_cptr = c_loc(matrix)
+        libgrasprci_diracpot_matrix1pscalar = 0 ! no error
+    end function libgrasprci_diracpot_matrix1pscalar
+
+    !> Calls the `IABINT` routine, but ensures that the input `k` and `l`
+    !! arguments do not get swapped.
+    subroutine iabint_safe(k, l, result)
+        use grasp_rciqed_kinds, only: real64
+        use iabint_I
+        integer, value :: k, l
+        real(real64), intent(out) :: result
+        call IABINT(k, l, result)
+    end
 
     !> Allocates and stores a C pointer to a `matrix1pscalar` type in
     !! `matrix_cptr`, filled with the 1-particle matrix elements of the QED
@@ -280,7 +378,9 @@ contains
     subroutine libgrasprci_onescalar_delete(onescalar_cptr) bind(c)
         type(c_ptr), intent(in), value :: onescalar_cptr
         type(onescalar_cache), pointer :: onescalar
-        print '(a,z16.16)', "Deallocating onescalar_cache: 0x", onescalar_cptr
+        if(debug) then
+            print '(a,z16.16)', "Deallocating onescalar_cache: 0x", onescalar_cptr
+        endif
         call c_f_pointer(onescalar_cptr, onescalar)
         deallocate(onescalar%tshell)
         deallocate(onescalar)
@@ -302,44 +402,20 @@ contains
         libgrasprci_matrixelement_1p = qed_se(matrix%matrix, cache%ic, cache%ir, cache%k, cache%l, cache%tshell)
     end function libgrasprci_matrixelement_1p
 
-    !===========================================================================
-    ! Undocumented libgrasp-rci C API
-    !---------------------------------------------------------------------------
-
-    subroutine grasp_ci_onescalar_show(cache_cptr) bind(c)
-        use orb_C, only: NW
-
+    function libgrasprci_matrixelement_diracpot(cache_cptr) bind(c)
+        use grasp_rciqed_cimatrixelements, only: dirac_potential, coulomb
         type(c_ptr), value :: cache_cptr
-
+        real(c_double) :: libgrasprci_matrixelement_diracpot
         type(onescalar_cache), pointer :: cache
-        integer :: i
-
         call c_f_pointer(cache_cptr, cache)
+        libgrasprci_matrixelement_diracpot = dirac_potential(cache%ic, cache%ir, cache%k, cache%l, cache%tshell)
+    end function libgrasprci_matrixelement_diracpot
 
-        print '("ic=",i0,", ir=",i0)', cache%ic, cache%ir
-        print '("k=",i0,", l=",i0)', cache%k, cache%l
-        do i = 1,NW
-            print *, cache%tshell(i)
-        enddo
-    end
-
-    subroutine grasp_ci_pt_matrix1pscalar(matrix_cptr, contributions_cptr) bind(c)
-        use prnt_C, only: NVEC
-
-        type(c_ptr), intent(in), value :: matrix_cptr, contributions_cptr
-
-        type(matrix1pscalar), pointer :: matrix
-        real(c_double), pointer :: contributions(:)
-
-        integer :: i
-
-        call c_f_pointer(contributions_cptr, contributions, (/ NVEC /))
-
-        print *, "NVEC", NVEC, contributions
-
-        do i = 1, NVEC
-            contributions(i) = i*i
-        enddo
-    end subroutine grasp_ci_pt_matrix1pscalar
+    function libgrasprci_matrixelement_coulomb(ir, ic) bind(c)
+        use grasp_rciqed_cimatrixelements, only: coulomb
+        integer(c_int), value :: ir, ic
+        real(c_double) :: libgrasprci_matrixelement_coulomb
+        libgrasprci_matrixelement_coulomb = coulomb(ic, ir)
+    end function libgrasprci_matrixelement_coulomb
 
 end module libgrasprci

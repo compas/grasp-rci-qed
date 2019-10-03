@@ -9,6 +9,7 @@ target_link_libraries_Fortran(grasp-rci PUBLIC
     rciqed-grasp rciqed-rci rciqed-breit rciqed-qed rciqed-mass_shifts rciqed-matrixelements
 )
 install(TARGETS grasp-rci DESTINATION lib/)
+install(TARGETS grasp-rci DESTINATION "${GRASPRCI_ROOT}/lib/")
 
 # Also, compile a big-endian version of the library
 add_library(grasp-rci-bigendian SHARED
@@ -21,3 +22,4 @@ target_link_libraries_Fortran(grasp-rci-bigendian PUBLIC
     rciqed-grasp rciqed-rci rciqed-breit rciqed-qed rciqed-mass_shifts rciqed-matrixelements
 )
 install(TARGETS grasp-rci-bigendian DESTINATION lib/)
+install(TARGETS grasp-rci-bigendian DESTINATION "${GRASPRCI_ROOT}/lib/")

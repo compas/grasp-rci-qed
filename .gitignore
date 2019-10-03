@@ -2,3 +2,4 @@ grasp-rci-qed
 build/
 build-*/
 doc/html/
+lib/

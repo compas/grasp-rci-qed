@@ -1,10 +1,9 @@
 [deps]
 AtomicLevels = "10933b4c-d60f-11e8-1fc6-bd9035a249a1"
-
-[juliaenv]
-load_path="lib/:@:@v#.#:@stdlib"
+ProjectX = "5bc72906-84ee-441a-b1af-482a16c1ccd3"
 
 [environment]
-#LIBGRASPRCI="~/Projects/grasp/grasp/build/lib/libgrasp-rci-bigendian.so"
-LIBGRASPRCI="~/Projects/grasp/grasp/build/lib/libgrasp-rci.so"
-#GFORTRAN_CONVERT_UNIT="big_endian"
+LIBGRASPRCI = "../../lib/libgrasp-rci.so"
+
+[juliaenv]
+load_path = "../../julia/:@:@v#.#:@stdlib"

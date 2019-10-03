@@ -10,9 +10,9 @@ version = "0.1.0"
 
 [[BandedMatrices]]
 deps = ["FillArrays", "LazyArrays", "LinearAlgebra", "MatrixFactorizations", "Random", "SparseArrays"]
-git-tree-sha1 = "887159a41e0bf6d5d9fe9dd98ca7a48f6b8780d4"
+git-tree-sha1 = "16ed431f921ff6f6d0db7b56b315c5b4c92e7ea7"
 uuid = "aae01518-5342-5314-be14-df237901396f"
-version = "0.11.1"
+version = "0.12.2"
 
 [[Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
@@ -25,9 +25,9 @@ version = "0.10.0"
 
 [[BlockBandedMatrices]]
 deps = ["BandedMatrices", "BlockArrays", "Distributed", "FillArrays", "LazyArrays", "LinearAlgebra", "MatrixFactorizations", "Pkg", "Profile", "Random", "SharedArrays", "SparseArrays", "Statistics", "Test"]
-git-tree-sha1 = "f18a3f8314dd313a30e1bb30c0f3ba8446d342ef"
+git-tree-sha1 = "160fc541f01304ab823d1aff1959e84f28a63faf"
 uuid = "ffab5731-97b5-5995-9138-79e8c1846df0"
-version = "0.5.0"
+version = "0.5.1"
 
 [[CSTParser]]
 deps = ["Tokenize"]
@@ -49,9 +49,9 @@ version = "2.1.0"
 
 [[DataStructures]]
 deps = ["InteractiveUtils", "OrderedCollections"]
-git-tree-sha1 = "0809951a1774dc724da22d26e4289bbaab77809a"
+git-tree-sha1 = "517ce30aa57cdfae1ab444a7c0aef8bb86345bc2"
 uuid = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
-version = "0.17.0"
+version = "0.17.1"
 
 [[Dates]]
 deps = ["Printf"]
@@ -67,15 +67,15 @@ uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[FillArrays]]
 deps = ["LinearAlgebra", "Random", "SparseArrays"]
-git-tree-sha1 = "4c707c87ddd3199fc5624d5c98b2c706e4d00675"
+git-tree-sha1 = "16974065d5bfa867446d3228bc63f05a440e910b"
 uuid = "1a297f60-69ca-5386-bcde-b61e274b549b"
-version = "0.7.0"
+version = "0.7.2"
 
 [[Formatting]]
 deps = ["Printf"]
-git-tree-sha1 = "aef8983c0f77c84ae77ced1bb3ecf5ab7d687700"
+git-tree-sha1 = "a0c901c29c0e7c763342751c0a94211d56c0de5c"
 uuid = "59287772-0a20-5a39-b81b-1366585eb4c0"
-version = "0.4.0"
+version = "0.4.1"
 
 [[HalfIntegers]]
 git-tree-sha1 = "46026f5138d0458abbeaa60ddd700580f009e291"
@@ -88,9 +88,9 @@ uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
 
 [[LazyArrays]]
 deps = ["FillArrays", "LinearAlgebra", "MacroTools", "StaticArrays"]
-git-tree-sha1 = "631379228b52050c9c925d34db7d60b9073f2989"
+git-tree-sha1 = "0e8448cc1774a8d067ce6dc576fcfa61f44adb2f"
 uuid = "5078a376-72f3-5289-bfd5-ec5146d43c02"
-version = "0.11.0"
+version = "0.12.1"
 
 [[LibGit2]]
 uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
@@ -117,9 +117,9 @@ uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 
 [[MatrixFactorizations]]
 deps = ["LinearAlgebra", "Random", "Test"]
-git-tree-sha1 = "95ed2db8197ef7eadce558dff0e9595169672aee"
+git-tree-sha1 = "42f7931fac4068709a8412d3766e9a2bfc91e451"
 uuid = "a3b82374-2e81-5b9e-98ce-41277c0e4c87"
-version = "0.1.0"
+version = "0.2.0"
 
 [[Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
@@ -159,6 +159,14 @@ uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 [[Profile]]
 deps = ["Printf"]
 uuid = "9abbd945-dff8-562f-b5e8-e1ebf5ef1b79"
+
+[[ProjectX]]
+deps = ["Pkg"]
+git-tree-sha1 = "e2805f1f6f51cd9a39787df38f4644045781b69e"
+repo-rev = "master"
+repo-url = "https://github.com/mortenpi/ProjectX.jl.git"
+uuid = "5bc72906-84ee-441a-b1af-482a16c1ccd3"
+version = "0.1.0"
 
 [[REPL]]
 deps = ["InteractiveUtils", "Markdown", "Sockets"]
