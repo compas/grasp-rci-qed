@@ -8,13 +8,11 @@ module libgrasprci
     character(:), allocatable :: lasterror
     character(:), allocatable, target :: lasterror_cstr
 
-    logical :: constants_initialized = .false.
-    logical :: isodata_loaded = .false.
-    logical :: csl_loaded = .false.
-    logical :: orbitals_loaded = .false.
-    logical :: mixing_loaded = .false.
-
+    !> `.true.` if the files are loaded and DC matrix elements are initialized
+    logical :: libgrasprci_initialized = .false.
+    logical :: breit_initialized = .false.
     logical :: qedvp_initialized = .false.
+    logical :: ms_initialized = .false.
 
     integer :: j2max
 
@@ -57,13 +55,6 @@ contains
     !===========================================================================
     ! The C API for managing the library global state
     !---------------------------------------------------------------------------
-
-    !> Initializes the various global constants.
-    subroutine libgrasprci_initialize_constants() bind(c)
-        use grasp_rciqed_lib9290_init, only: lib9290_init_constants
-        call lib9290_init_constants
-        constants_initialized = .true.
-    end subroutine libgrasprci_initialize_constants
 
     !> Accessor function for the `j2max` global variable in the `libgrasprci`
     !! module.
@@ -219,7 +210,7 @@ contains
     end subroutine libgrasprci_matrix1pscalar_disable
 
     !===========================================================================
-    ! Loading input files
+    ! Loading input files, initializing the global state
     !---------------------------------------------------------------------------
 
     function libgrasprci_initalize(isodata, csl, orbitals, mixing) bind(c)
@@ -235,6 +226,12 @@ contains
 
         character(:), allocatable :: filename
 
+        if(breit_initialized) then
+            lasterror = "libgrasprci_initalize: libgrasprci already initialized"
+            libgrasprci_initalize = 1
+            return
+        endif
+
         ! Initialize machine constants
         call lib9290_init_constants
 
@@ -248,8 +245,64 @@ contains
         call lib9290_init_rkco_gg
         call init_rkintc(j2max)
 
+        libgrasprci_initialized = .true.
         libgrasprci_initalize = 0
     end function libgrasprci_initalize
+
+    function libgrasprci_initialize_breit() bind(c)
+        use grasp_rciqed_breit, only: init_breit
+        integer(c_int) :: libgrasprci_initialize_breit
+        if(.not.libgrasprci_initialized) then
+            lasterror = "libgrasprci_initialize_breit: libgrasprci must be initialized"
+            libgrasprci_initialize_breit = 1
+            return
+        endif
+        if(breit_initialized) then
+            lasterror = "libgrasprci_initialize_breit: Breit operator already initialized"
+            libgrasprci_initialize_breit = 2
+            return
+        endif
+        call init_breit(j2max)
+        breit_initialized = .true.
+        libgrasprci_initialize_breit = 0
+    end function libgrasprci_initialize_breit
+
+    function libgrasprci_initialize_qedvp() bind(c)
+        use grasp_rciqed_qed, only: init_vacuum_polarization
+        integer(c_int) :: libgrasprci_initialize_qedvp
+        if(.not.libgrasprci_initialized) then
+            lasterror = "libgrasprci_initialize_qedvp: libgrasprci must be initialized"
+            libgrasprci_initialize_qedvp = 1
+            return
+        endif
+        if(qedvp_initialized) then
+            lasterror = "libgrasprci_initialize_qedvp: QED VP already initialized"
+            libgrasprci_initialize_qedvp = 2
+            return
+        endif
+        call init_vacuum_polarization
+        qedvp_initialized = .true.
+        libgrasprci_initialize_qedvp = 0
+    end function libgrasprci_initialize_qedvp
+
+    !> Initializes the normal and special mass shift global state.
+    function libgrasprci_initialize_ms() bind(c)
+        use grasp_rciqed_mass_shifts, only: init_mass_shifts
+        integer(c_int) :: libgrasprci_initialize_ms
+        if(.not.libgrasprci_initialized) then
+            lasterror = "libgrasprci_initialize_ms: libgrasprci must be initialized"
+            libgrasprci_initialize_ms = 1
+            return
+        endif
+        if(ms_initialized) then
+            lasterror = "libgrasprci_initialize_ms: NMS/SMS already initialized"
+            libgrasprci_initialize_ms = 2
+            return
+        endif
+        call init_mass_shifts
+        ms_initialized = .true.
+        libgrasprci_initialize_ms = 0
+    end function libgrasprci_initialize_ms
 
     !===========================================================================
     ! C API for accessing the orbitals, ASFs coefficients etc.
@@ -417,5 +470,61 @@ contains
         real(c_double) :: libgrasprci_matrixelement_coulomb
         libgrasprci_matrixelement_coulomb = coulomb(ic, ir)
     end function libgrasprci_matrixelement_coulomb
+
+    function libgrasprci_matrixelement_breit(ir, ic) bind(c)
+        use, intrinsic :: ieee_arithmetic, only: ieee_value, ieee_signaling_nan
+        use grasp_rciqed_cimatrixelements, only: breit
+        integer(c_int), value :: ir, ic
+        real(c_double) :: libgrasprci_matrixelement_breit
+        if(.not.breit_initialized) then
+            lasterror = "libgrasprci_matrixelement_breit: QED VP not initialized"
+            libgrasprci_matrixelement_breit = ieee_value(libgrasprci_matrixelement_breit, ieee_signaling_nan)
+            return
+        endif
+        libgrasprci_matrixelement_breit = breit(ic, ir)
+    end function libgrasprci_matrixelement_breit
+
+    function libgrasprci_matrixelement_qedvp(cache_cptr) bind(c)
+        use, intrinsic :: ieee_arithmetic, only: ieee_value, ieee_signaling_nan
+        use grasp_rciqed_cimatrixelements, only: qed_vp
+        type(c_ptr), value :: cache_cptr
+        real(c_double) :: libgrasprci_matrixelement_qedvp
+        type(onescalar_cache), pointer :: cache
+        if(.not.qedvp_initialized) then
+            lasterror = "libgrasprci_matrixelement_qedvp: QED VP not initialized"
+            libgrasprci_matrixelement_qedvp = ieee_value(libgrasprci_matrixelement_qedvp, ieee_signaling_nan)
+            return
+        endif
+        call c_f_pointer(cache_cptr, cache)
+        libgrasprci_matrixelement_qedvp = qed_vp(cache%ic, cache%ir, cache%k, cache%l, cache%tshell)
+    end function libgrasprci_matrixelement_qedvp
+
+    function libgrasprci_matrixelement_nms(cache_cptr) bind(c)
+        use, intrinsic :: ieee_arithmetic, only: ieee_value, ieee_signaling_nan
+        use grasp_rciqed_cimatrixelements, only: nms
+        type(c_ptr), value :: cache_cptr
+        real(c_double) :: libgrasprci_matrixelement_nms
+        type(onescalar_cache), pointer :: cache
+        if(.not.ms_initialized) then
+            lasterror = "libgrasprci_matrixelement_nms: NMS/SMS not initialized"
+            libgrasprci_matrixelement_nms = ieee_value(libgrasprci_matrixelement_nms, ieee_signaling_nan)
+            return
+        endif
+        call c_f_pointer(cache_cptr, cache)
+        libgrasprci_matrixelement_nms = nms(cache%ic, cache%ir, cache%k, cache%l, cache%tshell)
+    end function libgrasprci_matrixelement_nms
+
+    function libgrasprci_matrixelement_sms(ir, ic) bind(c)
+        use, intrinsic :: ieee_arithmetic, only: ieee_value, ieee_signaling_nan
+        use grasp_rciqed_cimatrixelements, only: sms
+        integer(c_int), value :: ir, ic
+        real(c_double) :: libgrasprci_matrixelement_sms
+        if(.not.ms_initialized) then
+            lasterror = "libgrasprci_matrixelement_sms: NMS/SMS not initialized"
+            libgrasprci_matrixelement_sms = ieee_value(libgrasprci_matrixelement_sms, ieee_signaling_nan)
+            return
+        endif
+        libgrasprci_matrixelement_sms = sms(ic, ir)
+    end function libgrasprci_matrixelement_sms
 
 end module libgrasprci

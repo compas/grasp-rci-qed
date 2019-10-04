@@ -11,34 +11,48 @@ using Libdl
 # `libgrasp` contains the filesystem path to the library and `libgrasp_lib` is the pointer
 
 "Contains the filesystem path to the `libgrasp-rci` library."
-const libgrasp = Ref{String}()
+const libgrasp = Ref{String}("")
 "Contains the `dlopen`ed pointer to the `libgrasp-rci` library."
-const libgrasp_lib = Ref{Ptr{Nothing}}(0)
+const libgrasp_lib = Ref{Ptr{Nothing}}(C_NULL)
 
-function __init__()
-    haskey(ENV, "LIBGRASPRCI") || error("\$LIBGRASPRCI unset")
-    libgrasp_path = normpath(abspath(expanduser(ENV["LIBGRASPRCI"])))
-    isfile(libgrasp_path) || error("$(libgrasp_path) missing")
-    libgrasp[] = libgrasp_path
-    _open_libgrasp()
-end
+"""
+    __reload__()
 
-function _open_libgrasp()
-    libgrasp_lib[] == Ptr{Nothing}(0) || error("libgrasp is already open")
+Convenience function to quickly reload the `libgrasp-rci` shared library. Note
+that this will wipe out any global state you have.
+"""
+function __reload__()
+    global libgrasp, libgrasp_lib
+    # Check the LIBGRASPRCI environment variable
+    if haskey(ENV, "LIBGRASPRCI")
+        path = normpath(abspath(expanduser(ENV["LIBGRASPRCI"])))
+        isfile(path) || error("$(path) missing")
+        libgrasp[] = path
+    elseif !haskey(ENV, "LIBGRASPRCI") && isempty(libgrasp[])
+        error("\$LIBGRASPRCI not set, unable to find libgrasp-rci")
+    end
+    # If libgrasp is already loaded, unload it
+    if libgrasp_lib[] != C_NULL
+        Libdl.dlclose(libgrasp_lib[])
+        libgrasp_lib[] = C_NULL
+    end
+    # Open the shared library (again)
     libgrasp_lib[] = Libdl.dlopen(libgrasp[])
-
-    # Initialize GRASP constants
-    ccall(Libdl.dlsym(libgrasp_lib[], :libgrasprci_initialize_constants), Cvoid, ())
     return
 end
 
+__init__() = __reload__()
+
+
 """
-Convenience function to quickly reload the `libgrasp-rci` library.
+    grasperror() -> String
+
+Returns the error string corresponding to the last error condition in
+`libgrasp-rci`.
 """
-function _reopen_libgrasp()
-    Libdl.dlclose(libgrasp_lib[])
-    libgrasp_lib[] = 0
-    _open_libgrasp()
+function grasperror()
+    s = ccall(Libdl.dlsym(libgrasp_lib[], :libgrasprci_error_string), Cstring, ())
+    unsafe_string(s)
 end
 
 #-------------------------------------------------------------------------------------------
@@ -60,9 +74,36 @@ function initialize!(isodata, csl, orbitals, mixing)
         isodata, csl, orbitals, mixing
     )
     if status != 0
-        error(grasp_error_string())
+        error(grasperror())
     end
     return
+end
+
+function initialize_breit!()
+    status = ccall(Libdl.dlsym(libgrasp_lib[], :libgrasprci_initialize_breit),
+        Cint, ()
+    )
+    if status != 0
+        error(grasperror())
+    end
+end
+
+function initialize_qedvp!()
+    status = ccall(Libdl.dlsym(libgrasp_lib[], :libgrasprci_initialize_qedvp),
+        Cint, ()
+    )
+    if status != 0
+        error(grasperror())
+    end
+end
+
+function initialize_mass_shifts!()
+    status = ccall(Libdl.dlsym(libgrasp_lib[], :libgrasprci_initialize_ms),
+        Cint, ()
+    )
+    if status != 0
+        error(grasperror())
+    end
 end
 
 function globals(mod::Symbol, variable::Symbol)
@@ -108,14 +149,6 @@ function globals_orbitals()
     ccall(sym, Cvoid, (Cint, Ptr{Cint}, Ptr{Cint}), nw, np, nak)
     return map(args -> RelativisticOrbital(args...), zip(np, nak))
 end
-
-function asfcoefficients()
-    ncf, nvec = globals(:orb_C, :NCF), globals(:prnt_C, :NVEC)
-    sym = Libdl.dlsym(libgrasp_lib[], :libgrasprci_asfcoefficient)
-    asf(k, i)::Float64 = ccall(sym, Cdouble, (Cint, Cint), k, i)
-    Float64[asf(k, i) for i = 1:ncf, k = 1:nvec]
-end
-
 
 #-------------------------------------------------------------------------------------------
 # 1 particle scalar operators (generic API)
@@ -193,8 +226,40 @@ const diracpot = DiracPotential()
 
 A singleton type representing the Coulomb operator.
 """
-struct Coulomb <: OneScalarOperator end
+struct Coulomb <: Operator end
 const coulomb = Coulomb()
+
+"""
+    struct Breit <: Operator
+
+A singleton type representing the Breit operator.
+"""
+struct Breit <: Operator end
+const breit = Breit()
+
+"""
+    struct NormalMassShift <: Operator
+
+A singleton type representing the normal mass shift operator.
+"""
+struct NormalMassShift <: OneScalarOperator end
+const nms = NormalMassShift()
+
+"""
+    struct SpecialMassShift <: Operator
+
+A singleton type representing the special mass shift operator.
+"""
+struct SpecialMassShift <: Operator end
+const sms = SpecialMassShift()
+
+"""
+    struct QEDVP <: Operator
+
+A singleton type representing the QED vacuum polarization operator.
+"""
+struct QEDVP <: OneScalarOperator end
+const qedvp = QEDVP()
 
 #-------------------------------------------------------------------------------------------
 # libgrasp-rci QED operators
@@ -266,11 +331,75 @@ function matrixelement(::DiracPotential, osc::OneScalarCache)
     return Float64(r)
 end
 
+function matrixelement(::NormalMassShift, osc::OneScalarCache)
+    sym = Libdl.dlsym(libgrasp_lib[], :libgrasprci_matrixelement_nms)
+    r = ccall(sym, Cdouble, (Ptr{Cvoid},), osc.p)
+    return Float64(r)
+end
+
+function matrixelement(::QEDVP, osc::OneScalarCache)
+    sym = Libdl.dlsym(libgrasp_lib[], :libgrasprci_matrixelement_qedvp)
+    r = ccall(sym, Cdouble, (Ptr{Cvoid},), osc.p)
+    return Float64(r)
+end
+
 function matrixelement(::Coulomb, ir::Integer, ic::Integer)
     sym = Libdl.dlsym(libgrasp_lib[], :libgrasprci_matrixelement_coulomb)
     r = ccall(sym, Cdouble, (Cint, Cint), ir, ic)
     return Float64(r)
 end
+
+function matrixelement(::Breit, ir::Integer, ic::Integer)
+    sym = Libdl.dlsym(libgrasp_lib[], :libgrasprci_matrixelement_breit)
+    r = ccall(sym, Cdouble, (Cint, Cint), ir, ic)
+    return Float64(r)
+end
+
+function matrixelement(::SpecialMassShift, ir::Integer, ic::Integer)
+    sym = Libdl.dlsym(libgrasp_lib[], :libgrasprci_matrixelement_sms)
+    r = ccall(sym, Cdouble, (Cint, Cint), ir, ic)
+    return Float64(r)
+end
+
+#-------------------------------------------------------------------------------------------
+# Calculations with Atomic State Functions (ASFs)
+# -----------------------------------------------
+
+function asfcoefficients()
+    ncf, nvec = globals(:orb_C, :NCF), globals(:prnt_C, :NVEC)
+    sym = Libdl.dlsym(libgrasp_lib[], :libgrasprci_asfcoefficient)
+    asf(k, i)::Float64 = ccall(sym, Cdouble, (Cint, Cint), k, i)
+    Float64[asf(k, i) for i = 1:ncf, k = 1:nvec]
+end
+
+function asfvalues(ops::Vector{T}) where {T <: Operator}
+    ncf = globals(:orb_C, :NCF)
+    asfs = asfcoefficients()
+    asfvalues = zeros(Float64, length(ops), size(asfs, 2))
+    is1ps = map(op -> isa(op, Matrix1PScalar), ops)
+    cij = Vector{Float64}(undef, size(asfs, 2))
+    for i = 1:ncf, j = 1:ncf
+        osc = any(is1ps) ? onescalar(i, j) : nothing
+        #cij[:] .= asfs[i,:] .* asfs[j,:]
+        for k = 1:size(asfs, 2)
+            cij[k] = asfs[i, k] * asfs[j, k]
+        end
+        for (q, op) in enumerate(ops)
+            me = is1ps[q] ? matrixelement(op, osc) : matrixelement(op, i, j)
+            #asfvalues[q,:] .+= cij  .* me
+            for k = 1:size(asfs, 2)
+                asfvalues[q, k] += cij[k] * me
+            end
+        end
+    end
+    return asfvalues
+end
+
+function asfvalue(op::Operator, k)
+    ncf, asfs = globals(:orb_C, :NCF), asfcoefficients()
+    sum(matrixelement(op, i, j) * asfs[i, k] * asfs[j, k] for i = 1:ncf, j=1:ncf)
+end
+
 
 #
 #-------------------------------------------------------------------------------------------
@@ -288,12 +417,6 @@ end
 function grasp_ci_onescalar_show(c)
     @debug "Starting ccall: grasp_ci_onescalar_show"
     ccall( (:grasp_ci_onescalar_show, libgrasp[]), Cvoid, (Ptr{Cvoid},), c.p)
-end
-
-function grasp_error_string()
-    @debug "Starting ccall: grasp_error_string"
-    s = ccall( (:grasp_error_string, libgrasp[]), Cstring, ())
-    unsafe_string(s)
 end
 
 for routine in [:grasp_load_isodata, :grasp_load_orbitals, :grasp_load_mixing, :grasp_load_csl]
