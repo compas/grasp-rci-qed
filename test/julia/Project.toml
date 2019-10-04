@@ -7,3 +7,4 @@ LIBGRASPRCI = "../../lib/libgrasp-rci.so"
 
 [juliaenv]
 load_path = "../../julia/:@:@v#.#:@stdlib"
+startup = "using Revise\nmy_convenience_function(x) = x + 1\n"

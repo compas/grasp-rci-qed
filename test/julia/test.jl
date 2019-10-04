@@ -9,10 +9,15 @@
 #
 # in the developer tools of Atom, and then restarting the Julia process.
 #
+using Test
 @test ENV["GFORTRAN_CONVERT_UNIT"] === "big_endian"
-using RCIWrapper; RCIWrapper._reopen_libgrasp()
+using RCIWrapper
+RCIWrapper.__reload__()
 #RCIWrapper.initialize!("test/isodata", "test/test.c", "test/test.w", "test/test.cm")
 RCIWrapper.initialize!("Z30.cc3-n3/isodata.Z30", "Z30.cc3-n3/F_like-cc-n3.c", "Z30.cc3-n3/Z30_F_like-cc-n3.w", "Z30.cc3-n3/Z30.cc-n3.dcb.cm")
+RCIWrapper.initialize_breit!()
+RCIWrapper.initialize_qedvp!()
+RCIWrapper.initialize_mass_shifts!()
 
 RCIWrapper.globals_orbitals()
 
@@ -24,51 +29,32 @@ ops = [RCIWrapper.qedse(i) for i=1:4]
 
 
 dpop = RCIWrapper.diracpot()
-asfvalue(dpop, 1)
-asfvalue(RCIWrapper.diracpot, 1)
-asfvalue(RCIWrapper.coulomb, 1)
+RCIWrapper.asfvalue(dpop, 1)
+RCIWrapper.asfvalue(RCIWrapper.diracpot, 1)
+RCIWrapper.asfvalue(RCIWrapper.coulomb, 1)
+RCIWrapper.asfvalue(RCIWrapper.breit, 1)
+RCIWrapper.asfvalue(RCIWrapper.nms, 1)
+RCIWrapper.asfvalue(RCIWrapper.sms, 1)
+RCIWrapper.asfvalue(RCIWrapper.qedvp, 1)
 
 op = RCIWrapper.qedse(2)
 size(op)
 RCIWrapper.materialize(op)
 
-asfvalues([RCIWrapper.diracpot, RCIWrapper.coulomb])
+ops = [
+    RCIWrapper.diracpot, RCIWrapper.coulomb,
+    RCIWrapper.breit,
+    RCIWrapper.nms, RCIWrapper.sms,
+    RCIWrapper.qedvp,
+    (RCIWrapper.qedse(i) for i=1:4)...
+]
+RCIWrapper.asfvalues(ops)
 
 RCIWrapper.onescalar(1,1)
 
 RCIWrapper.matrixelement(op, 1, 1)
 
 RCIWrapper.asfcoefficients()
-
-using RCIWrapper: Operator, Matrix1PScalar, onescalar
-using RCIWrapper: globals, asfcoefficients, matrixelement
-function asfvalues(ops::Vector{T}) where {T <: Operator}
-    ncf = globals(:orb_C, :NCF)
-    asfs = asfcoefficients()
-    asfvalues = zeros(Float64, length(ops), size(asfs, 2))
-    is1ps = map(op -> isa(op, Matrix1PScalar), ops)
-    cij = Vector{Float64}(undef, size(asfs, 2))
-    for i = 1:ncf, j = 1:ncf
-        osc = any(is1ps) ? onescalar(i, j) : nothing
-        #cij[:] .= asfs[i,:] .* asfs[j,:]
-        for k = 1:size(asfs, 2)
-            cij[k] = asfs[i, k] * asfs[j, k]
-        end
-        for (q, op) in enumerate(ops)
-            me = is1ps[q] ? matrixelement(op, osc) : matrixelement(op, i, j)
-            #asfvalues[q,:] .+= cij  .* me
-            for k = 1:size(asfs, 2)
-                asfvalues[q, k] += cij[k] * me
-            end
-        end
-    end
-    return asfvalues
-end
-
-function asfvalue(op::Operator, k)
-    ncf, asfs = globals(:orb_C, :NCF), asfcoefficients()
-    sum(matrixelement(op, i, j) * asfs[i, k] * asfs[j, k] for i = 1:ncf, j=1:ncf)
-end
 
 # @testset "libgrasp-rci" begin
 #     @test_throws ErrorException grasp_load_isodata("isodata.Z60")

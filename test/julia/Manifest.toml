@@ -162,7 +162,7 @@ uuid = "9abbd945-dff8-562f-b5e8-e1ebf5ef1b79"
 
 [[ProjectX]]
 deps = ["Pkg"]
-git-tree-sha1 = "e2805f1f6f51cd9a39787df38f4644045781b69e"
+git-tree-sha1 = "a7be1351275bb3d7e1f36859137b641d04b9974c"
 repo-rev = "master"
 repo-url = "https://github.com/mortenpi/ProjectX.jl.git"
 uuid = "5bc72906-84ee-441a-b1af-482a16c1ccd3"
