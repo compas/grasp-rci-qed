@@ -46,6 +46,13 @@ if ! [ -z ${grasp_cmake_build+x} ]; then
 	echo "  appending to: ${cmakelistsuser}"
 	cat >> ${cmakelistsuser} <<-EOF
 		# Added automatically by the ./configure.sh script of grasp-rci-qed
+		set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -fpic")
+		target_compile_options(mod PRIVATE "-fpic")
+		target_compile_options(9290 PRIVATE "-fpic")
+		target_compile_options(mcp90 PRIVATE "-fpic")
+		target_compile_options(rang90 PRIVATE "-fpic")
+		target_compile_options(mpi90 PRIVATE "-fpic")
+		target_compile_options(dvd90 PRIVATE "-fpic")
 		add_subdirectory("${DIR}/src/" "\${CMAKE_CURRENT_BINARY_DIR}/external/grasp-rci-qed")
 		add_subdirectory("${DIR}/tools/" "\${CMAKE_CURRENT_BINARY_DIR}/external/grasp-rci-qed/tools")
 		add_subdirectory("${DIR}/test/" "\${CMAKE_CURRENT_BINARY_DIR}/external/grasp-rci-qed/test")
