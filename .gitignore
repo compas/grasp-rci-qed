@@ -3,3 +3,5 @@
 /build-*/
 /doc/html/
 /lib/
+
+/test/julia/data/
