@@ -145,9 +145,10 @@ Returns a vector of `RelativisticOrbital` of the orbitals stored in the GRASP gl
 function globals_orbitals()
     nw = globals(:orb_C, :NW)
     np, nak = Vector{Cint}(undef, nw), Vector{Cint}(undef, nw)
+    e = Vector{Cdouble}(undef, nw)
     sym = Libdl.dlsym(libgrasp_lib[], :libgraspci_global_orbitals)
-    ccall(sym, Cvoid, (Cint, Ptr{Cint}, Ptr{Cint}), nw, np, nak)
-    return map(args -> RelativisticOrbital(args...), zip(np, nak))
+    ccall(sym, Cvoid, (Cint, Ptr{Cint}, Ptr{Cint}, Ptr{Cdouble}), nw, np, nak, e)
+    return map(args -> RelativisticOrbital(args...), zip(np, nak)), e
 end
 
 #-------------------------------------------------------------------------------------------

@@ -84,26 +84,30 @@ contains
         libgrasprci_global_prnt_nvec = NVEC
     end function libgrasprci_global_prnt_nvec
 
-    !> Returns the `n` first values in `NP` and `NAK` arrays in `orb_C`.
+    !> Returns the `n` first values in `NP`, `NAK` and `E` arrays in `orb_C`.
     !!
     !! These arrays contain the contain the principal and \f$\kappa\f$ quantum
-    !! numbers of the orbitals, respectively.
+    !! numbers, and the energies of the orbitals, respectively.
     !!
     !! @param n Length of the `np_c` and `nak_c` arrays.
     !! @param np_c Pointer to an array of at least length `n` which will be
     !!     filled with the first `n` principal quantum numbers.
     !! @param nak_c Pointer to an array of at least length `n` which will be
     !!     filled with the first `n` \f$\kappa\f$ quantum numbers.
+    !! @param nak_c Pointer to an array of at least length `n` which will be
+    !!     filled with the first `n` orbital energies.
     !!
     !! If the global `NW` is less than `n`, only the first `NW` values will be
     !! filled.
-    subroutine libgraspci_global_orbitals(n, np_c, nak_c) bind(c)
-        use orb_C, only: NW, NP, NAK
+    subroutine libgraspci_global_orbitals(n, np_c, nak_c, e_c) bind(c)
+        use orb_C, only: NW, NP, NAK, E
         integer(c_int), value :: n
         integer(c_int), intent(out) :: np_c(NW), nak_c(NW)
+        real(c_double), intent(out) :: e_c(NW)
         n = min(n, NW)
         np_c(1:n) = NP(1:n)
         nak_c(1:n) = NAK(1:n)
+        e_c(1:n) = E(1:n)
     end
 
     !> Returns the C string of the last error
