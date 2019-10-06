@@ -11,50 +11,55 @@
 #
 using Test
 @test ENV["GFORTRAN_CONVERT_UNIT"] === "big_endian"
-using RCIWrapper
-RCIWrapper.__reload__()
-#RCIWrapper.initialize!("test/isodata", "test/test.c", "test/test.w", "test/test.cm")
-RCIWrapper.initialize!("Z30.cc3-n3/isodata.Z30", "Z30.cc3-n3/F_like-cc-n3.c", "Z30.cc3-n3/Z30_F_like-cc-n3.w", "Z30.cc3-n3/Z30.cc-n3.dcb.cm")
-RCIWrapper.initialize_breit!()
-RCIWrapper.initialize_qedvp!()
-RCIWrapper.initialize_mass_shifts!()
+using RCIQED
+RCIQED.__reload__()
 
-RCIWrapper.globals_orbitals()
+#RCIQED.initialize!("test/isodata", "test/test.c", "test/test.w", "test/test.cm")
+#RCIQED.initialize!("Z30.cc3-n3/isodata.Z30", "Z30.cc3-n3/F_like-cc-n3.c", "Z30.cc3-n3/Z30_F_like-cc-n3.w", "Z30.cc3-n3/Z30.cc-n3.dcb.cm")
+RCIQED.initialize!(
+    "Z30.cc-n7.dcb/isodata.Z30", "Z30.cc-n7.dcb/F_like-cc-n7.c",
+    "Z30.cc-n7.dcb/Z30_F_like-cc-n7.w", "Z30.cc-n7.dcb/Z30.cc-n7.dcb.cm"
+)
+RCIQED.initialize_breit!()
+RCIQED.initialize_qedvp!()
+RCIQED.initialize_mass_shifts!()
 
-RCIWrapper.globals(:orb_C, :NCF) # Number of CSFs
-RCIWrapper.globals(:prnt_C, :NVEC) # Number of ASFs
+RCIQED.globals_orbitals()
+
+RCIQED.globals(:orb_C, :NCF) # Number of CSFs
+RCIQED.globals(:prnt_C, :NVEC) # Number of ASFs
 
 # Compute the single-particle matrix elements of the QED SE operators
-ops = [RCIWrapper.qedse(i) for i=1:4]
+ops = [RCIQED.qedse(i) for i=1:4]
 
 
-dpop = RCIWrapper.diracpot()
-RCIWrapper.asfvalue(dpop, 1)
-RCIWrapper.asfvalue(RCIWrapper.diracpot, 1)
-RCIWrapper.asfvalue(RCIWrapper.coulomb, 1)
-RCIWrapper.asfvalue(RCIWrapper.breit, 1)
-RCIWrapper.asfvalue(RCIWrapper.nms, 1)
-RCIWrapper.asfvalue(RCIWrapper.sms, 1)
-RCIWrapper.asfvalue(RCIWrapper.qedvp, 1)
+dpop = RCIQED.diracpot()
+RCIQED.asfvalue(dpop, 1)
+RCIQED.asfvalue(RCIQED.diracpot, 1)
+RCIQED.asfvalue(RCIQED.coulomb, 1)
+RCIQED.asfvalue(RCIQED.breit, 1)
+RCIQED.asfvalue(RCIQED.nms, 1)
+RCIQED.asfvalue(RCIQED.sms, 1)
+RCIQED.asfvalue(RCIQED.qedvp, 1)
 
-op = RCIWrapper.qedse(2)
+op = RCIQED.qedse(2)
 size(op)
-RCIWrapper.materialize(op)
+RCIQED.materialize(op)
 
 ops = [
-    RCIWrapper.diracpot, RCIWrapper.coulomb,
-    RCIWrapper.breit,
-    RCIWrapper.nms, RCIWrapper.sms,
-    RCIWrapper.qedvp,
-    (RCIWrapper.qedse(i) for i=1:4)...
+    RCIQED.diracpot, RCIQED.coulomb,
+    RCIQED.breit,
+    RCIQED.nms, RCIQED.sms,
+    RCIQED.qedvp,
+    (RCIQED.qedse(i) for i=1:4)...
 ]
-RCIWrapper.asfvalues(ops)
+RCIQED.asfvalues(ops)
 
-RCIWrapper.onescalar(1,1)
+RCIQED.onescalar(1,1)
 
-RCIWrapper.matrixelement(op, 1, 1)
+RCIQED.matrixelement(ops[2], 1, 1)
 
-RCIWrapper.asfcoefficients()
+RCIQED.asfcoefficients()
 
 # @testset "libgrasp-rci" begin
 #     @test_throws ErrorException grasp_load_isodata("isodata.Z60")
@@ -90,4 +95,4 @@ RCIWrapper.asfcoefficients()
 # @show grasp_orbitals()
 # m = grasp_ci_qedse_matrix(2)
 
-RCIWrapper._reopen_libgrasp()
+RCIQED._reopen_libgrasp()

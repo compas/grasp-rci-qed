@@ -1,4 +1,4 @@
-module RCIWrapper
+module RCIQED
 using AtomicLevels
 using Libdl
 
@@ -143,7 +143,7 @@ Returns a vector of `RelativisticOrbital` of the orbitals stored in the GRASP gl
 (i.e. in the `orb_C` module).
 """
 function globals_orbitals()
-    nw = RCIWrapper.globals(:orb_C, :NW)
+    nw = globals(:orb_C, :NW)
     np, nak = Vector{Cint}(undef, nw), Vector{Cint}(undef, nw)
     sym = Libdl.dlsym(libgrasp_lib[], :libgraspci_global_orbitals)
     ccall(sym, Cvoid, (Cint, Ptr{Cint}, Ptr{Cint}), nw, np, nak)

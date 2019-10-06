@@ -1,0 +1,142 @@
+
+ There are 9 electrons in the cloud
+  in 22817 relativistic CSFs
+  based on 49 relativistic subshells.
+
+The atomic number is  30.0000000000;
+ the mass of the nucleus is  1.192333129933D+05 electron masses;
+  Fermi nucleus:
+  c = 8.325699864646D-05 Bohr radii,
+  a = 9.890591370096D-06 Bohr radii;
+  there are 144 tabulation points in the nucleus.
+
+Speed of light =  1.370359991390D+02 atomic units.
+
+ To H (Dirac Coulomb) is added
+  H (Transverse) --- factor multiplying the photon frequency:  1.00000000D-06;
+  the total will be diagonalised.
+
+Radial grid: R(I) = RNT*(exp((I-1)*H)-1), I = 1, ..., N;
+
+ RNT  =  6.666666666667D-08 Bohr radii;
+ H    =  5.000000000000D-02 Bohr radii;
+ N    =  590;
+ R(1) =  0.000000000000D+00 Bohr radii;
+ R(2) =  3.418073091735D-09 Bohr radii;
+ R(N) =  4.110372988964D+05 Bohr radii.
+
+ Subshell radial wavefunction summary:
+
+Subshell      e             p0     gamma     P(2)       Q(2)    MTP
+
+  1s   3.9401915277D+02  3.760D+02  1.00  1.285D-06  2.179D-10  340
+  2s   7.7910755943D+01  1.216D+02  1.00  4.156D-07 -1.402D-10  349
+  2p-  7.3204926979D+01  1.164D+00  1.00 -1.043D-10  3.634D-08  349
+  2p   7.2258574391D+01  8.842D+02  2.00  1.034D-14  5.127D-15  349
+  3s   2.0020996742D+02  4.908D+02  1.00  7.803D-07  1.216D-11  349
+  3p-  1.8968627461D+02  1.561D+00  1.00  3.779D-11  8.642D-08  349
+  3p   1.8971886191D+02  2.028D+03  2.00  6.476D-13 -6.969D-14  349
+  3d-  1.4468981569D+02  5.704D+00  2.00 -6.499D-16  1.218D-15  347
+  3d   1.4386625308D+02  5.488D+03  3.00  2.321D-22  1.117D-20  347
+  4s   9.4709072795D+02  4.505D+02  1.00  2.088D-06  1.674D-10  349
+  4p-  6.4095708516D+02  1.206D+01  1.00  1.072D-11  3.193D-07  349
+  4p   6.7668237450D+02  9.523D+03  2.00 -1.738D-12 -5.833D-13  349
+  4d-  3.4793284302D+02  3.232D+01  2.00 -1.443D-14 -6.955D-14  347
+  4d   3.4570232266D+02  3.183D+04  3.00 -4.013D-19  6.386D-19  347
+  4f-  1.7673686153D+02  3.774D+01  3.00 -2.265D-21  4.325D-23  345
+  4f   1.7638790809D+02  3.985D+04  4.00  6.148D-28  2.405D-26  345
+  5s   2.9054231366D+02  3.676D+02  1.00 -1.491D-06  6.837D-10  350
+  5p-  3.2227826645D+02  2.248D+01  1.00 -1.127D-10  3.755D-07  349
+  5p   3.2159470978D+02  8.033D+03  2.00  1.413D-12 -8.853D-12  349
+  5d-  5.8552014104D+02  1.212D+02  2.00 -2.559D-13 -1.529D-13  347
+  5d   6.4198516346D+02  1.416D+05  3.00 -7.958D-19  3.135D-17  347
+  5f-  3.8498712213D+02  2.871D+02  3.00 -8.997D-20 -4.709D-20  345
+  5f   3.8531667378D+02  3.168D+05  4.00 -1.781D-25  2.307D-24  346
+  5g-  2.4818089391D+02  3.380D+02  4.00 -8.012D-27  1.943D-28  344
+  5g   2.4775818160D+02  3.756D+05  5.00  2.127D-32  6.179D-32  344
+  6s   1.7455172112D+03  4.877D+03  1.00 -3.033D-06  8.431D-12  351
+  6p-  1.1751002263D+03  3.128D+01  1.00  2.361D-12  8.572D-07  349
+  6p   1.3568729923D+03  3.284D+04  2.00 -7.533D-12 -1.818D-10  349
+  6d-  8.5754919352D+02  3.180D+02  2.00 -4.303D-12 -8.781D-13  347
+  6d   9.4806444278D+02  4.023D+05  3.00 -6.568D-18  1.552D-15  347
+  6f-  7.5150984486D+02  1.561D+03  3.00 -4.170D-18 -3.553D-19  345
+  6f   7.9477617129D+02  2.052D+06  4.00 -1.354D-24  2.763D-22  346
+  6g-  4.6087291688D+02  2.535D+03  4.00 -7.084D-25 -5.090D-26  344
+  6g   4.6008088550D+02  3.018D+06  5.00  3.693D-33  1.345D-29  344
+  6h-  3.7218502568D+02  2.808D+03  5.00 -2.265D-32  7.245D-33  342
+  6h   3.7162138029D+02  3.167D+06  6.00  3.504D-37  1.341D-37  343
+  7s   2.4495642363D+02  1.052D+03  1.00  1.617D-06 -3.963D-10  352
+  7p-  3.0916665888D+02  3.482D+01  1.00 -2.859D-10  6.829D-07  350
+  7p   2.9388962115D+02  1.990D+04  2.00 -4.634D-13 -5.964D-11  350
+  7d-  9.0590744815D+02  5.154D+02  2.00 -8.699D-11 -8.000D-13  347
+  7d   9.2048679729D+02  6.278D+05  3.00 -1.875D-17  9.711D-14  347
+  7f-  1.2242739652D+03  5.765D+03  3.00 -1.877D-16 -1.602D-18  346
+  7f   1.4809359860D+03  9.652D+06  4.00 -1.021D-23  2.983D-20  346
+  7g-  9.0321689322D+02  1.756D+04  4.00 -7.162D-23 -3.417D-25  344
+  7g   9.4740575737D+02  2.508D+07  5.00 -4.935D-32  3.401D-27  344
+  7h-  5.8063185448D+02  2.313D+04  5.00 -4.592D-30  6.312D-33  343
+  7h   5.7736907966D+02  3.043D+07  6.00  3.031D-36  6.680D-35  343
+  7i-  5.1775593955D+02  2.252D+04  6.00 -5.605D-38  1.366D-37  341
+  7i   5.1730759250D+02  2.366D+07  7.00  2.996D-42  2.452D-43  341
+
+           2  levels will be computed
+           0  (total          951 ) rows read from .res
+CUTOFF set to  1.0000000000D-12
+Dirac-Coulomb one-e radial integrals:    1120
+One-e angular integrals that exceed CUTOFF:    81010
+Coulomb two-e radial integrals:        0
+Two-e angular integrals that exceed CUTOFF:     8423871
+Transverse two-e radial integrals: 
+       0       0  129088   11779   40778   33160
+MCBP coefficients that exceed CUTOFF:         87388914
+Core coefficients that exceed CUTOFF:        0
+Elements that exceed CUTOFF in the lower triangle of the H matrix:      407150
+
+Average energy =  2.015439371910D+02 Hartrees.
+ DVDSON routine selected for eigenvalue problem;
+  sparse matrix stored in memory
+            38  iterations;
+            39  matrix-vector multiplies.
+
+Eigenenergies:
+
+Level  J Parity       Hartrees              Kaysers                eV
+
+  1   1/2 -          -1.4995924D+03        -3.2912248D+08        -4.0805986D+04
+
+Weights of major contributors to ASF:
+
+Level J Parity      CSF contributions
+
+  1   1/2 -      0.99913   -0.01265   -0.01120    0.01053   -0.01007
+                       1       1961       1976        741        743
+           0  (total         1902 ) rows read from .res
+CUTOFF set to  1.0000000000D-12
+Dirac-Coulomb one-e radial integrals:    1120
+One-e angular integrals that exceed CUTOFF:   184646
+Coulomb two-e radial integrals:        0
+Two-e angular integrals that exceed CUTOFF:    27315023
+Transverse two-e radial integrals: 
+       0       0  168553   14278   47622   38864
+MCBP coefficients that exceed CUTOFF:        288087435
+Core coefficients that exceed CUTOFF:        0
+Elements that exceed CUTOFF in the lower triangle of the H matrix:     1296651
+
+Average energy =  2.034228240452D+02 Hartrees.
+ DVDSON routine selected for eigenvalue problem;
+  sparse matrix stored in memory
+            33  iterations;
+            34  matrix-vector multiplies.
+
+Eigenenergies:
+
+Level  J Parity       Hartrees              Kaysers                eV
+
+  1   3/2 -          -1.5004881D+03        -3.2931906D+08        -4.0830360D+04
+
+Weights of major contributors to ASF:
+
+Level J Parity      CSF contributions
+
+  1   3/2 -      0.99913   -0.01484   -0.00918    0.00864    0.00856
+                       1       3817       2941        425         98
