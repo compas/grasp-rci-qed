@@ -24,13 +24,13 @@ that this will wipe out any global state you have.
 function __reload__()
     global libgrasp, libgrasp_lib
     # Check the LIBGRASPRCI environment variable
-    if haskey(ENV, "LIBGRASPRCI")
-        path = normpath(abspath(expanduser(ENV["LIBGRASPRCI"])))
-        isfile(path) || error("$(path) missing")
-        libgrasp[] = path
-    elseif !haskey(ENV, "LIBGRASPRCI") && isempty(libgrasp[])
-        error("\$LIBGRASPRCI not set, unable to find libgrasp-rci")
+    libgrasp[] = if haskey(ENV, "LIBGRASPRCI")
+        @info "Overriding library location with \$LIBGRASPRCI" ENV["LIBGRASPRCI"]
+        normpath(abspath(expanduser(ENV["LIBGRASPRCI"])))
+    else
+        normpath(abspath(joinpath(@__DIR__, "..", "lib", "libgrasp-rci.so")))
     end
+    isfile(libgrasp[]) || error("libgrasp-rci.so not found at $(libgrasp[])")
     # If libgrasp is already loaded, unload it
     if libgrasp_lib[] != C_NULL
         Libdl.dlclose(libgrasp_lib[])

@@ -2,9 +2,6 @@
 AtomicLevels = "10933b4c-d60f-11e8-1fc6-bd9035a249a1"
 ProjectX = "5bc72906-84ee-441a-b1af-482a16c1ccd3"
 
-[environment]
-LIBGRASPRCI = "../../lib/libgrasp-rci.so"
-
 [juliaenv]
 load_path = "../../julia/:@:@v#.#:@stdlib"
 startup = "using Revise\nmy_convenience_function(x) = x + 1\n"

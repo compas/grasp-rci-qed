@@ -2,10 +2,16 @@ using Test
 using AtomicLevels
 using RCIQED
 
+const DATADIR = joinpath(@__DIR__, "data")
+
 @testset "Hydrogenic" begin
     RCIQED.__reload__()
-    RCIQED.initialize!("data/hydrogen/isodata", "data/hydrogen/hydrogen.c",
-        "data/hydrogen/hydrogen.w", "data/hydrogen/hydrogen.cm")
+    RCIQED.initialize!(
+        joinpath(DATADIR, "hydrogen/isodata"),
+        joinpath(DATADIR, "hydrogen/hydrogen.c"),
+        joinpath(DATADIR, "hydrogen/hydrogen.w"),
+        joinpath(DATADIR, "hydrogen/hydrogen.cm"),
+    )
 
     os, es = RCIQED.globals_orbitals()
     @test os == ros"1[s] 2[s-p] 3[s-d] 4[s-f]"
@@ -23,8 +29,12 @@ end
 
 @testset "Be-like" begin
     RCIQED.__reload__()
-    RCIQED.initialize!("data/belike/isodata", "data/belike/belike.c",
-        "data/belike/belike.w", "data/belike/belike.cm")
+    RCIQED.initialize!(
+        joinpath(DATADIR, "belike/isodata"),
+        joinpath(DATADIR, "belike/belike.c"),
+        joinpath(DATADIR, "belike/belike.w"),
+        joinpath(DATADIR, "belike/belike.cm"),
+    )
     RCIQED.initialize_breit!()
     RCIQED.initialize_qedvp!()
     RCIQED.initialize_mass_shifts!()

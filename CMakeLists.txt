@@ -97,7 +97,7 @@ set(CMAKE_INSTALL_PREFIX ${GRASP})
 #
 #     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgfortran")
 #
-set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -fno-automatic")
+set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -fno-automatic -fPIC")
 
 # Find and set up the GRASP libraries. They are assumed to live in ${GRASP}/lib.
 #
