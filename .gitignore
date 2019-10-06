@@ -1,5 +1,5 @@
-grasp-rci-qed
-build/
-build-*/
-doc/html/
-lib/
+/grasp-rci-qed
+/build/
+/build-*/
+/doc/html/
+/lib/
