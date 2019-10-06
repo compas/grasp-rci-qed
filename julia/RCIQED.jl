@@ -60,6 +60,8 @@ end
 # --------------------------------------
 
 """
+    initialize!(isodata, csl, orbitals, mixing)
+
 Load all the relevant GRASP input files.
 """
 function initialize!(isodata, csl, orbitals, mixing)
