@@ -25,7 +25,6 @@
       USE orb_C
       USE prnt_C
       USE wave_C
-      USE wfac_C
       USE iounit_C
       USE hblock_C
       USE iccu_C,          ONLY: ICCUTBLK
@@ -98,7 +97,7 @@
       WRITE (24, *)
       IF (LTRANS .OR. LVP .OR. LNMS .OR. LSMS) THEN
          WRITE (24, *) 'To H (Dirac Coulomb) is added'
-         IF (LTRANS) WRITE (24, 304) WFACT
+         !IF (LTRANS) WRITE (24, 304) WFACT !TODO
          IF (LVP) WRITE (24, *) ' H (Vacuum Polarisation);'
          IF (LNMS) WRITE (24, *) ' H (Normal Mass Shift);'
          IF (LSMS) WRITE (24, *) ' H (Specific Mass Shift);'

@@ -24,4 +24,4 @@ add_library(rciqed-breit STATIC
     zkf.f90 zkf_I.f90
 )
 setup_fortran_modules(rciqed-breit)
-target_link_libraries_Fortran(rciqed-breit PRIVATE mod 9290 rang90)
+target_link_libraries_Fortran(rciqed-breit PRIVATE mod 9290 rang90 rciqed-grasp)

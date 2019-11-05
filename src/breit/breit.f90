@@ -1,6 +1,13 @@
 !> Routines related to calculating the matrix elements of the Breit operator.
 module grasp_rciqed_breit
+    use grasp_rciqed_kinds, only: real64, dp
+    use parameter_def, only: NNNW
     implicit none
+
+    !> TODO
+    real(real64), parameter :: WFACT = 1e-6_dp
+
+    logical :: breit_specorbs(NNNW)
 
 contains
 
@@ -14,7 +21,7 @@ contains
         use decide_C, only: LTRANS
         use iounit_c, only: ISTDE
         use orb_C, only: NW, NCF
-        use wfac_C, only: WFACT
+        !use wfac_C, only: WFACT
         use genintbreit1_I
         use genintbreit2_I
         use ichop_I
@@ -32,7 +39,7 @@ contains
         LTRANS = .TRUE.
 
         ! WFACT is the Breit scale factor. We set it to the default 1e-6
-        WFACT = 1d-6
+        !WFACT = 1d-6
 
         ! From rci3mpi_LINUX.f
         call genintbreit1(myid, nprocs, N, j2max)

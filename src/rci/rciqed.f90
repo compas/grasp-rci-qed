@@ -15,6 +15,10 @@ module grasp_rciqed
     integer :: setype
     real(real64) :: sematrix(NNNW,NNNW)
 
+    !> Contains the list of spectroscopic orbitals
+    !integer :: specorbs(NNNW), specorbs_n
+    logical :: isspecorb(NNNW)
+
 contains
 
     !> Initializes the global state for the RK integrals, i.e. DC matrix elements.
@@ -48,5 +52,17 @@ contains
         NCOEI = 0
 
     end subroutine init_rkintc
+
+    subroutine init_isspecorb(n, specorbs)
+        integer, intent(in) :: n, specorbs(*)
+        integer :: i
+        do i = 1, size(isspecorb)
+            isspecorb(i) = .false.
+        enddo
+        do i = 1, n
+            isspecorb(specorbs(i)) = .true.
+        enddo
+        print *, isspecorb ! TODO: remove
+    end subroutine init_isspecorb
 
 end module grasp_rciqed
