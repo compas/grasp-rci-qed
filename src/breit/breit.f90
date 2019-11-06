@@ -8,6 +8,7 @@ module grasp_rciqed_breit
     real(real64), parameter :: WFACT = 1e-6_dp
 
     logical :: breit_specorbs(NNNW)
+    character(len=:), allocatable :: breit_mode
 
 contains
 

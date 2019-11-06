@@ -31,12 +31,12 @@
       USE npot_C, ONLY: zz, nnuc
       USE orb_C
       USE wave_C
-      USE wfac_C
-      use grasp_rciqed, only: IMCDF => res_unit
       USE hblock_C
       USE iccu_C
       USE iounit_C
       USE mpi_C
+      use grasp_rciqed, only: IMCDF => res_unit
+      use grasp_rciqed_breit, only: breit_specorbs
 !-----------------------------------------------
 !   I n t e r f a c e   B l o c k s
 !-----------------------------------------------
@@ -75,8 +75,9 @@
 !   Read the physical effects specifications
 !   iccutblk() is now an array of length nblock.
 !
-      READ (IMCDF) C, LFORDR, (ICCUTBLK(I),I=1,NBLOCK), LTRANS, WFACT, LVP, &
-         LNMS, LSMS
+      ! TODO: Also write SE preferences?
+      READ (IMCDF) C, LFORDR, (ICCUTBLK(I),I=1,NBLOCK), LTRANS, LVP, LNMS, LSMS
+      READ (IMCDF) (breit_specorbs(i), i = 1, NW)
 !
 !   Read the remaining parameters controlling the radial grid and the
 !   grid arrays

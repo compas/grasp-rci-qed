@@ -38,6 +38,7 @@
       USE mpi_C
       use getcid_I, only: getcid_specorbs, getcid_breit, getcid_qedse
       use grasp_rciqed, only: IMCDF => res_unit, setype
+      use grasp_rciqed_breit, only: breit_specorbs
 !-----------------------------------------------
 !   I n t e r f a c e   B l o c k s
 !-----------------------------------------------
@@ -170,26 +171,12 @@
 !     ENDIF
 !*****************************************************************
 !
-! Include transverse ?
-! Quantities to be obtained: LTRANS, WFACT
-!
-      ! IF (myid .EQ. 0) THEN
-      !    call getcid_breit
-      !    WRITE (istde,*) 'Include contribution of H (Transverse)?'
-      !    LTRANS = GETYN ()
-      !    WRITE (istde,*) 'Modify all transverse photon frequencies?'
-      !    YES = GETYN ()
-      !    IF (YES) THEN
-      !       WRITE (istde,*) 'Enter the scale factor:'
-      !       READ *, WFACT
-      !    ELSE
-      !       WFACT = 1.0D00
-      !    ENDIF
-      ! ENDIF ! myid .EQ. 0
+
+      ! Include Breit? Also broadcast the settings to other nodes.
       if (myid == 0) call getcid_breit
-      ! TODO: broadcast
       CALL MPI_Bcast (LTRANS, 1, MPI_LOGICAL, 0, MPI_COMM_WORLD, ierr)
-      !CALL MPI_Bcast (WFACT, 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD, ierr)
+      CALL MPI_Bcast (breit_specorbs, size(breit_specorbs), MPI_LOGICAL, 0, MPI_COMM_WORLD, ierr)
+
 !
 ! Other interactions ? One logical for each case. Done altogether
 !
@@ -338,8 +325,8 @@
 !   This is the sixth record on the file
 !
       WRITE (imcdf) C, LFORDR, (ICCUTblk(i), i = 1, nblock),           &
-                    !LTRANS, WFACT, LVP, LNMS, LSMS
-                    LTRANS, 1e-6, LVP, LNMS, LSMS ! TODD
+                    LTRANS, LVP, LNMS, LSMS
+      WRITE (imcdf) (breit_specorbs(i), i = 1, NW)
 !
 !   Write the grid data to the  .res  file; this is the seventh
 !   record on the file

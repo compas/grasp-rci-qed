@@ -28,13 +28,23 @@ contains
     end subroutine getcid_specorbs
 
     !> Breit interaction part of the `GETCID` routine.
+    !!
+    !! This populates two variables based on the user preferences:
+    !!
+    !! - `LTRANS` from `decide_C`: set to `.true.` if the user requested some form of Breit
+    !!   to be included in the calculation, or `.false.` otherwise
+    !! - `breit_specorbs` from `grasp_rciqed_breit`: if `LTRANS` is set, the orbitals for
+    !!   which the full frequency-dependent Breit should be used, are set to `.true.` in
+    !!   this array. For frequency-independent Breit, all elements are set to `.false.`.
+    !!   If `LTRANS` is `.false.`, the contents of the array is undefined.
+    !!
     subroutine getcid_breit
         use, intrinsic :: iso_fortran_env, only: stdin => input_unit
         use parameter_def, ONLY: NNNW
         use decide_C, only: LTRANS
         use iounit_C, only: istde
         use grasp_rciqed, only: isspecorb
-        use grasp_rciqed_breit, only: breit_specorbs
+        use grasp_rciqed_breit, only: breit_specorbs, breit_mode
 
         character(len=1000) :: user_input
         integer :: i
@@ -61,10 +71,9 @@ contains
                 write(istde, *) "Invalid input for last option:", trim(user_input)
                 cycle
             endif
+            breit_mode = trim(user_input)
             exit
         enddo
-        print *, "breit_specorbs", LTRANS
-        print *, breit_specorbs
     end subroutine getcid_breit
 
     !> QED self-energy part of the `GETCID` routine.
