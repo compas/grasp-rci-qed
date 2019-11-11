@@ -20,7 +20,6 @@
       USE vast_kind_param, ONLY: DOUBLE
       USE parameter_def,   ONLY: NNNP
       USE grid_C
-      USE horb_C, ONLY: ph, qh
       USE tatb_C, ONLY: mtp, ta
 !-----------------------------------------------
 !   I n t e r f a c e   B l o c k s
@@ -42,6 +41,7 @@
 !-----------------------------------------------
       INTEGER :: MTPH, I, K
       REAL(DOUBLE) :: EH, PZH, RESULT, RESULT1
+      REAL(DOUBLE), DIMENSION(NNNP) :: PH, QH
 !-----------------------------------------------
 !
 !
