@@ -13,7 +13,6 @@ add_library(rciqed-rci
     genmat2.f90 genmat2_I.f90
     getcid.f90 getcid_I.f90
     hmout.f90 hmout_I.f90
-    hovlap.f90 hovlap_I.f90
     indtpi.f90 indtpi_I.f90
     iniestdm.f90 iniestdm_I.f90
     iniestsd.f90 iniestsd_I.f90
