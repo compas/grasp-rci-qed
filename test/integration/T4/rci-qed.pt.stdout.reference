@@ -19,6 +19,7 @@
        3       7       7       6      -1
 >>> INITIALIZING rci commons
  Allocating space for          446  Rk integrals
+>>> INITIALIZING fully frequency-dependent Breit
  Computing        3216  Breit integrals of type 1
  Computing        1744  Breit integrals of type 2
 >>> LOADING: test.settings.toml

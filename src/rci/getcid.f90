@@ -32,7 +32,6 @@
       USE nsmdat_C
       USE orb_C
       USE wave_C
-      !USE wfac_C
       USE blim_C
       USE qedcut_C
       USE mpi_C
