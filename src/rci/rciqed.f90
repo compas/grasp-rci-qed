@@ -19,6 +19,12 @@ module grasp_rciqed
     !integer :: specorbs(NNNW), specorbs_n
     logical :: isspecorb(NNNW)
 
+    !> Caches the string used for initializing Breit.
+    !!
+    !! The value here does not determine the behaviour of the code, but can be used to
+    !! reconstruct the `init_breit` call that was used to initialize the Breit global state.
+    character(len=:), allocatable :: breit_mode
+
 contains
 
     !> Initializes the global state for the RK integrals, i.e. DC matrix elements.
@@ -52,17 +58,5 @@ contains
         NCOEI = 0
 
     end subroutine init_rkintc
-
-    subroutine init_isspecorb(n, specorbs)
-        integer, intent(in) :: n, specorbs(*)
-        integer :: i
-        do i = 1, size(isspecorb)
-            isspecorb(i) = .false.
-        enddo
-        do i = 1, n
-            isspecorb(specorbs(i)) = .true.
-        enddo
-        print *, isspecorb ! TODO: remove
-    end subroutine init_isspecorb
 
 end module grasp_rciqed

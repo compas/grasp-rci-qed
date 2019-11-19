@@ -28,7 +28,7 @@
       USE iounit_C
       USE hblock_C
       USE iccu_C,          ONLY: ICCUTBLK
-      use grasp_rciqed_breit, only: breit_mode
+      use grasp_rciqed, only: breit_mode
 !-----------------------------------------------
 !   I n t e r f a c e   B l o c k s
 !-----------------------------------------------

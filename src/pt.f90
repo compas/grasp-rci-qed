@@ -7,6 +7,7 @@
 !! Depends on files: `isodata`, `<state>.c`, `<state>.w` and `<state>.cm`
 !!
 program rci_qed_pt
+    use parameter_def, only: NNNW
     use grasp_rciqed_kinds, only: real64, dp
     use grasp_lib9290, only: init_isocw_full
     use grasp_rciqed_lib9290_files, only: load_mixing
@@ -119,7 +120,9 @@ program rci_qed_pt
     call load_mixing(file_mixing)
     print '(a)', ">>> INITIALIZING rci commons"
     call init_rkintc(j2max)
-    call init_breit(j2max)
+    ! TODO: FIX THIS -- should be generic
+    print '(a)', ">>> INITIALIZING fully frequency-dependent Breit"
+    call init_breit(j2max, (/ (.true., k=1,NNNW) /))
     call init_vacuum_polarization
     call init_mass_shifts
 

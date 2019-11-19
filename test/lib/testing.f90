@@ -3,7 +3,7 @@ module grasptest_testing
     implicit none
 
     interface test_isequal
-        module procedure test_isequal_real64, test_isequal_logical
+        module procedure test_isequal_real64, test_isequal_logical, test_isequal_integer
     end interface test_isequal
 
 contains
@@ -107,5 +107,18 @@ contains
             test_passed = .false.
         endif
     end subroutine test_isequal_logical
+
+    !> Tests if two logical values are equal.
+    subroutine test_isequal_integer(test_passed, which, a, b)
+        logical, intent(inout) :: test_passed
+        character(*), intent(in) :: which
+        integer, intent(in) :: a, b
+
+        if (a /= b) then
+            print '("  Test failed: logical values differ for ",a," (a=",i0,", b=",i0,")")', &
+                which, a, b
+            test_passed = .false.
+        endif
+    end subroutine test_isequal_integer
 
 end module grasptest_testing

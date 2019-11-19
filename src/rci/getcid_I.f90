@@ -17,15 +17,37 @@ contains
         use parameter_def, ONLY: NNNW
         use getrsl_I
         use iounit_C, only: istde
-        use grasp_rciqed, only: init_isspecorb
+        use grasp_rciqed, only: isspecorb
 
         integer :: specorbs(NNNW), specorbs_n
 
         write(istde, *) "List spectrosopic orbitals (e.g. for Breit, QED)"
         call GETRSL(specorbs, specorbs_n)
         print *, specorbs(1:specorbs_n) ! TODO: remove
-        call init_isspecorb(specorbs_n, specorbs)
+        call enabled_orbitals(specorbs(1:specorbs_n), isspecorb)
+        print *, isspecorb
     end subroutine getcid_specorbs
+
+    !> Converts a list of orbital indices `orbitals` into a list of `logical`s of length
+    !! `NNNW`, where `.true.` values mark orbitals that are in `orbitals`.
+    !!
+    !! @param orbitals List of orbital indices.
+    !! @param enabledorbitals Output array of `logical`s.
+    !!
+    !! Primarily a convenience function to convert the output of `GETRSL` into the input
+    !! of `init_breit`.
+    subroutine enabled_orbitals(orbitals, enabledorbitals)
+        use parameter_def, only: NNNW
+        integer, intent(in) :: orbitals(:)
+        logical, intent(out) :: enabledorbitals(NNNW)
+        integer :: i
+        do i = 1, size(enabledorbitals)
+            enabledorbitals(i) = .false.
+        enddo
+        do i = 1, size(orbitals)
+            enabledorbitals(orbitals(i)) = .true.
+        enddo
+    end subroutine enabled_orbitals
 
     !> Breit interaction part of the `GETCID` routine.
     !!
@@ -43,8 +65,8 @@ contains
         use parameter_def, ONLY: NNNW
         use decide_C, only: LTRANS
         use iounit_C, only: istde
-        use grasp_rciqed, only: isspecorb
-        use grasp_rciqed_breit, only: breit_specorbs, breit_mode
+        use grasp_rciqed, only: isspecorb, breit_mode
+        use grasp_rciqed_breit, only: breit_specorbs
 
         character(len=1000) :: user_input
         integer :: i

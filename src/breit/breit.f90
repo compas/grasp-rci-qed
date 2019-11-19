@@ -1,21 +1,34 @@
-!> Routines related to calculating the matrix elements of the Breit operator.
+!> Routines related to calculating the matrix elements of the Breit operator:
+!!
+!! \f[
+!!   g^T(R; \omega) =
+!!   - \vec{\alpha}_1 \cdot \vec{\alpha}_2 ~ \frac{\textrm{e}^{i\omega R}}{R}
+!!   - (\vec{\alpha}_1 \cdot \nabla_R) (\vec{\alpha}_2 \cdot \nabla_R) \frac{\textrm{e}^{i\omega R} - 1}{\omega^2 R}
+!! \f]
 module grasp_rciqed_breit
     use grasp_rciqed_kinds, only: real64, dp
     use parameter_def, only: NNNW
     implicit none
 
-    !> TODO
+    !> Factor used to multiply the energy differences in the Breit operator to emulate
+    !! frequency-independent Breit.
     real(real64), parameter :: WFACT = 1e-6_dp
 
+    !> Marks whether an orbital is considered to be a spectroscopic orbital or not for the
+    !! purposes of the Breit operator.
+    !!
+    !! The Breit two-particle matrix elements that contain at least one non-spectroscopic
+    !! orbital have their energy difference \f$\omega\f$ damped by `WFACT`.
     logical :: breit_specorbs(NNNW)
-    character(len=:), allocatable :: breit_mode
 
 contains
 
     !> Initialize Breit-related global state.
     !!
     !! @param j2max This is the value determined by genintrk(), e.g. in init_rkintc()
-    subroutine init_breit(j2max)
+    !! @param specorbs List of `logical`s marking which orbitals are to be considered
+    !!        spectroscopic.
+    subroutine init_breit(j2max, specorbs)
         use parameter_def, only: NNNW
         use bcore_C, only: ICORE
         use bilst_C, only: FIRST, NTPI
@@ -28,6 +41,7 @@ contains
         use ichop_I
 
         integer, intent(in) :: j2max
+        logical, intent(in) :: specorbs(NNNW)
 
         ! These are the MPI parameters that need to be passed to different
         ! routines. We use the single core values.
@@ -35,12 +49,12 @@ contains
 
         integer :: i, j, N
 
+        ! Set up the the array of specroscopic orbitals
+        breit_specorbs = specorbs
+
         ! We'll enable all parts of the Hamiltonian. E.g. AUXBLK relies on these
         ! flags to determine if certain things get initialized.
         LTRANS = .TRUE.
-
-        ! WFACT is the Breit scale factor. We set it to the default 1e-6
-        !WFACT = 1d-6
 
         ! From rci3mpi_LINUX.f
         call genintbreit1(myid, nprocs, N, j2max)
