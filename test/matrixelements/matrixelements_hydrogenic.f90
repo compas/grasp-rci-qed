@@ -1,4 +1,5 @@
 program matrixelements_hydrogenic
+    use parameter_def, only: NNNW
     use grasp_rciqed_kinds, only: real64, dp
     use grasp_rciqed_lib9290_init
     use grasp_rciqed_lib9290_files, only: load_csl
@@ -40,7 +41,8 @@ program matrixelements_hydrogenic
 
     ! RCI-specific initialization
     call init_rkintc(j2max)
-    call init_breit(j2max)
+    ! Initialize frequency-dependent Breit
+    call init_breit(j2max, (/ (.true., k=1,NNNW) /))
     call init_vacuum_polarization
     call init_mass_shifts
 
