@@ -16,24 +16,41 @@ libraries -- BLAS, LAPACK and MPI.
 
 ## Installation
 
-For compiling it together with the published [2018 CPC version of
-GRASP][compas-grasp2018], you should set the `GRASP` environment variable to
-point to the GRASP root directory and call `./configure.sh` without any
-arguments:
+To download the latest version of the code, you can clone it with Git:
+
+```
+git clone https://github.com/compas/grasp-rci-qed.git
+```
+
+When configuring `rci-qed` for compilation, you first need to make sure that you have the `$GRASP` environment variable pointing to the root of the GRASP directory:
 
 ```
 export GRASP=/path/to/grasp
+```
+
+The compilation and installation scripts assume that the static libraries
+are stored under `$GRASP/lib` and that compiled binaries should be installed to `$GRASP/bin`.
+
+Next, the `./configure.sh` script can help setting up the [CMake](https://cmake.org/) build of `rci-qed`, by creating an _out-of-tree_ build directory under `build/`:
+
+```
 ./configure.sh
 ```
 
-To integrate with the updated CMake-based build system of [the development
-fork][mortenpi-grasp], source GRASP's `envset.sh` and pass the `--grasp-cmake`
-argument to `./configure.sh`:
+After this, the `rci-qed` build directory is set up under `build/`.
 
-```
-source /path/to/grasp/envset.sh
-./configure.sh --grasp-cmake
-```
+### Compilation
+
+* To compile the code and binaries, change into the `build/` directory and call `make`:
+
+  ```
+  cd build/
+  make
+  ```
+
+* To run the test suite, call `ctest` or `make test` in `build`.
+
+* To install the binaries into `$GRASP/bin`, run `make install` in `build/`.
 
 
 [compas-grasp2018]: https://github.com/compas/grasp2018
