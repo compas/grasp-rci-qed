@@ -1,9 +1,9 @@
 # `rci-qed` for GRASP
 
-**An updated RCI program with new QED for GRASP.**
-
 [![Doxygen Documentation][doc-img]][doc-url]
 [![Build Status][travis-img]][travis-url]
+
+**An updated RCI program with new QED for GRASP.**
 
 > **Beware:** this version is still a work on progress, contains unfinished features and probably bugs. Do not rely on this for scientific calculations.
 
