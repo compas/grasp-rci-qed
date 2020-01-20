@@ -14,28 +14,27 @@ libraries -- BLAS, LAPACK and MPI.
 
 ## Installation
 
-For compiling it together with the published [2018 CPC version of
-GRASP][compas-grasp2018], you should set the `GRASP` environment variable to
-point to the GRASP root directory and call `./configure.sh` without any
-arguments:
+For compiling it together with the published [2018 CPC version of GRASP][compas-grasp-2018],
+you should set the `GRASP` environment variable to point to the GRASP root directory and
+call `./configure.sh` without any arguments:
 
 ```
 export GRASP=/path/to/grasp
 ./configure.sh
 ```
 
-To integrate with the updated CMake-based build system of [the development
-fork][mortenpi-grasp], source GRASP's `envset.sh` and pass the `--grasp-cmake`
+To integrate with the updated CMake-based build system available on [the GRASP master
+branch][compas-grasp], source GRASP's `envset.sh` and pass the `--grasp-installed-modules`
 argument to `./configure.sh`:
 
 ```
 source /path/to/grasp/envset.sh
-./configure.sh --grasp-cmake
+./configure.sh --grasp-installed-modules
 ```
 
 
-[compas-grasp2018]: https://github.com/compas/grasp2018
-[mortenpi-grasp]: https://github.com/mortenpi/grasp
+[compas-grasp]: https://github.com/compas/grasp
+[compas-grasp-2018]: https://github.com/compas/grasp/releases/tag/2018-12-03
 [doc-img]: https://img.shields.io/badge/documentation-master-blue.svg
 [doc-url]: http://compas.github.io/grasp-rci-qed/
 [travis-img]: https://travis-ci.com/compas/grasp-rci-qed.svg?token=J2TJDmxGV6c9f8C3LXps&branch=master
