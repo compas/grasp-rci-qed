@@ -112,7 +112,6 @@ endfunction()
 # libmod.a
 add_grasp_static_library(mod "libmod")
 get_property(FOO TARGET mod PROPERTY Fortran_MODULE_DIRECTORY)
-message("mod: ${FOO}")
 # lib9290.a
 add_grasp_static_library(9290 "lib9290")
 set_property(TARGET 9290 PROPERTY IMPORTED_LINK_INTERFACE_LIBRARIES
