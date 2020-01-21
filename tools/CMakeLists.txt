@@ -14,7 +14,7 @@ add_library(rciqed-tools STATIC
 )
 setup_fortran_modules(rciqed-tools)
 target_link_libraries_Fortran(rciqed-tools PUBLIC
-    mod 9290 mpi90
+    mod 9290 mpiu90
     rciqed-grasp
 )
 
@@ -23,7 +23,7 @@ add_executable(rci-qed.exporthydrogenic
     exporthydrogenic.f90
 )
 target_link_libraries_Fortran(rci-qed.exporthydrogenic PUBLIC
-    mod 9290 mpi90
+    mod 9290 mpiu90
     rciqed-tools
 )
 
@@ -32,6 +32,6 @@ add_executable(rci-qed.exportvp
     exportvp.f90
 )
 target_link_libraries_Fortran(rci-qed.exportvp PUBLIC
-    mod 9290 mpi90
+    mod 9290 mpiu90
     rciqed-rci rciqed-qed
 )

@@ -2,9 +2,12 @@
 !                                                                      *
       REAL(KIND(0.0D0)) FUNCTION RATDEN (P, Q, MTPO, NP, KAPPA, Z)
 !                                                                      *
-!   This subprogram computes the overlap of the orbital tabulated in   *
-!   the arrays  P  and  Q  with maximum tabulation point  MTPO  with   *
-!   a hydrogenic orbital with parameters  NP  KAPPA  Z .               *
+!   This function calculates the ratio of occupation of the orbital in *
+!   the P and Q arrays and the hydrogenic orbital defined by NP, KAPPA *
+!   and Z in the radial range 0 < r < 0.0219 a.u.                      *
+!                                                                      *
+!   I.e. in other words, it integrates the densities of the two        *
+!   orbitals in that range and the returns their ratio.                *
 !                                                                      *
 !   Call(s) to: [LIB92]: DCBSRW, QUAD.                                 *
 !                                                                      *
@@ -20,7 +23,6 @@
       USE vast_kind_param, ONLY: DOUBLE
       USE parameter_def,   ONLY: NNNP
       USE grid_C
-      USE horb_C, ONLY: ph, qh
       USE tatb_C, ONLY: mtp, ta
 !-----------------------------------------------
 !   I n t e r f a c e   B l o c k s
@@ -42,6 +44,7 @@
 !-----------------------------------------------
       INTEGER :: MTPH, I, K
       REAL(DOUBLE) :: EH, PZH, RESULT, RESULT1
+      REAL(DOUBLE), DIMENSION(NNNP) :: PH, QH
 !-----------------------------------------------
 !
 !

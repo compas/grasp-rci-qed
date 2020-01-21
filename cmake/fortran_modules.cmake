@@ -6,8 +6,8 @@
 # For every library, the modules get stored in
 # ${Fortran_MODULE_DIRECTORY_root}/<library_name>/ so the modules from different
 # libraries are separated from each other.
-#
-#
+set(Fortran_MODULE_DIRECTORY_root ${CMAKE_CURRENT_BINARY_DIR}/modules)
+
 # Command: setup_fortran_modules(target)
 #
 # Needs to be called on all libraries that provide modules. It set the
@@ -18,7 +18,10 @@
 #
 #     setup_fortran_modules(9290)
 #
-#
+function(setup_fortran_modules target)
+    set_property(TARGET ${target} PROPERTY Fortran_MODULE_DIRECTORY "${Fortran_MODULE_DIRECTORY_root}/${target}")
+endfunction()
+
 # Command: target_link_libraries_Fortran(target mode libraries...)
 #
 # Similar to target_link_libraries(), but will also set up paths so that the
@@ -31,10 +34,6 @@
 #
 #     target_link_libraries_Fortran(rcsfsplit PRIVATE mod 9290)
 #
-set(Fortran_MODULE_DIRECTORY_root ${CMAKE_CURRENT_BINARY_DIR}/modules)
-function(setup_fortran_modules target)
-    set_property(TARGET ${target} PROPERTY Fortran_MODULE_DIRECTORY "${Fortran_MODULE_DIRECTORY_root}/${target}")
-endfunction()
 function(target_link_libraries_Fortran target mode)
     target_link_libraries(${target} ${mode} ${ARGN})
     foreach(lib IN LISTS ARGN)

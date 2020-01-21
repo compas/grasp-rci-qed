@@ -60,7 +60,7 @@ Hamiltonian parts enabled in RCI calculation:
 >         Non.pet   -1.40268598E+04
             Breit    2.64982360E+01
            QED VP   -2.87857666E+00
-QED SE hydrogenic    1.51903402E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52825338E+01
 QED SE   flambaum    1.55225344E+01
 QED SE    pyykkoe    1.61863188E+01
@@ -76,7 +76,7 @@ QED SE    pyykkoe    1.61863188E+01
 >         Non.pet   -1.40262759E+04
             Breit    2.65095634E+01
            QED VP   -2.87857844E+00
-QED SE hydrogenic    1.51885693E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52797808E+01
 QED SE   flambaum    1.55208396E+01
 QED SE    pyykkoe    1.61863266E+01
@@ -92,7 +92,7 @@ QED SE    pyykkoe    1.61863266E+01
 >         Non.pet   -1.40260354E+04
             Breit    2.65300959E+01
            QED VP   -2.87858089E+00
-QED SE hydrogenic    1.51861164E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52759677E+01
 QED SE   flambaum    1.55184922E+01
 QED SE    pyykkoe    1.61863374E+01
@@ -108,7 +108,7 @@ QED SE    pyykkoe    1.61863374E+01
 >         Non.pet   -1.40250798E+04
             Breit    2.65364974E+01
            QED VP   -2.87858158E+00
-QED SE hydrogenic    1.51854218E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52748879E+01
 QED SE   flambaum    1.55178274E+01
 QED SE    pyykkoe    1.61863405E+01
@@ -124,7 +124,7 @@ QED SE    pyykkoe    1.61863405E+01
 >         Non.pet   -1.40245703E+04
             Breit    2.65642043E+01
            QED VP   -2.87858519E+00
-QED SE hydrogenic    1.51818214E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52692908E+01
 QED SE   flambaum    1.55143818E+01
 QED SE    pyykkoe    1.61863564E+01
@@ -140,7 +140,7 @@ QED SE    pyykkoe    1.61863564E+01
 >         Non.pet   -1.40266199E+04
             Breit    2.65129090E+01
            QED VP   -2.87857875E+00
-QED SE hydrogenic    1.51882601E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52793001E+01
 QED SE   flambaum    1.55205437E+01
 QED SE    pyykkoe    1.61863280E+01
@@ -156,7 +156,7 @@ QED SE    pyykkoe    1.61863280E+01
 >         Non.pet   -1.40262471E+04
             Breit    2.65138540E+01
            QED VP   -2.87857878E+00
-QED SE hydrogenic    1.51882241E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52792442E+01
 QED SE   flambaum    1.55205092E+01
 QED SE    pyykkoe    1.61863281E+01
@@ -172,7 +172,7 @@ QED SE    pyykkoe    1.61863281E+01
 >         Non.pet   -1.40257905E+04
             Breit    2.65282308E+01
            QED VP   -2.87858082E+00
-QED SE hydrogenic    1.51861915E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52760843E+01
 QED SE   flambaum    1.55185640E+01
 QED SE    pyykkoe    1.61863371E+01
@@ -188,7 +188,7 @@ QED SE    pyykkoe    1.61863371E+01
 >         Non.pet   -1.40253923E+04
             Breit    2.65491147E+01
            QED VP   -2.87858337E+00
-QED SE hydrogenic    1.51836342E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52721089E+01
 QED SE   flambaum    1.55161166E+01
 QED SE    pyykkoe    1.61863484E+01
@@ -204,7 +204,7 @@ QED SE    pyykkoe    1.61863484E+01
 >         Non.pet   -1.40270722E+04
             Breit    2.64932727E+01
            QED VP   -2.87857629E+00
-QED SE hydrogenic    1.51907181E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52831212E+01
 QED SE   flambaum    1.55228960E+01
 QED SE    pyykkoe    1.61863171E+01
@@ -220,7 +220,7 @@ QED SE    pyykkoe    1.61863171E+01
 >         Non.pet   -1.40264337E+04
             Breit    2.65102383E+01
            QED VP   -2.87857862E+00
-QED SE hydrogenic    1.51883898E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52795017E+01
 QED SE   flambaum    1.55206678E+01
 QED SE    pyykkoe    1.61863274E+01
@@ -236,7 +236,7 @@ QED SE    pyykkoe    1.61863274E+01
 >         Non.pet   -1.40262539E+04
             Breit    2.65141229E+01
            QED VP   -2.87857904E+00
-QED SE hydrogenic    1.51879642E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52788401E+01
 QED SE   flambaum    1.55202604E+01
 QED SE    pyykkoe    1.61863293E+01
@@ -252,7 +252,7 @@ QED SE    pyykkoe    1.61863293E+01
 >         Non.pet   -1.40260783E+04
             Breit    2.65286132E+01
            QED VP   -2.87858085E+00
-QED SE hydrogenic    1.51861546E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52760270E+01
 QED SE   flambaum    1.55185287E+01
 QED SE    pyykkoe    1.61863373E+01
@@ -268,7 +268,7 @@ QED SE    pyykkoe    1.61863373E+01
 >         Non.pet   -1.40257413E+04
             Breit    2.65274549E+01
            QED VP   -2.87858094E+00
-QED SE hydrogenic    1.51860700E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52758955E+01
 QED SE   flambaum    1.55184477E+01
 QED SE    pyykkoe    1.61863376E+01
@@ -284,7 +284,7 @@ QED SE    pyykkoe    1.61863376E+01
 >         Non.pet   -1.40255934E+04
             Breit    2.65298232E+01
            QED VP   -2.87858101E+00
-QED SE hydrogenic    1.51859997E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52757863E+01
 QED SE   flambaum    1.55183805E+01
 QED SE    pyykkoe    1.61863379E+01
@@ -300,7 +300,7 @@ QED SE    pyykkoe    1.61863379E+01
 >         Non.pet   -1.40252765E+04
             Breit    2.65293475E+01
            QED VP   -2.87858089E+00
-QED SE hydrogenic    1.51861126E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52759618E+01
 QED SE   flambaum    1.55184885E+01
 QED SE    pyykkoe    1.61863375E+01
@@ -316,7 +316,7 @@ QED SE    pyykkoe    1.61863375E+01
 >         Non.pet   -1.40251191E+04
             Breit    2.65469008E+01
            QED VP   -2.87858332E+00
-QED SE hydrogenic    1.51836836E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52721857E+01
 QED SE   flambaum    1.55161639E+01
 QED SE    pyykkoe    1.61863482E+01
@@ -332,7 +332,7 @@ QED SE    pyykkoe    1.61863482E+01
 >         Non.pet   -1.40266856E+04
             Breit    2.65109858E+01
            QED VP   -2.87857873E+00
-QED SE hydrogenic    1.51882763E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52793252E+01
 QED SE   flambaum    1.55205591E+01
 QED SE    pyykkoe    1.61863279E+01
@@ -348,7 +348,7 @@ QED SE    pyykkoe    1.61863279E+01
 >         Non.pet   -1.40264172E+04
             Breit    2.65094439E+01
            QED VP   -2.87857867E+00
-QED SE hydrogenic    1.51883372E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52794200E+01
 QED SE   flambaum    1.55206175E+01
 QED SE    pyykkoe    1.61863276E+01
@@ -364,7 +364,7 @@ QED SE    pyykkoe    1.61863276E+01
 >         Non.pet   -1.40261915E+04
             Breit    2.65104403E+01
            QED VP   -2.87857861E+00
-QED SE hydrogenic    1.51883940E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52795082E+01
 QED SE   flambaum    1.55206718E+01
 QED SE    pyykkoe    1.61863274E+01
@@ -380,7 +380,7 @@ QED SE    pyykkoe    1.61863274E+01
 >         Non.pet   -1.40259339E+04
             Breit    2.65272763E+01
            QED VP   -2.87858085E+00
-QED SE hydrogenic    1.51861518E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52760227E+01
 QED SE   flambaum    1.55185261E+01
 QED SE    pyykkoe    1.61863373E+01
@@ -396,7 +396,7 @@ QED SE    pyykkoe    1.61863373E+01
 >         Non.pet   -1.40258428E+04
             Breit    2.65281796E+01
            QED VP   -2.87858109E+00
-QED SE hydrogenic    1.51859128E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52756511E+01
 QED SE   flambaum    1.55182973E+01
 QED SE    pyykkoe    1.61863383E+01
@@ -412,7 +412,7 @@ QED SE    pyykkoe    1.61863383E+01
 >         Non.pet   -1.40250987E+04
             Breit    2.65468604E+01
            QED VP   -2.87858338E+00
-QED SE hydrogenic    1.51836291E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52721011E+01
 QED SE   flambaum    1.55161118E+01
 QED SE    pyykkoe    1.61863484E+01
@@ -428,7 +428,7 @@ QED SE    pyykkoe    1.61863484E+01
 >         Non.pet   -1.40271768E+04
             Breit    2.64910023E+01
            QED VP   -2.87857629E+00
-QED SE hydrogenic    1.51907169E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52831193E+01
 QED SE   flambaum    1.55228948E+01
 QED SE    pyykkoe    1.61863171E+01
@@ -444,7 +444,7 @@ QED SE    pyykkoe    1.61863171E+01
 >         Non.pet   -1.40266379E+04
             Breit    2.65081580E+01
            QED VP   -2.87857850E+00
-QED SE hydrogenic    1.51885023E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52796767E+01
 QED SE   flambaum    1.55207755E+01
 QED SE    pyykkoe    1.61863269E+01
@@ -460,7 +460,7 @@ QED SE    pyykkoe    1.61863269E+01
 >         Non.pet   -1.40262367E+04
             Breit    2.65101710E+01
            QED VP   -2.87857883E+00
-QED SE hydrogenic    1.51881751E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52791679E+01
 QED SE   flambaum    1.55204623E+01
 QED SE    pyykkoe    1.61863283E+01
@@ -476,7 +476,7 @@ QED SE    pyykkoe    1.61863283E+01
 >         Non.pet   -1.40259812E+04
             Breit    2.65265882E+01
            QED VP   -2.87858098E+00
-QED SE hydrogenic    1.51860311E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52758351E+01
 QED SE   flambaum    1.55184105E+01
 QED SE    pyykkoe    1.61863378E+01
@@ -492,7 +492,7 @@ QED SE    pyykkoe    1.61863378E+01
 >         Non.pet   -1.40257506E+04
             Breit    2.65246426E+01
            QED VP   -2.87858090E+00
-QED SE hydrogenic    1.51861034E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52759474E+01
 QED SE   flambaum    1.55184797E+01
 QED SE    pyykkoe    1.61863375E+01
@@ -508,7 +508,7 @@ QED SE    pyykkoe    1.61863375E+01
 >         Non.pet   -1.40255394E+04
             Breit    2.65286508E+01
            QED VP   -2.87858114E+00
-QED SE hydrogenic    1.51858659E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52755782E+01
 QED SE   flambaum    1.55182524E+01
 QED SE    pyykkoe    1.61863385E+01
@@ -524,7 +524,7 @@ QED SE    pyykkoe    1.61863385E+01
 >         Non.pet   -1.40251921E+04
             Breit    2.65439794E+01
            QED VP   -2.87858327E+00
-QED SE hydrogenic    1.51837387E+01
+QED SE hydrogenic    0.00000000E+00
 QED SE     qedmod    1.52722713E+01
 QED SE   flambaum    1.55162166E+01
 QED SE    pyykkoe    1.61863479E+01

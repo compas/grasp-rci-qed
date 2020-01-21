@@ -13,7 +13,6 @@ add_library(rciqed-rci
     genmat2.f90 genmat2_I.f90
     getcid.f90 getcid_I.f90
     hmout.f90 hmout_I.f90
-    hovlap.f90 hovlap_I.f90
     indtpi.f90 indtpi_I.f90
     iniestdm.f90 iniestdm_I.f90
     iniestsd.f90 iniestsd_I.f90
@@ -32,6 +31,6 @@ add_library(rciqed-rci
 )
 setup_fortran_modules(rciqed-rci)
 target_link_libraries_Fortran(rciqed-rci PRIVATE
-    mod 9290 rang90 mpi90 dvd90
+    mod 9290 rang90 mpiu90 dvd90
     rciqed-breit rciqed-qed rciqed-mass_shifts rciqed-matrixelements rciqed-grasp
 )

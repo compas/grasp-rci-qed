@@ -15,7 +15,7 @@ add_executable(rci-qed
     rci-qed.f90
 )
 target_link_libraries_Fortran(rci-qed PUBLIC
-    mod 9290 mpi90
+    mod 9290 mpiu90
     rciqed-rci rciqed-matrixelements
 )
 install(TARGETS rci-qed DESTINATION bin/)
