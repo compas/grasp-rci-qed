@@ -74,25 +74,6 @@ find_package(BLAS REQUIRED)
 find_package(LAPACK REQUIRED)
 find_package(MPI REQUIRED)
 
-# Command: target_link_libraries_Fortran(target mode libraries...)
-#
-# Similar to target_link_libraries(), but will also set up paths so that the
-# compiler could fine the the Fortran .mod files from of the libraries. Unlike
-# for the standard command, mode ( = PUBLIC, PRIVATE) is mandatory.
-#
-# Modified version of: https://stackoverflow.com/a/43918277/1601695
-#
-# Example:
-#
-#     target_link_libraries_Fortran(rcsfsplit PRIVATE mod 9290)
-#
-function(target_link_libraries_Fortran target mode)
-    target_link_libraries(${target} ${mode} ${ARGN})
-    foreach(lib IN LISTS ARGN)
-        target_include_directories(${target} ${mode} $<TARGET_PROPERTY:${lib},Fortran_MODULE_DIRECTORY>)
-    endforeach()
-endfunction()
-
 # We put the compiled binaries into the bin/ subdirectory of the build directory
 # and libraries into the lib/ subdirectory.
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin/")
