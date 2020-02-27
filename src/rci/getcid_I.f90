@@ -23,9 +23,8 @@ contains
 
         write(istde, *) "List spectrosopic orbitals (e.g. for Breit, QED)"
         call GETRSL(specorbs, specorbs_n)
-        print *, specorbs(1:specorbs_n) ! TODO: remove
         call enabled_orbitals(specorbs(1:specorbs_n), isspecorb)
-        print *, isspecorb
+        ! TODO: print out a list of spectroscopic orbitals?
     end subroutine getcid_specorbs
 
     !> Converts a list of orbital indices `orbitals` into a list of `logical`s of length
