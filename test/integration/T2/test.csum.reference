@@ -13,7 +13,7 @@ The atomic number is  74.0000000000;
 Speed of light =  1.370359991390D+02 atomic units.
 
  To H (Dirac Coulomb) is added
-  H (Transverse) : mode = gaunt;
+  H (Transverse) : mode = full;
   H (Vacuum Polarisation);
   H (Normal Mass Shift);
   H (Specific Mass Shift);

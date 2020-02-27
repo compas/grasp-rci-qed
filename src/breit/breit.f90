@@ -1,10 +1,35 @@
-!> Routines related to calculating the matrix elements of the Breit operator:
+!> Routines related to calculating the matrix elements of the transverse photon operator
+!! (in the Coulomb gauge):
 !!
 !! \f[
 !!   g^T(R; \omega) =
 !!   - \vec{\alpha}_1 \cdot \vec{\alpha}_2 ~ \frac{\textrm{e}^{i\omega R}}{R}
 !!   - (\vec{\alpha}_1 \cdot \nabla_R) (\vec{\alpha}_2 \cdot \nabla_R) \frac{\textrm{e}^{i\omega R} - 1}{\omega^2 R}
 !! \f]
+!!
+!! Taking the frequency-independent limit \f$\lim_{\omega \to 0}\f$ leads to the Breit
+!! operator:
+!!
+!! \f[
+!!   g^B(R) = \lim_{\omega \to 0} g^T(R; \omega) =
+!!   - \frac{1}{2R} \left[
+!!     \vec{\alpha}_1 \cdot \vec{\alpha}_2
+!!   + (\vec{\alpha}_1 \cdot \hat{\vec{R}}) (\vec{\alpha}_2 \cdot \hat{\vec{R}})
+!!   \right]
+!! \f]
+!!
+!! In GRASP, this is not implemented directory, but with a \f$10^{-6}\f$ energy scaling factor
+!! `WFACT` (i.e. the value for \f$\omega\f$, derived from the difference of orbital energies,
+!! is multiplied by this factor).
+!!
+!! For completeness, we'll also mention another related operator: the Gaunt operator:
+!!
+!! \f[
+!!   g^G(R) = - \frac{\vec{\alpha}_1 \cdot \vec{\alpha}_2}{R}
+!! \f]
+!!
+!! While not implemented separately in GRASP, it is a different limit of the transverse
+!! photon operator.
 module grasp_rciqed_breit
     use grasp_rciqed_kinds, only: real64, dp
     use parameter_def, only: NNNW
@@ -35,7 +60,6 @@ contains
         use decide_C, only: LTRANS
         use iounit_c, only: ISTDE
         use orb_C, only: NW, NCF
-        !use wfac_C, only: WFACT
         use genintbreit1_I
         use genintbreit2_I
         use ichop_I
@@ -49,7 +73,7 @@ contains
 
         integer :: i, j, N
 
-        ! Set up the the array of specroscopic orbitals
+        ! Set up the the global array of specroscopic orbitals
         breit_specorbs = specorbs
 
         ! We'll enable all parts of the Hamiltonian. E.g. AUXBLK relies on these

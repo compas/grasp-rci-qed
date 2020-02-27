@@ -25,7 +25,7 @@
 >>> LOADING: test.settings.toml
 Hamiltonian parts enabled in RCI calculation:
  ✔  Dirac + nuclear potential
- ✔  Breit
+ ✔  Breit (mode: full)
  ✔  Normal mass shift
  ✔  Special mass shift
  ✔  QED vacuum polarization

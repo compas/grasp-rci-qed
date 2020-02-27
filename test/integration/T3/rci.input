@@ -1,7 +1,7 @@
 y                  # Default settings?
 test               # Name of state
 1s,2*,3s,3p-,3p    # Spectroscopic orbitals
-gaunt              # Breit mode
+full               # Breit mode
 y                  # Include vacuum polarization?
 y                  # Include NMS?
 y                  # Include SMS?

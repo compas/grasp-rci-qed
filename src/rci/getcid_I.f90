@@ -74,13 +74,13 @@ contains
         do while (.true.)
             write(istde, *) "Include contribution of H (Transverse)? Valid modes are:"
             write(istde, *) "   n        -- do not include H (Transverse)"
-            write(istde, *) "   gaunt    -- enable in frequency-independent mode"
-            write(istde, *) "   specorbs -- enable full Breit only for spectroscopic orbitals, frequency-independent for others"
-            write(istde, *) "   full     -- enable H (Transverse) for all orbitals (not recommended)"
+            write(istde, *) "   breit    -- enable in frequency-independent mode (Breit operator)"
+            write(istde, *) "   specorbs -- enable full freq.dep. for spectroscopic orbitals, Breit for others"
+            write(istde, *) "   full     -- enable full freq.dep. H (Transverse) for all orbitals (not recommended)"
             read(stdin, '(a)') user_input
             if(trim(user_input) == "n") then
                 LTRANS = .false.
-            elseif(trim(user_input) == "gaunt") then
+            elseif(trim(user_input) == "breit") then
                 LTRANS = .true.
                 breit_specorbs = (/(.false., i = 1, NNNW)/)
             elseif(trim(user_input) == "specorbs") then

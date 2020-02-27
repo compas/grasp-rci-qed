@@ -34,6 +34,7 @@ set_tests_properties(matrixelements_rcisettings_expfloat
 set_tests_properties(matrixelements_rcisettings_expfloat-check
     PROPERTIES FIXTURES_REQUIRED rcisettings-expfloattoml)
 
+# matrixelements_rcisettings
 add_executable(test.matrixelements_rcisettings
     matrixelements_rcisettings.f90
 )
@@ -43,3 +44,13 @@ target_link_libraries_Fortran(test.matrixelements_rcisettings PUBLIC
     rciqed-test
 )
 add_test(matrixelements_rcisettings test.matrixelements_rcisettings)
+add_test(NAME matrixelements_rcisettings-check
+    COMMAND
+    ${TEST_SOURCE_DIR}/lib/filematch.sh
+    "testjob.settings.toml"
+    ${CMAKE_CURRENT_SOURCE_DIR}/testjob.settings.toml.reference
+)
+set_tests_properties(matrixelements_rcisettings
+    PROPERTIES FIXTURES_SETUP rcisettings)
+set_tests_properties(matrixelements_rcisettings-check
+    PROPERTIES FIXTURES_REQUIRED rcisettings)

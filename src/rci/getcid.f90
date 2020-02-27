@@ -36,7 +36,7 @@
       USE qedcut_C
       USE mpi_C
       use getcid_I, only: getcid_specorbs, getcid_breit, getcid_qedse
-      use grasp_rciqed, only: IMCDF => res_unit, setype
+      use grasp_rciqed, only: IMCDF => res_unit, setype, isspecorb
       use grasp_rciqed_breit, only: breit_specorbs
 !-----------------------------------------------
 !   I n t e r f a c e   B l o c k s
@@ -140,7 +140,7 @@
 
       ! Determine spectroscopic orbitals
       if (myid == 0) call getcid_specorbs
-      ! TODO: broadcast specorbs?
+      CALL MPI_Bcast (isspecorb, size(isspecorb), MPI_LOGICAL, 0, MPI_COMM_WORLD, ierr)
 
 !*****************************************************************
 !
