@@ -14,9 +14,13 @@
   N = 590
 [hamiltonian]
   # Contains the following booleans:
-  #   breit, nms, sms, qed_vp
+  #   qed_vp, nms, sms
   # Each indicates if the corresponding part of the Hamiltonian
   # was enabled. If it is omitted, it is assumed to have been off.
+  #
+  # Can also contain breit (string) which indicates the mode of the
+  # transverse photon operator. Possible values are 'breit', 'specorbs'
+  # and 'full'. If set to 'n', the operator is completely disabled.
   #
   # May also contain qed_se (string), which indicates that a particular
   # QED self-energy operator was also included in the Hamiltonian.
@@ -25,5 +29,6 @@
   # Finally, for the hydrogenic QED self-energy, qed_se_hydrogenic_cutoff
   # (integer) may be defined, which sets the n-quantum number cutoff. If not
   # present, the implementation default is used.
+  breit = "n"
   nms = true
   sms = true

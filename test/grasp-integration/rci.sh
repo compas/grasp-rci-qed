@@ -56,9 +56,8 @@ cp rwfn.inp ${CONF}.w
 sed 's/[ \t]*#.*//' <<-EOF > rci.input
 	y                  # Default settings?
 	${CONF}            # Name of state
-	y                  # Include Breit?
-	y                  # Modify frequency?
-	1e-6               # Frequency scaling factor
+	1s,2s,2p-,2p       # Spectroscopic orbitals
+	specorbs           # Include Breit / mode?
 	y                  # Include vaccuum polarization?
 	y                  # Include NMS?
 	y                  # Include SMS?

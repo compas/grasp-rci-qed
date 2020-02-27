@@ -51,7 +51,7 @@
       USE grid_C
       USE orb_C
       USE stor_C
-      USE wfaC_c
+      use grasp_rciqed_breit, only: WFACT, breit_specorbs
       IMPLICIT NONE
 !-----------------------------------------------
 !   D u m m y   A r g u m e n t s
@@ -85,7 +85,11 @@
 !
 !   Function not in position; is it available in BESS arrays?
 !
-      W = WFACT*DABS(E(IA)-E(IB))/C
+      W = DABS(E(IA)-E(IB))/C
+      ! If either of the orbitals is designate as "non-spectroscopic" for the breit purposes,
+      ! we'll dampen the energy difference with WFACT (a very small factor) to effective go
+      ! to the frequency-independent limit of Breit
+      if(.not.breit_specorbs(IA) .or. .not.breit_specorbs(IB)) W = WFACT*W
       WIJ(IW) = W
 !
       DO IWKP = 1, 2

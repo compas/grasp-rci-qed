@@ -21,7 +21,7 @@ program matrixelements_rcisettings
     call test_isequal(success, "settings%Z", settings%Z, 77.0_dp, rtol)
     call test_isequal(success, "settings%atomic_mass_amu", settings%atomic_mass_amu, 100.0_dp, rtol)
 
-    call test_isequal(success, "settings%breit_enabled", settings%breit_enabled, .true.)
+    call test_isequal(success, "settings%breit_mode", settings%breit_mode, "full")
     call test_isequal(success, "settings%nms_enabled", settings%nms_enabled, .false.)
 
     if(.not.success) then
@@ -47,7 +47,7 @@ contains
         Z = 77
         EMN = 100.0_dp / AUMAMU
 
-        call write_settings_toml(jobname, 1)
+        call write_settings_toml(jobname, 'full', 1)
 
     end subroutine write_testsettings
 

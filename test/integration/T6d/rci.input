@@ -1,7 +1,7 @@
 y                  # Default settings?
 test               # Name of state
+1*,2*,3*,4*,5s,5p-,5p,5d-,5d,6s # Spectrosopic orbitals
 n                  # Include Breit?
-n                  # Modify frequency?
 y                  # Include vacuum polarization?
 y                  # Include NMS?
 y                  # Include SMS?

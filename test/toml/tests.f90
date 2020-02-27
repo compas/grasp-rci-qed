@@ -30,14 +30,18 @@ program tomltest
     call test_get_integer_default("grid.N", 200, 500)
     call test_get_integer_default("grid.Q", 42, 42)
 
-    call test_get_logical("hamiltonian.breit", .true.)
+    call test_get_logical("hamiltonian.vp", .true.)
     call test_get_logical("hamiltonian.nms", .false.)
-    call test_get_logical_default("hamiltonian.breit", .false., .true.)
+    call test_get_logical_default("hamiltonian.vp", .false., .true.)
     call test_get_logical_default("hamiltonian.nms", .true., .false.)
     call test_get_logical_default("hamiltonian.nonexist", .true., .true.)
     call test_get_logical_default("hamiltonian.nonexist", .false., .false.)
 
     call test_get_string("nucleus.model", "point")
+    call test_get_string("hamiltonian.breit", "foobar")
+    call test_get_string_fail("hamiltonian.breit2")
+    call test_get_string_default("hamiltonian.breit", "default_value", "foobar")
+    call test_get_string_default("hamiltonian.breit2", "default_value", "default_value")
 
     ! Done. Report and exit non-zero exit code if need be.
     if(.not.tests_passed) then
@@ -114,7 +118,7 @@ contains
 
         call get_integer_default(table, key, default, value)
         if(value /= reference) then
-            print '("TEST ERROR: Bad value from get_integer(",a,")")', key
+            print '("TEST ERROR: Bad value from get_integer_default(",a,")")', key
             print '("   returned: ",i0)', value
             print '("   expected: ",i0)', reference
             tests_passed = .false.
@@ -144,7 +148,7 @@ contains
 
         call get_logical_default(table, key, default, value)
         if(value.neqv.reference) then
-            print '("TEST ERROR: Bad value from get_logical(",a,")")', key
+            print '("TEST ERROR: Bad value from get_logical_default(",a,")")', key
             print '("   returned: ",L1)', value
             print '("   expected: ",L1)', reference
             tests_passed = .false.
@@ -165,5 +169,28 @@ contains
             tests_passed = .false.
         endif
     end subroutine test_get_string
+
+    subroutine test_get_string_fail(key)
+        character(len=*), intent(in) :: key
+        character(:), allocatable :: value
+
+        if(get_string(table, key, value)) then
+            print '("TEST ERROR: get_string(",a,") did not fail")', key
+            tests_passed = .false.
+        endif
+    end subroutine test_get_string_fail
+
+    subroutine test_get_string_default(key, default, reference)
+        character(len=*), intent(in) :: key, default, reference
+        character(:), allocatable :: value
+
+        call get_string_default(table, key, default, value)
+        if(value /= reference) then
+            print '("TEST ERROR: Bad value from get_string_default(",a,")")', key
+            print '("   returned: ",L1)', value
+            print '("   expected: ",L1)', reference
+            tests_passed = .false.
+        endif
+    end subroutine test_get_string_default
 
 end program tomltest

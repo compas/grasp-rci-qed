@@ -164,6 +164,19 @@ contains
         endif
     end function get_string
 
+    subroutine get_string_default(table, key, default, value)
+        use iso_c_binding, only: c_bool
+        type(cpptoml_table), intent(in) :: table
+        character(len=*), intent(in) :: key
+        character(len=*), intent(in) :: default
+        character(:), allocatable, intent(out) :: value
+
+        logical(c_bool) :: value_
+        if(.not.get_string(table, key, value)) then
+            value = default
+        endif
+    end subroutine get_string_default
+
     pure function cstr(str)
         character(len=*), intent(in) :: str
         character(len_trim(str)+1) :: cstr

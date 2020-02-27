@@ -9,5 +9,6 @@
   N = 500
 
 [hamiltonian]
-  breit = true
+  breit = "foobar"
+  vp = true
   nms = false

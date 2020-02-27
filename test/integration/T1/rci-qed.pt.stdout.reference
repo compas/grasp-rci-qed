@@ -19,12 +19,13 @@
        3       1       1       6      -1
 >>> INITIALIZING rci commons
  Allocating space for          306  Rk integrals
+>>> INITIALIZING fully frequency-dependent Breit
  Computing        1921  Breit integrals of type 1
  Computing        1009  Breit integrals of type 2
 >>> LOADING: test.settings.toml
 Hamiltonian parts enabled in RCI calculation:
  ✔  Dirac + nuclear potential
- ✔  Breit
+ ✔  Breit (mode: full)
  ✔  Normal mass shift
  ✔  Special mass shift
  ✔  QED vacuum polarization

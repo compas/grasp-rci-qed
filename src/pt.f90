@@ -7,6 +7,7 @@
 !! Depends on files: `isodata`, `<state>.c`, `<state>.w` and `<state>.cm`
 !!
 program rci_qed_pt
+    use parameter_def, only: NNNW
     use grasp_rciqed_kinds, only: real64, dp
     use grasp_lib9290, only: init_isocw_full
     use grasp_rciqed_lib9290_files, only: load_mixing
@@ -119,7 +120,9 @@ program rci_qed_pt
     call load_mixing(file_mixing)
     print '(a)', ">>> INITIALIZING rci commons"
     call init_rkintc(j2max)
-    call init_breit(j2max)
+    ! TODO: FIX THIS -- should be generic
+    print '(a)', ">>> INITIALIZING fully frequency-dependent Breit"
+    call init_breit(j2max, (/ (.true., k=1,NNNW) /))
     call init_vacuum_polarization
     call init_mass_shifts
 
@@ -140,7 +143,11 @@ program rci_qed_pt
 
     print "(a)", "Hamiltonian parts enabled in RCI calculation:"
     print '(" ",a,"  ",a)', check(.true.), "Dirac + nuclear potential"
-    print '(" ",a,"  ",a)', check(settings%breit_enabled), "Breit"
+    if(settings%breit_mode == "n") then
+        print '(" ",a,"  ",a)', check(.false.), "Breit"
+    else
+        print '(" ",a,"  Breit (mode: ",a,")")', check(.true.), settings%breit_mode
+    endif
     print '(" ",a,"  ",a)', check(settings%nms_enabled), "Normal mass shift"
     print '(" ",a,"  ",a)', check(settings%sms_enabled), "Special mass shift"
     print '(" ",a,"  ",a)', check(settings%qed_vp_enabled), "QED vacuum polarization"
@@ -157,11 +164,12 @@ program rci_qed_pt
 
     hcs_cat(1) = .true.
     hcs_cat(2) = .true.
-    hcs_cat(3) = settings%breit_enabled
+    ! TODO: actually, we should split up by contribution?
+    hcs_cat(3) = (settings%breit_mode /= "n")
     hcs_cat(4) = settings%nms_enabled
     hcs_cat(5) = settings%sms_enabled
     hcs_cat(6) = settings%qed_vp_enabled
-    hcs_cat(7) = .not.(settings%qed_se == 0)
+    hcs_cat(7) = (settings%qed_se /= 0)
 
     ! Also set the hydrogenic settings in qedcut_C appropriately:
     ! LSE needs to be set to .true. since QED_SLFEN checks for it when applying
