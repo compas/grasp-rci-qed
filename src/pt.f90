@@ -18,7 +18,7 @@ program rci_qed_pt
         nsetypes, setypes_long, setypes_short
     use grasp_rciqed_rcisettings, only: rcisettings, read_settings_toml
     use grasp_rciqed_cimatrixelements
-    use decide_C, only: LSE
+    use decide_C, only: LSE, LNMS, LSMS
     use orb_C, only: NW
     use prnt_C, only: NVEC
     use qedcut_C, only: NQEDCUT, NQEDMAX
@@ -197,16 +197,27 @@ program rci_qed_pt
             hij%diracpot = dirac_potential(i, j)
             hij%coulomb = coulomb(i, j)
             hij%breit = breit(i, j)
-            hij%nms = nms(i, j)
-            hij%sms = sms(i, j)
             hij%vp = qed_vp(i, j)
-
+            ! If self-energy is disabled, then we populate an array with all possible
+            ! self-energy values.
             if(settings%qed_se == 0) then
                 do k = 1, nsetypes
                     hij%se_array(k) = qed_se(sematrix(k,:,:), i, j)
                 enddo
             else
                 hij%se = qed_se(sematrix(1,:,:), i, j)
+            endif
+            ! It is possible that the atomic mass is configured to be zero, in which case
+            ! we can not calculate a reasonable estimate for the mass shifts.
+            if (LNMS) then
+                hij%nms = nms(i, j)
+            else
+                hij%nms = 0.0_dp
+            endif
+            if (LSMS) then
+                hij%sms = sms(i, j)
+            else
+                hij%sms = 0.0_dp
             endif
 
             ! Add the values to the ASF values
