@@ -435,6 +435,12 @@ contains
         logical :: within_tolerance
         real(real64) :: relative_difference
 
+        ! If the values are exactly the same, we also say that they are within tolerance.
+        if (abs(a-b) == 0) then
+            within_tolerance = .true.
+            return
+        endif
+
         relative_difference = abs(a-b) / max(abs(a), abs(b))
         if (relative_difference < relative_tolerance) then
             within_tolerance = .true.
