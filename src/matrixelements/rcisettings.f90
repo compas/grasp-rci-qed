@@ -112,7 +112,14 @@ contains
         open(newunit=toml_unit, file=tomlfile)
         write(toml_unit, '(a)') "[nucleus]"
         write(toml_unit, '(a,f0.16)') "  Z = ", Z
-        write(toml_unit, '(a,f0.16)') "  atomic_mass_amu = ", EMN * AUMAMU
+        if(EMN == 0) then
+            ! Fortran prints '.000000000' if the floating point number is exactly zero,
+            ! which breaks the TOML file (not a valid float literal). So we need to
+            ! special-case that.
+            write(toml_unit, '(a)') "  atomic_mass_amu = 0.0"
+        else
+            write(toml_unit, '(a,f0.16)') "  atomic_mass_amu = ", EMN * AUMAMU
+        endif
         if(NPARM == 0) then
             write(toml_unit, '(a)') "  nuclear_model = ""point"""
         elseif(NPARM == 2) then
