@@ -420,13 +420,6 @@ contains
             print '(a,e22.16)', "  atomic_mass_amu in .settings.toml: ", settings%atomic_mass_amu
         endif
 
-        if(.not.within_tolerance(settings%atomic_mass_amu, EMN * AUMAMU, rtol)) then
-            print '(a)', "WARNING: discrepancy between isodata and .settings.toml"
-            print '(a)', "  values for atomic_mass_amu <-> EMN do not match"
-            print '(a,e22.16)', "  EMN * AUMAMU (global)            : ", EMN * AUMAMU
-            print '(a,e22.16)', "  atomic_mass_amu in .settings.toml: ", settings%atomic_mass_amu
-        endif
-
     end subroutine verify_rcisettings
 
     !> Checks if the difference of `a` and `b` are within the tolerance relative
