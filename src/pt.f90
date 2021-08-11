@@ -163,15 +163,23 @@ program rci_qed_pt
     hcs_cat(6) = settings%qed_vp_enabled
     hcs_cat(7) = .not.(settings%qed_se == 0)
 
-    ! Also set the hydrogenic settings in qedcut_C appropriately:
-    ! LSE needs to be set to .true. since QED_SLFEN checks for it when applying
-    ! NQEDMAX for some reason.
+    ! Also set the hydrogenic settings in qedcut_C appropriately. LSE needs to be set to
+    ! .true. since QED_SLFEN checks for it when applying NQEDMAX for some reason.
     LSE = .true.
     if(settings%qed_se_hydrogenic_cutoff >= 0) then
         NQEDCUT = 1
         NQEDMAX = settings%qed_se_hydrogenic_cutoff
     else
+        ! If 'qed_se_hydrogenic_cutoff' is not explicitly given in the settings TOML file,
+        ! we assume that it is 8. This corresponds to the perturbative case in the old RCI
+        ! program. This is also appropriate, because this is most likely to happen when
+        ! self-energy is disabled in the RCI calculation.
+        !
+        ! It should also be pointed out that the 'NQEDCUT' variable is quite pointless -- it
+        ! is actually never read by any of the QED self-energy routines. However, we set
+        ! this for logical consistency.
         NQEDCUT = 0
+        NQEDMAX = 8
     endif
 
     ! Calculate the self-energy matrix (or matrices, if SE in in PT mode).
