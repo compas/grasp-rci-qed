@@ -32,6 +32,9 @@ if [ -z ${GRASP+x} ]; then
 fi
 export DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# Expand GRASP into an absolute path, if not already:
+export GRASP=$(realpath "$GRASP")
+
 unset grasp_cmake_build
 build_directory="build" # we default to build/
 cmake_args=""
