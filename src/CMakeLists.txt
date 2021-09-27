@@ -35,3 +35,13 @@ target_link_libraries_Fortran(rci-qed.orbitals PUBLIC
     rciqed-grasp rciqed-rci rciqed-breit rciqed-qed rciqed-mass_shifts rciqed-matrixelements
 )
 install(TARGETS rci-qed.orbitals DESTINATION bin/)
+
+# libgrasp-rci-qed: A shared library that exposes GRASP functions etc.
+# Note: currently only accessing global variables works -- GRASP needs to be compiled
+# with -fPIC to make this work for functions.
+add_library(grasp-rci-qed SHARED
+    libgrasp-rci-qed.f90
+)
+target_link_libraries_Fortran(grasp-rci-qed PUBLIC
+    mod
+)
