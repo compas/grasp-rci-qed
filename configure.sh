@@ -1,4 +1,24 @@
 #!/usr/bin/env bash
+#
+# ./configure.sh [--debug] [--grasp-cmake]
+#
+# Configures a CMake-based out-of-tree build of grasp-rci-qed.
+#
+# By default, the build will be located under the build/ directory and will be 'Release'
+# build. However, if `--debug` is passed, the build will instead be located under
+# build-debug/ and have debug flags enabled. It is possible to have both build
+# configurations be present in parallel.
+#
+# The `--grasp-cmake` option should be passed when GRASP itself was built using CMake. In
+# that case, the `.mod` files get installed under ${GRASP}/lib/${library}, rather than next
+# to the Fortran files under the `src/` directory. If this is passed, it properly passes the
+# GRASP_INSTALLED_MODULES option to CMake, which makes sure that the build can find the
+# `.mod` files that have been installed into `lib/` in the GRASP build.
+#
+# The script requires the $GRASP environment variable to be set, which must point to the
+# root of a (make-installed) GRASP build. The CMake build for grasp-rci-qed will use the
+# `.a` object archive and `.mod` files from the GRASP build.
+#
 if [ -z ${GRASP+x} ]; then
 	>&2 cat <<-EOF
 		ERROR: \$GRASP environment variable unset.
@@ -20,7 +40,7 @@ for arg in $@; do
 		echo "Creating a DEBUG build"
 		build_directory="build-debug"
 		cmake_args="-DCMAKE_BUILD_TYPE=Debug${cmake_args:+ $cmake_args}"
-	elif [ "$arg" == "--grasp-installed-modules" ]; then
+	elif [ "$arg" == "--grasp-cmake" ]; then
 		cmake_args="-DGRASP_INSTALLED_MODULES=true${cmake_args:+ $cmake_args}"
 	fi
 done

@@ -55,14 +55,15 @@ After this, the `rci-qed` build directory is set up under `build/`.
 
 ### CMake-based GRASP builds
 
-To integrate with the updated CMake-based build system available on [the GRASP master
-branch][compas-grasp], source GRASP's `envset.sh` and pass the `--grasp-installed-modules`
-argument to `./configure.sh`:
+To integrate with the updated CMake-based build system available on [the GRASP master branch][compas-grasp], source GRASP's `envset.sh` and pass the `--grasp-cmake` argument to `./configure.sh`:
 
 ```
 source /path/to/grasp/envset.sh
-./configure.sh --grasp-installed-modules
+./configure.sh --grasp-cmake
 ```
+
+The difference between the CMake-based build and a Make-based build for GRASP is that the `.mod` module files get placed in different places (next to the Fortran source files for Make, under `$GRASP/lib/${library}` for CMake).
+Passing the `--grasp-cmake` option to `./configure.sh` makes sure that the `GRASP_INSTALLED_MODULES` option of the CMake configuration gets set properly to make sure that CMake can find the `.mod` files.
 
 [compas-grasp]: https://github.com/compas/grasp
 [compas-grasp-2018]: https://github.com/compas/grasp/releases/tag/2018-12-03
