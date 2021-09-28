@@ -60,3 +60,19 @@ contains
     end
 
 end function libgrasp_rciqed_parameter_def
+
+
+function libgrasp_rciqed_test(i1, i2, i3) bind(c)
+    use, intrinsic :: iso_c_binding
+    use itrig_I
+    use setiso_I
+    implicit none
+
+    integer(c_int), intent(in), value :: i1, i2, i3
+    integer(c_int) :: libgrasp_rciqed_test
+
+    call setiso("isodata")
+
+    libgrasp_rciqed_test = itrig(i1, i2, i3)
+
+end function libgrasp_rciqed_test

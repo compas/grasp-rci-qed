@@ -55,6 +55,16 @@ set(GRASP_INSTALLED_MODULES false CACHE BOOL
     default source directories (i.e. \${GRASP}/src/lib/\${library})"
 )
 
+# Can be used to build a shared library that exposes some of GRASP's routines. Useful for
+# e.g. calling GRASP routines from a high-level language such as Julia.
+#
+# This requires the original GRASP to be built with position-independent code on, which can
+# be enabled by passing -DCMAKE_POSITION_INDEPENDENT_CODE=ON to CMake when configuring its
+# build.
+set(GRASP_DYNAMIC_LIBRARY false CACHE BOOL
+    "If true, build the libgrasp-rci-qed shared library. Required PIC in GRASP."
+)
+
 # "Release" will be the default build type, which gives us optimization flags etc.
 # The other relevant option would be "Debug", which disables optimizations and
 # enables debugging symbols. The debug build can be enabled when setting up the
@@ -137,6 +147,8 @@ set_property(TARGET dvd90 PROPERTY IMPORTED_LINK_INTERFACE_LIBRARIES  mod)
 
 message("Compiler flags etc. for this rci-qed build:")
 message("* GRASP:                          ${GRASP}")
+message("* GRASP_INSTALLED_MODULES:        ${GRASP_INSTALLED_MODULES}")
+message("* GRASP_DYNAMIC_LIBRARY:          ${GRASP_DYNAMIC_LIBRARY}")
 message("* CMAKE_BUILD_TYPE:               ${CMAKE_BUILD_TYPE}")
 message("* CMAKE_Fortran_COMPILER:         ${CMAKE_Fortran_COMPILER}")
 message("* CMAKE_Fortran_COMPILER_VERSION: ${CMAKE_Fortran_COMPILER_VERSION}")

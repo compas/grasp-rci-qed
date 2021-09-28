@@ -62,6 +62,12 @@ source /path/to/grasp/envset.sh
 The difference between the CMake-based build and a Make-based build for GRASP is that the `.mod` module files get placed in different places (next to the Fortran source files for Make, under `$GRASP/lib/${library}` for CMake).
 Passing the `--grasp-cmake` option to `./configure.sh` makes sure that the `GRASP_INSTALLED_MODULES` option of the CMake configuration gets set properly to make sure that CMake can find the `.mod` files.
 
+### Shared library of GRASP functions
+
+Passing `-DGRASP_DYNAMIC_LIBRARY=true` to CMake enables the building of a shared library that exposes some of the GRASP functionality.
+
+
+
 [compas-grasp]: https://github.com/compas/grasp
 [compas-grasp-2018]: https://github.com/compas/grasp/releases/tag/2018-12-03
 [doc-img]: https://img.shields.io/badge/documentation-master-blue.svg
