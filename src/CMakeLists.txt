@@ -43,6 +43,6 @@ if(GRASP_DYNAMIC_LIBRARY)
         libgrasp-rci-qed.f90
     )
     target_link_libraries_Fortran(grasp-rci-qed PUBLIC
-        mod 9290
+        mod 9290 rciqed-qed
     )
 endif(GRASP_DYNAMIC_LIBRARY)
