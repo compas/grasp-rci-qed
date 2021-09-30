@@ -66,6 +66,60 @@ contains
 
     end function libgrasp_rciqed_parameter_def
 
+    subroutine libgrasp_rciqed_grid_c(n, rnt, h, hp, r_ptr, rp_ptr, rpor_ptr) bind(c)
+        use, intrinsic :: iso_c_binding
+        use grid_C, only: grid_c_n => N, grid_c_rnt => RNT, grid_c_h => H, grid_c_hp => HP, &
+            grid_c_r => R, grid_c_rp => RP, grid_c_rpor => RPOR
+        implicit none
+
+        integer(c_int), intent(out) :: n
+        real(c_double), intent(out) :: rnt, h, hp
+        type(c_ptr), intent(out) :: r_ptr, rp_ptr, rpor_ptr
+
+        real(c_double), pointer :: r(:), rp(:), rpor(:)
+
+        n = grid_c_n
+        rnt = grid_c_rnt
+        h = grid_c_h
+        hp = grid_c_hp
+
+        print *, n, rnt, h, hp
+
+        allocate(r(n))
+        r_ptr = c_loc(r)
+        r(:) = grid_c_r(:n)
+
+        allocate(rp(n))
+        rp_ptr = c_loc(rp)
+        rp(:) = grid_c_rp(:n)
+
+        allocate(rpor(n))
+        rpor_ptr = c_loc(rpor)
+        rpor(:) = grid_c_rpor(:n)
+
+    end subroutine libgrasp_rciqed_grid_c
+
+    ! Initializes the the 9290 for a point nuclear charge with a given Z.
+    ! This include initializing the physical constants, the grid and the nuclear
+    ! potential itself.
+    subroutine libgrasp_rciqed_9290_init_pnc(nuclear_z) bind(c)
+        use, intrinsic :: iso_c_binding
+        use grasp_rciqed_lib9290_init
+
+        real(c_double), intent(in), value :: nuclear_z
+
+        ! Calls SETCON and SETMC:
+        call lib9290_init_constants
+        ! Sets up the necessary values and calls SETQIC and RADGRD:
+        call lib9290_init_grid(nuclear_z)
+        ! Set NPARM = 0 and calls NUCPOT:
+        call lib9290_init_nucleus(nuclear_z)
+
+    end subroutine libgrasp_rciqed_9290_init_pnc
+
+    subroutine libgrasp_rciqed_vp_vacpol() bind(c)
+    end subroutine libgrasp_rciqed_vp_vacpol
+
     function libgrasp_rciqed_vp_funk(x, n) bind(c)
         use, intrinsic :: iso_c_binding
         use, intrinsic :: iso_fortran_env, only: real64
