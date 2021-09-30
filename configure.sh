@@ -45,6 +45,8 @@ for arg in $@; do
 		cmake_args="-DCMAKE_BUILD_TYPE=Debug${cmake_args:+ $cmake_args}"
 	elif [ "$arg" == "--grasp-cmake" ]; then
 		cmake_args="-DGRASP_INSTALLED_MODULES=true${cmake_args:+ $cmake_args}"
+	elif [ "$arg" == "--dynamic-library" ]; then
+		cmake_args="-DGRASP_DYNAMIC_LIBRARY=true${cmake_args:+ $cmake_args}"
 	fi
 done
 
@@ -65,7 +67,10 @@ mkdir "${build_abspath}" && cd "${build_abspath}" \
 
 # Note: we need to use spaces, not tabs, to indent in the heredoc.
 cat <<-EOF
-Build directory ${build_directory}/ created.
+Build directory ${build_directory}/ created with:
+
+    cmake ${cmake_args} ..
+
 To build rci-qed run you need to cd into ${build_directory}/ and run make:
 
     cd ${build_directory}/
