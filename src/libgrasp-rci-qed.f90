@@ -83,8 +83,6 @@ contains
         h = grid_c_h
         hp = grid_c_hp
 
-        print *, n, rnt, h, hp
-
         allocate(r(n))
         r_ptr = c_loc(r)
         r(:) = grid_c_r(:n)
@@ -113,11 +111,72 @@ contains
         ! Sets up the necessary values and calls SETQIC and RADGRD:
         call lib9290_init_grid(nuclear_z)
         ! Set NPARM = 0 and calls NUCPOT:
-        call lib9290_init_nucleus(nuclear_z)
+        call lib9290_init_nucleus_pnc(nuclear_z)
 
     end subroutine libgrasp_rciqed_9290_init_pnc
 
-    subroutine libgrasp_rciqed_vp_vacpol() bind(c)
+    ! Initializes the the 9290 for a Fermi nucleus with a charge Z.
+    ! This include initializing the physical constants, the grid and the nuclear
+    ! potential itself.
+    subroutine libgrasp_rciqed_9290_init_fnc(z, a, c) bind(c)
+        use, intrinsic :: iso_c_binding
+        use grasp_rciqed_lib9290_init
+
+        real(c_double), intent(in), value :: z, a, c
+
+        ! Calls SETCON and SETMC:
+        call lib9290_init_constants
+        ! Sets up the necessary values and calls SETQIC and RADGRD:
+        call lib9290_init_grid(z)
+        ! Set NPARM = 1 and calls NUCPOT:
+        call lib9290_init_nucleus_fnc(z, a, c)
+
+    end subroutine libgrasp_rciqed_9290_init_fnc
+
+    subroutine libgrasp_rciqed_vp_vacpol(array_n, zdist_ptr, vac2_ptr, vac4_ptr) bind(c)
+        use grasp_rciqed_kinds, only: real64, dp
+        use, intrinsic :: iso_c_binding
+        ! Global state:
+        use grid_C, only: R, RP
+        use tatb_C, only: MTP, TB
+        use ncdist_C, only: ZDIST
+        ! Routines:
+        use ncharg_I
+        use vac2_I
+        use vac4_I
+        ! Arguments:
+        integer(c_int), intent(out) :: array_n
+        type(c_ptr), intent(out) :: zdist_ptr, vac2_ptr, vac4_ptr
+        ! Local variables:
+        real(c_double), pointer :: zdist_arr(:), vac2_arr(:), vac4_arr(:)
+
+        ! Allocating the output arrays that go to the calling function:
+        array_n = MTP
+        allocate(zdist_arr(MTP))
+        zdist_ptr = c_loc(zdist_arr)
+        allocate(vac2_arr(MTP))
+        vac2_ptr = c_loc(vac2_arr)
+        allocate(vac4_arr(MTP))
+        vac4_ptr = c_loc(vac4_arr)
+
+        ! Initialize the nuclear charge distribution variable ZDIST. It shoud be all zeroes
+        ! if it's PNC:
+        call NCHARG
+        ! Store the charge distribution:
+        zdist_arr(:MTP) = ZDIST(:MTP)
+        ! This "re-definition" of ZDIST is in VACPOL. As we call NCHARG every time anyway,
+        ! it is fine to do this over and over again.
+        ZDIST(:MTP) = ZDIST(:MTP)*R(:MTP)*RP(:MTP)
+
+        ! VAC2, which should be calculating the Uehling potential, populates the TB array:
+        call VAC2
+        vac2_arr(:MTP) = TB(:MTP)
+
+        ! VAC4, which should be calculating the Källen-Sabry potential, adds its potential
+        ! to the TB array, on top of Uehling. So we need to subtract to get the original
+        ! potential out.
+        call VAC4
+        vac4_arr(:MTP) = TB(:MTP) - vac2_arr(:MTP)
     end subroutine libgrasp_rciqed_vp_vacpol
 
     function libgrasp_rciqed_vp_funk(x, n) bind(c)

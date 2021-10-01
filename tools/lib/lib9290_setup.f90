@@ -17,7 +17,7 @@ contains
 
         call lib9290_init_constants
         call lib9290_init_grid(nuclear_z)
-        call lib9290_init_nucleus(nuclear_z)
+        call lib9290_init_nucleus_pnc(nuclear_z)
         call lib9290_init_nucleus_mass(nuclear_mass)
     end subroutine setup
 
