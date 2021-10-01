@@ -81,6 +81,14 @@ target_link_libraries_Fortran(test.qed_qedmod_hydrogenic PUBLIC
 )
 add_test(qed_qedmod_hydrogenic test.qed_qedmod_hydrogenic)
 
+# Tests for vacuum polarization routines
+add_executable(test.qedvp_funk_funl
+    qed-vp/funk_funl.f90
+)
+target_link_libraries_Fortran(test.qedvp_funk_funl PUBLIC
+    rciqed-qed rciqed-test
+)
+add_test(qedvp_funk_funl test.qedvp_funk_funl)
 
 # Unit tests for matrix element calculations
 add_subdirectory("matrixelements/")
