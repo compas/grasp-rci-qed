@@ -90,6 +90,15 @@ target_link_libraries_Fortran(test.qedvp_funk_funl PUBLIC
 )
 add_test(qedvp_funk_funl test.qedvp_funk_funl)
 
+add_executable(test.qedvp_vac2_vac4
+    qed-vp/vac2_vac4.f90
+)
+target_link_libraries_Fortran(test.qedvp_vac2_vac4 PUBLIC
+    mod
+    rciqed-qed rciqed-test
+)
+add_test(qedvp_vac2_vac4 test.qedvp_vac2_vac4)
+
 # Unit tests for matrix element calculations
 add_subdirectory("matrixelements/")
 
