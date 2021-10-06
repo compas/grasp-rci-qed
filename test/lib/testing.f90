@@ -89,8 +89,9 @@ contains
 
         if (.not.within_tolerance(a, b, relative_tolerance)) then
             relative_difference = abs(a-b) / max(abs(a), abs(b))
-            print '("  Test failed: ",a," not within tolerance. Rel.diff: ",es12.5,", tol: ",es12.5)', &
-                which, relative_difference, relative_tolerance
+            print '("  Test failed: ",a," not within tolerance (value: ", &
+                es12.5,", ref: ",es12.5,", rdiff: ",es12.5,", rtol: ",es12.5)', &
+                which, a, b, relative_difference, relative_tolerance
             test_passed = .false.
         endif
     end subroutine test_isequal_real64
