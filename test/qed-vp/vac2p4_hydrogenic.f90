@@ -35,6 +35,7 @@ program qed_vp_hydrogenic_test
     logical :: success = .true.
     integer :: n, k, l
     real(real64), dimension(:, :), allocatable :: qedvpkl
+    real(real64) :: vpint
 
     call lib9290_init_constants
     call lib9290_init_grid(nuclear_z)
@@ -56,8 +57,33 @@ program qed_vp_hydrogenic_test
         call test_isequal(success, "qedvp", qedvpkl(k, k), orb%se, orb%se_tol)
     end do
 
+    ! Here we test against the old GRASP routines, specifically the values given by the
+    ! VPINT routine. However, one thing to note is that the old routines ignore the
+    ! angular momentum quantum number. This is likely because the angular coefficient
+    ! calculation already takes that into account. But we have to implement the check
+    ! ourselves here.
+    print *
+    print *, "QED VP comparisons with old VP routines:"
+    print '(11(" "), 2a15)', 'VPINT', 'qedvp'
+    do k = 1, NW
+        do l = 1, NW
+            if(NAK(k) /= NAK(l)) then
+                cycle
+            endif
+            call vpint_safe(k, l, vpint)
+            print '(i2,a2,":",i2,a2,": ",2es15.7)', &
+                NP(k), kappa_to_string(NAK(k)), NP(k), kappa_to_string(NAK(k)), &
+                vpint, qedvpkl(k, l)
+            if(qedvpkl(k, l) == 0.0_dp) then
+                call test_isequal_atol(success, "qedvp~vpint", vpint, qedvpkl(k, l), 1e-15_dp)
+            else
+                call test_isequal(success, "qedvp~vpint", vpint, qedvpkl(k, l), 1e-15_dp)
+            endif
+        end do
+    end do
+
     if(.not.success) then
-        print *, "qed_flambaum_hydrogenic_test: Tests failed."
+        print *, "qed_vp_hydrogenic_test: Tests failed."
         stop 1
     end if
 
@@ -97,5 +123,15 @@ contains
         call allocate_hydrogenic_orbitals(orbital_defs)
 
     end subroutine allocate_orbitals
+
+    !> Calls the `VPINT` routine, but ensures that the input `k` and `l`
+    !! arguments do not get swapped.
+    subroutine vpint_safe(k, l, result)
+        use grasp_rciqed_kinds, only: real64
+        use vpint_I
+        integer, value :: k, l
+        real(real64), intent(out) :: result
+        call VPINT(k, l, result)
+    end
 
 end program
