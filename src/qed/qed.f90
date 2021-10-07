@@ -1,4 +1,5 @@
 module grasp_rciqed_qed
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
     integer, parameter :: nsetypes = 4
@@ -25,15 +26,27 @@ contains
         use vpilst_C, only: NVPI, FRSTVP
         use ncharg_I
         use vacpol_I
+        use grasp_rciqed_qed_vp, only: vac2p4
 
         LVP = .TRUE.
 
-        ! From AUXBLK
+        ! From AUXBLK. NCHARG set up the nuclear charge distrbution in ZDIST. If we're dealing
+        ! with the PNC, then the routine actually does nothing, ZDIST stays zero and is
+        ! ignored in VAC2 and VAC4.
         CALL NCHARG
+        ! VACPOL calls VAC2 and VAC4, which populate TB with the (total) vacuum polarization
+        ! potential.
         CALL VACPOL
+        ! VACPOL puts the vacuum polarization potentials into TB, but the VPINT(F) routines
+        ! use ZDSIT to actually evaluate the matrix elements.
         ZDIST(2:N) = TB(2:N)*RP(2:N)
         FRSTVP = .TRUE.
         NVPI = 0
+        ! We'll also allocate the global array in grasp_rciqed_qed_vp and populate it with
+        ! the potential value (without the RP multiplier, which is a QUAD-specific).
+        allocate(vac2p4(N))
+        vac2p4(1) = 0.0_dp
+        vac2p4(2:N) = TB(2:N)
     end subroutine init_vacuum_polarization
 
     !> Populates the `matrix` with QED self-energy matrix elements for each orbital.

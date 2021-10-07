@@ -100,6 +100,16 @@ target_link_libraries_Fortran(test.qedvp_vac2_vac4 PUBLIC
 add_test(qedvp_vac2_vac4_pnc_118 test.qedvp_vac2_vac4 "pnc_118")
 add_test(qedvp_vac2_vac4_fnc_92 test.qedvp_vac2_vac4 "fnc_92")
 
+add_executable(test.qedvp_hydrogenic
+    qed-vp/vac2p4_hydrogenic.f90
+)
+target_link_libraries_Fortran(test.qedvp_hydrogenic PUBLIC
+    mod 9290
+    rciqed-grasp rciqed-rci rciqed-qed
+    rciqed-tools rciqed-test
+)
+add_test(qedvp_hydrogenic test.qedvp_hydrogenic)
+
 # Unit tests for matrix element calculations
 add_subdirectory("matrixelements/")
 
