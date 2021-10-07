@@ -90,7 +90,7 @@ contains
                 print '("  Index too larger in ",a,": accessing at ",I0," for size(values)=",I0,")")', &
                     name, idxs(i), size(values)
                 success = .false.
-                continue
+                cycle
             endif
             loop_label = name // "(" // itoa(idxs(i)) // ")"
             if(refs(i) == 0.0_dp) then
