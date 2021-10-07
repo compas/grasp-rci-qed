@@ -97,7 +97,8 @@ target_link_libraries_Fortran(test.qedvp_vac2_vac4 PUBLIC
     mod
     rciqed-qed rciqed-test
 )
-add_test(qedvp_vac2_vac4 test.qedvp_vac2_vac4)
+add_test(qedvp_vac2_vac4_pnc_118 test.qedvp_vac2_vac4 "pnc_118")
+add_test(qedvp_vac2_vac4_fnc_92 test.qedvp_vac2_vac4 "fnc_92")
 
 # Unit tests for matrix element calculations
 add_subdirectory("matrixelements/")

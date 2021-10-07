@@ -14,22 +14,29 @@ program qedvp_vac2_vac4_test
     use grasptest_testing
     implicit none
     ! Settings and reference values that are initialized by one of the init routines below:
-    real(real64) :: nuclear_Z
     integer, dimension(:), allocatable :: idxs
     real(real64), dimension(:), allocatable :: ref_r, ref_zdist, ref_vac2, ref_vac2p4
     ! Other local variables, including the success state variable:
+    character(len=:), allocatable :: testset
     integer :: i
     logical :: success = .true.
 
-    ! Initialize setting and reference values, based on the test case:
-    call init_refs_pnc_1
-
     ! Calls SETCON and SETMC:
     call lib9290_init_constants
-    ! Sets up the necessary values and calls SETQIC and RADGRD:
-    call lib9290_init_grid(nuclear_z)
-    ! Set NPARM = 0 and calls NUCPOT:
-    call lib9290_init_nucleus_pnc(nuclear_z)
+
+    ! Initialize setting and reference values, based on the test case:
+    if(.not.get_command_argument_allocating(1, testset)) then
+        print '("ERROR: unable to extract the command line argument.")'
+        error stop
+    endif
+    if(testset == "pnc_118") then
+        call init_refs_pnc_118
+    elseif(testset == "fnc_92") then
+        call init_refs_fnc_92
+    else
+        print '("ERROR: invalid testset ",a)', testset
+        error stop
+    endif
 
     ! Testing to make sure that the grid is the same. The point is that we are testing
     ! VP values at specific grid points, so
@@ -92,7 +99,7 @@ contains
                 call test_isequal(success, loop_label, values(idxs(i)), refs(i), atol)
             endif
         enddo
-    end subroutine test_array_subset
+    end
 
     ! Borrowed from https://stackoverflow.com/a/31028207
     function itoa(i)
@@ -101,11 +108,43 @@ contains
         character(range(i)+2) :: tmp
         write(tmp,'(i0)') i
         itoa = trim(tmp)
-    end function itoa
+    end
 
-    subroutine init_refs_pnc_1
+    function get_command_argument_allocating(n, value)
+        logical :: get_command_argument_allocating
+        integer, intent(in) :: n
+        character(:), allocatable, intent(inout) :: value
+        integer :: length, status
+        character(1) :: test
+
+        ! First, make an inquiry call to get_environment_variable to determine
+        ! whether the variable exists and, if so, its length.
+        call get_command_argument(n, test, length, status)
+        if(status > 0) then
+            ! From the GFortran manual:
+            !
+            ! > If the argument retrieval fails, STATUS is a positive number;
+            !
+            ! So a positive status will make this function fail (i.e. return
+            ! .false.)
+            get_command_argument_allocating = .false.
+            return
+        endif
+        ! Will allocate or re-allocate value, unless it already has the correct length.
+        if(allocated(value) .and. len(value) /= length) deallocate(value)
+        if(.not.allocated(value)) allocate(character(length) :: value)
+        ! Only call get_command_argument again if the argument is non-empty
+        if(length > 0) then
+            call get_command_argument(n, value, length, status)
+        endif
+        get_command_argument_allocating = .true.
+    end
+
+    ! Reference data:
+
+    subroutine init_refs_pnc_118
+        real(real64) :: z = 118.0_dp
         print *, "Test case: PNC with Z=118"
-        nuclear_Z = 118.0_dp
         idxs = (/ 1, 2, 10, 100, 200, 300, 400 /)
         ref_r = (/ &
             0.0_dp, &
@@ -136,6 +175,59 @@ contains
             -5.2166645062196083e-8_dp, &
             0.0_dp &
         /)
-    end subroutine init_refs_pnc_1
 
-end program qedvp_vac2_vac4_test
+        ! Sets up the necessary values and calls SETQIC and RADGRD:
+        call lib9290_init_grid(z)
+        ! Set NPARM = 0 and calls NUCPOT:
+        call lib9290_init_nucleus_pnc(z)
+    end
+
+    subroutine init_refs_fnc_92
+        real(real64) :: z = 92.0_dp
+        real(real64) :: a = 9.890591365741376e-6_dp, c = 0.00014178890920967197_dp
+        print *, "Test case: FNC with Z=92"
+        idxs = (/ 1, 2, 10, 120, 195, 305, 380 /)
+        ref_r = (/ &
+            0.0_dp, &
+            1.1145890516526981e-9_dp, &
+            1.2354612728047168e-8_dp, &
+            8.3207247621981630e-6_dp, &
+            3.5470885213077558e-4_dp, &
+            8.6799692069805201e-2_dp, &
+            3.6908177267126243_dp &
+        /)
+        ref_zdist = (/ &
+            0.0_dp, &
+            1.8727187006528125e-4_dp, &
+            3.0967397116672744e-3_dp, &
+            510.33579825161564_dp, &
+            4.1389190360958001e-4_dp, &
+            0.0_dp, &
+            0.0_dp &
+        /)
+        ref_vac2 = (/ &
+            0.0_dp, &
+            -4438.7607282950403_dp, &
+            -4438.7607150539343_dp, &
+            -4432.9079728155803_dp, &
+            -700.00744353361927_dp, &
+            -1.0812577738386876e-12_dp, &
+            0.0_dp &
+        /)
+        ref_vac2p4 = (/ &
+            0.0_dp, &
+            -4476.2380030732465_dp, &
+            -4476.2379897101273_dp, &
+            -4470.3352280316485_dp, &
+            -705.05629777606441_dp, &
+            -1.1060619437733789e-12_dp, &
+            0.0_dp &
+        /)
+
+        ! Sets up the necessary values and calls SETQIC and RADGRD:
+        call lib9290_init_grid(z)
+        ! Set NPARM to 2
+        call lib9290_init_nucleus_fnc(z, a, c)
+    end
+
+end program
