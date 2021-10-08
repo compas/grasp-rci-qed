@@ -1,4 +1,5 @@
 program exportvp
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
     call setup
     call setup_vacuum_polarization

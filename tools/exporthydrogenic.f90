@@ -1,6 +1,6 @@
 !> Creates a `.w` file with hydrogenic wavefunctions.
 program exporthydrogenic
-    use grasp_rciqed_kinds, only: real64, dp
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     use grasptest_lib9290_setup
     use grasptest_lib9290_hydrogenic
     use orbout_I

@@ -3,6 +3,7 @@
 !!
 !! Uses the DCBSRW routine from lib9290 to numerically solve for the wavefunction.
 module grasptest_lib9290_hydrogenic
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
     type orbital_definition
@@ -32,7 +33,6 @@ contains
     contains
 
         subroutine populate_hydrogenic(idx)
-            use grasp_rciqed_kinds, only: real64
             use def_C
             use wave_C
             use dcbsrw_I
