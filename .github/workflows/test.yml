@@ -28,6 +28,8 @@ jobs:
         make -C ../grasp/build-debug/ install
     - name: "Test GRASP"
       run: make -C ../grasp/build-debug/ test
+      env:
+        CTEST_OUTPUT_ON_FAILURE: True
     - name: "Build GRASP RCI QED"
       run: |
         source ../grasp/envset.sh
@@ -36,3 +38,5 @@ jobs:
         make -C build-debug/ install
     - name: "Run tests"
       run: make -C build-debug/ test
+      env:
+        CTEST_OUTPUT_ON_FAILURE: True
