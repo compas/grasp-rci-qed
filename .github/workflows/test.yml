@@ -1,11 +1,14 @@
 name: Tests
 
-# branches: '*' only matches "main" branches, i.e. ones without a /
-# This ensures that we don't run CI multiple times on pull requests, since we expect all
+# branches: '*' only matches "main" branches, i.e. ones without a /, which would
+# ensures that we don't run CI multiple times on pull requests --- we expect all
 # feature branches to be namespaced as <prefix>/<branch>.
+#
+# However, currently we run with branches: '**' to also test feature branches
+# because we do not necessarily open PRs for each of them.
 on:
   push:
-    branches: '*'
+    branches: '**'
     tags: '**'
   pull_request:
 
