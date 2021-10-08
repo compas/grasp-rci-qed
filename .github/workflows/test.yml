@@ -24,7 +24,7 @@ jobs:
     - name: "Build GRASP"
       run: |
         git clone https://github.com/mortenpi/grasp.git ../grasp
-        ../grasp/configure.sh --debug && cd ../grasp/build-debug/
+        ../grasp/configure.sh --debug
         make -C ../grasp/build-debug/ install
     - name: "Test GRASP"
       run: make -C ../grasp/build-debug/ test
