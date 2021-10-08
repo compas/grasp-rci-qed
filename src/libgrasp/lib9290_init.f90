@@ -3,6 +3,7 @@
 !! This primarily means populating the various `libmod` modules (derived from
 !! the old COMMON blocks) with appropriate values.
 module grasp_rciqed_lib9290_init
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
 contains
@@ -24,7 +25,6 @@ contains
     !!
     !! @param nuclear_z Charge of the nucleus.
     subroutine lib9290_init_grid(nuclear_z)
-        use grasp_rciqed_kinds, only: real64
         ! Global state:
         use parameter_def, only: NNNP
         use def_C, only: ACCY
@@ -53,7 +53,6 @@ contains
     !!
     !! @param nuclear_z Charge of the nucleus.
     subroutine lib9290_init_nucleus_pnc(nuclear_z)
-        use grasp_rciqed_kinds, only: real64, dp
         use def_C, only: CVAC, C, PI, TENMAX, EXPMAX, EXPMIN, PRECIS, Z
         use npar_C, only: NPARM, PARM
         use nucpot_I
@@ -78,7 +77,6 @@ contains
     !! @param a The a parameter of the Fermi charge distribution (in a.u.).
     !! @param c The c parameter of the Fermi charge distribution (in a.u.).
     subroutine lib9290_init_nucleus_fnc(nuclear_z, dist_a, dist_c)
-        use grasp_rciqed_kinds, only: real64, dp
         use def_C, only: CVAC, C, PI, TENMAX, EXPMAX, EXPMIN, PRECIS, Z
         use npar_C, only: NPARM, PARM
         use nucpot_I
@@ -102,7 +100,6 @@ contains
     !!
     !! @param nuclear_mass Mass of the nucleus in atomic mass units.
     subroutine lib9290_init_nucleus_mass(nuclear_mass)
-        use grasp_rciqed_kinds, only: real64
         use def_C, only: EMN, AUMAMU
 
         real(real64), intent(in) :: nuclear_mass

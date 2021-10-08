@@ -6,6 +6,7 @@
 !! the variables when using them to get around this.
 !! The module __should not__ be used outside of the `se_qedmod.f90` file.
 module grasp_rciqed_qed_qedmod_common
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit real*8 (a-h,o-z)
 
     include 'qedmod.inc'
@@ -74,6 +75,7 @@ module grasp_rciqed_qed_qedmod_common
 end module grasp_rciqed_qed_qedmod_common
 
 module grasp_rciqed_qed_qedmod
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
     logical :: qedmod_initialized = .false.
@@ -92,7 +94,6 @@ contains
     !!   - [QEDMOD, 2015] Shabaev, Tupitsyn and Yerokhin, Comp.Phys.Comm 189, 175–181 (2015)
     !!
     function qedse_qedmod(k1, k2)
-        use grasp_rciqed_kinds, only: real64, dp
         use parameter_def, only: NNN1, NNNP
         use orb_C, only: NP, NH, NAK
         use grasp_rciqed_qed_qedmod_common, only: &
@@ -150,7 +151,6 @@ contains
     !!
     !! `p` and `q` are the interpolated output arrays on the QEDMOD grid.
     subroutine qedse_qedmod_wfinterpolate(k, p, q)
-        use grasp_rciqed_kinds, only: real64
         use grid_C, only: N, R
         use npar_C, only: NPARM, PARM
         use orb_C, only: NP, NAK
@@ -205,7 +205,6 @@ contains
     end subroutine qedse_qedmod_wfinterpolate
 
     subroutine qedse_qedmod_init
-        use grasp_rciqed_kinds, only: real64, dp
         use def_C, only: Z, CVAC, PI, FMTOAU
         use grid_C, only: N, R
         use npar_C, only: NPARM, PARM

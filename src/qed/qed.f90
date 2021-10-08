@@ -62,7 +62,6 @@ contains
     !! `matrix` is assumed to be an `NW x NW` `real64` array.
     !!
     subroutine qedse(setype, matrix)
-        use grasp_rciqed_kinds, only: real64, dp
         use orb_C, only: NW, NAK
         use grasp_rciqed_qed_pyykkoe
         use grasp_rciqed_qed_flambaum

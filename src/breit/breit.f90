@@ -1,5 +1,6 @@
 !> Routines related to calculating the matrix elements of the Breit operator.
 module grasp_rciqed_breit
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
 contains

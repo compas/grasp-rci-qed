@@ -134,7 +134,6 @@ contains
     end subroutine libgrasp_rciqed_9290_init_fnc
 
     subroutine libgrasp_rciqed_vp_vacpol(array_n, zdist_ptr, vac2_ptr, vac4_ptr) bind(c)
-        use grasp_rciqed_kinds, only: real64, dp
         use, intrinsic :: iso_c_binding
         ! Global state:
         use grid_C, only: R, RP

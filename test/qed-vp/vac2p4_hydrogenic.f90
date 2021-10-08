@@ -127,7 +127,6 @@ contains
     !> Calls the `VPINT` routine, but ensures that the input `k` and `l`
     !! arguments do not get swapped.
     subroutine vpint_safe(k, l, result)
-        use grasp_rciqed_kinds, only: real64
         use vpint_I
         integer, value :: k, l
         real(real64), intent(out) :: result

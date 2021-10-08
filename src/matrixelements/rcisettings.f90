@@ -1,5 +1,5 @@
 module grasp_rciqed_rcisettings
-    use grasp_rciqed_kinds, only: real64
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
     public :: rcisettings, read_settings_toml, write_settings_toml
@@ -182,7 +182,6 @@ contains
     !! exponent to 1 character, but then writing numbers with exponents
     !! \f$ |\textrm{exp}| \geq 10 \f$ will fail).
     subroutine write_toml_expfloat(unit, label, value)
-        use grasp_rciqed_kinds, only: real64, dp
 
         integer, intent(in) :: unit
         character(*), intent(in) :: label

@@ -1,5 +1,5 @@
 program hydrogenic_se
-    use grasp_rciqed_kinds, only: real64, dp
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     use grasptest_testing, only: test_isequal, reldiff
     use grasptest_lib9290_setup
     use parameter_def, only: NNNW

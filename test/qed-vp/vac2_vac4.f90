@@ -1,5 +1,4 @@
 program qedvp_vac2_vac4_test
-    use grasp_rciqed_kinds, only: real64, dp
     use grasp_rciqed_lib9290_init
     ! GRASP global variables:
     use parameter_def, only: NNNP

@@ -1,5 +1,6 @@
 !>     ./rci-qed.orbitals <state>
 program rci_qed_orbitals
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     use grasp_rciqed_system
     use grasp_rciqed_qed, only: init_vacuum_polarization
     use grasp_rciqed_qed_qedmod
@@ -45,7 +46,6 @@ contains
 
     !> Prints a table of QED self-energy estimates for all the orbitals.
     subroutine qed_orbital_summary
-        use grasp_rciqed_kinds, only: real64, dp
         use grasp_rciqed_qed, only: qedse, nsetypes, setypes_long
         use orb_C, only: NW
         use vacpol_I
@@ -66,7 +66,6 @@ contains
     end subroutine qed_orbital_summary
 
     subroutine print_orbital_qed
-      use grasp_rciqed_kinds, only: real64, dp
       use grasp_rciqed_qed_pyykkoe
       use grasp_rciqed_qed_flambaum
       use grasp_rciqed_qed_qedmod
@@ -108,7 +107,6 @@ contains
     end subroutine print_orbital_qed
 
     subroutine fill_vpint_matrix(matrix)
-        use grasp_rciqed_kinds, only: real64, dp
         use orb_C, only: NW, NAK
         use vpint_I
         implicit none
@@ -135,7 +133,6 @@ contains
     end subroutine fill_vpint_matrix
 
     subroutine writematrix(matrix)
-        use grasp_rciqed_kinds, only: real64
         use orb_C, only: NW
 
         real(real64), intent(in) :: matrix(NW, NW)
@@ -150,7 +147,6 @@ contains
     end subroutine writematrix
 
     subroutine writematrix_kappa(matrix, kappa)
-        use grasp_rciqed_kinds, only: real64
         use orb_C, only: NW, NP, NH, NAK
 
         real(real64), intent(in) :: matrix(NW, NW)
@@ -242,7 +238,6 @@ contains
     end function has_kappa
 
     function qed_orbital_summary_wfnorm(k)
-        use grasp_rciqed_kinds, only: real64
         use grid_C, only: N, RP
         use wave_C, only: PF, QF
         use tatb_C, only: MTP, TA

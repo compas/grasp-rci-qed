@@ -1,4 +1,5 @@
 module grasp_rciqed_qed_pyykkoe
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
 contains
@@ -28,7 +29,6 @@ contains
     !!   - [Pyykkö & Zhao, 2003] Pyykkö and Zhao, J.Phys.B 36, 1469 (2003)
     !!
     function qedse_pyykkoe(k1, k2)
-        use grasp_rciqed_kinds, only: real64, dp
         use def_C, only: Z
         use grid_C, only: N, R, RP
         use tatb_C, only: MTP, TA

@@ -1,5 +1,4 @@
 program qedvp_funk_funl
-    use grasp_rciqed_kinds, only: real64, dp
     use funk_I
     use funl_I
     use grasptest_testing
