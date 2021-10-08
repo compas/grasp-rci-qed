@@ -64,7 +64,6 @@ var searchData=
   ['grasp_5frciqed_5fbreit',['grasp_rciqed_breit',['../namespacegrasp__rciqed__breit.html',1,'']]],
   ['grasp_5frciqed_5fcimatrixelements',['grasp_rciqed_cimatrixelements',['../namespacegrasp__rciqed__cimatrixelements.html',1,'']]],
   ['grasp_5frciqed_5fcli',['grasp_rciqed_cli',['../namespacegrasp__rciqed__cli.html',1,'']]],
-  ['grasp_5frciqed_5fkinds',['grasp_rciqed_kinds',['../namespacegrasp__rciqed__kinds.html',1,'']]],
   ['grasp_5frciqed_5flib9290_5ffiles',['grasp_rciqed_lib9290_files',['../namespacegrasp__rciqed__lib9290__files.html',1,'']]],
   ['grasp_5frciqed_5flib9290_5finit',['grasp_rciqed_lib9290_init',['../namespacegrasp__rciqed__lib9290__init.html',1,'']]],
   ['grasp_5frciqed_5fmass_5fshifts',['grasp_rciqed_mass_shifts',['../namespacegrasp__rciqed__mass__shifts.html',1,'']]],

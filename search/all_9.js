@@ -7,7 +7,6 @@ var searchData=
   ['keint_5fi',['keint_i',['../namespacekeint__i.html',1,'']]],
   ['keint_5fi_2ef90',['keint_I.f90',['../keint__I_8f90.html',1,'']]],
   ['keint_5fsafe',['keint_safe',['../namespacegrasp__rciqed__cimatrixelements.html#a65f82164b704df6518c7a98752896522',1,'grasp_rciqed_cimatrixelements']]],
-  ['kinds_2ef90',['kinds.f90',['../kinds_8f90.html',1,'']]],
   ['klamaq',['klamaq',['../interfaceklamaq__i_1_1klamaq.html',1,'klamaq_i::klamaq'],['../interfaceklamaq__i_1_1klamaq.html#ac9a073c87b243cca73af54ebafa2d3c9',1,'klamaq_i::klamaq::klamaq()'],['../klamaq_8f90.html#aae60800b9c0408643a9d01065a66d4db',1,'klamaq():&#160;klamaq.f90']]],
   ['klamaq_2ef90',['klamaq.f90',['../klamaq_8f90.html',1,'']]],
   ['klamaq_5fi',['klamaq_i',['../namespaceklamaq__i.html',1,'']]],

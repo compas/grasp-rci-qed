@@ -15,7 +15,6 @@ var searchData=
   ['dnicmv_2ef90',['dnicmv.f90',['../dnicmv_8f90.html',1,'']]],
   ['dnicmv_5fi',['dnicmv_i',['../namespacednicmv__i.html',1,'']]],
   ['dnicmv_5fi_2ef90',['dnicmv_I.f90',['../dnicmv__I_8f90.html',1,'']]],
-  ['dp',['dp',['../namespacegrasp__rciqed__kinds.html#a61d527ae7323846c555b85efc227d621',1,'grasp_rciqed_kinds']]],
   ['dspevx',['dspevx',['../interfacedspevx__i_1_1dspevx.html',1,'dspevx_i::dspevx'],['../interfacedspevx__i_1_1dspevx.html#a59fd758e729936b0392b4d1d85238928',1,'dspevx_i::dspevx::dspevx()']]],
   ['dspevx_5fi',['dspevx_i',['../namespacedspevx__i.html',1,'']]],
   ['dspevx_5fi_2ef90',['dspevx_I.f90',['../dspevx__I_8f90.html',1,'']]],
