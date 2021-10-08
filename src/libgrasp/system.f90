@@ -1,5 +1,6 @@
 !> Routines and functions for interacting with the OS, filesystem etc.
 module grasp_rciqed_system
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
     !> Checks if `filename` exists or stops the program with `ERROR STOP`.

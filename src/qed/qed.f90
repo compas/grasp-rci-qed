@@ -1,4 +1,5 @@
 module grasp_rciqed_qed
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
     integer, parameter :: nsetypes = 4
@@ -49,7 +50,6 @@ contains
     !! `matrix` is assumed to be an `NW x NW` `real64` array.
     !!
     subroutine qedse(setype, matrix)
-        use grasp_rciqed_kinds, only: real64, dp
         use orb_C, only: NW, NAK
         use grasp_rciqed_qed_pyykkoe
         use grasp_rciqed_qed_flambaum

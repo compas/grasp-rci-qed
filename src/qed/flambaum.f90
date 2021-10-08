@@ -1,4 +1,5 @@
 module grasp_rciqed_qed_flambaum
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
 contains
@@ -27,7 +28,6 @@ contains
     !! [Thierfelder & Schwerdtfeger, 2010] Thierfelder and Schwerdtfeger, Phys.Rev.A 82, 062503 (2010)
     !!
     function qedse_flambaum(k1, k2, phi_l, phi_f, phi_g)
-        use grasp_rciqed_kinds, only: real64, dp
         use def_C, only: Z, CVAC, PI
         use grid_C, only: N, R, RP
         use npar_C, only: NPARM, PARM
@@ -148,7 +148,6 @@ contains
     !! Equation 10 in [Flambaum & Ginges, 2005].
     !!
     function phi_f_inner(t, r)
-        use grasp_rciqed_kinds, only: real64, dp
         use def_C, only: Z, CVAC, PI
 
         real(real64) :: t, r, phi_f_inner
@@ -169,7 +168,6 @@ contains
     !! This is the first term from the product rule in equation (7) of [Flambaum & Ginges, 2005].
     !!
     function phi_g1_inner(t,r)
-        use grasp_rciqed_kinds, only: real64, dp
         use def_C, only: CVAC, PI
 
         real(real64) :: t, r, phi_g1_inner
@@ -183,7 +181,6 @@ contains
     !! This is the second term from the product rule in equation (7) of [Flambaum & Ginges, 2005].
     !!
     function phi_g2_inner(t,r)
-        use grasp_rciqed_kinds, only: real64, dp
         use def_C, only: CVAC, PI
 
         real(real64) :: t, r, phi_g2_inner
@@ -198,7 +195,6 @@ contains
     !! The integral is then evaluated between `t(1)` and `t(nt)` and stored in `result`.
     !!
     subroutine quad_t_us2(f, t, ntmax, nt, result)
-        use grasp_rciqed_kinds, only: real64, dp
 
         integer :: ntmax, nt
         real(real64) :: f(ntmax), t(ntmax), result
@@ -233,7 +229,6 @@ contains
     !!   `f` (possible values are `F`, `G1` or `G2`).
     !!
     subroutine se_t_grid(f, t, ntmax, nt, r, nterm)
-        use grasp_rciqed_kinds, only: real64, dp
 
         integer :: j, ntmax, nt
         character*2 :: nterm

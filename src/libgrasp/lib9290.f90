@@ -1,6 +1,7 @@
 !> Wrapper methods used to interact with the `lib92` library, collected here for
 !! potential future reuse.
 module grasp_lib9290
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
 contains

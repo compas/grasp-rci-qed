@@ -1,6 +1,6 @@
 !> Types, routines and global variables for RCI.
 module grasp_rciqed
-    use grasp_rciqed_kinds, only: real64
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     use parameter_def, only: NNNW
     implicit none
 
