@@ -30,6 +30,7 @@ jobs:
       run: make -C ../grasp/build-debug/ test
     - name: "Build GRASP RCI QED"
       run: |
+        source ../grasp/envset.sh
         ./configure.sh --debug --grasp-cmake
         make -C build-debug/
         make -C build-debug/ install
