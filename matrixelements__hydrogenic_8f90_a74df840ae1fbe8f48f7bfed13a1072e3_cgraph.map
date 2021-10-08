@@ -1,14 +1,14 @@
 <map id="verify_dcb" name="verify_dcb">
-<area shape="rect" id="node2" href="$pt_8f90.html#a3befcbd68432b869abd100afc6de459d" title="Calculate the relative difference of a and b. " alt="" coords="223,13,280,39"/>
-<area shape="rect" id="node3" href="$namespacegrasp__rciqed__cimatrixelements.html#ab096c138ca6a98a2c15778762252af16" title="Also calls the RKCO_GG routine. " alt="" coords="140,64,363,105"/>
-<area shape="rect" id="node6" href="$namespacegrasp__rciqed__cimatrixelements.html#a330ddf37c5eeb9458446d7b126b42ef9" title="Returns the matrix element of the Breit operator. " alt="" coords="140,153,363,195"/>
-<area shape="rect" id="node4" href="$namespacegrasp__rciqed__cimatrixelements.html#a1381b29b99c6e09de32b44903f5a1466" title="Assumes that buffer_C is set up properly by RKCO_GG. " alt="" coords="411,17,633,59"/>
-<area shape="rect" id="node5" href="$namespacegrasp__rciqed__cimatrixelements.html#a488d680a837588eb535c9ec496c4f350" title="Calls the RKINTC, but makes sure that the input LABEL values do not get changed. " alt="" coords="681,5,904,47"/>
-<area shape="rect" id="node7" href="$namespacegrasp__rciqed__cimatrixelements.html#adc9e9ef07f6f0e61d0b878c6349c75d2" title="Calculates the Breit matrix element, but calculates the core part only sometimes. ..." alt="" coords="411,165,633,207"/>
-<area shape="rect" id="node8" href="$brint1_8f90.html#a849f1f3ba4f10477b2c126b628a57974" title="brint1" alt="" coords="763,71,822,98"/>
-<area shape="rect" id="node9" href="$brint2_8f90.html#a45c778317fafab10e7fff2eb982120c9" title="brint2" alt="" coords="763,122,822,149"/>
-<area shape="rect" id="node10" href="$brint3_8f90.html#a35c720fabeda86ef046b211c91542edb" title="brint3" alt="" coords="763,173,822,199"/>
-<area shape="rect" id="node11" href="$brint4_8f90.html#a1c578337bcfe812fe6fe1128d7446f83" title="brint4" alt="" coords="763,223,822,250"/>
-<area shape="rect" id="node12" href="$brint5_8f90.html#abb8c9e809ba0e8e9443578505c10fb29" title="brint5" alt="" coords="763,274,822,301"/>
-<area shape="rect" id="node13" href="$brint6_8f90.html#a4338682afc000cc58bdf4e7b455840c4" title="brint6" alt="" coords="763,325,822,351"/>
+<area shape="rect" id="node2" href="$pt_8f90.html#a3befcbd68432b869abd100afc6de459d" title="Calculate the relative difference of a and b. " alt="" coords="227,5,287,32"/>
+<area shape="rect" id="node3" href="$namespacegrasp__rciqed__cimatrixelements.html#ab096c138ca6a98a2c15778762252af16" title="Also calls the RKCO_GG routine. " alt="" coords="144,57,371,98"/>
+<area shape="rect" id="node6" href="$namespacegrasp__rciqed__cimatrixelements.html#a330ddf37c5eeb9458446d7b126b42ef9" title="Returns the matrix element of the Breit operator. " alt="" coords="144,146,371,187"/>
+<area shape="rect" id="node4" href="$namespacegrasp__rciqed__cimatrixelements.html#a1381b29b99c6e09de32b44903f5a1466" title="Assumes that buffer_C is set up properly by RKCO_GG. " alt="" coords="419,45,645,86"/>
+<area shape="rect" id="node5" href="$namespacegrasp__rciqed__cimatrixelements.html#a488d680a837588eb535c9ec496c4f350" title="Calls the RKINTC, but makes sure that the input LABEL values do not get changed. " alt="" coords="693,33,920,74"/>
+<area shape="rect" id="node7" href="$namespacegrasp__rciqed__cimatrixelements.html#adc9e9ef07f6f0e61d0b878c6349c75d2" title="Calculates the Breit matrix element, but calculates the core part only sometimes. ..." alt="" coords="419,193,645,234"/>
+<area shape="rect" id="node8" href="$brint1_8f90.html#a849f1f3ba4f10477b2c126b628a57974" title="brint1" alt="" coords="777,99,837,125"/>
+<area shape="rect" id="node9" href="$brint2_8f90.html#a45c778317fafab10e7fff2eb982120c9" title="brint2" alt="" coords="777,149,837,176"/>
+<area shape="rect" id="node10" href="$brint3_8f90.html#a35c720fabeda86ef046b211c91542edb" title="brint3" alt="" coords="777,200,837,227"/>
+<area shape="rect" id="node11" href="$brint4_8f90.html#a1c578337bcfe812fe6fe1128d7446f83" title="brint4" alt="" coords="777,251,837,277"/>
+<area shape="rect" id="node12" href="$brint5_8f90.html#abb8c9e809ba0e8e9443578505c10fb29" title="brint5" alt="" coords="777,301,837,328"/>
+<area shape="rect" id="node13" href="$brint6_8f90.html#a4338682afc000cc58bdf4e7b455840c4" title="brint6" alt="" coords="777,352,837,379"/>
 </map>

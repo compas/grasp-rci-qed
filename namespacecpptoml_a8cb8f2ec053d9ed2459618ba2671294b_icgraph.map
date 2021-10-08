@@ -1,6 +1,6 @@
 <map id="cpptoml::make_consumer" name="cpptoml::make_consumer">
-<area shape="rect" id="node2" href="$classcpptoml_1_1parser.html#ab5ad3a507eabf5c207f44daa726508c9" title="cpptoml::parser::parse\l_table_array" alt="" coords="261,5,427,47"/>
-<area shape="rect" id="node3" href="$classcpptoml_1_1parser.html#a01c3d5a9cab70afb3802bb9176249bc2" title="cpptoml::parser::parse_bool" alt="" coords="243,71,445,98"/>
-<area shape="rect" id="node4" href="$classcpptoml_1_1parser.html#acb89cb5c3b45bf9675c017cb12e68669" title="cpptoml::parser::read_time" alt="" coords="246,122,442,149"/>
-<area shape="rect" id="node5" href="$classcpptoml_1_1parser.html#a42e196ef9c22803461f19148e8357c68" title="cpptoml::parser::parse_date" alt="" coords="243,173,445,199"/>
+<area shape="rect" id="node2" href="$classcpptoml_1_1parser.html#ab5ad3a507eabf5c207f44daa726508c9" title="cpptoml::parser::parse\l_table_array" alt="" coords="262,5,430,47"/>
+<area shape="rect" id="node3" href="$classcpptoml_1_1parser.html#a01c3d5a9cab70afb3802bb9176249bc2" title="cpptoml::parser::parse_bool" alt="" coords="245,71,447,98"/>
+<area shape="rect" id="node4" href="$classcpptoml_1_1parser.html#acb89cb5c3b45bf9675c017cb12e68669" title="cpptoml::parser::read_time" alt="" coords="247,122,445,149"/>
+<area shape="rect" id="node5" href="$classcpptoml_1_1parser.html#a42e196ef9c22803461f19148e8357c68" title="cpptoml::parser::parse_date" alt="" coords="244,173,448,199"/>
 </map>

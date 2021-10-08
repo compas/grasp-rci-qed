@@ -1,7 +1,7 @@
 <map id="cpptoml::detail::getline" name="cpptoml::detail::getline">
-<area shape="rect" id="node2" href="$classcpptoml_1_1parser.html#ada6145ed2440069d575fbc1c305898b7" title="cpptoml::parser::parse" alt="" coords="241,5,408,32"/>
-<area shape="rect" id="node5" href="$classcpptoml_1_1parser.html#a2b65d5595a9c44ee6bd7d9e2f880fe98" title="cpptoml::parser::parse\l_multiline_string" alt="" coords="241,57,408,98"/>
-<area shape="rect" id="node6" href="$classcpptoml_1_1parser.html#acbbdfa1ff85ab5bd406130aa0b7da83a" title="cpptoml::parser::skip\l_whitespace_and_comments" alt="" coords="221,122,428,163"/>
-<area shape="rect" id="node3" href="$namespacecpptoml.html#afea416cdae1e7237ee3571272d6f6625" title="cpptoml::parse_file" alt="" coords="476,5,619,32"/>
-<area shape="rect" id="node4" href="$toml_8h.html#aa1ce051e2e7b2ea4b6f7c5a6e180977f" title="toml_parse_file" alt="" coords="667,5,785,32"/>
+<area shape="rect" id="node2" href="$classcpptoml_1_1parser.html#ada6145ed2440069d575fbc1c305898b7" title="cpptoml::parser::parse" alt="" coords="248,5,416,32"/>
+<area shape="rect" id="node5" href="$classcpptoml_1_1parser.html#a2b65d5595a9c44ee6bd7d9e2f880fe98" title="cpptoml::parser::parse\l_multiline_string" alt="" coords="248,57,416,98"/>
+<area shape="rect" id="node6" href="$classcpptoml_1_1parser.html#acbbdfa1ff85ab5bd406130aa0b7da83a" title="cpptoml::parser::skip\l_whitespace_and_comments" alt="" coords="227,122,437,163"/>
+<area shape="rect" id="node3" href="$namespacecpptoml.html#afea416cdae1e7237ee3571272d6f6625" title="cpptoml::parse_file" alt="" coords="485,5,632,32"/>
+<area shape="rect" id="node4" href="$toml_8h.html#aa1ce051e2e7b2ea4b6f7c5a6e180977f" title="toml_parse_file" alt="" coords="680,5,803,32"/>
 </map>

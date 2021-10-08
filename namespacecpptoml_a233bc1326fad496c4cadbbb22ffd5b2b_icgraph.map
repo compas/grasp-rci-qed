@@ -1,12 +1,12 @@
 <map id="cpptoml::make_table" name="cpptoml::make_table">
-<area shape="rect" id="node2" href="$namespacecpptoml_1_1detail.html#a090c2aed86b22dbb038aed412e89fba4" title="cpptoml::detail::make\l_element\&lt; table \&gt;" alt="" coords="213,5,375,47"/>
-<area shape="rect" id="node3" href="$classcpptoml_1_1table.html#a72d962c370f0116c583a49af629e5edc" title="cpptoml::table::clone" alt="" coords="216,71,372,98"/>
-<area shape="rect" id="node4" href="$classcpptoml_1_1parser.html#ada6145ed2440069d575fbc1c305898b7" title="cpptoml::parser::parse" alt="" coords="211,122,377,149"/>
-<area shape="rect" id="node7" href="$classcpptoml_1_1parser.html#a343c2f112e1c169ab74e79c2efa7e864" title="cpptoml::parser::parse\l_single_table" alt="" coords="211,173,377,215"/>
-<area shape="rect" id="node8" href="$classcpptoml_1_1parser.html#ab5ad3a507eabf5c207f44daa726508c9" title="cpptoml::parser::parse\l_table_array" alt="" coords="211,239,377,280"/>
-<area shape="rect" id="node9" href="$classcpptoml_1_1parser.html#a4974807353aad06be5b995db9f343308" title="cpptoml::parser::parse\l_key_value" alt="" coords="211,304,377,345"/>
-<area shape="rect" id="node10" href="$classcpptoml_1_1parser.html#af1ae1edf218a1a6ebb17f06740273ca3" title="cpptoml::parser::parse\l_inline_table" alt="" coords="211,369,377,411"/>
-<area shape="rect" id="node5" href="$namespacecpptoml.html#afea416cdae1e7237ee3571272d6f6625" title="cpptoml::parse_file" alt="" coords="437,122,580,149"/>
-<area shape="rect" id="node6" href="$toml_8h.html#aa1ce051e2e7b2ea4b6f7c5a6e180977f" title="toml_parse_file" alt="" coords="640,122,759,149"/>
-<area shape="rect" id="node11" href="$classcpptoml_1_1parser.html#ae947486896aac5f814168d4575f95241" title="cpptoml::parser::parse\l_array" alt="" coords="425,369,592,411"/>
+<area shape="rect" id="node2" href="$namespacecpptoml_1_1detail.html#a090c2aed86b22dbb038aed412e89fba4" title="cpptoml::detail::make\l_element\&lt; table \&gt;" alt="" coords="215,5,380,47"/>
+<area shape="rect" id="node3" href="$classcpptoml_1_1table.html#a72d962c370f0116c583a49af629e5edc" title="cpptoml::table::clone" alt="" coords="218,71,377,98"/>
+<area shape="rect" id="node4" href="$classcpptoml_1_1parser.html#ada6145ed2440069d575fbc1c305898b7" title="cpptoml::parser::parse" alt="" coords="213,122,381,149"/>
+<area shape="rect" id="node7" href="$classcpptoml_1_1parser.html#a343c2f112e1c169ab74e79c2efa7e864" title="cpptoml::parser::parse\l_single_table" alt="" coords="213,173,381,215"/>
+<area shape="rect" id="node8" href="$classcpptoml_1_1parser.html#ab5ad3a507eabf5c207f44daa726508c9" title="cpptoml::parser::parse\l_table_array" alt="" coords="213,239,381,280"/>
+<area shape="rect" id="node9" href="$classcpptoml_1_1parser.html#a4974807353aad06be5b995db9f343308" title="cpptoml::parser::parse\l_key_value" alt="" coords="213,304,381,345"/>
+<area shape="rect" id="node10" href="$classcpptoml_1_1parser.html#af1ae1edf218a1a6ebb17f06740273ca3" title="cpptoml::parser::parse\l_inline_table" alt="" coords="213,369,381,411"/>
+<area shape="rect" id="node5" href="$namespacecpptoml.html#afea416cdae1e7237ee3571272d6f6625" title="cpptoml::parse_file" alt="" coords="440,122,587,149"/>
+<area shape="rect" id="node6" href="$toml_8h.html#aa1ce051e2e7b2ea4b6f7c5a6e180977f" title="toml_parse_file" alt="" coords="645,122,768,149"/>
+<area shape="rect" id="node11" href="$classcpptoml_1_1parser.html#ae947486896aac5f814168d4575f95241" title="cpptoml::parser::parse\l_array" alt="" coords="429,369,597,411"/>
 </map>

@@ -1,16 +1,8 @@
 <map id="matrixelements_rcisettings" name="matrixelements_rcisettings">
-<area shape="rect" id="node2" href="$namespacegrasp__rciqed__lib9290__init.html#ad91897d2b5a564f0da486552dcea32ad" title="Initialize physical and unit&#45;related constants and machine&#45;dependent parameters. " alt="" coords="249,5,448,47"/>
-<area shape="rect" id="node3" href="$matrixelements__rcisettings_8f90.html#a761073373213a13a8f0c73d37064bf60" title="write_testsettings" alt="" coords="281,71,416,98"/>
-<area shape="rect" id="node6" href="$namespacegrasp__rciqed__rcisettings.html#a77db53ade651dafa4290882b95d71510" title="Read a .setting.toml for an RCI job into a rcisettings object. " alt="" coords="260,180,437,221"/>
-<area shape="rect" id="node4" href="$namespacegrasp__rciqed__rcisettings.html#a18e67695156f2469b78ee14d112506e0" title="Writes a .settings.toml file with the nuclear, grid and Hamiltonian settings that were used for the R..." alt="" coords="496,5,673,47"/>
-<area shape="rect" id="node5" href="$namespacegrasp__rciqed__rcisettings.html#a639f10ecde51805a1b1811cc58f4f8b9" title="Writes a TOML key&#45;value line for a floating point number in exponent notation. " alt="" coords="721,5,899,47"/>
-<area shape="rect" id="node7" href="$namespacegrasp__rciqed__system.html#ae95514890f033dd3923644f9a26baa6b" title="Wraps the inquire statement to check if a file exists in a function. " alt="" coords="505,71,664,112"/>
-<area shape="rect" id="node8" href="$namespacegrasp__rciqed__toml.html#a85c0b7e375fc83ff5e1d4000173215c1" title="grasp_rciqed_toml::\lparse_file" alt="" coords="736,115,884,156"/>
-<area shape="rect" id="node10" href="$namespacegrasp__rciqed__toml.html#a24589331136534b624c1eeb6fc5a9f02" title="grasp_rciqed_toml::\lget_double" alt="" coords="736,180,884,221"/>
-<area shape="rect" id="node11" href="$namespacegrasp__rciqed__toml.html#aaec53ba3ed67c8c2ebb804b33f927e82" title="grasp_rciqed_toml::\lget_logical_default" alt="" coords="511,239,659,280"/>
-<area shape="rect" id="node13" href="$namespacegrasp__rciqed__toml.html#ad3aae33f2593aaa9308db3499ea54b44" title="grasp_rciqed_toml::\lget_string" alt="" coords="511,304,659,345"/>
-<area shape="rect" id="node14" href="$namespacegrasp__rciqed__toml.html#a64bbcd9b0496f5966862dc80594310c0" title="grasp_rciqed_toml::\lget_integer_default" alt="" coords="511,369,659,411"/>
-<area shape="rect" id="node9" href="$namespacegrasp__rciqed__toml.html#ac5d84627ea9e534c624785ce27e839bd" title="grasp_rciqed_toml::cstr" alt="" coords="947,253,1119,279"/>
-<area shape="rect" id="node12" href="$namespacegrasp__rciqed__toml.html#acce716e8f6baa31b4e360cfa5707142c" title="grasp_rciqed_toml::\lget_logical" alt="" coords="736,245,884,287"/>
-<area shape="rect" id="node15" href="$namespacegrasp__rciqed__toml.html#a819749c49ba9412cb172a8bbbff01706" title="grasp_rciqed_toml::\lget_integer" alt="" coords="736,365,884,407"/>
+<area shape="rect" id="node2" href="$namespacegrasp__rciqed__lib9290__init.html#ad91897d2b5a564f0da486552dcea32ad" title="Initialize physical and unit&#45;related constants and machine&#45;dependent parameters. " alt="" coords="255,5,459,47"/>
+<area shape="rect" id="node3" href="$matrixelements__rcisettings_8f90.html#a761073373213a13a8f0c73d37064bf60" title="write_testsettings" alt="" coords="287,71,426,98"/>
+<area shape="rect" id="node6" href="$namespacegrasp__rciqed__rcisettings.html#a77db53ade651dafa4290882b95d71510" title="Read a .setting.toml for an RCI job into a rcisettings object. " alt="" coords="267,124,447,165"/>
+<area shape="rect" id="node4" href="$namespacegrasp__rciqed__rcisettings.html#a18e67695156f2469b78ee14d112506e0" title="Writes a .settings.toml file with the nuclear, grid and Hamiltonian settings that were used for the R..." alt="" coords="507,61,687,103"/>
+<area shape="rect" id="node5" href="$namespacegrasp__rciqed__rcisettings.html#a639f10ecde51805a1b1811cc58f4f8b9" title="Writes a TOML key&#45;value line for a floating point number in exponent notation. " alt="" coords="735,61,915,103"/>
+<area shape="rect" id="node7" href="$namespacegrasp__rciqed__system.html#ae95514890f033dd3923644f9a26baa6b" title="Wraps the inquire statement to check if a file exists in a function. " alt="" coords="517,127,677,168"/>
 </map>

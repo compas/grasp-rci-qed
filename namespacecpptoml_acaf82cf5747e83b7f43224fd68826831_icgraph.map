@@ -1,9 +1,9 @@
 <map id="cpptoml::make_value" name="cpptoml::make_value">
-<area shape="rect" id="node2" href="$classcpptoml_1_1array.html#ad8225c455bc24816332fa82d00b014c1" title="cpptoml::array::push_back" alt="" coords="218,5,409,32"/>
-<area shape="rect" id="node3" href="$classcpptoml_1_1array.html#ad095605f299379d6065882cd9789e8d0" title="cpptoml::array::insert" alt="" coords="234,56,393,83"/>
-<area shape="rect" id="node4" href="$classcpptoml_1_1table.html#a213b23356017fd1a9aeaa9ac3a6178d8" title="cpptoml::table::insert" alt="" coords="234,107,393,133"/>
-<area shape="rect" id="node5" href="$classcpptoml_1_1value.html#a41545490bdaab88825014c3d5417fb9a" title="cpptoml::value::clone" alt="" coords="234,157,393,184"/>
-<area shape="rect" id="node6" href="$classcpptoml_1_1parser.html#ace88eae4330b5f0ff0e041bc024d7bd1" title="cpptoml::parser::parse\l_number" alt="" coords="230,209,397,250"/>
-<area shape="rect" id="node7" href="$classcpptoml_1_1parser.html#a7e6f0e216d0af67dbf8ec57215f140a0" title="cpptoml::parser::parse_time" alt="" coords="212,275,415,301"/>
-<area shape="rect" id="node8" href="$classcpptoml_1_1parser.html#a42e196ef9c22803461f19148e8357c68" title="cpptoml::parser::parse_date" alt="" coords="212,325,415,352"/>
+<area shape="rect" id="node2" href="$classcpptoml_1_1array.html#ad8225c455bc24816332fa82d00b014c1" title="cpptoml::array::push_back" alt="" coords="222,5,415,32"/>
+<area shape="rect" id="node3" href="$classcpptoml_1_1array.html#ad095605f299379d6065882cd9789e8d0" title="cpptoml::array::insert" alt="" coords="238,56,399,83"/>
+<area shape="rect" id="node4" href="$classcpptoml_1_1table.html#a213b23356017fd1a9aeaa9ac3a6178d8" title="cpptoml::table::insert" alt="" coords="238,107,399,133"/>
+<area shape="rect" id="node5" href="$classcpptoml_1_1value.html#a41545490bdaab88825014c3d5417fb9a" title="cpptoml::value::clone" alt="" coords="237,157,400,184"/>
+<area shape="rect" id="node6" href="$classcpptoml_1_1parser.html#ace88eae4330b5f0ff0e041bc024d7bd1" title="cpptoml::parser::parse\l_number" alt="" coords="235,209,403,250"/>
+<area shape="rect" id="node7" href="$classcpptoml_1_1parser.html#a7e6f0e216d0af67dbf8ec57215f140a0" title="cpptoml::parser::parse_time" alt="" coords="216,275,421,301"/>
+<area shape="rect" id="node8" href="$classcpptoml_1_1parser.html#a42e196ef9c22803461f19148e8357c68" title="cpptoml::parser::parse_date" alt="" coords="217,325,421,352"/>
 </map>

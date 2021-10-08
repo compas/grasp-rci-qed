@@ -1,8 +1,6 @@
 var searchData=
 [
   ['qed_5fflambaum_5fhydrogenic_5ftest',['qed_flambaum_hydrogenic_test',['../flambaum__hydrogenic_8f90.html#acd2c0bb45b563a532f72bb5f9078c01e',1,'flambaum_hydrogenic.f90']]],
-  ['qed_5forbital_5fsummary',['qed_orbital_summary',['../orbitals_8F90.html#a4bc989e4db39f1a581815da8ca547fa0',1,'orbitals.F90']]],
-  ['qed_5forbital_5fsummary_5fwfnorm',['qed_orbital_summary_wfnorm',['../orbitals_8F90.html#a5167c193edd280a5954d54a4ae9ac509',1,'orbitals.F90']]],
   ['qed_5fqedmod_5fhydrogenic_5ftest',['qed_qedmod_hydrogenic_test',['../qedmod__hydrogenic_8f90.html#a83ef8190797c2d662948c29cd5aa078b',1,'qedmod_hydrogenic.f90']]],
   ['qed_5fse',['qed_se',['../interfacegrasp__rciqed__cimatrixelements_1_1qed__se.html#a008b2cbfe2a944488450c1aca344044a',1,'grasp_rciqed_cimatrixelements::qed_se::qed_se()'],['../namespacegrasp__rciqed__cimatrixelements.html#acb18bf10d57823b631e80b12f9babcb8',1,'grasp_rciqed_cimatrixelements::qed_se()']]],
   ['qed_5fse_5fcached',['qed_se_cached',['../interfacegrasp__rciqed__cimatrixelements_1_1qed__se.html#a6de95bedd1849ec801530f25720ba0ba',1,'grasp_rciqed_cimatrixelements::qed_se::qed_se_cached()'],['../namespacegrasp__rciqed__cimatrixelements.html#ae95015233b8c2bd8c8b52880981887e4',1,'grasp_rciqed_cimatrixelements::qed_se_cached()']]],

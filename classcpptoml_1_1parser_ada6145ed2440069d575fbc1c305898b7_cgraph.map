@@ -1,5 +1,5 @@
 <map id="cpptoml::parser::parse" name="cpptoml::parser::parse">
-<area shape="rect" id="node2" href="$namespacecpptoml.html#a233bc1326fad496c4cadbbb22ffd5b2b" title="cpptoml::make_table" alt="" coords="225,5,383,32"/>
-<area shape="rect" id="node3" href="$namespacecpptoml_1_1detail.html#a3d07d1cff6567b9981f84f9247623af3" title="cpptoml::detail::getline" alt="" coords="220,56,388,83"/>
-<area shape="rect" id="node4" href="$classcpptoml_1_1table.html#ac5b06ea28043fba3c5323becac7b1a37" title="cpptoml::table::get" alt="" coords="233,107,375,133"/>
+<area shape="rect" id="node2" href="$namespacecpptoml.html#a233bc1326fad496c4cadbbb22ffd5b2b" title="cpptoml::make_table" alt="" coords="228,5,388,32"/>
+<area shape="rect" id="node3" href="$namespacecpptoml_1_1detail.html#a3d07d1cff6567b9981f84f9247623af3" title="cpptoml::detail::getline" alt="" coords="221,56,395,83"/>
+<area shape="rect" id="node4" href="$classcpptoml_1_1table.html#ab654c66c5785f144388924655e120d88" title="cpptoml::table::get" alt="" coords="235,107,381,133"/>
 </map>

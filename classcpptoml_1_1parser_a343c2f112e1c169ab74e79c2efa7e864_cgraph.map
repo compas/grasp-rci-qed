@@ -1,9 +1,9 @@
 <map id="cpptoml::parser::parse_single_table" name="cpptoml::parser::parse_single_table">
-<area shape="rect" id="node2" href="$classcpptoml_1_1table.html#af4d51bc16094dcdd42e13d7a68f32139" title="cpptoml::table::contains" alt="" coords="220,5,396,32"/>
-<area shape="rect" id="node3" href="$classcpptoml_1_1table.html#ac5b06ea28043fba3c5323becac7b1a37" title="cpptoml::table::get" alt="" coords="237,56,379,83"/>
-<area shape="rect" id="node4" href="$classcpptoml_1_1table.html#a4275af44e7655c001686d7225cd0387c" title="cpptoml::table::insert" alt="" coords="229,107,387,133"/>
-<area shape="rect" id="node5" href="$namespacecpptoml.html#a233bc1326fad496c4cadbbb22ffd5b2b" title="cpptoml::make_table" alt="" coords="229,157,387,184"/>
-<area shape="rect" id="node6" href="$classcpptoml_1_1table.html#a0ba74337e2f0af9e498213a0a974f186" title="cpptoml::table::empty" alt="" coords="227,208,389,235"/>
-<area shape="rect" id="node7" href="$classcpptoml_1_1table.html#a7b02d4bacfe44b57294993337ba2112b" title="cpptoml::table::begin" alt="" coords="229,259,387,285"/>
-<area shape="rect" id="node8" href="$classcpptoml_1_1table.html#a5ab77a7c1b96ea4f7d9a879bad4b90a6" title="cpptoml::table::end" alt="" coords="235,309,381,336"/>
+<area shape="rect" id="node2" href="$classcpptoml_1_1table.html#a212d6fec5865e7d10fd3e404b1af94fe" title="cpptoml::table::contains" alt="" coords="221,5,400,32"/>
+<area shape="rect" id="node3" href="$classcpptoml_1_1table.html#ab654c66c5785f144388924655e120d88" title="cpptoml::table::get" alt="" coords="238,56,383,83"/>
+<area shape="rect" id="node4" href="$classcpptoml_1_1table.html#a4275af44e7655c001686d7225cd0387c" title="cpptoml::table::insert" alt="" coords="230,107,391,133"/>
+<area shape="rect" id="node5" href="$namespacecpptoml.html#a233bc1326fad496c4cadbbb22ffd5b2b" title="cpptoml::make_table" alt="" coords="231,157,391,184"/>
+<area shape="rect" id="node6" href="$classcpptoml_1_1table.html#a624e1a754ee1c95539e4f5d67ae09574" title="cpptoml::table::empty" alt="" coords="227,208,394,235"/>
+<area shape="rect" id="node7" href="$classcpptoml_1_1table.html#a7b02d4bacfe44b57294993337ba2112b" title="cpptoml::table::begin" alt="" coords="231,259,391,285"/>
+<area shape="rect" id="node8" href="$classcpptoml_1_1table.html#a5ab77a7c1b96ea4f7d9a879bad4b90a6" title="cpptoml::table::end" alt="" coords="237,309,385,336"/>
 </map>

@@ -1,5 +1,5 @@
 <map id="cpptoml::parser::parse_number" name="cpptoml::parser::parse_number">
-<area shape="rect" id="node2" href="$namespacecpptoml.html#a8920dd98d64555bc47a96593a1a07989" title="cpptoml::is_hex" alt="" coords="238,5,361,32"/>
-<area shape="rect" id="node3" href="$namespacecpptoml.html#a5e79389ffd4c8d77d5518d4bb6ed83c3" title="cpptoml::is_number" alt="" coords="427,31,576,57"/>
-<area shape="rect" id="node4" href="$namespacecpptoml.html#acaf82cf5747e83b7f43224fd68826831" title="cpptoml::make_value" alt="" coords="220,107,379,133"/>
+<area shape="rect" id="node2" href="$namespacecpptoml.html#a8920dd98d64555bc47a96593a1a07989" title="cpptoml::is_hex" alt="" coords="240,5,365,32"/>
+<area shape="rect" id="node3" href="$namespacecpptoml.html#a5e79389ffd4c8d77d5518d4bb6ed83c3" title="cpptoml::is_number" alt="" coords="432,31,583,57"/>
+<area shape="rect" id="node4" href="$namespacecpptoml.html#acaf82cf5747e83b7f43224fd68826831" title="cpptoml::make_value" alt="" coords="221,107,384,133"/>
 </map>

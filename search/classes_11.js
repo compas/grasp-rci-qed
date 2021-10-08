@@ -14,6 +14,5 @@ var searchData=
   ['skfun',['skfun',['../interfaceskfun__i_1_1skfun.html',1,'skfun_i']]],
   ['skint',['skint',['../interfaceskint__i_1_1skint.html',1,'skint_i']]],
   ['spodmv',['spodmv',['../interfacespodmv__i_1_1spodmv.html',1,'spodmv_i']]],
-  ['string_5fdelete_5f',['string_delete_',['../interfacegrasp__rciqed__toml_1_1string__delete__.html',1,'grasp_rciqed_toml']]],
   ['strsum',['strsum',['../interfacestrsum__i_1_1strsum.html',1,'strsum_i']]]
 ];

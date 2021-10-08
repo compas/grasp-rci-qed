@@ -1,9 +1,9 @@
 <map id="grasp_rciqed_cimatrixelements::breit" name="grasp_rciqed_cimatrixelements::breit">
-<area shape="rect" id="node2" href="$namespacegrasp__rciqed__cimatrixelements.html#adc9e9ef07f6f0e61d0b878c6349c75d2" title="Calculates the Breit matrix element, but calculates the core part only sometimes. ..." alt="" coords="276,125,499,166"/>
-<area shape="rect" id="node3" href="$brint1_8f90.html#a849f1f3ba4f10477b2c126b628a57974" title="brint1" alt="" coords="547,5,605,32"/>
-<area shape="rect" id="node4" href="$brint2_8f90.html#a45c778317fafab10e7fff2eb982120c9" title="brint2" alt="" coords="547,56,605,83"/>
-<area shape="rect" id="node5" href="$brint3_8f90.html#a35c720fabeda86ef046b211c91542edb" title="brint3" alt="" coords="547,107,605,133"/>
-<area shape="rect" id="node6" href="$brint4_8f90.html#a1c578337bcfe812fe6fe1128d7446f83" title="brint4" alt="" coords="547,157,605,184"/>
-<area shape="rect" id="node7" href="$brint5_8f90.html#abb8c9e809ba0e8e9443578505c10fb29" title="brint5" alt="" coords="547,208,605,235"/>
-<area shape="rect" id="node8" href="$brint6_8f90.html#a4338682afc000cc58bdf4e7b455840c4" title="brint6" alt="" coords="547,259,605,285"/>
+<area shape="rect" id="node2" href="$namespacegrasp__rciqed__cimatrixelements.html#adc9e9ef07f6f0e61d0b878c6349c75d2" title="Calculates the Breit matrix element, but calculates the core part only sometimes. ..." alt="" coords="280,125,507,166"/>
+<area shape="rect" id="node3" href="$brint1_8f90.html#a849f1f3ba4f10477b2c126b628a57974" title="brint1" alt="" coords="555,5,615,32"/>
+<area shape="rect" id="node4" href="$brint2_8f90.html#a45c778317fafab10e7fff2eb982120c9" title="brint2" alt="" coords="555,56,615,83"/>
+<area shape="rect" id="node5" href="$brint3_8f90.html#a35c720fabeda86ef046b211c91542edb" title="brint3" alt="" coords="555,107,615,133"/>
+<area shape="rect" id="node6" href="$brint4_8f90.html#a1c578337bcfe812fe6fe1128d7446f83" title="brint4" alt="" coords="555,157,615,184"/>
+<area shape="rect" id="node7" href="$brint5_8f90.html#abb8c9e809ba0e8e9443578505c10fb29" title="brint5" alt="" coords="555,208,615,235"/>
+<area shape="rect" id="node8" href="$brint6_8f90.html#a4338682afc000cc58bdf4e7b455840c4" title="brint6" alt="" coords="555,259,615,285"/>
 </map>
