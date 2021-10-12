@@ -3,6 +3,7 @@ add_library(rciqed-qed STATIC
     pyykkoe.f90
     flambaum.f90
     qedmod.f90
+    vp.f90
 
     # Legacy code
     ## Vacuum polarization related routines

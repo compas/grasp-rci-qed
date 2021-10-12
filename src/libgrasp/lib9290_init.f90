@@ -52,7 +52,7 @@ contains
     !> Sets up the nuclear parameters for a point nucleus with charge `nuclear_z`.
     !!
     !! @param nuclear_z Charge of the nucleus.
-    subroutine lib9290_init_nucleus(nuclear_z)
+    subroutine lib9290_init_nucleus_pnc(nuclear_z)
         use def_C, only: CVAC, C, PI, TENMAX, EXPMAX, EXPMIN, PRECIS, Z
         use npar_C, only: NPARM, PARM
         use nucpot_I
@@ -63,15 +63,38 @@ contains
         ! a file, so needs to be set manually.
         C = CVAC
 
-        print *, TENMAX,EXPMAX,EXPMIN,PRECIS
-        print *, CVAC, PI
-
         ! Set the nucleus up as a point source for a specific Z
         Z = nuclear_z
         NPARM = 0
 
         call NUCPOT
-    end subroutine lib9290_init_nucleus
+    end subroutine lib9290_init_nucleus_pnc
+
+    !> Sets up the nuclear parameters for a Fermi nucleus with charge `nuclear_z` and Fermi
+    !! nuclear parameters `a` and `c`.
+    !!
+    !! @param nuclear_z Charge of the nucleus.
+    !! @param a The a parameter of the Fermi charge distribution (in a.u.).
+    !! @param c The c parameter of the Fermi charge distribution (in a.u.).
+    subroutine lib9290_init_nucleus_fnc(nuclear_z, dist_a, dist_c)
+        use def_C, only: CVAC, C, PI, TENMAX, EXPMAX, EXPMIN, PRECIS, Z
+        use npar_C, only: NPARM, PARM
+        use nucpot_I
+
+        real(real64), intent(in) :: nuclear_z, dist_a, dist_c
+
+        ! C and CVAC are both speeds of light. However, C is usually read in from
+        ! a file, so needs to be set manually.
+        C = CVAC
+
+        ! Set the nucleus up as a point source for a specific Z
+        Z = nuclear_z
+        NPARM = 2
+        PARM(1) = dist_c
+        PARM(2) = dist_a
+
+        call NUCPOT
+    end subroutine lib9290_init_nucleus_fnc
 
     !> Sets up the nuclear mass, important for nuclear mass shifts.
     !!
