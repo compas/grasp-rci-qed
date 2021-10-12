@@ -4,8 +4,42 @@ module grasp_rciqed_qed_vp
     implicit none
 
     real(real64), dimension(:), allocatable :: vac2p4
+    logical :: qedvp_initialized  = .false.
 
 contains
+
+    !> Initializes the global state for the vacuum polarization calculations.
+    subroutine qedvp_init
+        use decide_C, only: LVP
+        use grid_C, only: N, RP
+        use ncdist_C, only: ZDIST
+        use tatb_C, only: TB
+        use vpilst_C, only: NVPI, FRSTVP
+        use ncharg_I
+        use vacpol_I
+
+        LVP = .TRUE.
+
+        ! From AUXBLK. NCHARG set up the nuclear charge distrbution in ZDIST. If we're dealing
+        ! with the PNC, then the routine actually does nothing, ZDIST stays zero and is
+        ! ignored in VAC2 and VAC4.
+        CALL NCHARG
+        ! VACPOL calls VAC2 and VAC4, which populate TB with the (total) vacuum polarization
+        ! potential.
+        CALL VACPOL
+        ! VACPOL puts the vacuum polarization potentials into TB, but the VPINT(F) routines
+        ! use ZDIST to actually evaluate the matrix elements.
+        ZDIST(2:N) = TB(2:N)*RP(2:N)
+        FRSTVP = .TRUE.
+        NVPI = 0
+        ! We'll also allocate the global array in grasp_rciqed_qed_vp and populate it with
+        ! the potential value (without the RP multiplier, which is a QUAD-specific).
+        allocate(vac2p4(N))
+        vac2p4(1) = 0.0_dp
+        vac2p4(2:N) = TB(2:N)
+
+        qedvp_initialized = .true.
+    end
 
     !> Populates `matrix` with the QED vacuum polarization matrix elements in the orbital
     !! basis.
@@ -21,6 +55,12 @@ contains
         ! Local variables:
         real(real64) :: vpij
         integer :: k, l
+
+        if(.not.qedvp_initialized) then
+            print *, "ERROR(grasp_rciqed_qed_vp): GRASP VP global state not initialized."
+            print *, "qedvp_init() has to be called before the other routines can be used."
+            stop 1
+        end if
 
         do k = 1, NW
             do l = k, NW

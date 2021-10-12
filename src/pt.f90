@@ -14,8 +14,8 @@ program rci_qed_pt
     use grasp_rciqed, only: init_rkintc
     use grasp_rciqed_breit, only: init_breit
     use grasp_rciqed_mass_shifts, only: init_mass_shifts
-    use grasp_rciqed_qed, only: init_vacuum_polarization, qedse, &
-        nsetypes, setypes_long, setypes_short
+    use grasp_rciqed_qed, only: qedse, nsetypes, setypes_long, setypes_short
+    use grasp_rciqed_qed_vp, only: qedvp_init
     use grasp_rciqed_rcisettings, only: rcisettings, read_settings_toml
     use grasp_rciqed_cimatrixelements
     use decide_C, only: LSE, LNMS, LSMS
@@ -120,7 +120,7 @@ program rci_qed_pt
     print '(a)', ">>> INITIALIZING rci commons"
     call init_rkintc(j2max)
     call init_breit(j2max)
-    call init_vacuum_polarization
+    call qedvp_init
     call init_mass_shifts
 
     ! Load the info in $(state).settings.toml file

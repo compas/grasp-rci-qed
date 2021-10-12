@@ -5,7 +5,7 @@ program matrixelements_hydrogenic
     use grasp_rciqed, only: init_rkintc
     use grasp_rciqed_breit, only: init_breit
     use grasp_rciqed_mass_shifts, only: init_mass_shifts
-    use grasp_rciqed_qed, only: init_vacuum_polarization
+    use grasp_rciqed_qed_vp, only: qedvp_init
     use grasptest_lib9290_setup
     use grasptest_lib9290_hydrogenic
     implicit none
@@ -41,7 +41,7 @@ program matrixelements_hydrogenic
     ! RCI-specific initialization
     call init_rkintc(j2max)
     call init_breit(j2max)
-    call init_vacuum_polarization
+    call qedvp_init
     call init_mass_shifts
 
     ! The following reference values were calculated using the non-MPI rci90

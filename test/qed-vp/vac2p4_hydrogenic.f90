@@ -2,7 +2,7 @@ program qed_vp_hydrogenic_test
     use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     use parameter_def, only: NNNW, NNN1, NNNP
     use orb_C, only: NW, NP, NAK
-    use grasp_rciqed_qed, only: init_vacuum_polarization
+    use grasp_rciqed_qed_vp, only: qedvp_init
     use grasp_rciqed_qed_vp
     use grasp_rciqed_lib9290_init, only: lib9290_init_constants
     use grasptest_lib9290_setup, only: kappa_to_string
@@ -46,7 +46,7 @@ program qed_vp_hydrogenic_test
     call allocate_orbitals
 
     ! Populate a matrix with the matrix elements of the QED VP:
-    call init_vacuum_polarization
+    call qedvp_init
     allocate(qedvpkl(NW, NW))
     call qedvp(qedvpkl)
 

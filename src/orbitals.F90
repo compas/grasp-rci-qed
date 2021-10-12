@@ -2,7 +2,7 @@
 program rci_qed_orbitals
     use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     use grasp_rciqed_system
-    use grasp_rciqed_qed, only: init_vacuum_polarization
+    use grasp_rciqed_qed_vp, only: qedvp_init
     use grasp_rciqed_qed_qedmod
     use grasp_lib9290, only: init_isocw_full
     use vacpol_I
@@ -35,7 +35,7 @@ program rci_qed_orbitals
     call init_isocw_full(isodata, file_csls, file_wfns)
 
     ! Initialize the U+KS vacuum polarization potential
-    call init_vacuum_polarization
+    call qedvp_init
     ! Initialize the qedmod common blocks with Grasp data etc.
     call qedse_qedmod_init
 
