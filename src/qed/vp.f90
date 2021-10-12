@@ -65,4 +65,9 @@ contains
         call QUAD(potential)
     end
 
+    ! Legacy GRASP92 routines. Modifications to these are minimal, primarily just to make
+    ! them independent of old GRASP common blocks / _c modules.
+    include 'legacy/funk.f90'
+    include 'legacy/funl.f90'
+
 end module grasp_rciqed_qed_vp

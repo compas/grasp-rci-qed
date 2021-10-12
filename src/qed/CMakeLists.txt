@@ -7,8 +7,6 @@ add_library(rciqed-qed STATIC
 
     # Legacy code
     ## Vacuum polarization related routines
-    legacy/funk.f90 legacy/funk_I.f90
-    legacy/funl.f90 legacy/funl_I.f90
     legacy/ncharg.f90 legacy/ncharg_I.f90
     legacy/vac2.f90 legacy/vac2_I.f90
     legacy/vac4.f90 legacy/vac4_I.f90

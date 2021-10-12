@@ -1,6 +1,5 @@
 program qedvp_funk_funl
-    use funk_I
-    use funl_I
+    use grasp_rciqed_qed_vp, only: funk, funl
     use grasptest_testing
     implicit none
 
