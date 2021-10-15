@@ -6,13 +6,15 @@ module grasp_rciqed_qed_vp
     real(real64), dimension(:), allocatable :: vac2p4
     logical :: qedvp_initialized  = .false.
 
+    ! Legacy global array from the ncdist_C module:
+    real(real64), DIMENSION(NNNP) :: ZDIST
+
 contains
 
     !> Initializes the global state for the vacuum polarization calculations.
     subroutine qedvp_init
         use decide_C, only: LVP
         use grid_C, only: N, RP
-        use ncdist_C, only: ZDIST
         use tatb_C, only: TB
         use vpilst_C, only: NVPI, FRSTVP
         use ncharg_I

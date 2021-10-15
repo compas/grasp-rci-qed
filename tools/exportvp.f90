@@ -61,7 +61,7 @@ contains
     subroutine setup_vacuum_polarization
         use decide_C, only: LVP
         use vpilst_C, only: FRSTVP, NVPI
-        use ncdist_C, only: ZDIST
+        use grasp_rciqed_qed_vp, only: ZDIST
         use tatb_C, only: TB
         use grid_C, only: N, RP
         use ncharg_I
@@ -76,7 +76,7 @@ contains
     end subroutine setup_vacuum_polarization
 
     subroutine write_zdist_csv
-        use ncdist_C, only: ZDIST
+        use grasp_rciqed_qed_vp, only: ZDIST
         use grid_C, only: N, R, RP
         implicit none
 

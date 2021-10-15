@@ -12,7 +12,7 @@
       USE decide_C
       USE def_C
       USE grid_C
-      USE ncdist_C
+      use grasp_rciqed_qed_vp, only: ZDIST
       USE tatb_C
       USE coeils_C
       USE vpilst_C,indoei=>indvpi, valoei=>valvpi

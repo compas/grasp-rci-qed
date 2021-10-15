@@ -4,7 +4,7 @@ program qedvp_vac2_vac4_test
     use parameter_def, only: NNNP
     use grid_C, only: R, RP
     use tatb_C, only: MTP, TB
-    use ncdist_C, only: ZDIST
+    use grasp_rciqed_qed_vp, only: ZDIST
     ! Routines:
     use ncharg_I
     use vac2_I

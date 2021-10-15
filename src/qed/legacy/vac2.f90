@@ -24,7 +24,7 @@
       USE def_C
       USE grid_C
       USE npar_C
-      USE ncdist_C
+      use grasp_rciqed_qed_vp, only: ZDIST
       USE tatb_C
 !-----------------------------------------------
 !   I n t e r f a c e   B l o c k s
