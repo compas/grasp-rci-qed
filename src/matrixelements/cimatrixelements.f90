@@ -230,6 +230,7 @@ contains
     !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{VP}}|\Psi_{\textrm{ir}}\rangle\f$.
     function qed_vp_cached(ic, ir, k, l, tshell)
         use orb_C
+        use grasp_rciqed_qed_vp, only: qedvp_kl
         implicit none
 
         integer, intent(in) :: ic, ir, k, l
@@ -245,23 +246,12 @@ contains
         if(k /= 0 .and. k == l) then
             do m = 1, NW
                 if(abs(tshell(m)) <= cutoff) cycle
-                call vpint_safe(m, m, result)
-                qed_vp_cached = qed_vp_cached + result * tshell(m)
+                qed_vp_cached = qed_vp_cached + qedvp_kl(m, m) * tshell(m)
             enddo
         elseif(k /= 0 .and. k /= l .and. abs(tshell(1)) > cutoff) then
-            call vpint_safe(k, l, result)
-            qed_vp_cached = qed_vp_cached + result * tshell(1)
+            qed_vp_cached = qed_vp_cached + qedvp_kl(k, l) * tshell(1)
         endif
     end function qed_vp_cached
-
-    !> Calls the `VPINT` routine, but ensures that the input `k` and `l`
-    !! arguments do not get swapped.
-    subroutine vpint_safe(k, l, result)
-        use vpint_I
-        integer, value :: k, l
-        real(real64), intent(out) :: result
-        call VPINT(k, l, result)
-    end
 
     !===========================================================================
     ! Routines for two-particle Coulomb matrix elements

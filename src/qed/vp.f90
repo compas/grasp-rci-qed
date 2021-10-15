@@ -16,7 +16,6 @@ contains
         use decide_C, only: LVP
         use grid_C, only: N, RP
         use tatb_C, only: TB
-        use vpilst_C, only: NVPI, FRSTVP
         use ncharg_I
         use vacpol_I
 
@@ -32,8 +31,6 @@ contains
         ! VACPOL puts the vacuum polarization potentials into TB, but the VPINT(F) routines
         ! use ZDIST to actually evaluate the matrix elements.
         ZDIST(2:N) = TB(2:N)*RP(2:N)
-        FRSTVP = .TRUE.
-        NVPI = 0
         ! We'll also allocate the global array in grasp_rciqed_qed_vp and populate it with
         ! the potential value (without the RP multiplier, which is a QUAD-specific).
         allocate(vac2p4(N))
@@ -47,11 +44,11 @@ contains
     !! basis.
     !!
     !! The matrix element values are integrated using the `vac2p4` global array from this
-    !! module.
+    !! module, which contains both the Uehling and Källen-Sabry terms.
     !!
     !! @param matrix An `NW x NW` `real64` array for storing the matrix elements.
     subroutine qedvp(matrix)
-        use orb_C, only: NW, NAK
+        use orb_C, only: NW
         ! Arguments:
         real(real64), intent(out) :: matrix(:, :)
         ! Local variables:
@@ -66,15 +63,33 @@ contains
 
         do k = 1, NW
             do l = k, NW
-                if(NAK(k) == NAK(l)) then
-                    vpij = potential(vac2p4, k, l)
-                else
-                    vpij = 0.0_dp
-                endif
+                vpij = qedvp_kl(k, l)
                 matrix(k, l) = vpij
                 matrix(l, k) = vpij
             enddo
         enddo
+    end
+
+    !> Returns the value of the QED VP matrix element for orbitals `k` and `l`.
+    !!
+    !! The matrix element values are integrated using the `vac2p4` global array from this
+    !! module, which contains both the Uehling and Källen-Sabry terms.
+    !!
+    !! @param k, l Indices of the orbital for which the VP integral is calculated for.
+    !!
+    !! Note: no error checking is done, neither for whether VP has been initialized with
+    !! `qedvp_init`, nor whether the orbital indices are within bounds.
+    function qedvp_kl(k, l)
+        use orb_C, only: NAK
+        ! Arguments:
+        integer, intent(in) :: k, l
+        real(real64) :: qedvp_kl
+
+        if(NAK(k) == NAK(l)) then
+            qedvp_kl = potential(vac2p4, k, l)
+        else
+            qedvp_kl = 0.0_dp
+        end if
     end
 
     !> Integrates the generic potential, stored in the array `v`, with orbitals `k1` and

@@ -29,7 +29,6 @@ contains
         USE orb_C, only: ncf, nw
         USE prnt_C, only: NVEC
         USE vinlst_C, only: nvinti
-        USE vpilst_C, only: nvpi
         USE blim_c, only: coeffcut1, coeffcut2, ncsfpre, iprerun
         use grasp_rciqed, only: IMCDF => res_unit
         USE eigvec1_C, only: evec1
@@ -272,7 +271,6 @@ contains
         NTPItmp = NTPI
         NMCBPtmp = NMCBP
         NCOREtmp = NCORE
-        NVPItmp = NVPI
         NKEItmp = NKEI
         NVINTItmp = NVINTI
         NELMNTtmp = NELMNT

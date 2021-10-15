@@ -11,8 +11,6 @@ add_library(rciqed-qed STATIC
     legacy/vac2.f90 legacy/vac2_I.f90
     legacy/vac4.f90 legacy/vac4_I.f90
     legacy/vacpol.f90 legacy/vacpol_I.f90
-    legacy/vpint.f90 legacy/vpint_I.f90
-    legacy/vpintf.f90 legacy/vpintf_I.f90
     ## Self-energy related routines
     legacy/fzalf.f90 legacy/fzalf_I.f90
     legacy/klamaq.f90 legacy/klamaq_I.f90
