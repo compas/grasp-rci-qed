@@ -106,7 +106,7 @@ contains
     function potential(v, k1, k2)
         use grid_C, only: N, RP
         use tatb_C, only: MTP, TA
-        use wave_C, only: PF, QF
+        use wave_C, only: PF, QF, MF
         use quad_I
         ! Arguments:
         real(real64), dimension(:), intent(in) :: v
@@ -115,10 +115,12 @@ contains
         ! Local variables:
         integer :: i
 
-        do i = 1, N
+        ! MF appears to store the MTP for the orbitals, and we'll use that to determine the
+        ! MTP of the integral. This is consistent with the old VPINTF routine.
+        MTP = min(MF(k1), MF(k2))
+        do i = 1, MTP
             TA(i) = (PF(i,k1)*PF(i,k2) + QF(i,k1)*QF(i,k2)) * RP(i) * v(i)
         end do
-        MTP = N
         call QUAD(potential)
     end
 
