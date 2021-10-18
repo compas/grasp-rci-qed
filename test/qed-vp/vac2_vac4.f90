@@ -2,13 +2,8 @@ program qedvp_vac2_vac4_test
     use grasp_rciqed_lib9290_init
     ! GRASP global variables:
     use parameter_def, only: NNNP
-    use grid_C, only: R, RP
-    use tatb_C, only: MTP, TB
-    use grasp_rciqed_qed_vp, only: ZDIST
-    ! Routines:
-    use ncharg_I
-    use vac2_I
-    use vac4_I
+    use grid_C, only: R
+    use grasp_rciqed_qed_vp, only: qedvp_init, ZDIST, vp_vac2, vp_vac4
     ! Testing libraries
     use grasptest_testing
     use grasptest_utilities
@@ -42,21 +37,11 @@ program qedvp_vac2_vac4_test
     ! VP values at specific grid points, so
     call test_array_subset("R", idxs, R, ref_r)
 
-    ! Initialize the nuclear charge distribution variable ZDIST. It shoud be all zeroes
-    ! if it's PNC:
-    call NCHARG
-    ! This "re-definition" of ZDIST is in VACPOL.
-    ZDIST(:MTP) = ZDIST(:MTP)*R(:MTP)*RP(:MTP)
+    ! Initialize the VP arrays and test their contents:
+    call qedvp_init
     call test_array_subset("ZDIST", idxs, ZDIST, ref_zdist)
-
-    ! VAC2, which should be calculating the Uehling potential, populates the TB array:
-    call VAC2
-    call test_array_subset("[VAC2]TB", idxs, TB, ref_vac2)
-
-    ! VAC4, which should be calculating the Källen-Sabry potential, adds its potential
-    ! to the TB array, on top of Uehling. So the values we are testing here are U + KS.
-    call VAC4
-    call test_array_subset("[VAC2+VAC4]TB", idxs, TB, ref_vac2p4)
+    call test_array_subset("[VAC2]", idxs, vp_vac2, ref_vac2)
+    call test_array_subset("[VAC2+VAC4]TB", idxs, vp_vac2 + vp_vac4, ref_vac2p4)
 
     if(.not.success) then
         print *, "qedvp_vac2_vac4_test: Tests failed."

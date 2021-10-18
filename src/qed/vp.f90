@@ -3,7 +3,7 @@ module grasp_rciqed_qed_vp
     use parameter_def, only: NNNP
     implicit none
 
-    real(real64), dimension(:), allocatable :: vac2p4
+    real(real64), allocatable :: vp_vac2(:), vp_vac4(:)
     logical :: qedvp_initialized  = .false.
 
     ! Legacy global array from the ncdist_C module:
@@ -12,12 +12,21 @@ module grasp_rciqed_qed_vp
 contains
 
     !> Initializes the global state for the vacuum polarization calculations.
+    !!
+    !! If the global state is already initialized, the routine just prints an error message
+    !! and does not do anything.
     subroutine qedvp_init
         use decide_C, only: LVP
-        use grid_C, only: N, RP
-        use tatb_C, only: TB
+        use grid_C, only: N, R, RP
+        use tatb_C, only: MTP, TB
         use ncharg_I
-        use vacpol_I
+        use vac2_I
+        use vac4_I
+
+        if(qedvp_initialized) then
+            print *, "ERROR(grasp_rciqed_qed_vp/qedvp_init): GRASP VP global state already initialized."
+            return
+        end if
 
         LVP = .TRUE.
 
@@ -25,17 +34,22 @@ contains
         ! with the PNC, then the routine actually does nothing, ZDIST stays zero and is
         ! ignored in VAC2 and VAC4.
         CALL NCHARG
-        ! VACPOL calls VAC2 and VAC4, which populate TB with the (total) vacuum polarization
-        ! potential.
-        CALL VACPOL
-        ! VACPOL puts the vacuum polarization potentials into TB, but the VPINT(F) routines
-        ! use ZDIST to actually evaluate the matrix elements.
-        ZDIST(2:N) = TB(2:N)*RP(2:N)
-        ! We'll also allocate the global array in grasp_rciqed_qed_vp and populate it with
-        ! the potential value (without the RP multiplier, which is a QUAD-specific).
-        allocate(vac2p4(N))
-        vac2p4(1) = 0.0_dp
-        vac2p4(2:N) = TB(2:N)
+        ! VACPOL scaled ZDIST before calling VAC2 and VAC4, so we also need to do that here.
+        ! MTP (from tatb_C) is set by NCHARG.
+        ZDIST(:MTP) = ZDIST(:MTP)*R(:MTP)*RP(:MTP)
+        ! The VP potentials are calculated in VAC2 and VAC4, which both write it into the
+        ! TB array.
+        call VAC2
+        allocate(vp_vac2(N))
+        vp_vac2(:N) = TB(:N)
+        ! VAC4, however, does not overwrite TB, but rather adds to it (in the original
+        ! implementation it was adding the VAC4 potential on top of VAC2). However, as we
+        ! just want to get the VAC4 potential contribution, we set TB back to zero here
+        ! first.
+        TB(:N) = 0.0_dp
+        call VAC4
+        allocate(vp_vac4(N))
+        vp_vac4(:N) = TB(:N)
 
         qedvp_initialized = .true.
     end
@@ -58,7 +72,7 @@ contains
         if(.not.qedvp_initialized) then
             print *, "ERROR(grasp_rciqed_qed_vp): GRASP VP global state not initialized."
             print *, "qedvp_init() has to be called before the other routines can be used."
-            stop 1
+            error stop
         end if
 
         do k = 1, NW
@@ -86,7 +100,7 @@ contains
         real(real64) :: qedvp_kl
 
         if(NAK(k) == NAK(l)) then
-            qedvp_kl = potential(vac2p4, k, l)
+            qedvp_kl = potential(vp_vac2 + vp_vac4, k, l)
         else
             qedvp_kl = 0.0_dp
         end if

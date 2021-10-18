@@ -17,7 +17,7 @@
      USE parameter_def,   ONLY: KEYORB
      USE debug_C
      USE grid_C
-     use grasp_rciqed_qed_vp, only: ZDIST
+     use grasptest_qedvp_legacy, only: ZDIST
      USE orb_C
      USE tatb_C, ONLY: mtp, ta, tb
      USE wave_C
