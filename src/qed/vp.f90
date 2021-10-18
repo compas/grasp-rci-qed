@@ -3,6 +3,16 @@ module grasp_rciqed_qed_vp
     use parameter_def, only: NNNP
     implicit none
 
+    integer, parameter :: nvptypes = 2
+    character(*), dimension(nvptypes), parameter :: vptypes_long = (/ &
+        "Uehling        ", &
+        "Källén-Sabry "    & ! ä, é are 2-byte UTF-8 character
+    /)
+    character(*), dimension(nvptypes), parameter :: vptypes_short = (/ &
+        "uehling    ", &
+        "kallensabry" &
+    /)
+
     logical :: qedvp_initialized  = .false.
     real(real64), allocatable :: vp_vac2(:), vp_vac4(:), qedvp_kl(:,:)
 
@@ -14,6 +24,11 @@ module grasp_rciqed_qed_vp
     interface potential
         module procedure potential, potential_kl
     end interface potential
+
+    !> Populates a matrix with the matrix elements of a QED vacuum polarization potential.
+    interface qedvp
+        module procedure qedvp, qedvp_type
+    end interface qedvp
 
 contains
 
@@ -71,11 +86,11 @@ contains
 
     end
 
-    !> Populates `matrix` with the QED vacuum polarization matrix elements in the orbital
-    !! basis.
+    !> Populates `matrix` with the full QED vacuum polarization matrix elements in the
+    !! orbital basis.
     !!
-    !! The matrix element values are integrated using the `vac2p4` global array from this
-    !! module, which contains both the Uehling and Källen-Sabry terms.
+    !! The matrix element values are integrated using the `vp_vac{2,4}` global arrays from
+    !! this module, which contains both the Uehling and Källen-Sabry terms.
     !!
     !! @param matrix An `NW x NW` `real64` array for storing the matrix elements.
     subroutine qedvp(matrix)
@@ -88,6 +103,36 @@ contains
         end if
 
         call potential(vp_vac2 + vp_vac4, matrix)
+    end
+
+    !> Populates `matrix` with the matrix elements of the VP potential corresponding to a
+    !! contribution defined by `vptype`.
+    !!
+    !! The values of `vptype` correspond to the following VP contributions:
+    !!
+    !! 1. Uehling
+    !! 2. Källén-Sabry
+    !!
+    !! @param vptype Integer specifying the VP contribution.
+    !! @param matrix An `NW x NW` `real64` array for storing the matrix elements.
+    subroutine qedvp_type(vptype, matrix)
+        integer, intent(in) :: vptype
+        real(real64), intent(out) :: matrix(:, :)
+
+        if(.not.qedvp_initialized) then
+            print *, "ERROR(grasp_rciqed_qed_vp): GRASP VP global state not initialized."
+            print *, "qedvp_init() has to be called before the other routines can be used."
+            error stop
+        end if
+
+        select case(vptype)
+        case(1)
+            call potential(vp_vac2, matrix)
+        case(2)
+            call potential(vp_vac4, matrix)
+        case default
+            error stop "ERROR: Invalid vptype for subroutine qedse"
+        end select
     end
 
     !> Integrates the generic potential, stored in the array `v`, with orbitals `k1` and

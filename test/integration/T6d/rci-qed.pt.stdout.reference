@@ -47,7 +47,9 @@ Hamiltonian parts enabled in RCI calculation:
           Coulomb    1.04939688E+04
               NMS    8.11574426E-02
               SMS   -3.62901490E-02
-           QED VP   -2.87857667E+00
+v          QED VP   -2.87857667E+00
+|->       uehling   -2.85612576E+00
+|->   kallensabry   -2.24509105E-02
 QED SE   flambaum    1.55225302E+01
 >              DC   -1.40269047E+04
 >         Non.pet   -1.40142159E+04
@@ -60,7 +62,9 @@ QED SE   flambaum    1.55225302E+01
           Coulomb    1.04953589E+04
               NMS    8.11649490E-02
               SMS   -3.62898971E-02
-           QED VP   -2.87857844E+00
+v          QED VP   -2.87857844E+00
+|->       uehling   -2.85612750E+00
+|->   kallensabry   -2.24509301E-02
 QED SE   flambaum    1.55208407E+01
 >              DC   -1.40263208E+04
 >         Non.pet   -1.40136336E+04
@@ -73,7 +77,9 @@ QED SE   flambaum    1.55208407E+01
           Coulomb    1.04967192E+04
               NMS    8.11753759E-02
               SMS   -3.62895471E-02
-           QED VP   -2.87858089E+00
+v          QED VP   -2.87858089E+00
+|->       uehling   -2.85612993E+00
+|->   kallensabry   -2.24509574E-02
 QED SE   flambaum    1.55184938E+01
 >              DC   -1.40260802E+04
 >         Non.pet   -1.40133954E+04
@@ -86,7 +92,9 @@ QED SE   flambaum    1.55184938E+01
           Coulomb    1.04979978E+04
               NMS    8.11783833E-02
               SMS   -3.62894462E-02
-           QED VP   -2.87858160E+00
+v          QED VP   -2.87858160E+00
+|->       uehling   -2.85613063E+00
+|->   kallensabry   -2.24509653E-02
 QED SE   flambaum    1.55178168E+01
 >              DC   -1.40251247E+04
 >         Non.pet   -1.40124405E+04
@@ -99,7 +107,9 @@ QED SE   flambaum    1.55178168E+01
           Coulomb    1.05001405E+04
               NMS    8.11935910E-02
               SMS   -3.62889358E-02
-           QED VP   -2.87858517E+00
+v          QED VP   -2.87858517E+00
+|->       uehling   -2.85613417E+00
+|->   kallensabry   -2.24510051E-02
 QED SE   flambaum    1.55143938E+01
 >              DC   -1.40246152E+04
 >         Non.pet   -1.40119344E+04
@@ -112,7 +122,9 @@ QED SE   flambaum    1.55143938E+01
           Coulomb    1.04951571E+04
               NMS    8.11662736E-02
               SMS   -3.62898526E-02
-           QED VP   -2.87857875E+00
+v          QED VP   -2.87857875E+00
+|->       uehling   -2.85612781E+00
+|->   kallensabry   -2.24509336E-02
 QED SE   flambaum    1.55205425E+01
 >              DC   -1.40266647E+04
 >         Non.pet   -1.40139779E+04
@@ -125,7 +137,9 @@ QED SE   flambaum    1.55205425E+01
           Coulomb    1.04955466E+04
               NMS    8.11664291E-02
               SMS   -3.62898474E-02
-           QED VP   -2.87857878E+00
+v          QED VP   -2.87857878E+00
+|->       uehling   -2.85612785E+00
+|->   kallensabry   -2.24509340E-02
 QED SE   flambaum    1.55205075E+01
 >              DC   -1.40262920E+04
 >         Non.pet   -1.40136052E+04
@@ -138,7 +152,9 @@ QED SE   flambaum    1.55205075E+01
           Coulomb    1.04969298E+04
               NMS    8.11750570E-02
               SMS   -3.62895578E-02
-           QED VP   -2.87858081E+00
+v          QED VP   -2.87858081E+00
+|->       uehling   -2.85612986E+00
+|->   kallensabry   -2.24509566E-02
 QED SE   flambaum    1.55185655E+01
 >              DC   -1.40258354E+04
 >         Non.pet   -1.40131505E+04
@@ -151,7 +167,9 @@ QED SE   flambaum    1.55185655E+01
           Coulomb    1.04984959E+04
               NMS    8.11859311E-02
               SMS   -3.62891929E-02
-           QED VP   -2.87858337E+00
+v          QED VP   -2.87858337E+00
+|->       uehling   -2.85613239E+00
+|->   kallensabry   -2.24509851E-02
 QED SE   flambaum    1.55161180E+01
 >              DC   -1.40254372E+04
 >         Non.pet   -1.40127547E+04
@@ -164,7 +182,9 @@ QED SE   flambaum    1.55161180E+01
           Coulomb    1.04935825E+04
               NMS    8.11558235E-02
               SMS   -3.62902033E-02
-           QED VP   -2.87857629E+00
+v          QED VP   -2.87857629E+00
+|->       uehling   -2.85612538E+00
+|->   kallensabry   -2.24509062E-02
 QED SE   flambaum    1.55228947E+01
 >              DC   -1.40271171E+04
 >         Non.pet   -1.40144279E+04
@@ -177,7 +197,9 @@ QED SE   flambaum    1.55228947E+01
           Coulomb    1.04952838E+04
               NMS    8.11657189E-02
               SMS   -3.62898712E-02
-           QED VP   -2.87857862E+00
+v          QED VP   -2.87857862E+00
+|->       uehling   -2.85612768E+00
+|->   kallensabry   -2.24509322E-02
 QED SE   flambaum    1.55206674E+01
 >              DC   -1.40264785E+04
 >         Non.pet   -1.40137916E+04
@@ -190,7 +212,9 @@ QED SE   flambaum    1.55206674E+01
           Coulomb    1.04956603E+04
               NMS    8.11675506E-02
               SMS   -3.62898098E-02
-           QED VP   -2.87857905E+00
+v          QED VP   -2.87857905E+00
+|->       uehling   -2.85612811E+00
+|->   kallensabry   -2.24509370E-02
 QED SE   flambaum    1.55202551E+01
 >              DC   -1.40262988E+04
 >         Non.pet   -1.40136122E+04
@@ -203,7 +227,9 @@ QED SE   flambaum    1.55202551E+01
           Coulomb    1.04966576E+04
               NMS    8.11752025E-02
               SMS   -3.62895529E-02
-           QED VP   -2.87858085E+00
+v          QED VP   -2.87858085E+00
+|->       uehling   -2.85612989E+00
+|->   kallensabry   -2.24509570E-02
 QED SE   flambaum    1.55185328E+01
 >              DC   -1.40261232E+04
 >         Non.pet   -1.40134383E+04
@@ -216,7 +242,9 @@ QED SE   flambaum    1.55185328E+01
           Coulomb    1.04970350E+04
               NMS    8.11755775E-02
               SMS   -3.62895403E-02
-           QED VP   -2.87858094E+00
+v          QED VP   -2.87858094E+00
+|->       uehling   -2.85612998E+00
+|->   kallensabry   -2.24509580E-02
 QED SE   flambaum    1.55184484E+01
 >              DC   -1.40257861E+04
 >         Non.pet   -1.40131014E+04
@@ -229,7 +257,9 @@ QED SE   flambaum    1.55184484E+01
           Coulomb    1.04972151E+04
               NMS    8.11758778E-02
               SMS   -3.62895303E-02
-           QED VP   -2.87858101E+00
+v          QED VP   -2.87858101E+00
+|->       uehling   -2.85613005E+00
+|->   kallensabry   -2.24509588E-02
 QED SE   flambaum    1.55183808E+01
 >              DC   -1.40256383E+04
 >         Non.pet   -1.40129536E+04
@@ -242,7 +272,9 @@ QED SE   flambaum    1.55183808E+01
           Coulomb    1.04974802E+04
               NMS    8.11753963E-02
               SMS   -3.62895464E-02
-           QED VP   -2.87858089E+00
+v          QED VP   -2.87858089E+00
+|->       uehling   -2.85612994E+00
+|->   kallensabry   -2.24509575E-02
 QED SE   flambaum    1.55184892E+01
 >              DC   -1.40253214E+04
 >         Non.pet   -1.40126366E+04
@@ -255,7 +287,9 @@ QED SE   flambaum    1.55184892E+01
           Coulomb    1.04987464E+04
               NMS    8.11857207E-02
               SMS   -3.62891999E-02
-           QED VP   -2.87858332E+00
+v          QED VP   -2.87858332E+00
+|->       uehling   -2.85613234E+00
+|->   kallensabry   -2.24509845E-02
 QED SE   flambaum    1.55161653E+01
 >              DC   -1.40251640E+04
 >         Non.pet   -1.40124815E+04
@@ -268,7 +302,9 @@ QED SE   flambaum    1.55161653E+01
           Coulomb    1.04950840E+04
               NMS    8.11662042E-02
               SMS   -3.62898549E-02
-           QED VP   -2.87857873E+00
+v          QED VP   -2.87857873E+00
+|->       uehling   -2.85612780E+00
+|->   kallensabry   -2.24509334E-02
 QED SE   flambaum    1.55205582E+01
 >              DC   -1.40267305E+04
 >         Non.pet   -1.40140436E+04
@@ -281,7 +317,9 @@ QED SE   flambaum    1.55205582E+01
           Coulomb    1.04953244E+04
               NMS    8.11659436E-02
               SMS   -3.62898637E-02
-           QED VP   -2.87857867E+00
+v          QED VP   -2.87857867E+00
+|->       uehling   -2.85612774E+00
+|->   kallensabry   -2.24509327E-02
 QED SE   flambaum    1.55206168E+01
 >              DC   -1.40264621E+04
 >         Non.pet   -1.40137752E+04
@@ -294,7 +332,9 @@ QED SE   flambaum    1.55206168E+01
           Coulomb    1.04955240E+04
               NMS    8.11657014E-02
               SMS   -3.62898718E-02
-           QED VP   -2.87857861E+00
+v          QED VP   -2.87857861E+00
+|->       uehling   -2.85612768E+00
+|->   kallensabry   -2.24509321E-02
 QED SE   flambaum    1.55206713E+01
 >              DC   -1.40262364E+04
 >         Non.pet   -1.40135494E+04
@@ -307,7 +347,9 @@ QED SE   flambaum    1.55206713E+01
           Coulomb    1.04968045E+04
               NMS    8.11752257E-02
               SMS   -3.62895522E-02
-           QED VP   -2.87858085E+00
+v          QED VP   -2.87858085E+00
+|->       uehling   -2.85612990E+00
+|->   kallensabry   -2.24509570E-02
 QED SE   flambaum    1.55185276E+01
 >              DC   -1.40259788E+04
 >         Non.pet   -1.40132940E+04
@@ -320,7 +362,9 @@ QED SE   flambaum    1.55185276E+01
           Coulomb    1.04970056E+04
               NMS    8.11762499E-02
               SMS   -3.62895178E-02
-           QED VP   -2.87858109E+00
+v          QED VP   -2.87858109E+00
+|->       uehling   -2.85613013E+00
+|->   kallensabry   -2.24509597E-02
 QED SE   flambaum    1.55182970E+01
 >              DC   -1.40258877E+04
 >         Non.pet   -1.40132031E+04
@@ -333,7 +377,9 @@ QED SE   flambaum    1.55182970E+01
           Coulomb    1.04987920E+04
               NMS    8.11859546E-02
               SMS   -3.62891921E-02
-           QED VP   -2.87858338E+00
+v          QED VP   -2.87858338E+00
+|->       uehling   -2.85613239E+00
+|->   kallensabry   -2.24509851E-02
 QED SE   flambaum    1.55161127E+01
 >              DC   -1.40251436E+04
 >         Non.pet   -1.40124612E+04
@@ -346,7 +392,9 @@ QED SE   flambaum    1.55161127E+01
           Coulomb    1.04934785E+04
               NMS    8.11558296E-02
               SMS   -3.62902031E-02
-           QED VP   -2.87857629E+00
+v          QED VP   -2.87857629E+00
+|->       uehling   -2.85612538E+00
+|->   kallensabry   -2.24509063E-02
 QED SE   flambaum    1.55228933E+01
 >              DC   -1.40272217E+04
 >         Non.pet   -1.40145325E+04
@@ -359,7 +407,9 @@ QED SE   flambaum    1.55228933E+01
           Coulomb    1.04950275E+04
               NMS    8.11652350E-02
               SMS   -3.62898875E-02
-           QED VP   -2.87857850E+00
+v          QED VP   -2.87857850E+00
+|->       uehling   -2.85612757E+00
+|->   kallensabry   -2.24509309E-02
 QED SE   flambaum    1.55207763E+01
 >              DC   -1.40266828E+04
 >         Non.pet   -1.40139957E+04
@@ -372,7 +422,9 @@ QED SE   flambaum    1.55207763E+01
           Coulomb    1.04955796E+04
               NMS    8.11666395E-02
               SMS   -3.62898403E-02
-           QED VP   -2.87857883E+00
+v          QED VP   -2.87857883E+00
+|->       uehling   -2.85612790E+00
+|->   kallensabry   -2.24509346E-02
 QED SE   flambaum    1.55204602E+01
 >              DC   -1.40262816E+04
 >         Non.pet   -1.40135948E+04
@@ -385,7 +437,9 @@ QED SE   flambaum    1.55204602E+01
           Coulomb    1.04968128E+04
               NMS    8.11757433E-02
               SMS   -3.62895348E-02
-           QED VP   -2.87858097E+00
+v          QED VP   -2.87858097E+00
+|->       uehling   -2.85613002E+00
+|->   kallensabry   -2.24509584E-02
 QED SE   flambaum    1.55184111E+01
 >              DC   -1.40260260E+04
 >         Non.pet   -1.40133413E+04
@@ -398,7 +452,9 @@ QED SE   flambaum    1.55184111E+01
           Coulomb    1.04970102E+04
               NMS    8.11754344E-02
               SMS   -3.62895451E-02
-           QED VP   -2.87858090E+00
+v          QED VP   -2.87858090E+00
+|->       uehling   -2.85612994E+00
+|->   kallensabry   -2.24509576E-02
 QED SE   flambaum    1.55184806E+01
 >              DC   -1.40257955E+04
 >         Non.pet   -1.40131107E+04
@@ -411,7 +467,9 @@ QED SE   flambaum    1.55184806E+01
           Coulomb    1.04973309E+04
               NMS    8.11764540E-02
               SMS   -3.62895109E-02
-           QED VP   -2.87858114E+00
+v          QED VP   -2.87858114E+00
+|->       uehling   -2.85613018E+00
+|->   kallensabry   -2.24509603E-02
 QED SE   flambaum    1.55182511E+01
 >              DC   -1.40255843E+04
 >         Non.pet   -1.40128997E+04
@@ -424,7 +482,9 @@ QED SE   flambaum    1.55182511E+01
           Coulomb    1.04986477E+04
               NMS    8.11854811E-02
               SMS   -3.62892080E-02
-           QED VP   -2.87858327E+00
+v          QED VP   -2.87858327E+00
+|->       uehling   -2.85613228E+00
+|->   kallensabry   -2.24509839E-02
 QED SE   flambaum    1.55162193E+01
 >              DC   -1.40252370E+04
 >         Non.pet   -1.40125545E+04
@@ -437,7 +497,9 @@ QED SE   flambaum    1.55162193E+01
           Coulomb    1.04951820E+04
               NMS    8.11655640E-02
               SMS   -3.62898764E-02
-           QED VP   -2.87857858E+00
+v          QED VP   -2.87857858E+00
+|->       uehling   -2.85612765E+00
+|->   kallensabry   -2.24509318E-02
 QED SE   flambaum    1.55207022E+01
 >              DC   -1.40265636E+04
 >         Non.pet   -1.40138766E+04
@@ -450,7 +512,9 @@ QED SE   flambaum    1.55207022E+01
           Coulomb    1.04969035E+04
               NMS    8.11760245E-02
               SMS   -3.62895253E-02
-           QED VP   -2.87858104E+00
+v          QED VP   -2.87858104E+00
+|->       uehling   -2.85613008E+00
+|->   kallensabry   -2.24509591E-02
 QED SE   flambaum    1.55183478E+01
 >              DC   -1.40259656E+04
 >         Non.pet   -1.40132810E+04
@@ -463,7 +527,9 @@ QED SE   flambaum    1.55183478E+01
           Coulomb    1.04951995E+04
               NMS    8.11656444E-02
               SMS   -3.62898737E-02
-           QED VP   -2.87857860E+00
+v          QED VP   -2.87857860E+00
+|->       uehling   -2.85612767E+00
+|->   kallensabry   -2.24509320E-02
 QED SE   flambaum    1.55206841E+01
 >              DC   -1.40265548E+04
 >         Non.pet   -1.40138678E+04
@@ -476,7 +542,9 @@ QED SE   flambaum    1.55206841E+01
           Coulomb    1.04969578E+04
               NMS    8.11759441E-02
               SMS   -3.62895280E-02
-           QED VP   -2.87858102E+00
+v          QED VP   -2.87858102E+00
+|->       uehling   -2.85613006E+00
+|->   kallensabry   -2.24509589E-02
 QED SE   flambaum    1.55183659E+01
 >              DC   -1.40259027E+04
 >         Non.pet   -1.40132180E+04

@@ -15,7 +15,7 @@ program rci_qed_pt
     use grasp_rciqed_breit, only: init_breit
     use grasp_rciqed_mass_shifts, only: init_mass_shifts
     use grasp_rciqed_qed, only: qedse, nsetypes, setypes_long, setypes_short
-    use grasp_rciqed_qed_vp, only: qedvp_init
+    use grasp_rciqed_qed_vp, only: qedvp_init, qedvp, nvptypes, vptypes_long, vptypes_short
     use grasp_rciqed_rcisettings, only: rcisettings, read_settings_toml
     use grasp_rciqed_cimatrixelements
     use decide_C, only: LSE, LNMS, LSMS
@@ -28,7 +28,8 @@ program rci_qed_pt
     type matrixelement
         real(real64) :: diracpot = 0.0_dp, coulomb = 0.0_dp, breit = 0.0_dp, &
             nms = 0.0_dp, sms = 0.0_dp, vp = 0.0_dp, se = 0.0_dp, &
-            se_array(nsetypes) = (/(0.0_dp, i = 1, nsetypes)/)
+            se_array(nsetypes) = (/(0.0_dp, i = 1, nsetypes)/), &
+            vp_array(nvptypes) = (/(0.0_dp, i = 1, nvptypes)/)
     end type matrixelement
 
     integer, parameter :: hcs_len = 7
@@ -49,8 +50,8 @@ program rci_qed_pt
 
     type(matrixelement) :: hij, asfv
     type(matrixelement), dimension(:), allocatable :: asfvalues
-    real(real64), allocatable :: sematrix(:,:,:)
-    real(real64) :: sum
+    real(real64), allocatable :: sematrix(:,:,:), vpmatrix(:,:,:)
+    real(real64) :: nonpt_sum
 
     type(integer), dimension(:), allocatable :: hcs_rci, hcs_pt
     type(logical), dimension(hcs_len) :: hcs_cat
@@ -194,6 +195,15 @@ program rci_qed_pt
         call qedse(settings%qed_se, sematrix(1,:,:))
     endif
 
+    ! We can also split up the VP in terms of contributions. However, unlike in the SE case,
+    ! the VP contributions are additive, so we do not have to care if the contribution was
+    ! included in the calculation or not -- we can always split it up. If it was included,
+    ! then the total RCI value can be obtained by adding all the contributions together.
+    allocate(vpmatrix(nvptypes,NW,NW))
+    do i = 1, nvptypes
+        call qedvp(i, vpmatrix(i,:,:))
+    enddo
+
     ! Evaluate the ASF expectation values and write them to a CSV file.
     print '(a)', ">>> Evaluating ASF expectation values"
     allocate(asfvalues(NVEC))
@@ -205,7 +215,14 @@ program rci_qed_pt
             hij%diracpot = dirac_potential(i, j)
             hij%coulomb = coulomb(i, j)
             hij%breit = breit(i, j)
-            hij%vp = qed_vp(i, j)
+            ! Evaluate all the additive VP contribution. Currently, we are abusing the QED
+            ! SE routine, which actually is generic, taking any 1-particle matrix:
+            do k = 1, nvptypes
+                ! TODO: generalize qed_se()
+                hij%vp_array(k) = qed_se(vpmatrix(k,:,:), i, j)
+            enddo
+            ! Let's also sum up all the VP contributions to a single value:
+            hij%vp = sum(hij%vp_array)
             ! If self-energy is disabled, then we populate an array with all possible
             ! self-energy values.
             if(settings%qed_se == 0) then
@@ -252,31 +269,50 @@ program rci_qed_pt
         print '(">>> ASF #",i0)', k
         print '(80("-"))'
         print '(a1,a16,a18)',    " ", "Type", "<H_i> (Ha)"
-        sum = 0.0_dp
+        nonpt_sum = 0.0_dp
         do i = 1, hcs_len
             if(.not.hcs_cat(i)) cycle
-            if(i == 7) then
-                ! Self-energy gets special treatment
+            ! Add the contribution to the non-pt sum:
+            nonpt_sum = nonpt_sum + getindex(asfv, i)
+            ! And now we print them all out into the terminal for the user:
+            if(i == 6) then
+                ! VP gets special treatment, as we can split it up into sub-contributions,
+                ! but in this case we also want to print out the sum:
+                print '("v",a16,1p,e18.8)', trim(hcs_pretty(i)), getindex(asfv, i)
+                do j = 1, nvptypes
+                    print '("|-> ",a13,1p,e18.8)', trim(vptypes_short(j)), asfv%vp_array(j)
+                enddo
+            elseif(i == 7) then
+                ! Self-energy gets special treatment, because we only calculate one type and
+                ! we also want to label it appropriately.
                 print '("QED SE ",a10,1p,e18.8)', &
                     trim(setypes_short(settings%qed_se)), getindex(asfv, i)
             else
+                ! Default printing for other contributions:
                 print '(a1,a16,1p,e18.8)', " ", trim(hcs_pretty(i)), getindex(asfv, i)
-            endif
-            sum = sum + getindex(asfv, i)
+            end if
         enddo
         print '(a1,a16,1p,e18.8)', ">", "DC", asfv%diracpot + asfv%coulomb
-        print '(a1,a16,1p,e18.8)', ">", "Non.pet", sum
+        print '(a1,a16,1p,e18.8)', ">", "Non.pet", nonpt_sum
         do i = 1, hcs_len
             if(hcs_cat(i)) cycle
-            if(i == 7) then
-                ! Self-energy gets special treatment, since in PT mode, we have
-                ! several parallel methods.
+            if(i == 6) then
+                ! VP gets special treatment because we have sub-contributions that we want to
+                ! print out as well, in addition to the total:
+                print '("v",a16,1p,e18.8)', trim(hcs_pretty(i)), getindex(asfv, i)
+                do j = 1, nvptypes
+                    print '("|-> ",a13,1p,e18.8)', trim(vptypes_short(j)), asfv%vp_array(j)
+                enddo
+            elseif(i == 7) then
+                ! Self-energy gets special treatment, since in PT mode, we have several
+                ! parallel methods.
                 do j = 1, nsetypes
                     print '("QED SE ",a10,1p,e18.8)', trim(setypes_short(j)), asfv%se_array(j)
                 enddo
             else
+                ! Default printing for other contributions:
                 print '(a1,a16,1p,e18.8)', " ", trim(hcs_pretty(i)), getindex(asfv, i)
-            endif
+            end if
         enddo
     enddo
 
@@ -308,8 +344,15 @@ contains
         write(unit, '(a9)', advance='no') "asf_index"
         do i = 1, hcs_len
             if(.not.hcs_cat(i)) cycle
-            if(i == 7) then
-                ! Self-energy gets special treatment
+            ! Self-energy and VP get special treatment
+            if(i == 6) then
+                ! VP gets special treatment because of sub-contributions
+                do j = 1, nvptypes
+                    write(unit, '(",",a24)', advance='no') trim(hcs_technical(i))//":"//trim(vptypes_short(j))
+                enddo
+                write(unit, '(",",a24)', advance='no') trim(hcs_technical(i))
+            elseif(i == 7) then
+                ! In the self-energy we want to specify the type that was included
                 write(unit, '(",",a24)', advance='no') trim(hcs_technical(i))//":"//trim(setypes_short(settings%qed_se))
             else
                 write(unit, '(",",a24)', advance='no') trim(hcs_technical(i))
@@ -318,7 +361,13 @@ contains
         write(unit, '(",",a24)', advance='no') "sum:non_pt"
         do i = 1, hcs_len
             if(hcs_cat(i)) cycle
-            if(i == 7) then
+            if(i == 6) then
+                ! VP gets special treatment because of sub-contributions
+                do j = 1, nvptypes
+                    write(unit, '(",",a24)', advance='no') "pt:"//trim(hcs_technical(i))//":"//trim(vptypes_short(j))
+                enddo
+                write(unit, '(",",a24)', advance='no') "pt:"//trim(hcs_technical(i))
+            elseif(i == 7) then
                 ! Self-energy gets special treatment, since in PT mode, we have
                 ! several parallel methods.
                 do j = 1, nsetypes
@@ -340,13 +389,25 @@ contains
         write(unit, '(i9)', advance='no') k
         do i = 1, hcs_len
             if(.not.hcs_cat(i)) cycle
+            if(i == 6) then
+                ! VP gets special treatment due to sub-contributions
+                do j = 1, nvptypes
+                    write(unit, '(1(",",e24.16))', advance='no') me%vp_array(j)
+                enddo
+            end if
             write(unit, '(1(",",e24.16))', advance='no') getindex(me, i)
             sum = sum + getindex(me, i)
         enddo
         write(unit, '(1(",",e24.16))', advance='no') sum
         do i = 1, hcs_len
             if(hcs_cat(i)) cycle
-            if(i == 7) then
+            if(i == 6) then
+                ! VP gets special treatment due to sub-contributions
+                do j = 1, nvptypes
+                    write(unit, '(1(",",e24.16))', advance='no') me%vp_array(j)
+                enddo
+                write(unit, '(1(",",e24.16))', advance='no') getindex(me, i)
+            elseif(i == 7) then
                 ! Self-energy gets special treatment, since in PT mode, we have
                 ! several parallel methods.
                 do j = 1, nsetypes
@@ -392,6 +453,7 @@ contains
         asfvalue%coulomb = asfvalue%coulomb + hij%coulomb * cicj
         asfvalue%breit = asfvalue%breit + hij%breit * cicj
         asfvalue%vp  = asfvalue%vp  + hij%vp * cicj
+        asfvalue%vp_array(:) = asfvalue%vp_array(:) + hij%vp_array(:) * cicj
         asfvalue%nms = asfvalue%nms + hij%nms * cicj
         asfvalue%sms = asfvalue%sms + hij%sms * cicj
         asfvalue%se = asfvalue%se + hij%se * cicj
