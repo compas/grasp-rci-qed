@@ -86,8 +86,9 @@ contains
 
     !> Returns the value of the QED VP matrix element for orbitals `k` and `l`.
     !!
-    !! The matrix element values are integrated using the `vac2p4` global array from this
-    !! module, which contains both the Uehling and Källen-Sabry terms.
+    !! The matrix element values are integrated using the `vp_vac2` and `vp_vac4` global
+    !! arrays from this module, which contain the Uehling and Källen-Sabry terms,
+    !! respectively.
     !!
     !! @param k, l Indices of the orbital for which the VP integral is calculated for.
     !!
@@ -99,6 +100,8 @@ contains
         integer, intent(in) :: k, l
         real(real64) :: qedvp_kl
 
+        ! Note: potential also does this check, but if we do it here, we can avoid
+        ! evaluating the vp_vac2 + vp_vac4 sum on zero elements.
         if(NAK(k) == NAK(l)) then
             qedvp_kl = potential(vp_vac2 + vp_vac4, k, l)
         else
@@ -111,7 +114,7 @@ contains
     !!
     !! Internally, it uses the `QUAD` routine to perform the integration on the standard
     !! GRASP grid. It will multiply the value of the potential with `RP`, so the user should
-    !! do that themselves (i.e. internally `TA ~ V * RP`).
+    !! not do that themselves (i.e. internally `TA ~ V * RP`).
     !!
     !! @param v An array containing the potential, represented on the GRASP grid.
     !! @param k1,k2 Indices of the orbitals.
@@ -120,6 +123,7 @@ contains
     function potential(v, k1, k2)
         use grid_C, only: N, RP
         use tatb_C, only: MTP, TA
+        use orb_C, only: NAK
         use wave_C, only: PF, QF, MF
         use quad_I
         ! Arguments:
@@ -129,6 +133,12 @@ contains
         ! Local variables:
         integer :: i
 
+        ! If the orbitals are from different angular momenta, then the matrix element of the
+        ! potential is zero due to symmetry.
+        if(NAK(k1) /= NAK(k2)) then
+            potential = 0.0_dp
+            return
+        end if
         ! MF appears to store the MTP for the orbitals, and we'll use that to determine the
         ! MTP of the integral. This is consistent with the old VPINTF routine.
         MTP = min(MF(k1), MF(k2))
