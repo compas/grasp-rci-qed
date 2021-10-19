@@ -3,7 +3,7 @@ program qedvp_vac2_vac4_test
     ! GRASP global variables:
     use parameter_def, only: NNNP
     use grid_C, only: R
-    use grasp_rciqed_qed_vp, only: qedvp_init, ZDIST, vp_vac2, vp_vac4
+    use grasp_rciqed_qed_vp, only: qedvp_init, ZDIST, vp_potential
     ! Testing libraries
     use grasptest_testing
     use grasptest_utilities
@@ -40,8 +40,8 @@ program qedvp_vac2_vac4_test
     ! Initialize the VP arrays and test their contents:
     call qedvp_init
     call test_array_subset("ZDIST", idxs, ZDIST, ref_zdist)
-    call test_array_subset("[VAC2]", idxs, vp_vac2, ref_vac2)
-    call test_array_subset("[VAC2+VAC4]TB", idxs, vp_vac2 + vp_vac4, ref_vac2p4)
+    call test_array_subset("[VAC2]", idxs, vp_potential(1, :), ref_vac2)
+    call test_array_subset("[VAC2+VAC4]TB", idxs, vp_potential(1, :) + vp_potential(2, :), ref_vac2p4)
 
     if(.not.success) then
         print *, "qedvp_vac2_vac4_test: Tests failed."

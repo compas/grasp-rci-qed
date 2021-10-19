@@ -14,7 +14,8 @@ module grasp_rciqed_qed_vp
     /)
 
     logical :: qedvp_initialized  = .false.
-    real(real64), allocatable :: vp_vac2(:), vp_vac4(:), qedvp_kl(:,:)
+    real(real64), allocatable :: vp_potential(:,:)
+    real(real64), allocatable :: qedvp_kl(:,:)
 
     ! Legacy global array from the ncdist_C module:
     real(real64), DIMENSION(NNNP) :: ZDIST
@@ -54,6 +55,9 @@ contains
 
         LVP = .TRUE.
 
+        ! Allocate the storage for the VP potential representations on the grid:
+        allocate(vp_potential(nvptypes, N))
+
         ! From AUXBLK. NCHARG set up the nuclear charge distrbution in ZDIST. If we're dealing
         ! with the PNC, then the routine actually does nothing, ZDIST stays zero and is
         ! ignored in VAC2 and VAC4.
@@ -64,17 +68,14 @@ contains
         ! The VP potentials are calculated in VAC2 and VAC4, which both write it into the
         ! TB array.
         call VAC2
-        allocate(vp_vac2(N))
-        vp_vac2(:N) = TB(:N)
+        vp_potential(1, :N) = TB(:N)
         ! VAC4, however, does not overwrite TB, but rather adds to it (in the original
         ! implementation it was adding the VAC4 potential on top of VAC2). However, as we
         ! just want to get the VAC4 potential contribution, we set TB back to zero here
         ! first.
         TB(:N) = 0.0_dp
         call VAC4
-        allocate(vp_vac4(N))
-        vp_vac4(:N) = TB(:N)
-
+        vp_potential(2, :N) = TB(:N)
 
         ! Let's mark that the VP arrays are now initialized:
         qedvp_initialized = .true.
@@ -94,7 +95,11 @@ contains
     !!
     !! @param matrix An `NW x NW` `real64` array for storing the matrix elements.
     subroutine qedvp(matrix)
+        ! Arguments:
         real(real64), intent(out) :: matrix(:, :)
+        ! Local variables:
+        real(real64), allocatable :: vp_potential_sum(:)
+        integer :: i
 
         if(.not.qedvp_initialized) then
             print *, "ERROR(grasp_rciqed_qed_vp): GRASP VP global state not initialized."
@@ -102,7 +107,17 @@ contains
             error stop
         end if
 
-        call potential(vp_vac2 + vp_vac4, matrix)
+        ! Sum up all the individual VP contributions into a single array:
+        allocate(vp_potential_sum(size(vp_potential, 2)))
+        vp_potential_sum(:) = 0.0_dp
+        do i = 1, nvptypes
+            vp_potential_sum = vp_potential_sum + vp_potential(i, :)
+        end do
+
+        ! Calculate the matrix elements of the full VP potential
+        call potential(vp_potential_sum, matrix)
+
+        deallocate(vp_potential_sum)
     end
 
     !> Populates `matrix` with the matrix elements of the VP potential corresponding to a
@@ -125,14 +140,11 @@ contains
             error stop
         end if
 
-        select case(vptype)
-        case(1)
-            call potential(vp_vac2, matrix)
-        case(2)
-            call potential(vp_vac4, matrix)
-        case default
+        if(vptype < 1 .or. vptype > nvptypes) then
             error stop "ERROR: Invalid vptype for subroutine qedse"
-        end select
+        end if
+
+        call potential(vp_potential(vptype, :), matrix)
     end
 
     !> Integrates the generic potential, stored in the array `v`, with orbitals `k1` and

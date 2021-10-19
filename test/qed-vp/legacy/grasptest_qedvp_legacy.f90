@@ -14,7 +14,7 @@ contains
     !! It should be called after qedvp_init.
     subroutine qedvp_legacy_init
         use grid_C, only: N, RP
-        use grasp_rciqed_qed_vp, only: qedvp_initialized, vp_vac2, vp_vac4
+        use grasp_rciqed_qed_vp, only: qedvp_initialized, vp_potential
         use grasptest_vpilst_C, only: NVPI, FRSTVP
 
         if(.not.qedvp_initialized) then
@@ -32,7 +32,7 @@ contains
         ! use ZDIST to actually evaluate the matrix elements. This scaling of the TB array
         ! used to be in AUXBLK.
         ZDIST(1) = 0.0_dp
-        ZDIST(2:N) = (vp_vac2(2:N) + vp_vac4(2:N)) * RP(2:N)
+        ZDIST(2:N) = (vp_potential(1, 2:N) + vp_potential(2, 2:N)) * RP(2:N)
 
     end
 
