@@ -8,7 +8,6 @@ var searchData=
   ['setsum',['setsum',['../interfacesetsum__i_1_1setsum.html#a9c0ef832ff944f5b715a8ad4677d7afa',1,'setsum_i::setsum::setsum()'],['../setsum_8f90.html#ad5d0d10a8c68a16f44e9216604076f7a',1,'setsum():&#160;setsum.f90']]],
   ['setup',['setup',['../exportvp_8f90.html#add3a81e1f07081e59744b32caf64fa82',1,'setup():&#160;exportvp.f90'],['../namespacegrasptest__lib9290__setup.html#a52f6ff712b40031699cf68122ae02d99',1,'grasptest_lib9290_setup::setup()'],['../lib92__quad_8f90.html#a962cd8c829671084c21389b13d69b586',1,'setup():&#160;lib92_quad.f90']]],
   ['setup_5fmohr_5fse',['setup_mohr_se',['../hydrogenic__se_8f90.html#ac6266b2c769f0131d0de03257ee6a591',1,'hydrogenic_se.f90']]],
-  ['setup_5fvacuum_5fpolarization',['setup_vacuum_polarization',['../exportvp_8f90.html#a1cc7c16a857107fe96c0cd986bca584b',1,'setup_vacuum_polarization:&#160;exportvp.f90'],['../hydrogenic__vp_8f90.html#ad39b86fd6e8e4a608f3f17f2b019c098',1,'setup_vacuum_polarization:&#160;hydrogenic_vp.f90']]],
   ['shab_5fcorrect',['shab_correct',['../dirac_8f.html#a70863a1a1d4e124cd3a9d31fb86b03f5',1,'dirac.f']]],
   ['shab_5fdab_5fmatrix',['shab_dab_matrix',['../se__pot_8f.html#a8cfe8f57e2cfc11cb942857c5fea8ef1',1,'se_pot.f']]],
   ['shab_5fdfac',['shab_dfac',['../nucl_8f.html#a16bad5ae2af11a3031355d8c711d08c4',1,'nucl.f']]],

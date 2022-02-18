@@ -1,3 +1,4 @@
 <map id="hydrogenic_vp" name="hydrogenic_vp">
-<area shape="rect" id="node2" href="$pt_8f90.html#a3befcbd68432b869abd100afc6de459d" title="Calculate the relative difference of a and b. " alt="" coords="171,5,231,32"/>
+<area shape="rect" id="node2" href="$namespacegrasp__rciqed__qed__vp.html#a1b83fb35040c5eaf5e2e48a12f4d43f6" title="Initializes the global state for the vacuum polarization calculations. " alt="" coords="181,5,340,47"/>
+<area shape="rect" id="node3" href="$namespacegrasptest__qedvp__legacy.html#a17f989d13aa6fc5f87375322a6c68f20" title="This routine sets up the necessary global state for the legacy QED VP routines. It should be called a..." alt="" coords="171,71,351,112"/>
 </map>

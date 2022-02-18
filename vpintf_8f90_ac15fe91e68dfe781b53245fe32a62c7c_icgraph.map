@@ -1,6 +1,4 @@
 <map id="vpintf" name="vpintf">
-<area shape="rect" id="node2" href="$vpint_8f90.html#a2608d5b1293af67cf8577630a497e662" title="vpint" alt="" coords="113,13,168,39"/>
-<area shape="rect" id="node3" href="$namespacegrasp__rciqed__cimatrixelements.html#a390bfdae10ded08afc4e7223f29d8ba5" title="Calls the VPINT routine, but ensures that the input k and l arguments do not get swapped. " alt="" coords="216,5,443,47"/>
-<area shape="rect" id="node4" href="$namespacegrasp__rciqed__cimatrixelements.html#a482f154b79cf06803a2ce754e275a04d" title="The ONESCALAR output has to be passed as arguments here. " alt="" coords="491,5,717,47"/>
-<area shape="rect" id="node5" href="$namespacegrasp__rciqed__cimatrixelements.html#abfe49bce11b5a66df83685707947eef4" title="This also calls the ONESCALAR routing from lib9290. " alt="" coords="765,5,992,47"/>
+<area shape="rect" id="node2" href="$vpint_8f90.html#a2608d5b1293af67cf8577630a497e662" title="vpint" alt="" coords="113,5,168,32"/>
+<area shape="rect" id="node3" href="$hydrogenic__vp_8f90.html#ae4e874962c0150d7e9c278dee3ca4c7d" title="Calls the VPINT routine, but ensures that the input k and l arguments do not get swapped. " alt="" coords="216,5,307,32"/>
 </map>

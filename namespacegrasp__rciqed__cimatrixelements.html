@@ -120,9 +120,6 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a482f154b79cf06803a2ce754e275a04d"><td class="memItemLeft" align="right" valign="top">real(real64) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegrasp__rciqed__cimatrixelements.html#a482f154b79cf06803a2ce754e275a04d">qed_vp_cached</a> (ic, ir, k, l, tshell)</td></tr>
 <tr class="memdesc:a482f154b79cf06803a2ce754e275a04d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <code>ONESCALAR</code> output has to be passed as arguments here.  <a href="#a482f154b79cf06803a2ce754e275a04d">More...</a><br /></td></tr>
 <tr class="separator:a482f154b79cf06803a2ce754e275a04d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a390bfdae10ded08afc4e7223f29d8ba5"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegrasp__rciqed__cimatrixelements.html#a390bfdae10ded08afc4e7223f29d8ba5">vpint_safe</a> (k, l, result)</td></tr>
-<tr class="memdesc:a390bfdae10ded08afc4e7223f29d8ba5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls the <code>VPINT</code> routine, but ensures that the input <code>k</code> and <code>l</code> arguments do not get swapped.  <a href="#a390bfdae10ded08afc4e7223f29d8ba5">More...</a><br /></td></tr>
-<tr class="separator:a390bfdae10ded08afc4e7223f29d8ba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab096c138ca6a98a2c15778762252af16"><td class="memItemLeft" align="right" valign="top">real(real64) function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegrasp__rciqed__cimatrixelements.html#ab096c138ca6a98a2c15778762252af16">coulomb</a> (ic, ir)</td></tr>
 <tr class="memdesc:ab096c138ca6a98a2c15778762252af16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Also calls the <code>RKCO_GG</code> routine.  <a href="#ab096c138ca6a98a2c15778762252af16">More...</a><br /></td></tr>
 <tr class="separator:ab096c138ca6a98a2c15778762252af16"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -996,9 +993,6 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="namespacegrasp__rciqed__cimatrixelements_abfe49bce11b5a66df83685707947eef4_cgraph.png" border="0" usemap="#namespacegrasp__rciqed__cimatrixelements_abfe49bce11b5a66df83685707947eef4_cgraph" alt=""/></div>
 <map name="namespacegrasp__rciqed__cimatrixelements_abfe49bce11b5a66df83685707947eef4_cgraph" id="namespacegrasp__rciqed__cimatrixelements_abfe49bce11b5a66df83685707947eef4_cgraph">
 <area shape="rect" id="node2" href="namespacegrasp__rciqed__cimatrixelements.html#a482f154b79cf06803a2ce754e275a04d" title="The ONESCALAR output has to be passed as arguments here. " alt="" coords="280,5,507,47"/>
-<area shape="rect" id="node3" href="namespacegrasp__rciqed__cimatrixelements.html#a390bfdae10ded08afc4e7223f29d8ba5" title="Calls the VPINT routine, but ensures that the input k and l arguments do not get swapped. " alt="" coords="555,5,781,47"/>
-<area shape="rect" id="node4" href="vpint_8f90.html#a2608d5b1293af67cf8577630a497e662" title="vpint" alt="" coords="829,13,884,39"/>
-<area shape="rect" id="node5" href="vpintf_8f90.html#ac15fe91e68dfe781b53245fe32a62c7c" title="vpintf" alt="" coords="932,13,992,39"/>
 </map>
 </div>
 
@@ -1057,16 +1051,6 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The QED vacuum polarization expectation value \(\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{VP}}|\Psi_{\textrm{ir}}\rangle\). </dd></dl>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="namespacegrasp__rciqed__cimatrixelements_a482f154b79cf06803a2ce754e275a04d_cgraph.png" border="0" usemap="#namespacegrasp__rciqed__cimatrixelements_a482f154b79cf06803a2ce754e275a04d_cgraph" alt=""/></div>
-<map name="namespacegrasp__rciqed__cimatrixelements_a482f154b79cf06803a2ce754e275a04d_cgraph" id="namespacegrasp__rciqed__cimatrixelements_a482f154b79cf06803a2ce754e275a04d_cgraph">
-<area shape="rect" id="node2" href="namespacegrasp__rciqed__cimatrixelements.html#a390bfdae10ded08afc4e7223f29d8ba5" title="Calls the VPINT routine, but ensures that the input k and l arguments do not get swapped. " alt="" coords="280,5,507,47"/>
-<area shape="rect" id="node3" href="vpint_8f90.html#a2608d5b1293af67cf8577630a497e662" title="vpint" alt="" coords="555,13,609,39"/>
-<area shape="rect" id="node4" href="vpintf_8f90.html#ac15fe91e68dfe781b53245fe32a62c7c" title="vpintf" alt="" coords="657,13,717,39"/>
-</map>
-</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -1253,60 +1237,6 @@ Here is the caller graph for this function:</div>
 <area shape="rect" id="node3" href="matrixelements__hydrogenic_8f90.html#ac70bf8550a5bb3dfbde6e060ddd7f222" title="verify_dcbmsvp" alt="" coords="591,5,717,32"/>
 <area shape="rect" id="node4" href="matrixelements__hydrogenic_8f90.html#a3d6dd33862b729ae9e2363184220ca6a" title="matrixelements_hydrogenic" alt="" coords="765,5,971,32"/>
 <area shape="rect" id="node6" href="genmat_8f90.html#a2be391b17a5070fa50d0f1530eefb741" title="genmat" alt="" coords="618,56,690,83"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a390bfdae10ded08afc4e7223f29d8ba5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a390bfdae10ded08afc4e7223f29d8ba5">&#9670;&nbsp;</a></span>vpint_safe()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">subroutine grasp_rciqed_cimatrixelements::vpint_safe </td>
-          <td>(</td>
-          <td class="paramtype">integer, value&#160;</td>
-          <td class="paramname"><em>k</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">integer, value&#160;</td>
-          <td class="paramname"><em>l</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real(real64), intent(out)&#160;</td>
-          <td class="paramname"><em>result</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Calls the <code>VPINT</code> routine, but ensures that the input <code>k</code> and <code>l</code> arguments do not get swapped. </p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="namespacegrasp__rciqed__cimatrixelements_a390bfdae10ded08afc4e7223f29d8ba5_cgraph.png" border="0" usemap="#namespacegrasp__rciqed__cimatrixelements_a390bfdae10ded08afc4e7223f29d8ba5_cgraph" alt=""/></div>
-<map name="namespacegrasp__rciqed__cimatrixelements_a390bfdae10ded08afc4e7223f29d8ba5_cgraph" id="namespacegrasp__rciqed__cimatrixelements_a390bfdae10ded08afc4e7223f29d8ba5_cgraph">
-<area shape="rect" id="node2" href="vpint_8f90.html#a2608d5b1293af67cf8577630a497e662" title="vpint" alt="" coords="280,13,335,39"/>
-<area shape="rect" id="node3" href="vpintf_8f90.html#ac15fe91e68dfe781b53245fe32a62c7c" title="vpintf" alt="" coords="383,13,443,39"/>
-</map>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="namespacegrasp__rciqed__cimatrixelements_a390bfdae10ded08afc4e7223f29d8ba5_icgraph.png" border="0" usemap="#namespacegrasp__rciqed__cimatrixelements_a390bfdae10ded08afc4e7223f29d8ba5_icgraph" alt=""/></div>
-<map name="namespacegrasp__rciqed__cimatrixelements_a390bfdae10ded08afc4e7223f29d8ba5_icgraph" id="namespacegrasp__rciqed__cimatrixelements_a390bfdae10ded08afc4e7223f29d8ba5_icgraph">
-<area shape="rect" id="node2" href="namespacegrasp__rciqed__cimatrixelements.html#a482f154b79cf06803a2ce754e275a04d" title="The ONESCALAR output has to be passed as arguments here. " alt="" coords="280,5,507,47"/>
-<area shape="rect" id="node3" href="namespacegrasp__rciqed__cimatrixelements.html#abfe49bce11b5a66df83685707947eef4" title="This also calls the ONESCALAR routing from lib9290. " alt="" coords="555,5,781,47"/>
 </map>
 </div>
 

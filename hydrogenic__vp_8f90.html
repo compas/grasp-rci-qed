@@ -85,12 +85,13 @@ Data Types</h2></td></tr>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a967a75cf030689eb7ca4ca2b08e4eaeb"><td class="memItemLeft" align="right" valign="top">program&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hydrogenic__vp_8f90.html#a967a75cf030689eb7ca4ca2b08e4eaeb">hydrogenic_vp</a></td></tr>
 <tr class="separator:a967a75cf030689eb7ca4ca2b08e4eaeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4e874962c0150d7e9c278dee3ca4c7d"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hydrogenic__vp_8f90.html#ae4e874962c0150d7e9c278dee3ca4c7d">vpint_safe</a> (k, l, result)</td></tr>
+<tr class="memdesc:ae4e874962c0150d7e9c278dee3ca4c7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls the <code>VPINT</code> routine, but ensures that the input <code>k</code> and <code>l</code> arguments do not get swapped.  <a href="#ae4e874962c0150d7e9c278dee3ca4c7d">More...</a><br /></td></tr>
+<tr class="separator:ae4e874962c0150d7e9c278dee3ca4c7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f9f8ae64bc6ebaaf5c4bf0854303e89"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hydrogenic__vp_8f90.html#a4f9f8ae64bc6ebaaf5c4bf0854303e89">allocate_hydrogenic_orbitals</a></td></tr>
 <tr class="separator:a4f9f8ae64bc6ebaaf5c4bf0854303e89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a544586c53e9643cc357004fbd8e0fc86"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hydrogenic__vp_8f90.html#a544586c53e9643cc357004fbd8e0fc86">populate_hydrogenic</a> (idx, orbital_n, orbital_kappa)</td></tr>
 <tr class="separator:a544586c53e9643cc357004fbd8e0fc86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad39b86fd6e8e4a608f3f17f2b019c098"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hydrogenic__vp_8f90.html#ad39b86fd6e8e4a608f3f17f2b019c098">setup_vacuum_polarization</a></td></tr>
-<tr class="separator:ad39b86fd6e8e4a608f3f17f2b019c098"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="a4f9f8ae64bc6ebaaf5c4bf0854303e89"></a>
@@ -137,7 +138,8 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="hydrogenic__vp_8f90_a967a75cf030689eb7ca4ca2b08e4eaeb_cgraph.png" border="0" usemap="#hydrogenic__vp_8f90_a967a75cf030689eb7ca4ca2b08e4eaeb_cgraph" alt=""/></div>
 <map name="hydrogenic__vp_8f90_a967a75cf030689eb7ca4ca2b08e4eaeb_cgraph" id="hydrogenic__vp_8f90_a967a75cf030689eb7ca4ca2b08e4eaeb_cgraph">
-<area shape="rect" id="node2" href="pt_8f90.html#a3befcbd68432b869abd100afc6de459d" title="Calculate the relative difference of a and b. " alt="" coords="171,5,231,32"/>
+<area shape="rect" id="node2" href="namespacegrasp__rciqed__qed__vp.html#a1b83fb35040c5eaf5e2e48a12f4d43f6" title="Initializes the global state for the vacuum polarization calculations. " alt="" coords="181,5,340,47"/>
+<area shape="rect" id="node3" href="namespacegrasptest__qedvp__legacy.html#a17f989d13aa6fc5f87375322a6c68f20" title="This routine sets up the necessary global state for the legacy QED VP routines. It should be called a..." alt="" coords="171,71,351,112"/>
 </map>
 </div>
 
@@ -177,20 +179,48 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="ad39b86fd6e8e4a608f3f17f2b019c098"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad39b86fd6e8e4a608f3f17f2b019c098">&#9670;&nbsp;</a></span>setup_vacuum_polarization()</h2>
+<a id="ae4e874962c0150d7e9c278dee3ca4c7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4e874962c0150d7e9c278dee3ca4c7d">&#9670;&nbsp;</a></span>vpint_safe()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">subroutine hydrogenic_vp::setup_vacuum_polarization </td>
+          <td class="memname">subroutine hydrogenic_vp::vpint_safe </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">integer, value&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">integer, value&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(real64), intent(out)&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Calls the <code>VPINT</code> routine, but ensures that the input <code>k</code> and <code>l</code> arguments do not get swapped. </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="hydrogenic__vp_8f90_ae4e874962c0150d7e9c278dee3ca4c7d_cgraph.png" border="0" usemap="#hydrogenic__vp_8f90_ae4e874962c0150d7e9c278dee3ca4c7d_cgraph" alt=""/></div>
+<map name="hydrogenic__vp_8f90_ae4e874962c0150d7e9c278dee3ca4c7d_cgraph" id="hydrogenic__vp_8f90_ae4e874962c0150d7e9c278dee3ca4c7d_cgraph">
+<area shape="rect" id="node2" href="vpint_8f90.html#a2608d5b1293af67cf8577630a497e662" title="vpint" alt="" coords="144,5,199,32"/>
+<area shape="rect" id="node3" href="vpintf_8f90.html#ac15fe91e68dfe781b53245fe32a62c7c" title="vpintf" alt="" coords="247,5,307,32"/>
+</map>
+</div>
 
 </div>
 </div>

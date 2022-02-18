@@ -70,7 +70,9 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p>Replacing the old <code>rci90</code> and <code>rci90_mpi</code> programs with this version has the following implications on the GRASP libraries:</p>
 <ul>
-<li><code>where_C</code> in <code>libmod</code> is deprecated and should be removed </li>
+<li><code>where_C</code> in <code>libmod</code> is deprecated and should be removed</li>
+<li>Dependency on <code>ncdist_C</code> from <code>libmod</code> has been removed, which used to provide the <code>ZDIST</code> global variable storing the nuclear charge distributions and, later, the vacuum polarization potential.</li>
+<li>Dependency on <code>vpilst_C</code> from <code>libmod</code> has been removed, which was used to dynamically store the VP matrix elements for lookup. Relatedly, <code>NVPItmp</code> variable from <code>hmat_C</code> is no longer used. </li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->

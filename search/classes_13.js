@@ -2,7 +2,6 @@ var searchData=
 [
   ['vac2',['vac2',['../interfacevac2__i_1_1vac2.html',1,'vac2_i']]],
   ['vac4',['vac4',['../interfacevac4__i_1_1vac4.html',1,'vac4_i']]],
-  ['vacpol',['vacpol',['../interfacevacpol__i_1_1vacpol.html',1,'vacpol_i']]],
   ['valid_5fvalue',['valid_value',['../structcpptoml_1_1valid__value.html',1,'cpptoml']]],
   ['valid_5fvalue_5for_5fstring_5fconvertible',['valid_value_or_string_convertible',['../structcpptoml_1_1valid__value__or__string__convertible.html',1,'cpptoml']]],
   ['value',['value',['../classcpptoml_1_1value.html',1,'cpptoml']]],
