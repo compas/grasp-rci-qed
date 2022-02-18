@@ -26,12 +26,12 @@
       USE def_C
       USE grid_C, ONLY: r, n
       USE npar_C
-      USE ncdist_C, ONLY: zdist
+      use grasp_rciqed_qed_vp, only: ZDIST
       USE tatb_C, ONLY: mtp, ta, tb
 !-----------------------------------------------
 !   I n t e r f a c e   B l o c k s
 !-----------------------------------------------
-      USE funl_I
+      use grasp_rciqed_qed_vp, only: funl
       USE quad_I
       IMPLICIT NONE
 !-----------------------------------------------

@@ -43,7 +43,6 @@
       USE cteilsrk_C
       USE coeils_C
       USE bilst_C
-      USE vpilst_C
       USE keilst_C
       USE vinlst_C
       USE fposition_C
@@ -285,16 +284,6 @@
          IF (NVINTI .GT. 0) THEN
             CALL DALLOC (INDTEI, 'INDTEI', 'MATRIX')
             CALL DALLOC (VALTEI, 'VALTIE', 'MATRIX')
-         ENDIF
-      ENDIF
-!
-!   Deallocate storage for the vacuum-polarisation integral list;
-!   this was allocated in VPINT
-!
-      IF (LVP) THEN
-         IF (NVPI .GT. 0) THEN
-            CALL DALLOC (INDVPI, 'INDVPI', 'MATRIX')
-            CALL DALLOC (VALVPI, 'VALVPI', 'MATRIX')
          ENDIF
       ENDIF
 

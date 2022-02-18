@@ -12,7 +12,7 @@
 !! does not make sense to repeat it. The `*_cached` versions of the routines can
 !! be used to achieve that.
 module grasp_rciqed_cimatrixelements
-    use grasp_rciqed_kinds, only: real64, dp
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
     public dirac_potential, coulomb, coulomb_cached, breit, breit_split, &
@@ -65,7 +65,6 @@ contains
     !! @returns The Dirac kinetic + nuclear potential expectation value
     !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{D}} + \hat{V}_{\textrm{nucl.}}|\Psi_{\textrm{ir}}\rangle\f$.
     function dirac_potential(ic, ir)
-        use grasp_rciqed_kinds, only: real64, dp
         use orb_C
         use onescalar_I
         implicit none
@@ -90,7 +89,6 @@ contains
     !! @returns The Dirac kinetic + nuclear potential expectation value
     !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{D}} + \hat{V}_{\textrm{nucl.}}|\Psi_{\textrm{ir}}\rangle\f$.
     function dirac_potential_cached(ic, ir, k, l, tshell)
-        use grasp_rciqed_kinds, only: real64, dp
         use orb_C
         implicit none
 
@@ -122,7 +120,6 @@ contains
     !> Calls the `IABINT` routine, but ensures that the input `k` and `l`
     !! arguments do not get swapped.
     subroutine iabint_safe(k, l, result)
-        use grasp_rciqed_kinds, only: real64
         use iabint_I
         integer, value :: k, l
         real(real64), intent(out) :: result
@@ -140,7 +137,6 @@ contains
     !! @returns The normal mass shift expectation value
     !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{NMS}}|\Psi_{\textrm{ir}}\rangle\f$.
     function nms(ic, ir)
-        use grasp_rciqed_kinds, only: real64, dp
         use orb_C
         use onescalar_I
         implicit none
@@ -164,7 +160,6 @@ contains
     !! @returns The normal mass shift expectation value
     !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{NMS}}|\Psi_{\textrm{ir}}\rangle\f$.
     function nms_cached(ic, ir, k, l, tshell)
-        use grasp_rciqed_kinds, only: real64, dp
         use def_C, only: EMN
         use orb_C
         implicit none
@@ -195,7 +190,6 @@ contains
     !> Calls the `KEINT` routine, but ensures that the input `k` and `l`
     !! arguments do not get swapped.
     subroutine keint_safe(k, l, result)
-        use grasp_rciqed_kinds, only: real64
         use keint_I
         integer, value :: k, l
         real(real64), intent(out) :: result
@@ -212,7 +206,6 @@ contains
     !! @returns The QED vacuum polarization expectation value
     !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{VP}}|\Psi_{\textrm{ir}}\rangle\f$.
     function qed_vp(ic, ir)
-        use grasp_rciqed_kinds, only: real64, dp
         use orb_C
         use onescalar_I
         implicit none
@@ -236,8 +229,8 @@ contains
     !! @returns The QED vacuum polarization expectation value
     !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{VP}}|\Psi_{\textrm{ir}}\rangle\f$.
     function qed_vp_cached(ic, ir, k, l, tshell)
-        use grasp_rciqed_kinds, only: real64, dp
         use orb_C
+        use grasp_rciqed_qed_vp, only: qedvp_kl
         implicit none
 
         integer, intent(in) :: ic, ir, k, l
@@ -253,24 +246,12 @@ contains
         if(k /= 0 .and. k == l) then
             do m = 1, NW
                 if(abs(tshell(m)) <= cutoff) cycle
-                call vpint_safe(m, m, result)
-                qed_vp_cached = qed_vp_cached + result * tshell(m)
+                qed_vp_cached = qed_vp_cached + qedvp_kl(m, m) * tshell(m)
             enddo
         elseif(k /= 0 .and. k /= l .and. abs(tshell(1)) > cutoff) then
-            call vpint_safe(k, l, result)
-            qed_vp_cached = qed_vp_cached + result * tshell(1)
+            qed_vp_cached = qed_vp_cached + qedvp_kl(k, l) * tshell(1)
         endif
     end function qed_vp_cached
-
-    !> Calls the `VPINT` routine, but ensures that the input `k` and `l`
-    !! arguments do not get swapped.
-    subroutine vpint_safe(k, l, result)
-        use grasp_rciqed_kinds, only: real64
-        use vpint_I
-        integer, value :: k, l
-        real(real64), intent(out) :: result
-        call VPINT(k, l, result)
-    end
 
     !===========================================================================
     ! Routines for two-particle Coulomb matrix elements
@@ -282,7 +263,6 @@ contains
     !! @returns The Coulomb interaction expectation value
     !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{C}}|\Psi_{\textrm{ir}}\rangle\f$.
     function coulomb(ic, ir)
-        use grasp_rciqed_kinds, only: real64
         use buffer_C, only: NVCOEF
         use cord_I
         use rkco_gg_I
@@ -318,7 +298,6 @@ contains
     !! @returns The Coulomb interaction expectation value
     !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{C}}|\Psi_{\textrm{ir}}\rangle\f$.
     function coulomb_cached(ic, ir)
-        use grasp_rciqed_kinds, only: real64
         use buffer_C, only: NVCOEF, COEFF, LABEL
 
         integer, intent(in) :: ic, ir
@@ -339,7 +318,6 @@ contains
     !> Calls the RKINTC, but makes sure that the input LABEL values do not get
     !! changed.
     subroutine rkintc_safe(l1, l2, l3, l4, l5, result)
-        use grasp_rciqed_kinds, only: real64
         use rkintc_I
         integer, value :: l1, l2, l3, l4, l5
         real(real64), intent(out) :: result
@@ -356,7 +334,6 @@ contains
     !! @returns The special mass shift expectation value
     !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{SMS}}|\Psi_{\textrm{ir}}\rangle\f$.
     function sms(ic, ir)
-        use grasp_rciqed_kinds, only: real64
         use buffer_C, only: NVCOEF
         use cord_I
         use rkco_gg_I
@@ -376,7 +353,6 @@ contains
     !! @returns The special mass shift expectation value
     !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{SMS}}|\Psi_{\textrm{ir}}\rangle\f$.
     function sms_cached(ic, ir)
-        use grasp_rciqed_kinds, only: real64, dp
         use def_C, only: EMN
         use buffer_C, only: NVCOEF, COEFF, LABEL
         use vint_I
@@ -406,7 +382,6 @@ contains
 
     !> Returns the matrix element of the Breit operator.
     function breit(ic, ir)
-        use grasp_rciqed_kinds, only: real64, dp
 
         integer, intent(in) :: ic, ir
         real(real64) :: breit
@@ -463,7 +438,6 @@ contains
     !! give any hints. It just appears that `RKCI_GG` / `BREID` populate the
     !! `LABEL` arrays differently for some `ic`/`ir` values.
     subroutine breit_split(ic, ir, breit_core, breit_noncore)
-        use grasp_rciqed_kinds, only: real64, dp
         use buffer_C, only: NVCOEF, COEFF, LABEL
         use breid_I
         use rkco_gg_I
@@ -574,7 +548,6 @@ contains
     !! @returns The self-energy expectation value
     !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{SE}}|\Psi_{\textrm{ic}}\rangle\f$.
     function qed_se_mohr(ic)
-        use grasp_rciqed_kinds, only: real64, dp
         use parameter_def, only: NNNW
         use qed_slfen_I
         implicit none
@@ -598,7 +571,6 @@ contains
     !! @returns The self-energy expectation value
     !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{SE}}|\Psi_{\textrm{ic}}\rangle\f$.
     function qed_se_mohr_cached(ic, slfint)
-        use grasp_rciqed_kinds, only: real64, dp
         use parameter_def, only: NNNW
         use orb_C
         use iq_I
@@ -627,7 +599,6 @@ contains
     !! @returns The QED self-energy expectation value
     !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{VP}}|\Psi_{\textrm{ir}}\rangle\f$.
     function qed_se(sematrix, ic, ir)
-        use grasp_rciqed_kinds, only: real64, dp
         use orb_C
         use onescalar_I
         implicit none
@@ -652,7 +623,6 @@ contains
     !! @returns The QED self-energy expectation value
     !!   \f$\langle\Psi_{\textrm{ic}}|\hat{H}_{\textrm{VP}}|\Psi_{\textrm{ir}}\rangle\f$.
     function qed_se_cached(sematrix, ic, ir, k, l, tshell)
-        use grasp_rciqed_kinds, only: real64, dp
         use orb_C
         implicit none
 

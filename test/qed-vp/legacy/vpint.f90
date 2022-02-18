@@ -19,7 +19,7 @@
      USE parameter_def,   ONLY: KEYORB
      USE memory_man
      USE grid_C
-     USE vpilst_C, indoei=>indvpi, valoei=>valvpi, FIRST=>FRSTVP
+     USE grasptest_vpilst_C, indoei=>indvpi, valoei=>valvpi, FIRST=>FRSTVP
 !-----------------------------------------------
 !   I n t e r f a c e   B l o c k s
 !-----------------------------------------------

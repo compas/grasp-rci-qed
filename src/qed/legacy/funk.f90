@@ -1,6 +1,6 @@
 !***********************************************************************
 !                                                                      *
-      REAL(KIND(0.0D0)) FUNCTION FUNK (X, N)
+      REAL(DOUBLE) FUNCTION FUNK (X, N)
 !                                                                      *
 !   This  function  evaluates the KN(X) functions using the analytic   *
 !   functions defined in tables 1 and 3 of Fullerton and Rinker.       *
@@ -14,7 +14,7 @@
 !-----------------------------------------------
 !   M o d u l e s
 !-----------------------------------------------
-      USE vast_kind_param, ONLY:  DOUBLE
+      use, intrinsic :: iso_fortran_env, only: DOUBLE => real64
       IMPLICIT NONE
 !-----------------------------------------------
 !   D u m m y   A r g u m e n t s

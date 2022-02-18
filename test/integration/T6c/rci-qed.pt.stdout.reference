@@ -61,7 +61,9 @@ Hamiltonian parts enabled in RCI calculation:
           Coulomb    1.04939700E+04
               NMS    8.11574542E-02
               SMS   -3.62901486E-02
-           QED VP   -2.87857667E+00
+v          QED VP   -2.87857667E+00
+|->       uehling   -2.85612576E+00
+|->   kallensabry   -2.24509105E-02
 QED SE     qedmod    1.52825228E+01
 >              DC   -1.40269047E+04
 >         Non.pet   -1.40144559E+04
@@ -74,7 +76,9 @@ QED SE     qedmod    1.52825228E+01
           Coulomb    1.04953585E+04
               NMS    8.11649460E-02
               SMS   -3.62898972E-02
-           QED VP   -2.87857843E+00
+v          QED VP   -2.87857843E+00
+|->       uehling   -2.85612750E+00
+|->   kallensabry   -2.24509301E-02
 QED SE     qedmod    1.52797837E+01
 >              DC   -1.40263208E+04
 >         Non.pet   -1.40138747E+04
@@ -87,7 +91,9 @@ QED SE     qedmod    1.52797837E+01
           Coulomb    1.04967187E+04
               NMS    8.11753714E-02
               SMS   -3.62895473E-02
-           QED VP   -2.87858089E+00
+v          QED VP   -2.87858089E+00
+|->       uehling   -2.85612993E+00
+|->   kallensabry   -2.24509574E-02
 QED SE     qedmod    1.52759719E+01
 >              DC   -1.40260802E+04
 >         Non.pet   -1.40136380E+04
@@ -100,7 +106,9 @@ QED SE     qedmod    1.52759719E+01
           Coulomb    1.04980010E+04
               NMS    8.11784132E-02
               SMS   -3.62894452E-02
-           QED VP   -2.87858160E+00
+v          QED VP   -2.87858160E+00
+|->       uehling   -2.85613064E+00
+|->   kallensabry   -2.24509654E-02
 QED SE     qedmod    1.52748598E+01
 >              DC   -1.40251247E+04
 >         Non.pet   -1.40126835E+04
@@ -113,7 +121,9 @@ QED SE     qedmod    1.52748598E+01
           Coulomb    1.05001369E+04
               NMS    8.11935571E-02
               SMS   -3.62889369E-02
-           QED VP   -2.87858517E+00
+v          QED VP   -2.87858517E+00
+|->       uehling   -2.85613416E+00
+|->   kallensabry   -2.24510050E-02
 QED SE     qedmod    1.52693228E+01
 >              DC   -1.40246152E+04
 >         Non.pet   -1.40121795E+04
@@ -126,7 +136,9 @@ QED SE     qedmod    1.52693228E+01
           Coulomb    1.04951575E+04
               NMS    8.11662768E-02
               SMS   -3.62898525E-02
-           QED VP   -2.87857875E+00
+v          QED VP   -2.87857875E+00
+|->       uehling   -2.85612781E+00
+|->   kallensabry   -2.24509336E-02
 QED SE     qedmod    1.52792971E+01
 >              DC   -1.40266647E+04
 >         Non.pet   -1.40142191E+04
@@ -139,7 +151,9 @@ QED SE     qedmod    1.52792971E+01
           Coulomb    1.04955471E+04
               NMS    8.11664339E-02
               SMS   -3.62898472E-02
-           QED VP   -2.87857878E+00
+v          QED VP   -2.87857878E+00
+|->       uehling   -2.85612785E+00
+|->   kallensabry   -2.24509340E-02
 QED SE     qedmod    1.52792397E+01
 >              DC   -1.40262920E+04
 >         Non.pet   -1.40138465E+04
@@ -152,7 +166,9 @@ QED SE     qedmod    1.52792397E+01
           Coulomb    1.04969293E+04
               NMS    8.11750527E-02
               SMS   -3.62895580E-02
-           QED VP   -2.87858081E+00
+v          QED VP   -2.87858081E+00
+|->       uehling   -2.85612986E+00
+|->   kallensabry   -2.24509566E-02
 QED SE     qedmod    1.52760884E+01
 >              DC   -1.40258354E+04
 >         Non.pet   -1.40133930E+04
@@ -165,7 +181,9 @@ QED SE     qedmod    1.52760884E+01
           Coulomb    1.04984955E+04
               NMS    8.11859274E-02
               SMS   -3.62891930E-02
-           QED VP   -2.87858337E+00
+v          QED VP   -2.87858337E+00
+|->       uehling   -2.85613239E+00
+|->   kallensabry   -2.24509851E-02
 QED SE     qedmod    1.52721124E+01
 >              DC   -1.40254372E+04
 >         Non.pet   -1.40129988E+04
@@ -178,7 +196,9 @@ QED SE     qedmod    1.52721124E+01
           Coulomb    1.04935829E+04
               NMS    8.11558272E-02
               SMS   -3.62902032E-02
-           QED VP   -2.87857629E+00
+v          QED VP   -2.87857629E+00
+|->       uehling   -2.85612538E+00
+|->   kallensabry   -2.24509063E-02
 QED SE     qedmod    1.52831177E+01
 >              DC   -1.40271171E+04
 >         Non.pet   -1.40146677E+04
@@ -191,7 +211,9 @@ QED SE     qedmod    1.52831177E+01
           Coulomb    1.04952839E+04
               NMS    8.11657199E-02
               SMS   -3.62898712E-02
-           QED VP   -2.87857862E+00
+v          QED VP   -2.87857862E+00
+|->       uehling   -2.85612768E+00
+|->   kallensabry   -2.24509322E-02
 QED SE     qedmod    1.52795007E+01
 >              DC   -1.40264785E+04
 >         Non.pet   -1.40140327E+04
@@ -204,7 +226,9 @@ QED SE     qedmod    1.52795007E+01
           Coulomb    1.04956619E+04
               NMS    8.11675656E-02
               SMS   -3.62898092E-02
-           QED VP   -2.87857905E+00
+v          QED VP   -2.87857905E+00
+|->       uehling   -2.85612811E+00
+|->   kallensabry   -2.24509370E-02
 QED SE     qedmod    1.52788259E+01
 >              DC   -1.40262988E+04
 >         Non.pet   -1.40138536E+04
@@ -217,7 +241,9 @@ QED SE     qedmod    1.52788259E+01
           Coulomb    1.04966564E+04
               NMS    8.11751910E-02
               SMS   -3.62895533E-02
-           QED VP   -2.87858084E+00
+v          QED VP   -2.87858084E+00
+|->       uehling   -2.85612989E+00
+|->   kallensabry   -2.24509570E-02
 QED SE     qedmod    1.52760379E+01
 >              DC   -1.40261232E+04
 >         Non.pet   -1.40136808E+04
@@ -230,7 +256,9 @@ QED SE     qedmod    1.52760379E+01
           Coulomb    1.04970348E+04
               NMS    8.11755757E-02
               SMS   -3.62895404E-02
-           QED VP   -2.87858094E+00
+v          QED VP   -2.87858094E+00
+|->       uehling   -2.85612998E+00
+|->   kallensabry   -2.24509580E-02
 QED SE     qedmod    1.52758972E+01
 >              DC   -1.40257861E+04
 >         Non.pet   -1.40133439E+04
@@ -243,7 +271,9 @@ QED SE     qedmod    1.52758972E+01
           Coulomb    1.04972150E+04
               NMS    8.11758771E-02
               SMS   -3.62895303E-02
-           QED VP   -2.87858101E+00
+v          QED VP   -2.87858101E+00
+|->       uehling   -2.85613005E+00
+|->   kallensabry   -2.24509588E-02
 QED SE     qedmod    1.52757870E+01
 >              DC   -1.40256383E+04
 >         Non.pet   -1.40131962E+04
@@ -256,7 +286,9 @@ QED SE     qedmod    1.52757870E+01
           Coulomb    1.04974800E+04
               NMS    8.11753946E-02
               SMS   -3.62895465E-02
-           QED VP   -2.87858089E+00
+v          QED VP   -2.87858089E+00
+|->       uehling   -2.85612994E+00
+|->   kallensabry   -2.24509575E-02
 QED SE     qedmod    1.52759634E+01
 >              DC   -1.40253214E+04
 >         Non.pet   -1.40128792E+04
@@ -269,7 +301,9 @@ QED SE     qedmod    1.52759634E+01
           Coulomb    1.04987460E+04
               NMS    8.11857168E-02
               SMS   -3.62892000E-02
-           QED VP   -2.87858332E+00
+v          QED VP   -2.87858332E+00
+|->       uehling   -2.85613234E+00
+|->   kallensabry   -2.24509845E-02
 QED SE     qedmod    1.52721894E+01
 >              DC   -1.40251640E+04
 >         Non.pet   -1.40127255E+04
@@ -282,7 +316,9 @@ QED SE     qedmod    1.52721894E+01
           Coulomb    1.04950842E+04
               NMS    8.11662069E-02
               SMS   -3.62898548E-02
-           QED VP   -2.87857873E+00
+v          QED VP   -2.87857873E+00
+|->       uehling   -2.85612780E+00
+|->   kallensabry   -2.24509334E-02
 QED SE     qedmod    1.52793226E+01
 >              DC   -1.40267305E+04
 >         Non.pet   -1.40142848E+04
@@ -295,7 +331,9 @@ QED SE     qedmod    1.52793226E+01
           Coulomb    1.04953246E+04
               NMS    8.11659455E-02
               SMS   -3.62898636E-02
-           QED VP   -2.87857867E+00
+v          QED VP   -2.87857867E+00
+|->       uehling   -2.85612774E+00
+|->   kallensabry   -2.24509328E-02
 QED SE     qedmod    1.52794182E+01
 >              DC   -1.40264621E+04
 >         Non.pet   -1.40140164E+04
@@ -308,7 +346,9 @@ QED SE     qedmod    1.52794182E+01
           Coulomb    1.04955242E+04
               NMS    8.11657028E-02
               SMS   -3.62898718E-02
-           QED VP   -2.87857861E+00
+v          QED VP   -2.87857861E+00
+|->       uehling   -2.85612768E+00
+|->   kallensabry   -2.24509321E-02
 QED SE     qedmod    1.52795070E+01
 >              DC   -1.40262364E+04
 >         Non.pet   -1.40137906E+04
@@ -321,7 +361,9 @@ QED SE     qedmod    1.52795070E+01
           Coulomb    1.04968040E+04
               NMS    8.11752214E-02
               SMS   -3.62895523E-02
-           QED VP   -2.87858085E+00
+v          QED VP   -2.87858085E+00
+|->       uehling   -2.85612990E+00
+|->   kallensabry   -2.24509570E-02
 QED SE     qedmod    1.52760267E+01
 >              DC   -1.40259788E+04
 >         Non.pet   -1.40135365E+04
@@ -334,7 +376,9 @@ QED SE     qedmod    1.52760267E+01
           Coulomb    1.04970057E+04
               NMS    8.11762506E-02
               SMS   -3.62895178E-02
-           QED VP   -2.87858109E+00
+v          QED VP   -2.87858109E+00
+|->       uehling   -2.85613013E+00
+|->   kallensabry   -2.24509597E-02
 QED SE     qedmod    1.52756505E+01
 >              DC   -1.40258877E+04
 >         Non.pet   -1.40134457E+04
@@ -347,7 +391,9 @@ QED SE     qedmod    1.52756505E+01
           Coulomb    1.04987917E+04
               NMS    8.11859522E-02
               SMS   -3.62891921E-02
-           QED VP   -2.87858338E+00
+v          QED VP   -2.87858338E+00
+|->       uehling   -2.85613239E+00
+|->   kallensabry   -2.24509851E-02
 QED SE     qedmod    1.52721033E+01
 >              DC   -1.40251436E+04
 >         Non.pet   -1.40127052E+04
@@ -360,7 +406,9 @@ QED SE     qedmod    1.52721033E+01
           Coulomb    1.04934790E+04
               NMS    8.11558338E-02
               SMS   -3.62902030E-02
-           QED VP   -2.87857629E+00
+v          QED VP   -2.87857629E+00
+|->       uehling   -2.85612538E+00
+|->   kallensabry   -2.24509063E-02
 QED SE     qedmod    1.52831153E+01
 >              DC   -1.40272217E+04
 >         Non.pet   -1.40147723E+04
@@ -373,7 +421,9 @@ QED SE     qedmod    1.52831153E+01
           Coulomb    1.04950273E+04
               NMS    8.11652327E-02
               SMS   -3.62898875E-02
-           QED VP   -2.87857850E+00
+v          QED VP   -2.87857850E+00
+|->       uehling   -2.85612757E+00
+|->   kallensabry   -2.24509309E-02
 QED SE     qedmod    1.52796788E+01
 >              DC   -1.40266828E+04
 >         Non.pet   -1.40142368E+04
@@ -386,7 +436,9 @@ QED SE     qedmod    1.52796788E+01
           Coulomb    1.04955802E+04
               NMS    8.11666454E-02
               SMS   -3.62898401E-02
-           QED VP   -2.87857883E+00
+v          QED VP   -2.87857883E+00
+|->       uehling   -2.85612790E+00
+|->   kallensabry   -2.24509346E-02
 QED SE     qedmod    1.52791623E+01
 >              DC   -1.40262816E+04
 >         Non.pet   -1.40138361E+04
@@ -399,7 +451,9 @@ QED SE     qedmod    1.52791623E+01
           Coulomb    1.04968127E+04
               NMS    8.11757417E-02
               SMS   -3.62895348E-02
-           QED VP   -2.87858097E+00
+v          QED VP   -2.87858097E+00
+|->       uehling   -2.85613002E+00
+|->   kallensabry   -2.24509584E-02
 QED SE     qedmod    1.52758365E+01
 >              DC   -1.40260260E+04
 >         Non.pet   -1.40135839E+04
@@ -412,7 +466,9 @@ QED SE     qedmod    1.52758365E+01
           Coulomb    1.04970099E+04
               NMS    8.11754319E-02
               SMS   -3.62895452E-02
-           QED VP   -2.87858090E+00
+v          QED VP   -2.87858090E+00
+|->       uehling   -2.85612994E+00
+|->   kallensabry   -2.24509576E-02
 QED SE     qedmod    1.52759498E+01
 >              DC   -1.40257955E+04
 >         Non.pet   -1.40133533E+04
@@ -425,7 +481,9 @@ QED SE     qedmod    1.52759498E+01
           Coulomb    1.04973313E+04
               NMS    8.11764576E-02
               SMS   -3.62895108E-02
-           QED VP   -2.87858114E+00
+v          QED VP   -2.87858114E+00
+|->       uehling   -2.85613018E+00
+|->   kallensabry   -2.24509603E-02
 QED SE     qedmod    1.52755748E+01
 >              DC   -1.40255843E+04
 >         Non.pet   -1.40131424E+04
@@ -438,7 +496,9 @@ QED SE     qedmod    1.52755748E+01
           Coulomb    1.04986469E+04
               NMS    8.11854737E-02
               SMS   -3.62892082E-02
-           QED VP   -2.87858326E+00
+v          QED VP   -2.87858326E+00
+|->       uehling   -2.85613228E+00
+|->   kallensabry   -2.24509839E-02
 QED SE     qedmod    1.52722783E+01
 >              DC   -1.40252370E+04
 >         Non.pet   -1.40127984E+04
@@ -451,7 +511,9 @@ QED SE     qedmod    1.52722783E+01
           Coulomb    1.04951820E+04
               NMS    8.11655642E-02
               SMS   -3.62898764E-02
-           QED VP   -2.87857858E+00
+v          QED VP   -2.87857858E+00
+|->       uehling   -2.85612765E+00
+|->   kallensabry   -2.24509318E-02
 QED SE     qedmod    1.52795576E+01
 >              DC   -1.40265636E+04
 >         Non.pet   -1.40141178E+04
@@ -464,7 +526,9 @@ QED SE     qedmod    1.52795576E+01
           Coulomb    1.04969035E+04
               NMS    8.11760244E-02
               SMS   -3.62895253E-02
-           QED VP   -2.87858104E+00
+v          QED VP   -2.87858104E+00
+|->       uehling   -2.85613008E+00
+|->   kallensabry   -2.24509591E-02
 QED SE     qedmod    1.52757332E+01
 >              DC   -1.40259656E+04
 >         Non.pet   -1.40135236E+04
@@ -477,7 +541,9 @@ QED SE     qedmod    1.52757332E+01
           Coulomb    1.04951996E+04
               NMS    8.11656449E-02
               SMS   -3.62898737E-02
-           QED VP   -2.87857860E+00
+v          QED VP   -2.87857860E+00
+|->       uehling   -2.85612767E+00
+|->   kallensabry   -2.24509320E-02
 QED SE     qedmod    1.52795281E+01
 >              DC   -1.40265548E+04
 >         Non.pet   -1.40141090E+04
@@ -490,7 +556,9 @@ QED SE     qedmod    1.52795281E+01
           Coulomb    1.04969577E+04
               NMS    8.11759436E-02
               SMS   -3.62895281E-02
-           QED VP   -2.87858102E+00
+v          QED VP   -2.87858102E+00
+|->       uehling   -2.85613006E+00
+|->   kallensabry   -2.24509589E-02
 QED SE     qedmod    1.52757627E+01
 >              DC   -1.40259027E+04
 >         Non.pet   -1.40134606E+04

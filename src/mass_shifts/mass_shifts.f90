@@ -1,5 +1,6 @@
 !> Routines related to the calculation of the normal and specific mass shifts.
 module grasp_rciqed_mass_shifts
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
 contains

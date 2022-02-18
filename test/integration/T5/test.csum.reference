@@ -54,7 +54,6 @@ Transverse two-e radial integrals:
        0       0       6      16     128      44
 MCBP coefficients that exceed CUTOFF:             1376
 Core coefficients that exceed CUTOFF:       38
-Vacuum polarisation integrals:        9
 Kinetic energy integrals:        9
 Vinti integrals:       32
 Elements that exceed CUTOFF in the lower triangle of the H matrix:          36
@@ -109,7 +108,6 @@ Transverse two-e radial integrals:
        0       0       7      16     128      44
 MCBP coefficients that exceed CUTOFF:             2978
 Core coefficients that exceed CUTOFF:       38
-Vacuum polarisation integrals:        9
 Kinetic energy integrals:        9
 Vinti integrals:       32
 Elements that exceed CUTOFF in the lower triangle of the H matrix:         102
@@ -169,7 +167,6 @@ Transverse two-e radial integrals:
        0       0       7      16     128      44
 MCBP coefficients that exceed CUTOFF:             1272
 Core coefficients that exceed CUTOFF:       38
-Vacuum polarisation integrals:        9
 Kinetic energy integrals:        9
 Vinti integrals:       32
 Elements that exceed CUTOFF in the lower triangle of the H matrix:          28

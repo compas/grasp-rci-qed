@@ -1,5 +1,5 @@
 module grasp_rciqed_rcisettings
-    use grasp_rciqed_kinds, only: real64
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
     public :: rcisettings, read_settings_toml, write_settings_toml
@@ -113,7 +113,14 @@ contains
         open(newunit=toml_unit, file=tomlfile)
         write(toml_unit, '(a)') "[nucleus]"
         write(toml_unit, '(a,f0.16)') "  Z = ", Z
-        write(toml_unit, '(a,f0.16)') "  atomic_mass_amu = ", EMN * AUMAMU
+        if(EMN == 0) then
+            ! Fortran prints '.000000000' if the floating point number is exactly zero,
+            ! which breaks the TOML file (not a valid float literal). So we need to
+            ! special-case that.
+            write(toml_unit, '(a)') "  atomic_mass_amu = 0.0"
+        else
+            write(toml_unit, '(a,f0.16)') "  atomic_mass_amu = ", EMN * AUMAMU
+        endif
         if(NPARM == 0) then
             write(toml_unit, '(a)') "  nuclear_model = ""point"""
         elseif(NPARM == 2) then
@@ -184,7 +191,6 @@ contains
     !! exponent to 1 character, but then writing numbers with exponents
     !! \f$ |\textrm{exp}| \geq 10 \f$ will fail).
     subroutine write_toml_expfloat(unit, label, value)
-        use grasp_rciqed_kinds, only: real64, dp
 
         integer, intent(in) :: unit
         character(*), intent(in) :: label

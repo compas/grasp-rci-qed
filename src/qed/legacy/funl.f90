@@ -1,6 +1,6 @@
 !***********************************************************************
 !                                                                      *
-      REAL(KIND(0.0D0)) FUNCTION FUNL (X, K)
+      REAL(DOUBLE) FUNCTION FUNL (X, K)
 !                                                                      *
 !   This  function  evaluates the LK(X) functions using the analytic   *
 !   functions defined  in table 5  and equations  (20) and  (21)  of   *
@@ -15,7 +15,7 @@
 !-----------------------------------------------
 !   M o d u l e s
 !-----------------------------------------------
-      USE vast_kind_param, ONLY:  DOUBLE
+      use, intrinsic :: iso_fortran_env, only: DOUBLE => real64
       IMPLICIT NONE
 !-----------------------------------------------
 !   D u m m y   A r g u m e n t s

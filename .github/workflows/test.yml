@@ -1,0 +1,42 @@
+name: Tests
+
+# branches: '*' only matches "main" branches, i.e. ones without a /, which would
+# ensures that we don't run CI multiple times on pull requests --- we expect all
+# feature branches to be namespaced as <prefix>/<branch>.
+#
+# However, currently we run with branches: '**' to also test feature branches
+# because we do not necessarily open PRs for each of them.
+on:
+  push:
+    branches: '**'
+    tags: '**'
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: "Install dependencies"
+      run: sudo apt-get install -y build-essential gfortran liblapack-dev libblas-dev openmpi-bin openmpi-common libopenmpi-dev cmake
+    - name: "Build GRASP"
+      run: |
+        git clone https://github.com/mortenpi/grasp.git ../grasp
+        ../grasp/configure.sh --debug
+        make -C ../grasp/build-debug/ install
+    - name: "Test GRASP"
+      run: make -C ../grasp/build-debug/ test
+      env:
+        CTEST_OUTPUT_ON_FAILURE: True
+    - name: "Build GRASP RCI QED"
+      run: |
+        source ../grasp/envset.sh
+        ./configure.sh --debug --grasp-cmake
+        make -C build-debug/
+        make -C build-debug/ install
+    - name: "Run tests"
+      run: make -C build-debug/ test
+      env:
+        CTEST_OUTPUT_ON_FAILURE: True

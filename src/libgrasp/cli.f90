@@ -1,5 +1,6 @@
 !> Contains routines related to command line input.
 module grasp_rciqed_cli
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
 contains

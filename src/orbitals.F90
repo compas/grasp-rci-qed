@@ -1,10 +1,10 @@
 !>     ./rci-qed.orbitals <state>
 program rci_qed_orbitals
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     use grasp_rciqed_system
-    use grasp_rciqed_qed, only: init_vacuum_polarization
+    use grasp_rciqed_qed_vp, only: qedvp_init, qedvp
     use grasp_rciqed_qed_qedmod
     use grasp_lib9290, only: init_isocw_full
-    use vacpol_I
     implicit none
 
     character(256) :: state
@@ -34,7 +34,7 @@ program rci_qed_orbitals
     call init_isocw_full(isodata, file_csls, file_wfns)
 
     ! Initialize the U+KS vacuum polarization potential
-    call init_vacuum_polarization
+    call qedvp_init
     ! Initialize the qedmod common blocks with Grasp data etc.
     call qedse_qedmod_init
 
@@ -45,17 +45,15 @@ contains
 
     !> Prints a table of QED self-energy estimates for all the orbitals.
     subroutine qed_orbital_summary
-        use grasp_rciqed_kinds, only: real64, dp
         use grasp_rciqed_qed, only: qedse, nsetypes, setypes_long
         use orb_C, only: NW
-        use vacpol_I
         implicit none
 
         real(real64) :: matrix(NW, NW)
         integer :: i
 
         print *, 'QED operator matrix: vacuum polarization (U+KS)'
-        call fill_vpint_matrix(matrix)
+        call qedvp(matrix)
         call writematrix(matrix)
 
         do i = 1, nsetypes
@@ -66,13 +64,12 @@ contains
     end subroutine qed_orbital_summary
 
     subroutine print_orbital_qed
-      use grasp_rciqed_kinds, only: real64, dp
       use grasp_rciqed_qed_pyykkoe
       use grasp_rciqed_qed_flambaum
       use grasp_rciqed_qed_qedmod
       use orb_C, only: NW, NP, NH
       use qed_slfen_I
-      use vpint_I
+      use grasp_rciqed_qed_vp, only: qedvp_kl
       implicit none
 
       integer :: k
@@ -97,7 +94,7 @@ contains
           se_flam = qedse_flambaum(k, k, se_flam_phi_l, se_flam_phi_f, se_flam_phi_g)
           se_pyykkoe = qedse_pyykkoe(k, k)
           se_qedmod = qedse_qedmod(k, k)
-          call VPINT(k, k, vp)
+          vp = qedvp_kl(k, k)
 
           print '(i5,a2,es12.5,9es15.5)', &
               NP(k), NH(k), wfnorm, &
@@ -107,35 +104,7 @@ contains
       end do
     end subroutine print_orbital_qed
 
-    subroutine fill_vpint_matrix(matrix)
-        use grasp_rciqed_kinds, only: real64, dp
-        use orb_C, only: NW, NAK
-        use vpint_I
-        implicit none
-
-        real(real64), intent(out) :: matrix(NW, NW)
-
-        real(real64) :: vp
-        integer :: k, l
-
-        do k = 1, NW
-            do l = k, NW
-                if(NAK(k) == NAK(l)) then
-                    ! NOTE: VPINT swaps the indices if k > l, which will break the
-                    ! do loop if that should happen. do l = k, NW ensures that this
-                    ! does not happen.
-                    call VPINT(k, l, vp)
-                else
-                    vp = 0_dp
-                endif
-                matrix(k, l) = vp
-                matrix(l, k) = vp
-            enddo
-        enddo
-    end subroutine fill_vpint_matrix
-
     subroutine writematrix(matrix)
-        use grasp_rciqed_kinds, only: real64
         use orb_C, only: NW
 
         real(real64), intent(in) :: matrix(NW, NW)
@@ -150,7 +119,6 @@ contains
     end subroutine writematrix
 
     subroutine writematrix_kappa(matrix, kappa)
-        use grasp_rciqed_kinds, only: real64
         use orb_C, only: NW, NP, NH, NAK
 
         real(real64), intent(in) :: matrix(NW, NW)
@@ -242,7 +210,6 @@ contains
     end function has_kappa
 
     function qed_orbital_summary_wfnorm(k)
-        use grasp_rciqed_kinds, only: real64
         use grid_C, only: N, RP
         use wave_C, only: PF, QF
         use tatb_C, only: MTP, TA

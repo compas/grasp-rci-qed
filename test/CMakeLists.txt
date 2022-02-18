@@ -11,11 +11,26 @@ set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Werror=implicit-procedure -Werr
 
 # A library of test helper routines etc.
 add_library(rciqed-test STATIC
+    lib/utilities.f90
     lib/testing.f90
 )
 setup_fortran_modules(rciqed-test)
 target_link_libraries_Fortran(rciqed-test PUBLIC
     rciqed-grasp
+)
+
+# A library of legacy GRASP92 routines, used in testing against old implementations.
+add_library(rciqed-test-legacy STATIC
+    qed-vp/legacy/grasptest_qedvp_legacy.f90
+    # libmod modules:
+    qed-vp/legacy/vpilst_C.f90
+    # routines:
+    qed-vp/legacy/vpint_I.f90 qed-vp/legacy/vpint.f90
+    qed-vp/legacy/vpintf_I.f90 qed-vp/legacy/vpintf.f90
+)
+setup_fortran_modules(rciqed-test-legacy)
+target_link_libraries_Fortran(rciqed-test-legacy PUBLIC
+    mod 9290 rciqed-qed
 )
 
 # Script-based tests
@@ -45,7 +60,7 @@ add_executable(test.hydrogenic_vp
 target_link_libraries_Fortran(test.hydrogenic_vp PUBLIC
     mod 9290
     rciqed-grasp rciqed-rci rciqed-qed
-    rciqed-tools rciqed-test
+    rciqed-tools rciqed-test rciqed-test-legacy
 )
 add_test(hydrogenic_vp test.hydrogenic_vp)
 
@@ -91,6 +106,35 @@ target_link_libraries_Fortran(test.qed_qedmod_hydrogenic PUBLIC
 )
 add_test(qed_qedmod_hydrogenic test.qed_qedmod_hydrogenic)
 
+# Tests for vacuum polarization routines
+add_executable(test.qedvp_funk_funl
+    qed-vp/funk_funl.f90
+)
+target_link_libraries_Fortran(test.qedvp_funk_funl PUBLIC
+    rciqed-qed rciqed-test
+)
+add_test(qedvp_funk_funl test.qedvp_funk_funl)
+
+add_executable(test.qedvp_vac2_vac4
+    qed-vp/vac2_vac4.f90
+)
+target_link_libraries_Fortran(test.qedvp_vac2_vac4 PUBLIC
+    mod
+    rciqed-qed rciqed-test
+)
+add_test(qedvp_vac2_vac4_pnc_118 test.qedvp_vac2_vac4 "pnc_118")
+add_test(qedvp_vac2_vac4_fnc_92 test.qedvp_vac2_vac4 "fnc_92")
+
+add_executable(test.qedvp_hydrogenic
+    qed-vp/vac2p4_hydrogenic.f90
+)
+target_link_libraries_Fortran(test.qedvp_hydrogenic PUBLIC
+    mod 9290
+    rciqed-grasp rciqed-rci rciqed-qed
+    rciqed-tools rciqed-test rciqed-test-legacy
+)
+add_test(qedvp_hydrogenic_fnc_18 test.qedvp_hydrogenic "fnc_18")
+add_test(qedvp_hydrogenic_pnc_92 test.qedvp_hydrogenic "pnc_92")
 
 # Unit tests for matrix element calculations
 add_subdirectory("matrixelements/")

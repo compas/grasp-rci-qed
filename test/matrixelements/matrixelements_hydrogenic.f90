@@ -1,12 +1,12 @@
 program matrixelements_hydrogenic
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     use parameter_def, only: NNNW
-    use grasp_rciqed_kinds, only: real64, dp
     use grasp_rciqed_lib9290_init
     use grasp_rciqed_lib9290_files, only: load_csl
     use grasp_rciqed, only: init_rkintc
     use grasp_rciqed_breit, only: init_breit
     use grasp_rciqed_mass_shifts, only: init_mass_shifts
-    use grasp_rciqed_qed, only: init_vacuum_polarization
+    use grasp_rciqed_qed_vp, only: qedvp_init
     use grasptest_lib9290_setup
     use grasptest_lib9290_hydrogenic
     implicit none
@@ -43,7 +43,7 @@ program matrixelements_hydrogenic
     call init_rkintc(j2max)
     ! Initialize frequency-dependent Breit
     call init_breit(j2max, (/ (.true., k=1,NNNW) /))
-    call init_vacuum_polarization
+    call qedvp_init
     call init_mass_shifts
 
     ! The following reference values were calculated using the non-MPI rci90
@@ -110,7 +110,6 @@ contains
 
     subroutine verify_dcb(ic, ir, reference)
         use grasp_rciqed_cimatrixelements
-        use grasp_rciqed_kinds, only: real64, dp
         use grasptest_testing, only: reldiff, test_isequal
 
         integer, intent(in) :: ir, ic
@@ -128,7 +127,6 @@ contains
 
     subroutine verify_dcbmsvp(ic, ir, reference)
         use grasp_rciqed_cimatrixelements
-        use grasp_rciqed_kinds, only: real64, dp
         use grasptest_testing, only: reldiff, test_isequal
 
         integer, intent(in) :: ir, ic
@@ -149,7 +147,6 @@ contains
 
     subroutine verify_se_mohr(ic, reference)
         use grasp_rciqed_cimatrixelements
-        use grasp_rciqed_kinds, only: real64, dp
         use grasptest_testing, only: reldiff, test_isequal
 
         integer, intent(in) :: ic

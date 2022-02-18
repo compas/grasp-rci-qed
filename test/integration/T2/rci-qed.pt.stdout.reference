@@ -42,7 +42,9 @@ Hamiltonian parts enabled in RCI calculation:
             Breit    1.61364578E+01
               NMS    4.63578944E-02
               SMS   -1.15453106E-02
-           QED VP   -2.78336312E+00
+v          QED VP   -2.78336312E+00
+|->       uehling   -2.76166155E+00
+|->   kallensabry   -2.17015650E-02
 QED SE hydrogenic    1.45385945E+01
 >              DC   -1.22500082E+04
 >         Non.pet   -1.22220817E+04
@@ -55,7 +57,9 @@ QED SE hydrogenic    1.45385945E+01
             Breit    1.63078475E+01
               NMS    4.65463666E-02
               SMS   -1.17550024E-02
-           QED VP   -2.78906122E+00
+v          QED VP   -2.78906122E+00
+|->       uehling   -2.76731337E+00
+|->   kallensabry   -2.17478554E-02
 QED SE hydrogenic    1.45231452E+01
 >              DC   -1.22633686E+04
 >         Non.pet   -1.22352919E+04
@@ -68,7 +72,9 @@ QED SE hydrogenic    1.45231452E+01
             Breit    1.61218092E+01
               NMS    4.63579496E-02
               SMS   -1.15453720E-02
-           QED VP   -2.78336478E+00
+v          QED VP   -2.78336478E+00
+|->       uehling   -2.76166321E+00
+|->   kallensabry   -2.17015785E-02
 QED SE hydrogenic    1.45385900E+01
 >              DC   -1.22512007E+04
 >         Non.pet   -1.22232888E+04
@@ -81,7 +87,9 @@ QED SE hydrogenic    1.45385900E+01
             Breit    1.59403349E+01
               NMS    4.61693670E-02
               SMS   -1.13355574E-02
-           QED VP   -2.77766334E+00
+v          QED VP   -2.77766334E+00
+|->       uehling   -2.75600808E+00
+|->   kallensabry   -2.16552610E-02
 QED SE hydrogenic    1.45540484E+01
 >              DC   -1.22377094E+04
 >         Non.pet   -1.22099578E+04
@@ -94,7 +102,9 @@ QED SE hydrogenic    1.45540484E+01
             Breit    1.60877668E+01
               NMS    4.63578944E-02
               SMS   -1.15453106E-02
-           QED VP   -2.78336312E+00
+v          QED VP   -2.78336312E+00
+|->       uehling   -2.76166155E+00
+|->   kallensabry   -2.17015650E-02
 QED SE hydrogenic    1.45385945E+01
 >              DC   -1.22506604E+04
 >         Non.pet   -1.22227826E+04

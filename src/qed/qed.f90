@@ -1,4 +1,5 @@
 module grasp_rciqed_qed
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
     integer, parameter :: nsetypes = 4
@@ -17,25 +18,6 @@ module grasp_rciqed_qed
 
 contains
 
-    subroutine init_vacuum_polarization
-        use decide_C, only: LVP
-        use grid_C, only: N, RP
-        use ncdist_C, only: ZDIST
-        use tatb_C, only: TB
-        use vpilst_C, only: NVPI, FRSTVP
-        use ncharg_I
-        use vacpol_I
-
-        LVP = .TRUE.
-
-        ! From AUXBLK
-        CALL NCHARG
-        CALL VACPOL
-        ZDIST(2:N) = TB(2:N)*RP(2:N)
-        FRSTVP = .TRUE.
-        NVPI = 0
-    end subroutine init_vacuum_polarization
-
     !> Populates the `matrix` with QED self-energy matrix elements for each orbital.
     !!
     !! `setype` determines the method used to estimate self-energy and can take the
@@ -49,7 +31,6 @@ contains
     !! `matrix` is assumed to be an `NW x NW` `real64` array.
     !!
     subroutine qedse(setype, matrix)
-        use grasp_rciqed_kinds, only: real64, dp
         use orb_C, only: NW, NAK
         use grasp_rciqed_qed_pyykkoe
         use grasp_rciqed_qed_flambaum

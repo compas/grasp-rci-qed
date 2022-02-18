@@ -7,19 +7,19 @@
 !! Depends on files: `isodata`, `<state>.c`, `<state>.w` and `<state>.cm`
 !!
 program rci_qed_pt
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     use parameter_def, only: NNNW
-    use grasp_rciqed_kinds, only: real64, dp
     use grasp_lib9290, only: init_isocw_full
     use grasp_rciqed_lib9290_files, only: load_mixing
     use grasp_rciqed_lib9290_csls, only: ncsfs_global
     use grasp_rciqed, only: init_rkintc
     use grasp_rciqed_breit, only: init_breit
     use grasp_rciqed_mass_shifts, only: init_mass_shifts
-    use grasp_rciqed_qed, only: init_vacuum_polarization, qedse, &
-        nsetypes, setypes_long, setypes_short
+    use grasp_rciqed_qed, only: qedse, nsetypes, setypes_long, setypes_short
+    use grasp_rciqed_qed_vp, only: qedvp_init, qedvp, nvptypes, vptypes_long, vptypes_short
     use grasp_rciqed_rcisettings, only: rcisettings, read_settings_toml
     use grasp_rciqed_cimatrixelements
-    use decide_C, only: LSE
+    use decide_C, only: LSE, LNMS, LSMS
     use orb_C, only: NW
     use prnt_C, only: NVEC
     use qedcut_C, only: NQEDCUT, NQEDMAX
@@ -29,7 +29,8 @@ program rci_qed_pt
     type matrixelement
         real(real64) :: diracpot = 0.0_dp, coulomb = 0.0_dp, breit = 0.0_dp, &
             nms = 0.0_dp, sms = 0.0_dp, vp = 0.0_dp, se = 0.0_dp, &
-            se_array(nsetypes) = (/(0.0_dp, i = 1, nsetypes)/)
+            se_array(nsetypes) = (/(0.0_dp, i = 1, nsetypes)/), &
+            vp_array(nvptypes) = (/(0.0_dp, i = 1, nvptypes)/)
     end type matrixelement
 
     integer, parameter :: hcs_len = 7
@@ -50,8 +51,8 @@ program rci_qed_pt
 
     type(matrixelement) :: hij, asfv
     type(matrixelement), dimension(:), allocatable :: asfvalues
-    real(real64), allocatable :: sematrix(:,:,:)
-    real(real64) :: sum
+    real(real64), allocatable :: sematrix(:,:,:), vpmatrix(:,:,:)
+    real(real64) :: nonpt_sum
 
     type(integer), dimension(:), allocatable :: hcs_rci, hcs_pt
     type(logical), dimension(hcs_len) :: hcs_cat
@@ -123,7 +124,7 @@ program rci_qed_pt
     ! TODO: FIX THIS -- should be generic
     print '(a)', ">>> INITIALIZING fully frequency-dependent Breit"
     call init_breit(j2max, (/ (.true., k=1,NNNW) /))
-    call init_vacuum_polarization
+    call qedvp_init
     call init_mass_shifts
 
     ! Load the info in $(state).settings.toml file
@@ -171,15 +172,23 @@ program rci_qed_pt
     hcs_cat(6) = settings%qed_vp_enabled
     hcs_cat(7) = (settings%qed_se /= 0)
 
-    ! Also set the hydrogenic settings in qedcut_C appropriately:
-    ! LSE needs to be set to .true. since QED_SLFEN checks for it when applying
-    ! NQEDMAX for some reason.
+    ! Also set the hydrogenic settings in qedcut_C appropriately. LSE needs to be set to
+    ! .true. since QED_SLFEN checks for it when applying NQEDMAX for some reason.
     LSE = .true.
     if(settings%qed_se_hydrogenic_cutoff >= 0) then
         NQEDCUT = 1
         NQEDMAX = settings%qed_se_hydrogenic_cutoff
     else
+        ! If 'qed_se_hydrogenic_cutoff' is not explicitly given in the settings TOML file,
+        ! we assume that it is 8. This corresponds to the perturbative case in the old RCI
+        ! program. This is also appropriate, because this is most likely to happen when
+        ! self-energy is disabled in the RCI calculation.
+        !
+        ! It should also be pointed out that the 'NQEDCUT' variable is quite pointless -- it
+        ! is actually never read by any of the QED self-energy routines. However, we set
+        ! this for logical consistency.
         NQEDCUT = 0
+        NQEDMAX = 8
     endif
 
     ! Calculate the self-energy matrix (or matrices, if SE in in PT mode).
@@ -194,6 +203,15 @@ program rci_qed_pt
         call qedse(settings%qed_se, sematrix(1,:,:))
     endif
 
+    ! We can also split up the VP in terms of contributions. However, unlike in the SE case,
+    ! the VP contributions are additive, so we do not have to care if the contribution was
+    ! included in the calculation or not -- we can always split it up. If it was included,
+    ! then the total RCI value can be obtained by adding all the contributions together.
+    allocate(vpmatrix(nvptypes,NW,NW))
+    do i = 1, nvptypes
+        call qedvp(i, vpmatrix(i,:,:))
+    enddo
+
     ! Evaluate the ASF expectation values and write them to a CSV file.
     print '(a)', ">>> Evaluating ASF expectation values"
     allocate(asfvalues(NVEC))
@@ -205,16 +223,34 @@ program rci_qed_pt
             hij%diracpot = dirac_potential(i, j)
             hij%coulomb = coulomb(i, j)
             hij%breit = breit(i, j)
-            hij%nms = nms(i, j)
-            hij%sms = sms(i, j)
-            hij%vp = qed_vp(i, j)
-
+            ! Evaluate all the additive VP contribution. Currently, we are abusing the QED
+            ! SE routine, which actually is generic, taking any 1-particle matrix:
+            do k = 1, nvptypes
+                ! TODO: generalize qed_se()
+                hij%vp_array(k) = qed_se(vpmatrix(k,:,:), i, j)
+            enddo
+            ! Let's also sum up all the VP contributions to a single value:
+            hij%vp = sum(hij%vp_array)
+            ! If self-energy is disabled, then we populate an array with all possible
+            ! self-energy values.
             if(settings%qed_se == 0) then
                 do k = 1, nsetypes
                     hij%se_array(k) = qed_se(sematrix(k,:,:), i, j)
                 enddo
             else
                 hij%se = qed_se(sematrix(1,:,:), i, j)
+            endif
+            ! It is possible that the atomic mass is configured to be zero, in which case
+            ! we can not calculate a reasonable estimate for the mass shifts.
+            if (LNMS) then
+                hij%nms = nms(i, j)
+            else
+                hij%nms = 0.0_dp
+            endif
+            if (LSMS) then
+                hij%sms = sms(i, j)
+            else
+                hij%sms = 0.0_dp
             endif
 
             ! Add the values to the ASF values
@@ -241,31 +277,50 @@ program rci_qed_pt
         print '(">>> ASF #",i0)', k
         print '(80("-"))'
         print '(a1,a16,a18)',    " ", "Type", "<H_i> (Ha)"
-        sum = 0.0_dp
+        nonpt_sum = 0.0_dp
         do i = 1, hcs_len
             if(.not.hcs_cat(i)) cycle
-            if(i == 7) then
-                ! Self-energy gets special treatment
+            ! Add the contribution to the non-pt sum:
+            nonpt_sum = nonpt_sum + getindex(asfv, i)
+            ! And now we print them all out into the terminal for the user:
+            if(i == 6) then
+                ! VP gets special treatment, as we can split it up into sub-contributions,
+                ! but in this case we also want to print out the sum:
+                print '("v",a16,1p,e18.8)', trim(hcs_pretty(i)), getindex(asfv, i)
+                do j = 1, nvptypes
+                    print '("|-> ",a13,1p,e18.8)', trim(vptypes_short(j)), asfv%vp_array(j)
+                enddo
+            elseif(i == 7) then
+                ! Self-energy gets special treatment, because we only calculate one type and
+                ! we also want to label it appropriately.
                 print '("QED SE ",a10,1p,e18.8)', &
                     trim(setypes_short(settings%qed_se)), getindex(asfv, i)
             else
+                ! Default printing for other contributions:
                 print '(a1,a16,1p,e18.8)', " ", trim(hcs_pretty(i)), getindex(asfv, i)
-            endif
-            sum = sum + getindex(asfv, i)
+            end if
         enddo
         print '(a1,a16,1p,e18.8)', ">", "DC", asfv%diracpot + asfv%coulomb
-        print '(a1,a16,1p,e18.8)', ">", "Non.pet", sum
+        print '(a1,a16,1p,e18.8)', ">", "Non.pet", nonpt_sum
         do i = 1, hcs_len
             if(hcs_cat(i)) cycle
-            if(i == 7) then
-                ! Self-energy gets special treatment, since in PT mode, we have
-                ! several parallel methods.
+            if(i == 6) then
+                ! VP gets special treatment because we have sub-contributions that we want to
+                ! print out as well, in addition to the total:
+                print '("v",a16,1p,e18.8)', trim(hcs_pretty(i)), getindex(asfv, i)
+                do j = 1, nvptypes
+                    print '("|-> ",a13,1p,e18.8)', trim(vptypes_short(j)), asfv%vp_array(j)
+                enddo
+            elseif(i == 7) then
+                ! Self-energy gets special treatment, since in PT mode, we have several
+                ! parallel methods.
                 do j = 1, nsetypes
                     print '("QED SE ",a10,1p,e18.8)', trim(setypes_short(j)), asfv%se_array(j)
                 enddo
             else
+                ! Default printing for other contributions:
                 print '(a1,a16,1p,e18.8)', " ", trim(hcs_pretty(i)), getindex(asfv, i)
-            endif
+            end if
         enddo
     enddo
 
@@ -274,7 +329,6 @@ program rci_qed_pt
 contains
 
     function getindex(me, idx)
-        use grasp_rciqed_kinds, only: real64
         type(matrixelement), intent(in) :: me
         integer, intent(in) :: idx
         real(real64) :: getindex
@@ -298,8 +352,15 @@ contains
         write(unit, '(a9)', advance='no') "asf_index"
         do i = 1, hcs_len
             if(.not.hcs_cat(i)) cycle
-            if(i == 7) then
-                ! Self-energy gets special treatment
+            ! Self-energy and VP get special treatment
+            if(i == 6) then
+                ! VP gets special treatment because of sub-contributions
+                do j = 1, nvptypes
+                    write(unit, '(",",a24)', advance='no') trim(hcs_technical(i))//":"//trim(vptypes_short(j))
+                enddo
+                write(unit, '(",",a24)', advance='no') trim(hcs_technical(i))
+            elseif(i == 7) then
+                ! In the self-energy we want to specify the type that was included
                 write(unit, '(",",a24)', advance='no') trim(hcs_technical(i))//":"//trim(setypes_short(settings%qed_se))
             else
                 write(unit, '(",",a24)', advance='no') trim(hcs_technical(i))
@@ -308,7 +369,13 @@ contains
         write(unit, '(",",a24)', advance='no') "sum:non_pt"
         do i = 1, hcs_len
             if(hcs_cat(i)) cycle
-            if(i == 7) then
+            if(i == 6) then
+                ! VP gets special treatment because of sub-contributions
+                do j = 1, nvptypes
+                    write(unit, '(",",a24)', advance='no') "pt:"//trim(hcs_technical(i))//":"//trim(vptypes_short(j))
+                enddo
+                write(unit, '(",",a24)', advance='no') "pt:"//trim(hcs_technical(i))
+            elseif(i == 7) then
                 ! Self-energy gets special treatment, since in PT mode, we have
                 ! several parallel methods.
                 do j = 1, nsetypes
@@ -330,13 +397,25 @@ contains
         write(unit, '(i9)', advance='no') k
         do i = 1, hcs_len
             if(.not.hcs_cat(i)) cycle
+            if(i == 6) then
+                ! VP gets special treatment due to sub-contributions
+                do j = 1, nvptypes
+                    write(unit, '(1(",",e24.16))', advance='no') me%vp_array(j)
+                enddo
+            end if
             write(unit, '(1(",",e24.16))', advance='no') getindex(me, i)
             sum = sum + getindex(me, i)
         enddo
         write(unit, '(1(",",e24.16))', advance='no') sum
         do i = 1, hcs_len
             if(hcs_cat(i)) cycle
-            if(i == 7) then
+            if(i == 6) then
+                ! VP gets special treatment due to sub-contributions
+                do j = 1, nvptypes
+                    write(unit, '(1(",",e24.16))', advance='no') me%vp_array(j)
+                enddo
+                write(unit, '(1(",",e24.16))', advance='no') getindex(me, i)
+            elseif(i == 7) then
                 ! Self-energy gets special treatment, since in PT mode, we have
                 ! several parallel methods.
                 do j = 1, nsetypes
@@ -364,7 +443,6 @@ contains
     !! `hij` must contain the `(i, j)` Hamiltonian matrix element and asfvalue
     !! must be the `k`-th ASF value.
     subroutine add_asfvalue(i, j, hij, k, asfvalue)
-        use grasp_rciqed_kinds, only: real64, dp
         use orb_C
         use prnt_C
         use syma_C
@@ -383,6 +461,7 @@ contains
         asfvalue%coulomb = asfvalue%coulomb + hij%coulomb * cicj
         asfvalue%breit = asfvalue%breit + hij%breit * cicj
         asfvalue%vp  = asfvalue%vp  + hij%vp * cicj
+        asfvalue%vp_array(:) = asfvalue%vp_array(:) + hij%vp_array(:) * cicj
         asfvalue%nms = asfvalue%nms + hij%nms * cicj
         asfvalue%sms = asfvalue%sms + hij%sms * cicj
         asfvalue%se = asfvalue%se + hij%se * cicj
@@ -403,7 +482,6 @@ contains
     !!
     !! Does not abort if there are discrepancies, just prints warnings.
     subroutine verify_rcisettings(settings)
-        use grasp_rciqed_kinds, only: real64, dp
         use grasp_rciqed_rcisettings, only: rcisettings
         use decide_C, only: LTRANS, LNMS, LSMS, LVP, LSE
         use def_C, only: Z, EMN, AUMAMU, FMTOAU
@@ -428,13 +506,6 @@ contains
             print '(a,e22.16)', "  atomic_mass_amu in .settings.toml: ", settings%atomic_mass_amu
         endif
 
-        if(.not.within_tolerance(settings%atomic_mass_amu, EMN * AUMAMU, rtol)) then
-            print '(a)', "WARNING: discrepancy between isodata and .settings.toml"
-            print '(a)', "  values for atomic_mass_amu <-> EMN do not match"
-            print '(a,e22.16)', "  EMN * AUMAMU (global)            : ", EMN * AUMAMU
-            print '(a,e22.16)', "  atomic_mass_amu in .settings.toml: ", settings%atomic_mass_amu
-        endif
-
     end subroutine verify_rcisettings
 
     !> Checks if the difference of `a` and `b` are within the tolerance relative
@@ -444,11 +515,16 @@ contains
     !! @param relative_tolerance Relative tolerance \f$\sigma\f$.
     !! @returns Whether \f$|a-b| / \max(|a|,|b|) < \sigma\f$.
     function within_tolerance(a, b, relative_tolerance)
-        use grasp_rciqed_kinds, only: real64
 
         real(real64), intent(in) :: a, b, relative_tolerance
         logical :: within_tolerance
         real(real64) :: relative_difference
+
+        ! If the values are exactly the same, we also say that they are within tolerance.
+        if (abs(a-b) == 0) then
+            within_tolerance = .true.
+            return
+        endif
 
         relative_difference = abs(a-b) / max(abs(a), abs(b))
         if (relative_difference < relative_tolerance) then
@@ -469,7 +545,6 @@ contains
     !! @param a,b Input values.
     !! @returns The relative difference of `a` and `b`.
     function reldiff(a, b)
-        use grasp_rciqed_kinds, only: real64
         real(real64), intent(in) :: a, b
         real(real64) :: reldiff
         reldiff = abs(a-b) / max(abs(a), abs(b))

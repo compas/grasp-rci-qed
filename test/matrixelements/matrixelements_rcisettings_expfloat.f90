@@ -1,4 +1,5 @@
 program matrixelements_rcisettings_expfloat
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     use grasp_rciqed_rcisettings
     implicit none
 

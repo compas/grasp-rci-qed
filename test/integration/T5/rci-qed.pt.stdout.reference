@@ -42,7 +42,9 @@ Hamiltonian parts enabled in RCI calculation:
             Breit    1.59861357E+01
               NMS    4.58075957E-02
               SMS   -1.15005157E-02
-           QED VP   -2.75834672E+00
+v          QED VP   -2.75834672E+00
+|->       uehling   -2.73683786E+00
+|->   kallensabry   -2.15088554E-02
 QED SE hydrogenic    1.45283797E+01
 >              DC   -1.22571926E+04
 >         Non.pet   -1.22294021E+04
@@ -55,7 +57,9 @@ QED SE hydrogenic    1.45283797E+01
             Breit    1.61789257E+01
               NMS    4.59794505E-02
               SMS   -1.24675305E-02
-           QED VP   -2.67961355E+00
+v          QED VP   -2.67961355E+00
+|->       uehling   -2.65870848E+00
+|->   kallensabry   -2.09050687E-02
 QED SE hydrogenic    1.40472500E+01
 >              DC   -1.22075139E+04
 >         Non.pet   -1.21799338E+04
@@ -68,7 +72,9 @@ QED SE hydrogenic    1.40472500E+01
             Breit    1.61168032E+01
               NMS    4.60045235E-02
               SMS   -1.16827655E-02
-           QED VP   -2.75848632E+00
+v          QED VP   -2.75848632E+00
+|->       uehling   -2.73697417E+00
+|->   kallensabry   -2.15121534E-02
 QED SE hydrogenic    1.43610072E+01
 >              DC   -1.21500504E+04
 >         Non.pet   -1.21222968E+04
@@ -81,7 +87,9 @@ QED SE hydrogenic    1.43610072E+01
             Breit    1.59495367E+01
               NMS    4.58180940E-02
               SMS   -1.15159563E-02
-           QED VP   -2.75286069E+00
+v          QED VP   -2.75286069E+00
+|->       uehling   -2.73139425E+00
+|->   kallensabry   -2.14664386E-02
 QED SE hydrogenic    1.43763683E+01
 >              DC   -1.21379805E+04
 >         Non.pet   -1.21103732E+04
@@ -94,7 +102,9 @@ QED SE hydrogenic    1.43763683E+01
             Breit    1.61578024E+01
               NMS    4.59939136E-02
               SMS   -1.17155868E-02
-           QED VP   -2.76398853E+00
+v          QED VP   -2.76398853E+00
+|->       uehling   -2.74243382E+00
+|->   kallensabry   -2.15547109E-02
 QED SE hydrogenic    1.45130951E+01
 >              DC   -1.22705727E+04
 >         Non.pet   -1.22426315E+04
@@ -107,7 +117,9 @@ QED SE hydrogenic    1.45130951E+01
             Breit    1.59721740E+01
               NMS    4.58070175E-02
               SMS   -1.15000318E-02
-           QED VP   -2.75839974E+00
+v          QED VP   -2.75839974E+00
+|->       uehling   -2.73689048E+00
+|->   kallensabry   -2.15092621E-02
 QED SE hydrogenic    1.45288032E+01
 >              DC   -1.22583429E+04
 >         Non.pet   -1.22305660E+04
@@ -120,7 +132,9 @@ QED SE hydrogenic    1.45288032E+01
             Breit    1.57912857E+01
               NMS    4.56217149E-02
               SMS   -1.12868490E-02
-           QED VP   -2.75268560E+00
+v          QED VP   -2.75268560E+00
+|->       uehling   -2.73122274E+00
+|->   kallensabry   -2.14628598E-02
 QED SE hydrogenic    1.45434389E+01
 >              DC   -1.22448509E+04
 >         Non.pet   -1.22172346E+04
@@ -133,7 +147,9 @@ QED SE hydrogenic    1.45434389E+01
             Breit    1.63629128E+01
               NMS    4.61671777E-02
               SMS   -1.26814392E-02
-           QED VP   -2.68539215E+00
+v          QED VP   -2.68539215E+00
+|->       uehling   -2.66444018E+00
+|->   kallensabry   -2.09519716E-02
 QED SE hydrogenic    1.40324305E+01
 >              DC   -1.22202996E+04
 >         Non.pet   -1.21925561E+04
@@ -146,7 +162,9 @@ QED SE hydrogenic    1.40324305E+01
             Breit    1.61124638E+01
               NMS    4.60135341E-02
               SMS   -1.16818601E-02
-           QED VP   -2.75889237E+00
+v          QED VP   -2.75889237E+00
+|->       uehling   -2.73737708E+00
+|->   kallensabry   -2.15152878E-02
 QED SE hydrogenic    1.43612573E+01
 >              DC   -1.21509943E+04
 >         Non.pet   -1.21232452E+04
@@ -159,7 +177,9 @@ QED SE hydrogenic    1.43612573E+01
             Breit    1.59381249E+01
               NMS    4.58070677E-02
               SMS   -1.14999960E-02
-           QED VP   -2.75840327E+00
+v          QED VP   -2.75840327E+00
+|->       uehling   -2.73689398E+00
+|->   kallensabry   -2.15092886E-02
 QED SE hydrogenic    1.45288166E+01
 >              DC   -1.22577991E+04
 >         Non.pet   -1.22300562E+04
@@ -172,7 +192,9 @@ QED SE hydrogenic    1.45288166E+01
             Breit    1.61014957E+01
               NMS    4.60038313E-02
               SMS   -1.17362022E-02
-           QED VP   -2.75846101E+00
+v          QED VP   -2.75846101E+00
+|->       uehling   -2.73694905E+00
+|->   kallensabry   -2.15119531E-02
 QED SE hydrogenic    1.43610316E+01
 >              DC   -1.21517707E+04
 >         Non.pet   -1.21240323E+04
@@ -185,7 +207,9 @@ QED SE hydrogenic    1.43610316E+01
             Breit    1.59222956E+01
               NMS    4.58179837E-02
               SMS   -1.15422402E-02
-           QED VP   -2.75284619E+00
+v          QED VP   -2.75284619E+00
+|->       uehling   -2.73137985E+00
+|->   kallensabry   -2.14663345E-02
 QED SE hydrogenic    1.43762948E+01
 >              DC   -1.21398122E+04
 >         Non.pet   -1.21122322E+04

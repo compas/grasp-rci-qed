@@ -1,5 +1,5 @@
 program qed_flambaum_hydrogenic_test
-    use grasp_rciqed_kinds, only: real64, dp
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     use parameter_def, only: NNN1, NNNP
     use orb_C, only: NW, NP, NAK
     use grasp_rciqed_qed_flambaum
@@ -64,7 +64,6 @@ program qed_flambaum_hydrogenic_test
 contains
 
     subroutine init_nucleus
-        use grasp_rciqed_kinds, only: real64, dp
         use def_C, only: CVAC, C, PI, TENMAX, EXPMAX, EXPMIN, PRECIS, Z
         use npar_C, only: NPARM, PARM
         use nucpot_I

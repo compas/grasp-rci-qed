@@ -77,10 +77,6 @@
                                        MPI_COMM_WORLD, ierr)
       ENDIF
 
-      IF (LVP)                                                         &
-         CALL MPI_Reduce (NVPItmp, NVPI_a, 1, MPI_INTEGER, MPI_SUM, 0, &
-                                       MPI_COMM_WORLD, ierr)
-
       IF (LNMS)                                                        &
          CALL MPI_Reduce (NKEItmp, NKEI_a, 1, MPI_INTEGER, MPI_SUM, 0, &
                                        MPI_COMM_WORLD, ierr)
@@ -100,7 +96,6 @@
             WRITE (24,307) NMCBP_a
             WRITE (24,308) NCORE_a
          ENDIF
-         IF (LVP) WRITE (24,309) NVPI_a
          IF (LNMS) WRITE (24,310) NKEI_a
          IF (LSMS) WRITE (24,311) NVINTI_a
       ENDIF
@@ -150,7 +145,6 @@
 ! 307 FORMAT('MCBP coefficients that exceed CUTOFF: ',1I8)
   307 FORMAT('MCBP coefficients that exceed CUTOFF: ',1I16)
   308 FORMAT('Core coefficients that exceed CUTOFF: ',1I8)
-  309 FORMAT('Vacuum polarisation integrals: ',1I8)
   310 FORMAT('Kinetic energy integrals: ',1I8)
   311 FORMAT('Vinti integrals: ',1I8)
   312 FORMAT('Elements that exceed CUTOFF in the lower',&

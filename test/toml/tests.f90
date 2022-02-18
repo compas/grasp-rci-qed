@@ -1,5 +1,5 @@
 program tomltest
-    use grasp_rciqed_kinds, only: real64, dp
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     use grasptest_testing
     use grasp_rciqed_toml
 

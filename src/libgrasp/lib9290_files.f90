@@ -1,6 +1,7 @@
 !> Routines for initializing GRASP global state from input files (`isodata`,
 !! CSLs, wavefunction files, mixing files).
 module grasp_rciqed_lib9290_files
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
 contains

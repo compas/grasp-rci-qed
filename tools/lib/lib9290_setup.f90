@@ -1,6 +1,7 @@
 !> Contains routines that can be used to set up the different global state
 !! required by the lib9290 routines.
 module grasptest_lib9290_setup
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     implicit none
 
 contains
@@ -10,14 +11,13 @@ contains
     !! Nuclear mass is used for mass shifts -- the charge distribution is still
     !! assumed to be a point.
     subroutine setup(nuclear_z, nuclear_mass)
-        use grasp_rciqed_kinds, only: real64
         use grasp_rciqed_lib9290_init
 
         real(real64), intent(in) :: nuclear_z, nuclear_mass
 
         call lib9290_init_constants
         call lib9290_init_grid(nuclear_z)
-        call lib9290_init_nucleus(nuclear_z)
+        call lib9290_init_nucleus_pnc(nuclear_z)
         call lib9290_init_nucleus_mass(nuclear_mass)
     end subroutine setup
 

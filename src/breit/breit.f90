@@ -31,7 +31,7 @@
 !! While not implemented separately in GRASP, it is a different limit of the transverse
 !! photon operator.
 module grasp_rciqed_breit
-    use grasp_rciqed_kinds, only: real64, dp
+    use, intrinsic :: iso_fortran_env, only: real64, dp => real64
     use parameter_def, only: NNNW
     implicit none
 

@@ -12,10 +12,8 @@
       USE decide_C
       USE def_C
       USE grid_C
-      USE ncdist_C
       USE tatb_C
       USE coeils_C
-      USE vpilst_C,indoei=>indvpi, valoei=>valvpi
       USE bilst_C
       USE keilst_C
       USE vinlst_C
@@ -24,8 +22,7 @@
 !-----------------------------------------------
 !   I n t e r f a c e   B l o c k s
 !-----------------------------------------------
-      USE ncharg_I
-      USE vacpol_I
+      use grasp_rciqed_qed_vp, only: qedvp_init
       IMPLICIT NONE
 !-----------------------------------------------
 !   D u m m y   A r g u m e n t s
@@ -80,11 +77,7 @@
 !   Initialisations for the vacuum polarisation corrections
 !
       IF (LVP) THEN
-         CALL NCHARG
-         CALL VACPOL
-         ZDIST(2:N) = TB(2:N)*RP(2:N)
-         FRSTVP = .TRUE.
-         NVPI = 0
+         call qedvp_init
       ENDIF
 !
 !   Initialisations for nuclear translational energy corrections

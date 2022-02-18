@@ -63,7 +63,6 @@ Dirac-Coulomb one-e radial integrals:      22
 One-e angular integrals that exceed CUTOFF:      108
 Coulomb two-e radial integrals:        0
 Two-e angular integrals that exceed CUTOFF:        2789
-Vacuum polarisation integrals:       22
 Kinetic energy integrals:       22
 Vinti integrals:      186
 Elements that exceed CUTOFF in the lower triangle of the H matrix:          13
@@ -119,7 +118,6 @@ Dirac-Coulomb one-e radial integrals:      22
 One-e angular integrals that exceed CUTOFF:       88
 Coulomb two-e radial integrals:        0
 Two-e angular integrals that exceed CUTOFF:        2320
-Vacuum polarisation integrals:       22
 Kinetic energy integrals:       22
 Vinti integrals:      186
 Elements that exceed CUTOFF in the lower triangle of the H matrix:          10
@@ -170,7 +168,6 @@ Dirac-Coulomb one-e radial integrals:      22
 One-e angular integrals that exceed CUTOFF:      175
 Coulomb two-e radial integrals:        0
 Two-e angular integrals that exceed CUTOFF:        4615
-Vacuum polarisation integrals:       22
 Kinetic energy integrals:       22
 Vinti integrals:      186
 Elements that exceed CUTOFF in the lower triangle of the H matrix:          33
@@ -241,7 +238,6 @@ Dirac-Coulomb one-e radial integrals:      22
 One-e angular integrals that exceed CUTOFF:      132
 Coulomb two-e radial integrals:        0
 Two-e angular integrals that exceed CUTOFF:        3494
-Vacuum polarisation integrals:       22
 Kinetic energy integrals:       22
 Vinti integrals:      186
 Elements that exceed CUTOFF in the lower triangle of the H matrix:          21
@@ -302,7 +298,6 @@ Dirac-Coulomb one-e radial integrals:      22
 One-e angular integrals that exceed CUTOFF:      153
 Coulomb two-e radial integrals:        0
 Two-e angular integrals that exceed CUTOFF:        4030
-Vacuum polarisation integrals:       22
 Kinetic energy integrals:       22
 Vinti integrals:      186
 Elements that exceed CUTOFF in the lower triangle of the H matrix:          27
@@ -368,7 +363,6 @@ Dirac-Coulomb one-e radial integrals:      22
 One-e angular integrals that exceed CUTOFF:       44
 Coulomb two-e radial integrals:        0
 Two-e angular integrals that exceed CUTOFF:        1157
-Vacuum polarisation integrals:       22
 Kinetic energy integrals:       22
 Vinti integrals:      186
 Elements that exceed CUTOFF in the lower triangle of the H matrix:           3
@@ -409,7 +403,6 @@ Dirac-Coulomb one-e radial integrals:      22
 One-e angular integrals that exceed CUTOFF:       44
 Coulomb two-e radial integrals:        0
 Two-e angular integrals that exceed CUTOFF:        1157
-Vacuum polarisation integrals:       22
 Kinetic energy integrals:       22
 Vinti integrals:      186
 Elements that exceed CUTOFF in the lower triangle of the H matrix:           3
