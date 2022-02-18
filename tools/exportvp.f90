@@ -1,8 +1,9 @@
 program exportvp
     use, intrinsic :: iso_fortran_env, only: real64, dp => real64
+    use grasp_rciqed_qed_vp, only: qedvp_init
     implicit none
     call setup
-    call setup_vacuum_polarization
+    call qedvp_init
     call write_zdist_csv
 
 contains
@@ -58,25 +59,8 @@ contains
         call nucpot
     end subroutine setup
 
-    subroutine setup_vacuum_polarization
-        use decide_C, only: LVP
-        use vpilst_C, only: FRSTVP, NVPI
-        use ncdist_C, only: ZDIST
-        use tatb_C, only: TB
-        use grid_C, only: N, RP
-        use ncharg_I
-        use vacpol_I
-
-        LVP = .true.
-        call ncharg
-        call vacpol
-        ZDIST(2:N) = TB(2:N)*RP(2:N)
-        FRSTVP = .TRUE.
-        NVPI = 0
-    end subroutine setup_vacuum_polarization
-
     subroutine write_zdist_csv
-        use ncdist_C, only: ZDIST
+        use grasp_rciqed_qed_vp, only: ZDIST
         use grid_C, only: N, R, RP
         implicit none
 
