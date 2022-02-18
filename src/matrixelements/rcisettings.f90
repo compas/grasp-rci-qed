@@ -11,7 +11,8 @@ module grasp_rciqed_rcisettings
         ! Grid parameters
         !real(real64) :: RNT, H, N
         ! Hamiltonian parameters
-        logical :: breit_enabled, nms_enabled, sms_enabled, qed_vp_enabled
+        character(len=:), allocatable :: breit_mode
+        logical :: nms_enabled, sms_enabled, qed_vp_enabled
         ! For self-energy, we store:
         integer :: qed_se, qed_se_hydrogenic_cutoff
     end type rcisettings
@@ -59,7 +60,7 @@ contains
 
         ! TODO: Load nuclear model and GRID too!
 
-        call get_logical_default(table, "hamiltonian.breit", .false., settings%breit_enabled)
+        call get_string_default(table, "hamiltonian.breit", "n", settings%breit_mode)
         call get_logical_default(table, "hamiltonian.nms", .false., settings%nms_enabled)
         call get_logical_default(table, "hamiltonian.sms", .false., settings%sms_enabled)
         call get_logical_default(table, "hamiltonian.qed_vp", .false., settings%qed_vp_enabled)
@@ -89,7 +90,7 @@ contains
 
     !> Writes a $(jobname).settings.toml file with the nuclear, grid and
     !! Hamiltonian settings that were used for the RCI run.
-    subroutine write_settings_toml(jobname, setype)
+    subroutine write_settings_toml(jobname, breit_mode, setype)
         use decide_C, only: LTRANS, LNMS, LSMS, LVP, LSE
         use def_C, only: Z, EMN, AUMAMU, FMTOAU
         use grid_C, only: RNT, H, N
@@ -98,10 +99,10 @@ contains
         use grasp_rciqed_qed, only: nsetypes, setypes_short
 
         character(len=*), intent(in) :: jobname
-        ! TODO: passing setype explicitly here like this, while otherwise we
-        ! rely on the global common block modules is a bit of an inconsistent
-        ! hack to resolve a circular dependency problem. This should be fixed
-        ! at some point.
+        ! TODO: passing setype and breit_mopde explicitly here like this, even though
+        ! otherwise we rely on the global common block modules is a bit of an inconsistent
+        ! hack to resolve a circular dependency problem. This should be fixed at some point.
+        character(len=*), intent(in) :: breit_mode
         integer, intent(in) :: setype
 
         character(len=:), allocatable :: tomlfile
@@ -142,9 +143,13 @@ contains
 
         write(toml_unit, '(a)') "[hamiltonian]"
         write(toml_unit, '(a)') "  # Contains the following booleans:"
-        write(toml_unit, '(a)') "  #   breit, nms, sms, qed_vp"
+        write(toml_unit, '(a)') "  #   qed_vp, nms, sms"
         write(toml_unit, '(a)') "  # Each indicates if the corresponding part of the Hamiltonian"
         write(toml_unit, '(a)') "  # was enabled. If it is omitted, it is assumed to have been off."
+        write(toml_unit, '(a)') "  #"
+        write(toml_unit, '(a)') "  # Can also contain breit (string) which indicates the mode of the"
+        write(toml_unit, '(a)') "  # transverse photon operator. Possible values are 'breit', 'specorbs'"
+        write(toml_unit, '(a)') "  # and 'full'. If set to 'n', the operator is completely disabled."
         write(toml_unit, '(a)') "  #"
         write(toml_unit, '(a)') "  # May also contain qed_se (string), which indicates that a particular"
         write(toml_unit, '(a)') "  # QED self-energy operator was also included in the Hamiltonian."
@@ -153,7 +158,11 @@ contains
         write(toml_unit, '(a)') "  # Finally, for the hydrogenic QED self-energy, qed_se_hydrogenic_cutoff"
         write(toml_unit, '(a)') "  # (integer) may be defined, which sets the n-quantum number cutoff. If not"
         write(toml_unit, '(a)') "  # present, the implementation default is used."
-        if(LTRANS) write(toml_unit, '(a)') "  breit = true"
+        if(LTRANS) then
+            write(toml_unit, '("  breit = """,a,"""")') trim(breit_mode)
+        else
+            write(toml_unit, '("  breit = ""n""")')
+        endif
         if(LNMS) write(toml_unit, '(a)') "  nms = true"
         if(LSMS) write(toml_unit, '(a)') "  sms = true"
         if(LVP) write(toml_unit, '(a)') "  qed_vp = true"

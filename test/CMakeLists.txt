@@ -74,6 +74,16 @@ target_link_libraries_Fortran(test.hydrogenic_se PUBLIC
 )
 add_test(hydrogenic_se test.hydrogenic_se)
 
+# Tests for the rci static library
+add_executable(test.rci
+    rci.f90
+)
+target_link_libraries_Fortran(test.rci PUBLIC
+    rciqed-rci
+    rciqed-tools rciqed-test
+)
+add_test(rci test.rci)
+
 # Flambaum QED w/ hydrogenic orbitals
 add_executable(test.qed_flambaum_hydrogenic
     qed/flambaum_hydrogenic.f90

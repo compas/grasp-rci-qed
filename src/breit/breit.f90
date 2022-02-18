@@ -1,26 +1,71 @@
-!> Routines related to calculating the matrix elements of the Breit operator.
+!> Routines related to calculating the matrix elements of the transverse photon operator
+!! (in the Coulomb gauge):
+!!
+!! \f[
+!!   g^T(R; \omega) =
+!!   - \vec{\alpha}_1 \cdot \vec{\alpha}_2 ~ \frac{\textrm{e}^{i\omega R}}{R}
+!!   - (\vec{\alpha}_1 \cdot \nabla_R) (\vec{\alpha}_2 \cdot \nabla_R) \frac{\textrm{e}^{i\omega R} - 1}{\omega^2 R}
+!! \f]
+!!
+!! Taking the frequency-independent limit \f$\lim_{\omega \to 0}\f$ leads to the Breit
+!! operator:
+!!
+!! \f[
+!!   g^B(R) = \lim_{\omega \to 0} g^T(R; \omega) =
+!!   - \frac{1}{2R} \left[
+!!     \vec{\alpha}_1 \cdot \vec{\alpha}_2
+!!   + (\vec{\alpha}_1 \cdot \hat{\vec{R}}) (\vec{\alpha}_2 \cdot \hat{\vec{R}})
+!!   \right]
+!! \f]
+!!
+!! In GRASP, this is not implemented directory, but with a \f$10^{-6}\f$ energy scaling factor
+!! `WFACT` (i.e. the value for \f$\omega\f$, derived from the difference of orbital energies,
+!! is multiplied by this factor).
+!!
+!! For completeness, we'll also mention another related operator: the Gaunt operator:
+!!
+!! \f[
+!!   g^G(R) = - \frac{\vec{\alpha}_1 \cdot \vec{\alpha}_2}{R}
+!! \f]
+!!
+!! While not implemented separately in GRASP, it is a different limit of the transverse
+!! photon operator.
 module grasp_rciqed_breit
     use, intrinsic :: iso_fortran_env, only: real64, dp => real64
+    use parameter_def, only: NNNW
     implicit none
+
+    !> Factor used to multiply the energy differences in the Breit operator to emulate
+    !! frequency-independent Breit.
+    real(real64), parameter :: WFACT = 1e-6_dp
+
+    !> Marks whether an orbital is considered to be a spectroscopic orbital or not for the
+    !! purposes of the Breit operator.
+    !!
+    !! The Breit two-particle matrix elements that contain at least one non-spectroscopic
+    !! orbital have their energy difference \f$\omega\f$ damped by `WFACT`.
+    logical :: breit_specorbs(NNNW)
 
 contains
 
     !> Initialize Breit-related global state.
     !!
     !! @param j2max This is the value determined by genintrk(), e.g. in init_rkintc()
-    subroutine init_breit(j2max)
+    !! @param specorbs List of `logical`s marking which orbitals are to be considered
+    !!        spectroscopic.
+    subroutine init_breit(j2max, specorbs)
         use parameter_def, only: NNNW
         use bcore_C, only: ICORE
         use bilst_C, only: FIRST, NTPI
         use decide_C, only: LTRANS
         use iounit_c, only: ISTDE
         use orb_C, only: NW, NCF
-        use wfac_C, only: WFACT
         use genintbreit1_I
         use genintbreit2_I
         use ichop_I
 
         integer, intent(in) :: j2max
+        logical, intent(in) :: specorbs(NNNW)
 
         ! These are the MPI parameters that need to be passed to different
         ! routines. We use the single core values.
@@ -28,12 +73,12 @@ contains
 
         integer :: i, j, N
 
+        ! Set up the the global array of specroscopic orbitals
+        breit_specorbs = specorbs
+
         ! We'll enable all parts of the Hamiltonian. E.g. AUXBLK relies on these
         ! flags to determine if certain things get initialized.
         LTRANS = .TRUE.
-
-        ! WFACT is the Breit scale factor. We set it to the default 1e-6
-        WFACT = 1d-6
 
         ! From rci3mpi_LINUX.f
         call genintbreit1(myid, nprocs, N, j2max)

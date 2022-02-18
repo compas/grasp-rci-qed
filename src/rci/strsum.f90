@@ -25,10 +25,10 @@
       USE orb_C
       USE prnt_C
       USE wave_C
-      USE wfac_C
       USE iounit_C
       USE hblock_C
       USE iccu_C,          ONLY: ICCUTBLK
+      use grasp_rciqed, only: breit_mode
 !-----------------------------------------------
 !   I n t e r f a c e   B l o c k s
 !-----------------------------------------------
@@ -98,7 +98,9 @@
       WRITE (24, *)
       IF (LTRANS .OR. LVP .OR. LNMS .OR. LSMS) THEN
          WRITE (24, *) 'To H (Dirac Coulomb) is added'
-         IF (LTRANS) WRITE (24, 304) WFACT
+         IF (LTRANS) THEN
+            WRITE (24, 304) breit_mode
+         ENDIF
          IF (LVP) WRITE (24, *) ' H (Vacuum Polarisation);'
          IF (LNMS) WRITE (24, *) ' H (Normal Mass Shift);'
          IF (LSMS) WRITE (24, *) ' H (Specific Mass Shift);'
@@ -154,8 +156,7 @@
   301 FORMAT(' the mass of the nucleus is ',1P,D19.12,' electron masses;')
   302 FORMAT('  c =',1P,1D19.12,' Bohr radii,'/,'  a =',1D19.12,' Bohr radii;')
   303 FORMAT('Speed of light = ',1P,D19.12,' atomic units.')
-  304 FORMAT('  H (Transverse) --- factor multiplying the',&
-         ' photon frequency: ',1P,D15.8,';')
+  304 FORMAT('  H (Transverse) : mode = ',A,';')
   305 FORMAT('Radial grid: R(I) = RNT*(exp((I-1)*H)-1),',' I = 1, ..., N;'/,/,&
          ' RNT  = ',1P,D19.12,' Bohr radii;'/,' H    = ',D19.12,' Bohr radii;'/&
          ,' N    = ',1I4,';')

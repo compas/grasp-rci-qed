@@ -15,6 +15,16 @@ module grasp_rciqed
     integer :: setype
     real(real64) :: sematrix(NNNW,NNNW)
 
+    !> Contains the list of spectroscopic orbitals
+    !integer :: specorbs(NNNW), specorbs_n
+    logical :: isspecorb(NNNW)
+
+    !> Caches the string used for initializing Breit.
+    !!
+    !! The value here does not determine the behaviour of the code, but can be used to
+    !! reconstruct the `init_breit` call that was used to initialize the Breit global state.
+    character(len=:), allocatable :: breit_mode
+
 contains
 
     !> Initializes the global state for the RK integrals, i.e. DC matrix elements.

@@ -1,5 +1,6 @@
 program matrixelements_hydrogenic
     use, intrinsic :: iso_fortran_env, only: real64, dp => real64
+    use parameter_def, only: NNNW
     use grasp_rciqed_lib9290_init
     use grasp_rciqed_lib9290_files, only: load_csl
     use grasp_rciqed, only: init_rkintc
@@ -40,7 +41,8 @@ program matrixelements_hydrogenic
 
     ! RCI-specific initialization
     call init_rkintc(j2max)
-    call init_breit(j2max)
+    ! Initialize frequency-dependent Breit
+    call init_breit(j2max, (/ (.true., k=1,NNNW) /))
     call qedvp_init
     call init_mass_shifts
 

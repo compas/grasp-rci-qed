@@ -32,12 +32,12 @@
       USE nsmdat_C
       USE orb_C
       USE wave_C
-      USE wfac_C
       USE blim_C
       USE qedcut_C
       USE mpi_C
-      use getcid_I, only: getcid_qedse
-      use grasp_rciqed, only: IMCDF => res_unit, setype
+      use getcid_I, only: getcid_specorbs, getcid_breit, getcid_qedse
+      use grasp_rciqed, only: IMCDF => res_unit, setype, isspecorb
+      use grasp_rciqed_breit, only: breit_specorbs
 !-----------------------------------------------
 !   I n t e r f a c e   B l o c k s
 !-----------------------------------------------
@@ -138,6 +138,10 @@
                                                MPI_COMM_WORLD,ierr)
       ENDIF ! .NOT. LFORDR
 
+      ! Determine spectroscopic orbitals
+      if (myid == 0) call getcid_specorbs
+      CALL MPI_Bcast (isspecorb, size(isspecorb), MPI_LOGICAL, 0, MPI_COMM_WORLD, ierr)
+
 !*****************************************************************
 !
 ! Pre-run ?
@@ -166,24 +170,12 @@
 !     ENDIF
 !*****************************************************************
 !
-! Include transverse ?
-! Quantities to be obtained: LTRANS, WFACT
-!
-      IF (myid .EQ. 0) THEN
-         WRITE (istde,*) 'Include contribution of H (Transverse)?'
-         LTRANS = GETYN ()
-         WRITE (istde,*) 'Modify all transverse photon frequencies?'
-         YES = GETYN ()
-         IF (YES) THEN
-            WRITE (istde,*) 'Enter the scale factor:'
-            READ *, WFACT
-         ELSE
-            WFACT = 1.0D00
-         ENDIF
-      ENDIF ! myid .EQ. 0
+
+      ! Include Breit? Also broadcast the settings to other nodes.
+      if (myid == 0) call getcid_breit
       CALL MPI_Bcast (LTRANS, 1, MPI_LOGICAL, 0, MPI_COMM_WORLD, ierr)
-      CALL MPI_Bcast (WFACT, 1, MPI_DOUBLE_PRECISION, 0,            &
-                           MPI_COMM_WORLD, ierr)
+      CALL MPI_Bcast (breit_specorbs, size(breit_specorbs), MPI_LOGICAL, 0, MPI_COMM_WORLD, ierr)
+
 !
 ! Other interactions ? One logical for each case. Done altogether
 !
@@ -204,12 +196,12 @@
          ELSE
           WRITE(734,'(a)')'n            ! Contribution of H Transverse?'
          END IF
-         IF (YES) THEN
-           WRITE(734,'(a)') 'y            ! Modify photon frequencies?'
-           WRITE(734,*) WFACT,'! Scale factor'
-         ELSE
-           WRITE(734,'(a)') 'n            ! Modify photon frequencies?'
-         END IF
+         !IF (YES) THEN
+         !  WRITE(734,'(a)') 'y            ! Modify photon frequencies?'
+         !  WRITE(734,*) WFACT,'! Scale factor'
+         !ELSE
+         !  WRITE(734,'(a)') 'n            ! Modify photon frequencies?'
+         !END IF
          IF (LVP) THEN
            WRITE(734,'(a)') 'y            ! Vacuum polarization?'
          ELSE
@@ -332,7 +324,8 @@
 !   This is the sixth record on the file
 !
       WRITE (imcdf) C, LFORDR, (ICCUTblk(i), i = 1, nblock),           &
-                    LTRANS, WFACT, LVP, LNMS, LSMS
+                    LTRANS, LVP, LNMS, LSMS
+      WRITE (imcdf) (breit_specorbs(i), i = 1, NW)
 !
 !   Write the grid data to the  .res  file; this is the seventh
 !   record on the file

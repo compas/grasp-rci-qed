@@ -68,7 +68,7 @@
       USE strsum_I
       USE factt_I
       USE matrix_I
-      use grasp_rciqed, only: IMCDF => res_unit, setype
+      use grasp_rciqed, only: IMCDF => res_unit, setype, breit_mode
       use grasp_rciqed_rcisettings, only: write_settings_toml
       IMPLICIT NONE
 !-----------------------------------------------
@@ -219,7 +219,7 @@
          GO TO 99
       ENDIF
 
-      if(myid == 0) call write_settings_toml(name, setype)
+      if(myid == 0) call write_settings_toml(name, breit_mode, setype)
 !=======================================================================
 !  Execution finished; Statistics output
 !=======================================================================
